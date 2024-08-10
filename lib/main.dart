@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:qanoni/constant.dart';
-import 'package:qanoni/features/splash/presintation/views/splash_view.dart';
+import 'package:qanoni/features/splash/presentation/views/splash_view.dart';
 
 void main() {
   runApp(const Qanoni());

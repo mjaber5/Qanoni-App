@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/features/splash/presintation/views/widgets/sliding_text.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:qanoni/constant.dart';
+import 'package:qanoni/features/home/presentation/views/home_view.dart';
+import 'package:qanoni/features/splash/presentation/views/widgets/sliding_text.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -25,8 +29,8 @@ class _SplashViewBodyState extends State<SplashViewBody>
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        // Get.to(() => const HomeView(),
-        //     transition: Transition.fadeIn, duration: kTransitionDuration);
+        Get.to(() => const HomeView(),
+            transition: Transition.fadeIn, duration: kTransitionDuration);
       },
     );
   }
