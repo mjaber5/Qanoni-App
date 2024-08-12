@@ -1,0 +1,162 @@
+{
+  "helloWorld": "Hello World!",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "socialMedia": "Social Media",
+  "@socialMedia": {
+    "description": "Online platforms and tools that enable people to create, share, and interact with content in virtual communities."
+  },
+  "loginScreen": "Login ",
+  "@loginScreen": {
+    "description": "Screen where users enter their credentials to access the app."
+  },
+  "signupScreen": "Signup ",
+  "@signupScreen": {
+    "description": "Screen where new users create an account to join the app."
+  },
+  "resetPassword": "Reset Password",
+  "@resetPassword": {
+    "description": "Option for users to reset their forgotten password."
+  },
+  "homeScreen": "Home ",
+  "@homeScreen": {
+    "description": "Main screen of the app where users land after logging in."
+  },
+  "chatScreen": "Chat ",
+  "@chatScreen": {
+    "description": "Screen for real-time messaging between users."
+  },
+  "searchScreen": "Search ",
+  "@searchScreen": {
+    "description": "Screen for users to search for other users, posts, or content."
+  },
+  "addScreen": "Add ",
+  "@addScreen": {
+    "description": "Screen for adding new content or posts."
+  },
+  "profileScreen": "Profile ",
+  "@profileScreen": {
+    "description": "Screen displaying user's profile information and settings."
+  },
+  "editProfileScreen": "Edit Profile ",
+  "@editProfileScreen": {
+    "description": "Screen where users can edit their profile information."
+  },
+  "notificationScreen": "Notification ",
+  "@notificationScreen": {
+    "description": "Screen displaying notifications about user interactions."
+  },
+  "chatBot": "ChatBot",
+  "@chatBot": {
+    "description": "Automated bot for assisting users in the chat."
+  },
+  "description": "Description",
+  "@description": {
+    "description": "Text describing a user's profile or content."
+  },
+  "post": "Post",
+  "@post": {
+    "description": "Content shared by users on the platform."
+  },
+  "photos": "Photos",
+  "@photos": {
+    "description": "Images uploaded or shared by users."
+  },
+  "displayName": "Display name",
+  "@displayName": {
+    "description": "Name shown publicly on the app."
+  },
+  "userName": "User name",
+  "@userName": {
+    "description": "Unique identifier chosen by the user for their account."
+  },
+  "update": "Update",
+  "@update": {
+    "description": "Action to save changes or refresh information."
+  },
+  "typeMessage": "Type message..",
+  "@typeMessage": {
+    "description": "Field where users enter messages for chat or posts."
+  },
+  "you": "You",
+  "@you": {
+    "description": "Indicates the user themselves."
+  },
+  "email": "Email",
+  "@email": {
+    "description": "User's email address."
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Secret code used for user authentication."
+  },
+  "login": "Login",
+  "@login": {
+    "description": "Action to enter the app with credentials."
+  },
+  "signup": "Signup",
+  "@signup": {
+    "description": "Action to create a new account."
+  },
+  "show": "Show",
+  "@show": {
+    "description": "Action to reveal hidden content."
+  },
+  "hide": "Hide",
+  "@hide": {
+    "description": "Action to conceal content."
+  },
+  "uppercase": "Uppercase",
+  "@uppercase": {
+    "description": "Text or characters in capital letters."
+  },  
+  "lowercase": "Lowercase",
+  "@lowercase": {
+    "description": "Text or characters in small letters."
+  },  
+  "number": "Number",
+  "@number": {
+    "description": "Numeric value or digit."
+  },  
+  "specialCharacter": "Special Character",
+  "@specialCharacter": {
+    "description": "Non-alphanumeric character like !, @, #, $, etc."
+  },  
+  "minimumCharacter": "Minimum Character",
+  "@minimumCharacter": {
+    "description": "Requirement specifying the smallest count of characters allowed."
+  },  
+  "alreadyHaveAnAccount": "Already Have An Account?",
+  "@alreadyHaveAnAccount": {
+    "description": "Question indicating whether the user already has an existing account."
+  },  
+  "youDontHaveAnAccount": "You Don't Have An Account?",
+  "@youDon'tHaveAnAccount": {
+    "description": "Question indicating whether the user doesn't have an existing account."
+  },  
+  "createAccount": "Create Account",
+  "@createAccount": {
+    "description": "Action to start the process of creating a new account."
+  },
+  "deletePost": "Delete Post",
+  "@deletePost": {
+    "description": "Action to remove a post or content."
+  },
+  "editPost": "Edit Post",
+  "@editPost": {
+    "description": "Action to modify an existing post or content."
+  },
+  "savePost": "Save Post",
+  "@savePost": {
+    "description": "Action to preserve changes made to a post or content."
+  },
+  "comments": "Comments",
+  "@comments": {
+    "description": "Reactions or opinions shared by users on posts."
+  },
+  "typeComment": "Type Comment..",
+  "@typeComment": {
+    "description": "Field where users enter reactions or opinions on posts."
+  }
+}
