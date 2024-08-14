@@ -38,6 +38,8 @@ dependencies:
   get: ^4.6.6
   font_awesome_flutter: ^10.7.0
   flutter_localization: ^0.2.1
+  salomon_bottom_bar: ^3.3.2
+  iconsax: ^0.0.8
 
 dev_dependencies:
   flutter_test:
