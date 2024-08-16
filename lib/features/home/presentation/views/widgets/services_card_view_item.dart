@@ -13,7 +13,7 @@ class ServicesCardItem extends StatelessWidget {
         children: [
           Container(
             width: MediaQuery.of(context).size.width * 0.9,
-            height: 100,
+            height: MediaQuery.of(context).size.height * 0.15,
             padding: const EdgeInsets.symmetric(vertical: 12),
             decoration: BoxDecoration(
               color: kWhiteColor.withOpacity(0.1),

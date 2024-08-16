@@ -7,15 +7,12 @@ class ServicesCardListViewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.8,
+      height: MediaQuery.of(context).size.height * 0.785,
       child: ListView.builder(
         padding: EdgeInsets.zero,
         itemCount: 10,
         itemBuilder: (context, index) {
-          return const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: ServicesCardItem(),
-          );
+          return const ServicesCardItem();
         },
       ),
     );
