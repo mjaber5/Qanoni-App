@@ -11,7 +11,7 @@ class ServicesCardListViewNofification extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.785,
       child: ListView.builder(
         padding: EdgeInsets.zero,
-        itemCount: 10,
+        itemCount: 20,
         itemBuilder: (context, index) {
           return const ServicesCardNotifItem(
             notifications: [],
