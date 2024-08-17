@@ -6,6 +6,8 @@ class NotificationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const NotificationViewBody();
+    return const Scaffold(
+      body: NotificationViewBody(),
+    );
   }
 }

@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/styles.dart';
+import 'package:qanoni/features/notification/presentation/views/widgets/services_card_list_view_nofification.dart';
+
+import 'appbar_notification.dart';
 
 class NotificationViewBody extends StatelessWidget {
-  const NotificationViewBody({super.key});
+  const NotificationViewBody({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text(
-          'Notification',
-          style: Styles.textStyle20,
-        ),
-      ),
+    return const Column(
+      children: [
+        AppbarNotification(),
+        ServicesCardListViewNofification(),
+      ],
     );
   }
 }
