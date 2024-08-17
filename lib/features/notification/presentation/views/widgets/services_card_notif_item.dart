@@ -16,7 +16,7 @@ class ServicesCardNotifItem extends StatelessWidget {
           Container(
             width: MediaQuery.of(context).size.width * 0.9,
             height: MediaQuery.of(context).size.height * 0.15,
-            padding: const EdgeInsets.symmetric(vertical: 12),
+            padding: const EdgeInsets.symmetric(vertical: 7),
             decoration: BoxDecoration(
               color: kWhiteColor.withOpacity(0.1),
               borderRadius: BorderRadius.circular(12),
@@ -34,8 +34,6 @@ class ServicesCardNotifItem extends StatelessWidget {
                       ),
                       SizedBox(width: 20),
                       Text("@username"),
-                      SizedBox(width: 150),
-                      Text("12:00")
                     ],
                   ),
                 ),
