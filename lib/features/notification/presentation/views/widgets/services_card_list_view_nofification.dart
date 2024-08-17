@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:qanoni/features/notification/presentation/views/widgets/services_card_notif_item.dart';
 
-import 'services_card_notif_item.dart';
-
-class ServicesCardListViewNofification extends StatelessWidget {
-  const ServicesCardListViewNofification({super.key});
+class ServicesCardListViewNotification extends StatelessWidget {
+  const ServicesCardListViewNotification({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.785,
-      child: ListView.builder(
-        padding: EdgeInsets.zero,
-        itemCount: 20,
-        itemBuilder: (context, index) {
-          return const ServicesCardNotifItem(
-            notifications: [],
-          );
-        },
+    return Expanded(
+      child: SizedBox(
+        child: ListView.builder(
+          itemCount: 20,
+          itemBuilder: (context, index) {
+            return const ServicesCardNotifItem(
+              notifications: [],
+            );
+          },
+        ),
       ),
     );
   }

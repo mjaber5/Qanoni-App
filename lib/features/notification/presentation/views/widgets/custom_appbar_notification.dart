@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qanoni/core/utils/styles.dart';
 
 class AppbarNotification extends StatelessWidget {
   const AppbarNotification({super.key});
@@ -11,10 +12,7 @@ class AppbarNotification extends StatelessWidget {
         children: [
           Text(
             'Notification',
-            style: TextStyle(
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-            ),
+            style: Styles.textStyle30,
             textAlign: TextAlign.center,
           ),
         ],

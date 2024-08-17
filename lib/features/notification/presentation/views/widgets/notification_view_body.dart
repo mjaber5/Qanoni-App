@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/features/notification/presentation/views/widgets/services_card_list_view_nofification.dart';
 
-import 'appbar_notification.dart';
+import 'custom_appbar_notification.dart';
 
 class NotificationViewBody extends StatelessWidget {
   const NotificationViewBody({
@@ -13,7 +13,7 @@ class NotificationViewBody extends StatelessWidget {
     return const Column(
       children: [
         AppbarNotification(),
-        ServicesCardListViewNofification(),
+        ServicesCardListViewNotification(),
       ],
     );
   }
