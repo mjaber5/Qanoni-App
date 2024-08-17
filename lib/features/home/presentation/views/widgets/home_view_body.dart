@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/features/home/presentation/views/widgets/custom_app_bar.dart';
+import 'package:qanoni/features/home/presentation/views/widgets/custom_home_view_app_bar.dart';
 import 'package:qanoni/features/home/presentation/views/widgets/services_card_list_view_item.dart';
 
 class HomeViewBody extends StatelessWidget {
