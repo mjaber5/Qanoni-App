@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
+import 'package:qanoni/core/utils/app_router.dart';
 import 'package:qanoni/core/utils/styles.dart';
 
-class AppbarNotification extends StatefulWidget {
-  const AppbarNotification({super.key});
+class AppbarProfilState extends StatefulWidget {
+  const AppbarProfilState({super.key});
 
   @override
-  State<AppbarNotification> createState() => _AppbarNotificationState();
+  State<AppbarProfilState> createState() => __AppbarProfilStateState();
 }
 
-class _AppbarNotificationState extends State<AppbarNotification> {
+class __AppbarProfilStateState extends State<AppbarProfilState> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,7 +29,9 @@ class _AppbarNotificationState extends State<AppbarNotification> {
               FontAwesomeIcons.bars,
               size: 22,
             ),
-            onPressed: () {},
+            onPressed: () {
+              GoRouter.of(context).push(AppRouter.kSettingsView);
+            },
           )
         ],
       ),

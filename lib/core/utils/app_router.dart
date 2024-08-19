@@ -3,6 +3,7 @@ import 'package:qanoni/features/chatbot/presentation/views/chatbot_view.dart';
 import 'package:qanoni/features/home/presentation/views/home_view.dart';
 import 'package:qanoni/features/layout/layout.dart';
 import 'package:qanoni/features/notification/presentation/views/notification_view.dart';
+import 'package:qanoni/features/profile/presentation/settings_view.dart';
 import 'package:qanoni/features/profile/presentation/views/profile_view.dart';
 import 'package:qanoni/features/splash/presentation/views/splash_view.dart';
 
@@ -12,6 +13,7 @@ abstract class AppRouter {
   static const kChatbotView = '/chatbotView';
   static const kNotificationView = '/notificationView';
   static const kProfileView = '/profileView';
+  static const kSettingsView = '/settingsView';
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -37,6 +39,10 @@ abstract class AppRouter {
       GoRoute(
         path: kProfileView,
         builder: (context, state) => const ProfileView(),
+      ),
+      GoRoute(
+        path: kSettingsView,
+        builder: (context, state) => const SettingsView(),
       ),
     ],
   );

@@ -9,12 +9,14 @@ class ProfileViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        AppbarNotification(),
-        ProfileUserInformationCard(),
-        ProfileUserInformationEditingField(),
-      ],
+    return const SingleChildScrollView(
+      child: Column(
+        children: [
+          AppbarProfilState(),
+          ProfileUserInformationCard(),
+          ProfileUserInformationEditingField(),
+        ],
+      ),
     );
   }
 }
