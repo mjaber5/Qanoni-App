@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/constant.dart';
+import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/styles.dart';
 
 class ServicesCardItem extends StatelessWidget {
@@ -16,7 +16,7 @@ class ServicesCardItem extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.15,
             padding: const EdgeInsets.symmetric(vertical: 12),
             decoration: BoxDecoration(
-              color: kWhiteColor.withOpacity(0.1),
+              color: TColors.white.withOpacity(0.1),
               borderRadius: BorderRadius.circular(12),
             ),
             child: const Column(

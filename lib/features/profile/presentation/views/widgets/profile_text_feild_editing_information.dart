@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/constant.dart';
+import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/styles.dart';
 
 class ProfileUserInformationEditingField extends StatelessWidget {
@@ -18,7 +18,7 @@ class ProfileUserInformationEditingField extends StatelessWidget {
           customTextFeild(
             birthdayController,
             'Enter your birthday',
-            const Icon(Icons.date_range, color: kWhiteColor),
+            const Icon(Icons.date_range, color: TColors.white),
           ),
           const SizedBox(height: 18),
           labelText('Phone :'),
@@ -26,7 +26,7 @@ class ProfileUserInformationEditingField extends StatelessWidget {
           customTextFeild(
             birthdayController,
             'Enter your phone',
-            const Icon(Icons.phone, color: kWhiteColor),
+            const Icon(Icons.phone, color: TColors.white),
           ),
           const SizedBox(height: 18),
           labelText('Email :'),
@@ -34,7 +34,7 @@ class ProfileUserInformationEditingField extends StatelessWidget {
           customTextFeild(
             birthdayController,
             'Enter your email',
-            const Icon(Icons.email, color: kWhiteColor),
+            const Icon(Icons.email, color: TColors.white),
           ),
         ],
       ),
@@ -68,9 +68,9 @@ class ProfileUserInformationEditingField extends StatelessWidget {
         ),
         prefixIcon: prefixIcon,
         hintText: hintText,
-        hintStyle: TextStyle(color: kGreyColor.withOpacity(0.6)),
+        hintStyle: TextStyle(color: TColors.darkGrey.withOpacity(0.6)),
         filled: true,
-        fillColor: kWhiteColor.withOpacity(0.1),
+        fillColor: TColors.white.withOpacity(0.1),
       ),
     );
   }

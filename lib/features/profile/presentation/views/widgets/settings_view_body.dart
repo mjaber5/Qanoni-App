@@ -15,7 +15,7 @@ class SettingsViewBody extends StatelessWidget {
             'Settings View',
             style: Styles.textStyle20,
           ),
-        )
+        ),
       ],
     );
   }

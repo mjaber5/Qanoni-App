@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/constant.dart';
+import 'package:qanoni/core/utils/constants/colors.dart';
 
 class ChatbotMessagesListView extends StatelessWidget {
   final List<Map<String, dynamic>> _messages;
@@ -27,7 +27,7 @@ class ChatbotMessagesListView extends StatelessWidget {
               margin:
                   const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
               decoration: BoxDecoration(
-                color: isUserMessage ? kSecondaryColor : kGreyColor,
+                color: isUserMessage ? TColors.secondary : TColors.darkerGrey,
                 borderRadius: BorderRadius.circular(8.0),
               ),
               child: Text(

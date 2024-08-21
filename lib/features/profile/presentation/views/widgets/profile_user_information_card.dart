@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/constant.dart';
 import 'package:qanoni/core/utils/assets.dart';
+import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/styles.dart';
 
 class ProfileUserInformationCard extends StatelessWidget {
@@ -16,7 +16,7 @@ class ProfileUserInformationCard extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.95,
             height: MediaQuery.of(context).size.height * 0.2,
             decoration: BoxDecoration(
-              color: kWhiteColor.withOpacity(0.1),
+              color: TColors.white.withOpacity(0.1),
               borderRadius: BorderRadius.circular(30),
             ),
             child: Padding(
