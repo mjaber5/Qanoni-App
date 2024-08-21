@@ -2,28 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 
 class ChatbotTextField extends StatelessWidget {
-  final TextEditingController controller;
+  final TextEditingController chatbotMessageController;
   final VoidCallback onSend;
 
   const ChatbotTextField({
     super.key,
-    required this.controller,
+    required this.chatbotMessageController,
     required this.onSend,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(10.0),
       child: Row(
         children: [
           Expanded(
             child: TextField(
-              controller: controller,
+              controller: chatbotMessageController,
               decoration: InputDecoration(
                 hintText: 'Type your message...',
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.0),
+                  borderRadius: BorderRadius.circular(12),
                   borderSide: const BorderSide(color: QColors.secondary),
                 ),
               ),

@@ -9,15 +9,15 @@ import 'package:qanoni/core/utils/theme/custom_themes/outlined_button_theme.dart
 import 'package:qanoni/core/utils/theme/custom_themes/text_field_theme.dart';
 import 'package:qanoni/core/utils/theme/custom_themes/text_theme.dart';
 
-class TAppTheme {
-  TAppTheme._();
+class QAppTheme {
+  QAppTheme._();
 
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     fontFamily: 'Poppins',
     brightness: Brightness.light,
     primaryColor: QColors.primary,
-    scaffoldBackgroundColor: QColors.primary,
+    scaffoldBackgroundColor: QColors.white,
     textTheme: QTextTheme.lightTextTheme,
     elevatedButtonTheme: QElevatedButtonTheme.lightElevatedButtonTheme,
     chipTheme: QChipTheme.lightChipTheme,

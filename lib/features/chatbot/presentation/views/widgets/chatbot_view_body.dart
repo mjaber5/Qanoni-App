@@ -37,7 +37,7 @@ class ChatbotViewBodyState extends State<ChatbotViewBody> {
         const CustomAppBar(),
         ChatbotMessagesListView(messages: _messages),
         ChatbotTextField(
-          controller: _controller,
+          chatbotMessageController: _controller,
           onSend: _handleSend,
         ),
       ],

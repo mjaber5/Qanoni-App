@@ -18,7 +18,7 @@ class ServicesCardNotifItem extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.15,
             padding: const EdgeInsets.symmetric(vertical: 10),
             decoration: BoxDecoration(
-              color: QColors.white.withOpacity(0.1),
+              color: QColors.darkerGrey.withOpacity(0.4),
               borderRadius: BorderRadius.circular(12),
             ),
             child: const Column(

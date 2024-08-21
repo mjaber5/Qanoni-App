@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qanoni/core/utils/constants/colors.dart';
 
 class QTextFormFieldTheme {
   QTextFormFieldTheme._();
@@ -8,8 +9,10 @@ class QTextFormFieldTheme {
     errorMaxLines: 3,
     prefixIconColor: Colors.grey,
     suffixIconColor: Colors.grey,
-    labelStyle: const TextStyle().copyWith(fontSize: 14, color: Colors.black),
-    hintStyle: const TextStyle().copyWith(fontSize: 14, color: Colors.black),
+    labelStyle:
+        const TextStyle().copyWith(fontSize: 14, color: QColors.darkGrey),
+    hintStyle:
+        const TextStyle().copyWith(fontSize: 14, color: QColors.darkGrey),
     errorStyle: const TextStyle().copyWith(fontStyle: FontStyle.normal),
     floatingLabelStyle:
         const TextStyle().copyWith(color: Colors.black.withOpacity(0.8)),
@@ -40,8 +43,10 @@ class QTextFormFieldTheme {
     errorMaxLines: 3,
     prefixIconColor: Colors.grey,
     suffixIconColor: Colors.grey,
-    labelStyle: const TextStyle().copyWith(fontSize: 14, color: Colors.white),
-    hintStyle: const TextStyle().copyWith(fontSize: 14, color: Colors.white),
+    labelStyle:
+        const TextStyle().copyWith(fontSize: 14, color: QColors.darkGrey),
+    hintStyle:
+        const TextStyle().copyWith(fontSize: 14, color: QColors.darkGrey),
     errorStyle: const TextStyle().copyWith(fontStyle: FontStyle.normal),
     floatingLabelStyle:
         const TextStyle().copyWith(color: Colors.white.withOpacity(0.8)),

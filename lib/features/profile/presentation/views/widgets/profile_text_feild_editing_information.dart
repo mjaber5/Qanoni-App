@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/styles.dart';
+import 'package:qanoni/core/utils/theme/custom_themes/text_field_theme.dart';
 
 class ProfileUserInformationEditingField extends StatelessWidget {
   const ProfileUserInformationEditingField({super.key});
@@ -8,6 +9,8 @@ class ProfileUserInformationEditingField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController birthdayController = TextEditingController();
+    TextEditingController phoneController = TextEditingController();
+    TextEditingController emailController = TextEditingController();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Column(
@@ -18,23 +21,32 @@ class ProfileUserInformationEditingField extends StatelessWidget {
           customTextFeild(
             birthdayController,
             'Enter your birthday',
-            const Icon(Icons.date_range, color: QColors.white),
+            const Icon(
+              Icons.date_range,
+            ),
+            TextInputType.datetime,
           ),
           const SizedBox(height: 18),
           labelText('Phone :'),
           const SizedBox(height: 8),
           customTextFeild(
-            birthdayController,
+            phoneController,
             'Enter your phone',
-            const Icon(Icons.phone, color: QColors.white),
+            const Icon(
+              Icons.phone,
+            ),
+            TextInputType.number,
           ),
           const SizedBox(height: 18),
           labelText('Email :'),
           const SizedBox(height: 8),
           customTextFeild(
-            birthdayController,
+            emailController,
             'Enter your email',
-            const Icon(Icons.email, color: QColors.white),
+            const Icon(
+              Icons.email,
+            ),
+            TextInputType.emailAddress,
           ),
         ],
       ),
@@ -51,24 +63,22 @@ class ProfileUserInformationEditingField extends StatelessWidget {
   }
 
   TextFormField customTextFeild(
-    TextEditingController birthdayController,
+    TextEditingController controller,
     String hintText,
     Icon prefixIcon,
+    TextInputType inputType,
   ) {
     return TextFormField(
-      controller: birthdayController,
+      controller: controller,
+      keyboardType: inputType,
       decoration: InputDecoration(
-        enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.transparent),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.transparent),
-          borderRadius: BorderRadius.circular(5.5),
-        ),
+        enabledBorder:
+            QTextFormFieldTheme.lightInputDecorationTheme.enabledBorder,
+        focusedBorder:
+            QTextFormFieldTheme.lightInputDecorationTheme.focusedBorder,
         prefixIcon: prefixIcon,
         hintText: hintText,
-        hintStyle: TextStyle(color: QColors.darkGrey.withOpacity(0.6)),
+        hintStyle: QTextFormFieldTheme.lightInputDecorationTheme.hintStyle,
         filled: true,
         fillColor: QColors.white.withOpacity(0.1),
       ),

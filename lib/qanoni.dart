@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/app_router.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
+import 'package:qanoni/core/utils/theme/theme.dart';
 
 class Qanoni extends StatelessWidget {
   const Qanoni({super.key});
@@ -9,9 +9,9 @@ class Qanoni extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: AppRouter.router,
-      darkTheme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: QColors.primary,
-      ),
+      themeMode: ThemeMode.system,
+      theme: QAppTheme.lightTheme,
+      darkTheme: QAppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
     );
   }
