@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TOutLinedButtonTheme {
-  TOutLinedButtonTheme._();
+class QOutLinedButtonTheme {
+  QOutLinedButtonTheme._();
 
 // Light Theme
   static final lightOutlinedButtonTheme = OutlinedButtonThemeData(

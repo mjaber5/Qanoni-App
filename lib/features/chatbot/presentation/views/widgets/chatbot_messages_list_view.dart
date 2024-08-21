@@ -27,7 +27,7 @@ class ChatbotMessagesListView extends StatelessWidget {
               margin:
                   const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
               decoration: BoxDecoration(
-                color: isUserMessage ? TColors.secondary : TColors.darkerGrey,
+                color: isUserMessage ? QColors.secondary : QColors.darkerGrey,
                 borderRadius: BorderRadius.circular(8.0),
               ),
               child: Text(

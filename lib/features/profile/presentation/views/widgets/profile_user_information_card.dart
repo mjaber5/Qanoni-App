@@ -16,7 +16,7 @@ class ProfileUserInformationCard extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.95,
             height: MediaQuery.of(context).size.height * 0.2,
             decoration: BoxDecoration(
-              color: TColors.white.withOpacity(0.1),
+              color: QColors.white.withOpacity(0.1),
               borderRadius: BorderRadius.circular(30),
             ),
             child: Padding(

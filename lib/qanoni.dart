@@ -10,7 +10,7 @@ class Qanoni extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: AppRouter.router,
       darkTheme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: TColors.primary,
+        scaffoldBackgroundColor: QColors.primary,
       ),
       debugShowCheckedModeBanner: false,
     );

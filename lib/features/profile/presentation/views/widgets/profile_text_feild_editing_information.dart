@@ -18,7 +18,7 @@ class ProfileUserInformationEditingField extends StatelessWidget {
           customTextFeild(
             birthdayController,
             'Enter your birthday',
-            const Icon(Icons.date_range, color: TColors.white),
+            const Icon(Icons.date_range, color: QColors.white),
           ),
           const SizedBox(height: 18),
           labelText('Phone :'),
@@ -26,7 +26,7 @@ class ProfileUserInformationEditingField extends StatelessWidget {
           customTextFeild(
             birthdayController,
             'Enter your phone',
-            const Icon(Icons.phone, color: TColors.white),
+            const Icon(Icons.phone, color: QColors.white),
           ),
           const SizedBox(height: 18),
           labelText('Email :'),
@@ -34,7 +34,7 @@ class ProfileUserInformationEditingField extends StatelessWidget {
           customTextFeild(
             birthdayController,
             'Enter your email',
-            const Icon(Icons.email, color: TColors.white),
+            const Icon(Icons.email, color: QColors.white),
           ),
         ],
       ),
@@ -68,9 +68,9 @@ class ProfileUserInformationEditingField extends StatelessWidget {
         ),
         prefixIcon: prefixIcon,
         hintText: hintText,
-        hintStyle: TextStyle(color: TColors.darkGrey.withOpacity(0.6)),
+        hintStyle: TextStyle(color: QColors.darkGrey.withOpacity(0.6)),
         filled: true,
-        fillColor: TColors.white.withOpacity(0.1),
+        fillColor: QColors.white.withOpacity(0.1),
       ),
     );
   }

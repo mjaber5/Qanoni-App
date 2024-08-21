@@ -37,22 +37,22 @@ class _LayoutViewState extends State<LayoutView> {
           SalomonBottomBarItem(
             icon: const Icon(Iconsax.home_24),
             title: const Text("Home"),
-            selectedColor: TColors.secondary,
+            selectedColor: QColors.secondary,
           ),
           SalomonBottomBarItem(
             icon: const Icon(Iconsax.message_text_15),
             title: const Text("Chatbot"),
-            selectedColor: TColors.secondary,
+            selectedColor: QColors.secondary,
           ),
           SalomonBottomBarItem(
             icon: const Icon(Iconsax.notification_bing5),
             title: const Text("Notification"),
-            selectedColor: TColors.secondary,
+            selectedColor: QColors.secondary,
           ),
           SalomonBottomBarItem(
             icon: const Icon(Icons.person),
             title: const Text("Profile"),
-            selectedColor: TColors.secondary,
+            selectedColor: QColors.secondary,
           ),
         ],
       ),

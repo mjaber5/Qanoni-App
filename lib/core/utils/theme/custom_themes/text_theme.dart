@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TTextTheme {
-  TTextTheme._();
+class QTextTheme {
+  QTextTheme._();
 
   // Customizable light Text Theme
 

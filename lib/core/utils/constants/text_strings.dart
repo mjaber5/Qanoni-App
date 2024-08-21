@@ -1,4 +1,4 @@
-class TTexts {
+class QTexts {
   // -- OnBoarding Texts
   static const String onBoardingTitle1 = "Choose your product";
   static const String onBoardingTitle2 = "Select payment Method";

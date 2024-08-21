@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 
-class TCheckboxTheme {
-  TCheckboxTheme._();
+class QCheckboxTheme {
+  QCheckboxTheme._();
 
 // Customizable Light Text Theme
   static CheckboxThemeData lightCheckboxTheme = CheckboxThemeData(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
     checkColor: WidgetStateProperty.resolveWith((states) {
       if (states.contains(WidgetState.selected)) {
-        return TColors.secondary;
+        return QColors.secondary;
       } else {
         return Colors.black;
       }
     }),
     fillColor: WidgetStateProperty.resolveWith((states) {
       if (states.contains(WidgetState.selected)) {
-        return TColors.secondary;
+        return QColors.secondary;
       } else {
         return Colors.transparent;
       }
@@ -28,14 +28,14 @@ class TCheckboxTheme {
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
     checkColor: WidgetStateProperty.resolveWith((states) {
       if (states.contains(WidgetState.selected)) {
-        return TColors.secondary;
+        return QColors.secondary;
       } else {
         return Colors.black;
       }
     }),
     fillColor: WidgetStateProperty.resolveWith((states) {
       if (states.contains(WidgetState.selected)) {
-        return TColors.secondary;
+        return QColors.secondary;
       } else {
         return Colors.transparent;
       }

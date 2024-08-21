@@ -24,14 +24,14 @@ class ChatbotTextField extends StatelessWidget {
                 hintText: 'Type your message...',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),
-                  borderSide: const BorderSide(color: TColors.secondary),
+                  borderSide: const BorderSide(color: QColors.secondary),
                 ),
               ),
             ),
           ),
           IconButton(
             icon: const Icon(Icons.send),
-            color: TColors.secondary,
+            color: QColors.secondary,
             onPressed: onSend,
           ),
         ],
