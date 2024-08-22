@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
+
 import 'package:qanoni/core/utils/constants/colors.dart';
+
+import 'package:qanoni/features/profile/presentation/views/widgets/account_information_settings.dart';
+
+import 'package:qanoni/features/profile/presentation/views/widgets/change_language_settings.dart';
+import 'package:qanoni/features/profile/presentation/views/widgets/change_password_settings.dart';
+import 'package:qanoni/features/profile/presentation/views/widgets/history_settings.dart';
+import 'package:qanoni/features/profile/presentation/views/widgets/privacy_policy_settings.dart';
 
 class SettingsContainer extends StatelessWidget {
   const SettingsContainer({super.key});
@@ -16,9 +24,15 @@ class SettingsContainer extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
         ),
         child: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 20),
           child: Column(
-            children: [],
+            children: [
+              ChangeLanguageSettings(),
+              HistorySettings(),
+              AccountInformationSettings(),
+              ChangePasswordSettings(),
+              PrivacyPolicySettings(),
+            ],
           ),
         ),
       ),
