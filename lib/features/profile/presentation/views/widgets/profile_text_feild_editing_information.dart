@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/core/utils/styles.dart';
-import 'package:qanoni/core/utils/theme/custom_themes/text_field_theme.dart';
+import 'package:qanoni/core/utils/constants/text_strings.dart';
+import 'package:qanoni/features/profile/presentation/views/widgets/custom_label_text_field_profile_view.dart';
+import 'package:qanoni/features/profile/presentation/views/widgets/custom_text_feild_profile_view.dart';
 
 class ProfileUserInformationEditingField extends StatelessWidget {
   const ProfileUserInformationEditingField({super.key});
@@ -16,71 +16,36 @@ class ProfileUserInformationEditingField extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          labelText('Birthday :'),
+          const LabelTextFieldProfileView(text: '${QTexts.birthday} : '),
           const SizedBox(height: 8),
-          customTextFeild(
-            birthdayController,
-            'Enter your birthday',
-            const Icon(
-              Icons.date_range,
-            ),
-            TextInputType.datetime,
-          ),
+          CustomTextFieldProfileView(
+              controller: birthdayController,
+              hintText: 'Enter your birthday',
+              prefixIcon: const Icon(
+                Icons.date_range,
+              ),
+              inputType: TextInputType.datetime),
           const SizedBox(height: 18),
-          labelText('Phone :'),
+          const LabelTextFieldProfileView(text: '${QTexts.phone} : '),
           const SizedBox(height: 8),
-          customTextFeild(
-            phoneController,
-            'Enter your phone',
-            const Icon(
-              Icons.phone,
-            ),
-            TextInputType.number,
-          ),
+          CustomTextFieldProfileView(
+              controller: phoneController,
+              hintText: 'Enter your phone',
+              prefixIcon: const Icon(
+                Icons.phone,
+              ),
+              inputType: TextInputType.number),
           const SizedBox(height: 18),
-          labelText('Email :'),
+          const LabelTextFieldProfileView(text: '${QTexts.email} : '),
           const SizedBox(height: 8),
-          customTextFeild(
-            emailController,
-            'Enter your email',
-            const Icon(
-              Icons.email,
-            ),
-            TextInputType.emailAddress,
-          ),
+          CustomTextFieldProfileView(
+              controller: emailController,
+              hintText: 'Enter your email',
+              prefixIcon: const Icon(
+                Icons.email,
+              ),
+              inputType: TextInputType.emailAddress),
         ],
-      ),
-    );
-  }
-
-  Text labelText(String text) {
-    return Text(
-      text,
-      style: Styles.textStyle16.copyWith(
-        fontWeight: FontWeight.w500,
-      ),
-    );
-  }
-
-  TextFormField customTextFeild(
-    TextEditingController controller,
-    String hintText,
-    Icon prefixIcon,
-    TextInputType inputType,
-  ) {
-    return TextFormField(
-      controller: controller,
-      keyboardType: inputType,
-      decoration: InputDecoration(
-        enabledBorder:
-            QTextFormFieldTheme.lightInputDecorationTheme.enabledBorder,
-        focusedBorder:
-            QTextFormFieldTheme.lightInputDecorationTheme.focusedBorder,
-        prefixIcon: prefixIcon,
-        hintText: hintText,
-        hintStyle: QTextFormFieldTheme.lightInputDecorationTheme.hintStyle,
-        filled: true,
-        fillColor: QColors.white.withOpacity(0.1),
       ),
     );
   }

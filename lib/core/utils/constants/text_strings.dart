@@ -1,17 +1,28 @@
 class QTexts {
-  // -- OnBoarding Texts
-  static const String onBoardingTitle1 = "Choose your product";
-  static const String onBoardingTitle2 = "Select payment Method";
-  static const String onBoardingTitle3 = "Deliver at your door step";
-
-  static const String onBoardingSubTitle1 =
-      'Welcome to a World of Limitlees Choices - Your Perfect Product Awaits!';
-  static const String onBoardingSubTitle2 =
-      'For Seamless Transactions, Choose Your Path - Your Payment Path - Your Convenience, Our Priority!';
-  static const String onBoardingSubTitle3 =
-      'From Our Doorstep to Yours - Swift, Secure, and Contactless Delivery!';
+  // -- Splash Texts
+  static const String splashTitle = "Qanoni";
+  static const String splashSupTitle = "Make your works online";
 
   // -- Home
-  static const String homeAppbarTitle = 'Good day for shopping';
+  static const String homeAppbarTitle = 'Home';
   static const String homeAppbarSubTitle = 'Taimoor Sikander';
+
+  // -- Search
+
+  // -- Chatbot
+  static const String chatbotAppbarTitle = 'Chatbot';
+
+  // -- Notification
+  static const String notificationAppbarTitle = 'Notification';
+
+  // -- Profile
+  static const String profileAppbarTitle = 'Profile';
+  static const String idnumber = 'ID no';
+  static const String birthday = 'Birthday';
+  static const String phone = 'Phone';
+  static const String email = 'Email';
+
+  // -- Settings
+  static const String settingsAppbarTitle = 'Settings';
+  static const String settingsChangeThemeSwitch = 'Dark mode';
 }

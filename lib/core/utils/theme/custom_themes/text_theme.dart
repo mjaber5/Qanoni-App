@@ -17,7 +17,7 @@ class QTextTheme {
       color: Colors.black,
     ),
     headlineSmall: const TextStyle().copyWith(
-      fontSize: 18,
+      fontSize: 20,
       fontWeight: FontWeight.w600,
       color: Colors.black,
     ),
@@ -57,7 +57,7 @@ class QTextTheme {
       color: Colors.white,
     ),
     headlineSmall: const TextStyle().copyWith(
-      fontSize: 18,
+      fontSize: 20,
       fontWeight: FontWeight.w600,
       color: Colors.white,
     ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qanoni/core/utils/app_router.dart';
+import 'package:qanoni/core/utils/constants/text_strings.dart';
 import 'package:qanoni/features/splash/presentation/views/widgets/sliding_text.dart';
 
 class SplashViewBody extends StatefulWidget {
@@ -59,7 +60,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const Text(
-          'Qanoni',
+          QTexts.splashTitle,
           style: TextStyle(
             fontSize: 75,
             fontWeight: FontWeight.bold,

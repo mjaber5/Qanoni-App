@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/core/utils/constants/text_strings.dart';
+import 'package:qanoni/core/utils/constants/sizes.dart';
 import 'package:qanoni/core/utils/theme/change_theme_notifire.dart';
 import 'package:qanoni/core/utils/theme/custom_themes/text_theme.dart';
 
-class SettingsChangeTheme extends StatefulWidget {
-  const SettingsChangeTheme({super.key});
+class SettingsContainerAboutUs extends StatelessWidget {
+  const SettingsContainerAboutUs({super.key});
 
-  @override
-  State<SettingsChangeTheme> createState() => _SettingsViewCChangeTheme();
-}
-
-class _SettingsViewCChangeTheme extends State<SettingsChangeTheme> {
   @override
   Widget build(BuildContext context) {
     bool isLight = context.watch<ThemeNotifier>().isLightTheme;
@@ -20,33 +15,35 @@ class _SettingsViewCChangeTheme extends State<SettingsChangeTheme> {
       padding: const EdgeInsets.symmetric(vertical: 12.0),
       child: Container(
         width: MediaQuery.of(context).size.width * 0.95,
-        height: MediaQuery.of(context).size.height * 0.13,
+        height: MediaQuery.of(context).size.height * 0.1,
         decoration: BoxDecoration(
           color: QColors.darkerGrey.withOpacity(0.4),
           borderRadius: BorderRadius.circular(30),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-          child: GestureDetector(
-            child: Row(
-              children: [
-                Text(
-                  QTexts.settingsChangeThemeSwitch,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ListTile(
+                onTap: () {
+                  // Todo Navigator to about us view
+                },
+                leading: const Icon(
+                  Icons.info,
+                ),
+                title: Text(
+                  'About us',
                   style: isLight
                       ? QTextTheme.darkTextTheme.headlineSmall
                       : QTextTheme.lightTextTheme.headlineSmall,
                 ),
-                const Spacer(),
-                Switch(
-                  trackColor: WidgetStateProperty.all(QColors.grey),
-                  activeColor: QColors.secondary,
-                  value: isLight,
-                  onChanged: (themeChange) {
-                    context.read<ThemeNotifier>().toggleTheme(themeChange);
-                  },
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  size: QSizes.iconMd,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

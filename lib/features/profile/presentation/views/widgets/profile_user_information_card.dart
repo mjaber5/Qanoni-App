@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/constants/image_strings.dart';
+import 'package:qanoni/core/utils/constants/text_strings.dart';
 import 'package:qanoni/core/utils/styles.dart';
 
 class ProfileUserInformationCard extends StatelessWidget {
@@ -48,7 +49,7 @@ class ProfileUserInformationCard extends StatelessWidget {
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.6,
                           child: const Text(
-                            'ID no : 2000487852',
+                            '${QTexts.idnumber} : 3202106002041',
                             maxLines: 2,
                             overflow: TextOverflow.visible,
                             style: Styles.textStyle16,
