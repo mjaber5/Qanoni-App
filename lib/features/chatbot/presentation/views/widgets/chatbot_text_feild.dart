@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
+import 'package:qanoni/core/utils/constants/text_strings.dart';
 
 class ChatbotTextField extends StatelessWidget {
   final TextEditingController chatbotMessageController;
@@ -21,7 +22,7 @@ class ChatbotTextField extends StatelessWidget {
             child: TextField(
               controller: chatbotMessageController,
               decoration: InputDecoration(
-                hintText: 'Type your message...',
+                hintText: QTexts.chatbotTextFieldHintText,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: const BorderSide(color: QColors.secondary),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qanoni/core/utils/constants/sizes.dart';
+import 'package:qanoni/core/utils/constants/text_strings.dart';
 import 'package:qanoni/core/utils/theme/change_theme_notifire.dart';
 import 'package:qanoni/core/utils/theme/custom_themes/text_theme.dart';
 
@@ -20,7 +21,7 @@ class ChangeLanguageSettings extends StatelessWidget {
           Icons.language_outlined,
         ),
         title: Text(
-          'Language',
+          QTexts.settingsLanguage,
           style: isLight
               ? QTextTheme.darkTextTheme.headlineSmall
               : QTextTheme.lightTextTheme.headlineSmall,

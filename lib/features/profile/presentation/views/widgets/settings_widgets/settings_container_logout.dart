@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
+import 'package:qanoni/core/utils/constants/text_strings.dart';
 import 'package:qanoni/core/utils/styles.dart';
 
 class SettingsContainerLogout extends StatelessWidget {
@@ -28,7 +29,7 @@ class SettingsContainerLogout extends StatelessWidget {
                   color: QColors.error,
                 ),
                 title: Text(
-                  'Logout',
+                  QTexts.settingsLogout,
                   style: Styles.textStyle20.copyWith(
                     color: QColors.error,
                   ),

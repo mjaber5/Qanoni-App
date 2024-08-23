@@ -13,7 +13,7 @@ class CustomTextFieldProfileView extends StatelessWidget {
 
   final TextEditingController controller;
   final String hintText;
-  final Icon prefixIcon;
+  final IconButton prefixIcon;
   final TextInputType inputType;
 
   @override

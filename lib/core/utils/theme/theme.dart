@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/core/utils/theme/custom_themes/appbar_theme.dart';
-import 'package:qanoni/core/utils/theme/custom_themes/bottom_sheet_teme.dart';
 import 'package:qanoni/core/utils/theme/custom_themes/checkbox_theme.dart';
 import 'package:qanoni/core/utils/theme/custom_themes/chip_theme.dart';
 import 'package:qanoni/core/utils/theme/custom_themes/elevated_button_theme.dart';
@@ -21,8 +19,6 @@ class QAppTheme {
     textTheme: QTextTheme.lightTextTheme,
     elevatedButtonTheme: QElevatedButtonTheme.lightElevatedButtonTheme,
     chipTheme: QChipTheme.lightChipTheme,
-    appBarTheme: QAppBarTheme.lightAppBarTheme,
-    bottomSheetTheme: QBottomSheetTheme.lightBottomSheetTheme,
     outlinedButtonTheme: QOutLinedButtonTheme.lightOutlinedButtonTheme,
     inputDecorationTheme: QTextFormFieldTheme.lightInputDecorationTheme,
     checkboxTheme: QCheckboxTheme.lightCheckboxTheme,
@@ -36,8 +32,6 @@ class QAppTheme {
     textTheme: QTextTheme.darkTextTheme,
     elevatedButtonTheme: QElevatedButtonTheme.darkElevatedButtonTheme,
     chipTheme: QChipTheme.darkChipTheme,
-    appBarTheme: QAppBarTheme.darkAppBarTheme,
-    bottomSheetTheme: QBottomSheetTheme.darkBottomSheetTheme,
     outlinedButtonTheme: QOutLinedButtonTheme.darkOutlinedButtonTheme,
     inputDecorationTheme: QTextFormFieldTheme.darkInputDecorationTheme,
     checkboxTheme: QCheckboxTheme.darkCheckboxTheme,

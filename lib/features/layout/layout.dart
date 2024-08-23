@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
+import 'package:qanoni/core/utils/constants/text_strings.dart';
 import 'package:qanoni/features/chatbot/presentation/views/chatbot_view.dart';
 import 'package:qanoni/features/home/presentation/views/home_view.dart';
 import 'package:qanoni/features/notification/presentation/views/notification_view.dart';
@@ -36,22 +37,22 @@ class _LayoutViewState extends State<LayoutView> {
         items: [
           SalomonBottomBarItem(
             icon: const Icon(Iconsax.home_24),
-            title: const Text("Home"),
+            title: const Text(QTexts.homeAppbarTitle),
             selectedColor: QColors.secondary,
           ),
           SalomonBottomBarItem(
             icon: const Icon(Iconsax.message_text_15),
-            title: const Text("Chatbot"),
+            title: const Text(QTexts.chatbotAppbarTitle),
             selectedColor: QColors.secondary,
           ),
           SalomonBottomBarItem(
             icon: const Icon(Iconsax.notification_bing5),
-            title: const Text("Notification"),
+            title: const Text(QTexts.notificationAppbarTitle),
             selectedColor: QColors.secondary,
           ),
           SalomonBottomBarItem(
             icon: const Icon(Icons.person),
-            title: const Text("Profile"),
+            title: const Text(QTexts.profileAppbarTitle),
             selectedColor: QColors.secondary,
           ),
         ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qanoni/core/utils/constants/sizes.dart';
+import 'package:qanoni/core/utils/constants/text_strings.dart';
 import 'package:qanoni/core/utils/theme/change_theme_notifire.dart';
 import 'package:qanoni/core/utils/theme/custom_themes/text_theme.dart';
 
@@ -20,7 +21,7 @@ class HistorySettings extends StatelessWidget {
           Icons.history_outlined,
         ),
         title: Text(
-          'History',
+          QTexts.settingsHistory,
           style: isLight
               ? QTextTheme.darkTextTheme.headlineSmall
               : QTextTheme.lightTextTheme.headlineSmall,

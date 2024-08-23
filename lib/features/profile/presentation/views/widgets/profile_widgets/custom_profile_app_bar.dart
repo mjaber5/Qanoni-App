@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qanoni/core/utils/app_router.dart';
+import 'package:qanoni/core/utils/constants/text_strings.dart';
 import 'package:qanoni/core/utils/styles.dart';
 
 class AppbarProfilState extends StatefulWidget {
@@ -19,7 +20,7 @@ class __AppbarProfilStateState extends State<AppbarProfilState> {
       child: Row(
         children: [
           const Text(
-            'Profile',
+            QTexts.profileAppbarTitle,
             style: Styles.textStyle30,
             textAlign: TextAlign.center,
           ),

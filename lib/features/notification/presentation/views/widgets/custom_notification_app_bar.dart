@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qanoni/core/utils/constants/text_strings.dart';
 import 'package:qanoni/core/utils/styles.dart';
 
 class AppbarNotification extends StatelessWidget {
@@ -11,7 +12,7 @@ class AppbarNotification extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            'Notification',
+            QTexts.notificationAppbarTitle,
             style: Styles.textStyle30,
             textAlign: TextAlign.center,
           ),

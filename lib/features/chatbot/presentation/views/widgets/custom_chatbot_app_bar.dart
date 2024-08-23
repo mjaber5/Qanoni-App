@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qanoni/core/utils/constants/text_strings.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key});
@@ -10,7 +11,7 @@ class CustomAppBar extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            'Chatbot',
+            QTexts.chatbotAppbarTitle,
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,
