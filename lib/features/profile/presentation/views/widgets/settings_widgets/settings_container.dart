@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:qanoni/core/utils/constants/colors.dart';
 
-import 'package:qanoni/features/profile/presentation/views/widgets/account_information_settings.dart';
+import 'package:qanoni/features/profile/presentation/views/widgets/settings_widgets/account_information_settings.dart';
 
-import 'package:qanoni/features/profile/presentation/views/widgets/change_language_settings.dart';
-import 'package:qanoni/features/profile/presentation/views/widgets/change_password_settings.dart';
-import 'package:qanoni/features/profile/presentation/views/widgets/history_settings.dart';
-import 'package:qanoni/features/profile/presentation/views/widgets/privacy_policy_settings.dart';
+import 'package:qanoni/features/profile/presentation/views/widgets/settings_widgets/change_language_settings.dart';
+import 'package:qanoni/features/profile/presentation/views/widgets/settings_widgets/change_password_settings.dart';
+import 'package:qanoni/features/profile/presentation/views/widgets/settings_widgets/history_settings.dart';
+import 'package:qanoni/features/profile/presentation/views/widgets/profile_widgets/privacy_policy_settings.dart';
 
 class SettingsContainer extends StatelessWidget {
   const SettingsContainer({super.key});

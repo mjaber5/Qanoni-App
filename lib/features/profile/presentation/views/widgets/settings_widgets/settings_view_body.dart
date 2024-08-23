@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/features/profile/presentation/views/widgets/custom_settings_app_bar.dart';
-import 'package:qanoni/features/profile/presentation/views/widgets/settings_change_theme.dart';
-import 'package:qanoni/features/profile/presentation/views/widgets/settings_container.dart';
-import 'package:qanoni/features/profile/presentation/views/widgets/settings_container_about_us.dart';
-import 'package:qanoni/features/profile/presentation/views/widgets/settings_container_logout.dart';
+import 'package:qanoni/features/profile/presentation/views/widgets/settings_widgets/custom_settings_app_bar.dart';
+import 'package:qanoni/features/profile/presentation/views/widgets/settings_widgets/settings_change_theme.dart';
+import 'package:qanoni/features/profile/presentation/views/widgets/settings_widgets/settings_container.dart';
+import 'package:qanoni/features/profile/presentation/views/widgets/settings_widgets/settings_container_about_us.dart';
+import 'package:qanoni/features/profile/presentation/views/widgets/settings_widgets/settings_container_logout.dart';
 
 class SettingsViewBody extends StatefulWidget {
   const SettingsViewBody({super.key});

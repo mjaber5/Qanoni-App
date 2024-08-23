@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/text_strings.dart';
-import 'package:qanoni/features/profile/presentation/views/widgets/custom_label_text_field_profile_view.dart';
-import 'package:qanoni/features/profile/presentation/views/widgets/custom_text_feild_profile_view.dart';
+import 'package:qanoni/features/profile/presentation/views/widgets/profile_widgets/custom_label_text_field_profile_view.dart';
+import 'package:qanoni/features/profile/presentation/views/widgets/profile_widgets/custom_text_feild_profile_view.dart';
 
 class ProfileUserInformationEditingField extends StatelessWidget {
   const ProfileUserInformationEditingField({super.key});
