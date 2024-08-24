@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qanoni/features/home/data/card_model.dart';
 import 'package:qanoni/features/home/presentation/views/widgets/services_card_view_item.dart';
 
 class ServicesCardListViewItem extends StatelessWidget {
@@ -10,9 +11,9 @@ class ServicesCardListViewItem extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.8,
       child: ListView.builder(
         padding: EdgeInsets.zero,
-        itemCount: 3,
+        itemCount: cardModels.length,
         itemBuilder: (context, index) {
-          return const ServicesCardItem();
+          return  ServicesCardItem(cardModels: cardModels[index],);
         },
       ),
     );

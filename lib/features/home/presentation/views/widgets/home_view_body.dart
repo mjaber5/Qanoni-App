@@ -8,12 +8,15 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        CustomAppBar(),
-        ButtonHomeView(),
-        ServicesCardListViewItem(),
-      ],
+    return const SingleChildScrollView(
+      child: Column(
+        children: [
+          CustomAppBar(),
+          
+          ButtonHomeView(),
+          ServicesCardListViewItem(),
+        ],
+      ),
     );
   }
 }

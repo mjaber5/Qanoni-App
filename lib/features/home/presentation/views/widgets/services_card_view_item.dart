@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/styles.dart';
+import 'package:qanoni/features/home/data/card_model.dart';
 
-class ServicesCardItem extends StatelessWidget {
-  const ServicesCardItem({super.key});
 
+class ServicesCardItem extends StatefulWidget {
+
+  final CardModel cardModels;
+  const ServicesCardItem({super.key,  required this.cardModels});
+
+  @override
+  State<ServicesCardItem> createState() => _ServicesCardItemState();
+}
+
+class _ServicesCardItemState extends State<ServicesCardItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,17 +28,14 @@ class ServicesCardItem extends StatelessWidget {
               color: QColors.darkerGrey.withOpacity(0.5),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: const Column(
+            child:  Column(
               children: [
                 Text(
-                  'Services name ',
+                 widget.cardModels.servicname,
                   style: Styles.textStyle20,
                 ),
-                SizedBox(height: 10),
-                Text(
-                  'Department name',
-                  style: Styles.textStyle14,
-                )
+                const SizedBox(height: 10),
+               
               ],
             ),
           ),
