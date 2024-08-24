@@ -1,5 +1,7 @@
 import 'package:go_router/go_router.dart';
+import 'package:qanoni/core/utils/constants/aceapt_page.dart';
 import 'package:qanoni/features/chatbot/presentation/views/chatbot_view.dart';
+import 'package:qanoni/features/home/presentation/views/card/lease_card.dart';
 import 'package:qanoni/features/home/presentation/views/home_view.dart';
 import 'package:qanoni/features/layout/layout.dart';
 import 'package:qanoni/features/notification/presentation/views/notification_view.dart';
@@ -14,6 +16,8 @@ abstract class AppRouter {
   static const kNotificationView = '/notificationView';
   static const kProfileView = '/profileView';
   static const kSettingsView = '/settingsView';
+  static const kAceaptView = '/aceaptView';
+  static const kLeaseCard = '/leaseCard';
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -44,6 +48,15 @@ abstract class AppRouter {
         path: kSettingsView,
         builder: (context, state) => const SettingsView(),
       ),
+       GoRoute(
+        path: kAceaptView,
+        builder: (context, state) => const AceaptPage(),
+      ),
+      GoRoute(
+        path: kLeaseCard,
+        builder: (context, state) => const LeaseCard(),
+      ),
+      
     ],
   );
 }
