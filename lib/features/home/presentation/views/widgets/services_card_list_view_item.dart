@@ -10,7 +10,7 @@ class ServicesCardListViewItem extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.8,
       child: ListView.builder(
         padding: EdgeInsets.zero,
-        itemCount: 10,
+        itemCount: 3,
         itemBuilder: (context, index) {
           return const ServicesCardItem();
         },
