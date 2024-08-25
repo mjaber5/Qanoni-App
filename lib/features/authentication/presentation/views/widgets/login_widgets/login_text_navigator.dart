@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qanoni/core/utils/app_router.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
+import 'package:qanoni/core/utils/constants/text_strings.dart';
 
 class LoginTextNavigator extends StatelessWidget {
   const LoginTextNavigator({super.key});
@@ -15,7 +16,7 @@ class LoginTextNavigator extends StatelessWidget {
             // ToDo Navigator Forgot password view
           },
           child: const Text(
-            'Forgot Password?',
+            QTexts.loginForgotPassword,
             style: TextStyle(
               fontSize: 14,
               color: QColors.secondary,
@@ -29,14 +30,14 @@ class LoginTextNavigator extends StatelessWidget {
           },
           child: const Text.rich(
             TextSpan(
-              text: "Don't have an account? ",
+              text: QTexts.loginTextQuestion,
               style: TextStyle(
                 color: QColors.textSecondary,
                 fontSize: 14,
               ),
               children: [
                 TextSpan(
-                  text: 'Sign Up',
+                  text: QTexts.loginSignupTextNavigator,
                   style: TextStyle(
                     color: QColors.secondary,
                     fontWeight: FontWeight.bold,

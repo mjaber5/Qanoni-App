@@ -60,7 +60,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const Text(
-          QTexts.splashTitle,
+          QTexts.appLogoTitle,
           style: TextStyle(
             fontSize: 75,
             fontWeight: FontWeight.bold,

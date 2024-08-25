@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
+import 'package:qanoni/core/utils/constants/text_strings.dart';
 
 class LoginTextFeilds extends StatelessWidget {
   const LoginTextFeilds({super.key});
@@ -14,7 +15,7 @@ class LoginTextFeilds extends StatelessWidget {
         children: [
           TextField(
             decoration: InputDecoration(
-              labelText: 'Username',
+              labelText: QTexts.loginUsernameTextFeildHint,
               labelStyle: const TextStyle(color: QColors.textSecondary),
               border: const OutlineInputBorder(),
               prefixIcon: const Icon(Icons.person, color: QColors.secondary),
@@ -30,7 +31,7 @@ class LoginTextFeilds extends StatelessWidget {
           const SizedBox(height: 20),
           TextField(
             decoration: InputDecoration(
-              labelText: 'Password',
+              labelText: QTexts.loginPasswordTextFeildHint,
               labelStyle: const TextStyle(color: QColors.textSecondary),
               border: const OutlineInputBorder(),
               prefixIcon: const Icon(Icons.lock, color: QColors.secondary),

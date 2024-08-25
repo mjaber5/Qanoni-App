@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "99228179064",
+    "project_id": "qanoni-app",
+    "storage_bucket": "qanoni-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:99228179064:android:20c2680ef07ae54db5ab8d",
+        "android_client_info": {
+          "package_name": "com.example.qanoni"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbdYAu2zTvv0rJ3c0VTOAX02e1TiWzoYw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

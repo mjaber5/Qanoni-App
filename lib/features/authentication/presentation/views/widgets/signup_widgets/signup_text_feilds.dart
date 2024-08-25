@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qanoni/core/utils/constants/text_strings.dart';
 
 class SignupTextFeilds extends StatelessWidget {
   const SignupTextFeilds({super.key});
@@ -11,34 +12,37 @@ class SignupTextFeilds extends StatelessWidget {
         children: [
           TextField(
             decoration: InputDecoration(
-              labelText: 'Username',
+              labelText: QTexts.signupUsernameTextFeildHint,
               border: OutlineInputBorder(),
-              prefixIcon: Icon(Icons.person),
             ),
           ),
           SizedBox(height: 20),
           TextField(
             decoration: InputDecoration(
-              labelText: 'Email',
+              labelText: QTexts.signupPhoneNumberTextFeildHint,
               border: OutlineInputBorder(),
-              prefixIcon: Icon(Icons.email),
             ),
           ),
           SizedBox(height: 20),
           TextField(
             decoration: InputDecoration(
-              labelText: 'Password',
+              labelText: QTexts.signupEmailTextFeildHint,
               border: OutlineInputBorder(),
-              prefixIcon: Icon(Icons.lock),
+            ),
+          ),
+          SizedBox(height: 20),
+          TextField(
+            decoration: InputDecoration(
+              labelText: QTexts.signupPasswordTextFeildHint,
+              border: OutlineInputBorder(),
             ),
             obscureText: true,
           ),
           SizedBox(height: 20),
           TextField(
             decoration: InputDecoration(
-              labelText: 'Confirm Password',
+              labelText: QTexts.signupConfirmPasswordTextFeildHint,
               border: OutlineInputBorder(),
-              prefixIcon: Icon(Icons.lock),
             ),
             obscureText: true,
           ),

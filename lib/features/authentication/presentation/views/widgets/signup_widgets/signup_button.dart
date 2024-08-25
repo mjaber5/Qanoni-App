@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
+import 'package:qanoni/core/utils/constants/text_strings.dart';
 
 class SignupButton extends StatelessWidget {
   const SignupButton({super.key});
@@ -21,7 +22,7 @@ class SignupButton extends StatelessWidget {
               backgroundColor: QColors.secondary,
             ),
             child: const Text(
-              'Sign Up',
+              QTexts.signupTitleView,
               style: TextStyle(
                 fontSize: 18,
                 color: Colors.white,

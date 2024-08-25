@@ -1,7 +1,35 @@
 class QTexts {
+  static const String appLogoTitle = "Qanoni";
+
   // -- Splash Texts
-  static const String splashTitle = "Qanoni";
   static const String splashSupTitle = "Make your works online";
+
+  // -- Login
+  static const String loginWelcomeBackText = 'Welcome Back';
+  static const String loginUsernameTextFeildHint = "username";
+  static const String loginPasswordTextFeildHint = "password";
+  static const String loginButton = "Login";
+  static const String loginForgotPassword = "Forgot Passwrod";
+  static const String loginTextQuestion = "Dont't have an account ? ";
+  static const String loginSignupTextNavigator = "Signup";
+  static const String loginConditionText = 'By logging, you agree to our ';
+  static const String loginTermsAndConditions = 'Terms & Conditions ';
+  static const String loginAndText = 'and';
+  static const String loginPrivacyPolicy = 'Privacy Policy';
+
+  // -- Signup
+  static const String signupTitleView = 'Create Account';
+  static const String signupUsernameTextFeildHint = "Username";
+  static const String signupPhoneNumberTextFeildHint = "Phone Number";
+  static const String signupEmailTextFeildHint = "Email";
+  static const String signupPasswordTextFeildHint = "password";
+  static const String signupConfirmPasswordTextFeildHint = "Confirm password";
+  static const String signupTextQuestion = "Already have an account ? ";
+  static const String signupLoginTextNavigator = 'Login';
+  static const String signupConditionText = 'By logging, you agree to our ';
+  static const String signupTermsAndConditions = 'Terms & Conditions ';
+  static const String signupAndText = 'and';
+  static const String signupPrivacyPolicy = 'Privacy Policy';
 
   // -- Home
   static const String homeAppbarTitle = 'Home';

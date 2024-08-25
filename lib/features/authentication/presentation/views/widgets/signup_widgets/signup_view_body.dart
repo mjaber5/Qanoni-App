@@ -14,6 +14,9 @@ class SignupViewBody extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         SignupLogoText(),
+        SizedBox(
+          height: 50,
+        ),
         SignupTextFeilds(),
         SignupButton(),
         SignupTextNavigator(),
