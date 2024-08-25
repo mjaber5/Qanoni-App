@@ -12,7 +12,6 @@ class HomeViewBody extends StatelessWidget {
       child: Column(
         children: [
           CustomAppBar(),
-          
           ButtonHomeView(),
           ServicesCardListViewItem(),
         ],

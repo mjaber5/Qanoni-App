@@ -7,7 +7,7 @@ class QTextTheme {
 
   static TextTheme lightTextTheme = TextTheme(
     headlineLarge: const TextStyle().copyWith(
-      fontSize: 32,
+      fontSize: 38,
       fontWeight: FontWeight.bold,
       color: Colors.black,
     ),
@@ -47,7 +47,7 @@ class QTextTheme {
 
   static TextTheme darkTextTheme = TextTheme(
     headlineLarge: const TextStyle().copyWith(
-      fontSize: 32,
+      fontSize: 38,
       fontWeight: FontWeight.bold,
       color: Colors.white,
     ),
