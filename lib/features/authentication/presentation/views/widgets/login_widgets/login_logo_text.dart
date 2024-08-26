@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/constants/text_strings.dart';
-import 'package:qanoni/core/utils/theme/change_theme_notifire.dart';
-import 'package:qanoni/core/utils/theme/custom_themes/text_theme.dart';
+import 'package:qanoni/core/utils/styles.dart';
 
 class LoginLogoText extends StatelessWidget {
   const LoginLogoText({super.key});
 
   @override
   Widget build(BuildContext context) {
-    bool isLight = context.watch<ThemeNotifier>().isLightTheme;
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20.0),
-      child: Center(
-        child: Text(
-          QTexts.appLogoTitle,
-          style: isLight
-              ? QTextTheme.darkTextTheme.headlineLarge
-              : QTextTheme.lightTextTheme.headlineLarge,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding:
+              const EdgeInsets.only(top: 20.0, left: 16, right: 16, bottom: 12),
+          child: Text(
+            QTexts.loginWelcomeBackText,
+            style: Styles.textStyle30.copyWith(
+              color: QColors.secondary,
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 }

@@ -8,7 +8,7 @@ class LoginTextFeilds extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(12.0),
+      padding: const EdgeInsets.all(20.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -16,7 +16,7 @@ class LoginTextFeilds extends StatelessWidget {
           TextField(
             decoration: InputDecoration(
               labelText: QTexts.loginUsernameTextFeildHint,
-              labelStyle: const TextStyle(color: QColors.textSecondary),
+              labelStyle: const TextStyle(color: QColors.darkGrey),
               border: const OutlineInputBorder(),
               prefixIcon: const Icon(Icons.person, color: QColors.secondary),
               enabledBorder: OutlineInputBorder(
@@ -32,7 +32,7 @@ class LoginTextFeilds extends StatelessWidget {
           TextField(
             decoration: InputDecoration(
               labelText: QTexts.loginPasswordTextFeildHint,
-              labelStyle: const TextStyle(color: QColors.textSecondary),
+              labelStyle: const TextStyle(color: QColors.darkGrey),
               border: const OutlineInputBorder(),
               prefixIcon: const Icon(Icons.lock, color: QColors.secondary),
               enabledBorder: OutlineInputBorder(

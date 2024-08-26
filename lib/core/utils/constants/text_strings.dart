@@ -9,13 +9,15 @@ class QTexts {
   static const String loginUsernameTextFeildHint = "username";
   static const String loginPasswordTextFeildHint = "password";
   static const String loginButton = "Login";
-  static const String loginForgotPassword = "Forgot Passwrod";
+  static const String loginForgotPassword = "Forgot Passwrod?";
   static const String loginTextQuestion = "Dont't have an account ? ";
   static const String loginSignupTextNavigator = "Signup";
   static const String loginConditionText = 'By logging, you agree to our ';
   static const String loginTermsAndConditions = 'Terms & Conditions ';
-  static const String loginAndText = 'and';
+  static const String loginAndText = 'and ';
   static const String loginPrivacyPolicy = 'Privacy Policy';
+  static const String loginAboutApp =
+      'Make your services online with Qanoni app, can\'t wait to see what what you\'ve been up to since you last logged in.';
 
   // -- Signup
   static const String signupTitleView = 'Create Account';

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/constants/text_strings.dart';
+import 'package:qanoni/core/utils/styles.dart';
 
 class LoginButton extends StatelessWidget {
   const LoginButton({super.key});
@@ -12,7 +13,7 @@ class LoginButton extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 14),
           child: ElevatedButton(
             onPressed: () {
               // Todo Navigator Screen
@@ -23,10 +24,7 @@ class LoginButton extends StatelessWidget {
             ),
             child: const Text(
               QTexts.loginButton,
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.white,
-              ),
+              style: Styles.textStyle18,
             ),
           ),
         ),
