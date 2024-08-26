@@ -31,7 +31,9 @@ class QTexts {
   static const String signupConditionText = 'By logging, you agree to our ';
   static const String signupTermsAndConditions = 'Terms & Conditions ';
   static const String signupAndText = 'and';
-  static const String signupPrivacyPolicy = 'Privacy Policy';
+  static const String signupPrivacyPolicy = ' Privacy Policy';
+  static const String signupAboutApp =
+      'Sign up now and start exploring all that our app has to offer. We\'re excited to welcome you to our community!';
 
   // -- Home
   static const String homeAppbarTitle = 'Home';

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:qanoni/core/utils/app_router.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/constants/text_strings.dart';
+import 'package:qanoni/core/utils/styles.dart';
 
 class SignupTextNavigator extends StatelessWidget {
   const SignupTextNavigator({super.key});
@@ -15,19 +16,18 @@ class SignupTextNavigator extends StatelessWidget {
           onPressed: () {
             GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
           },
-          child: const Text.rich(
+          child: Text.rich(
             TextSpan(
               text: QTexts.signupTextQuestion,
-              style: TextStyle(
-                fontSize: 14,
-                color: QColors.textSecondary,
+              style: Styles.textStyle14.copyWith(
+                color: QColors.darkerGrey,
               ),
               children: [
                 TextSpan(
                   text: QTexts.signupLoginTextNavigator,
-                  style: TextStyle(
+                  style: Styles.textStyle14.copyWith(
                     color: QColors.secondary,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ],

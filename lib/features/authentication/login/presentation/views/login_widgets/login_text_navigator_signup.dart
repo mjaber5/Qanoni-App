@@ -23,7 +23,6 @@ class LoginTextNavigatorSignup extends StatelessWidget {
                 text: QTexts.loginTextQuestion,
                 style: Styles.textStyle14.copyWith(
                   color: QColors.darkerGrey,
-                  fontWeight: FontWeight.w500,
                 ),
                 children: [
                   TextSpan(

@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:qanoni/core/utils/constants/aceapt_page.dart';
-import 'package:qanoni/features/authentication/presentation/views/login_view.dart';
-import 'package:qanoni/features/authentication/presentation/views/signup_view.dart';
+import 'package:qanoni/features/authentication/login/presentation/views/login_view.dart';
+import 'package:qanoni/features/authentication/signup/presentation/views/signup_view.dart';
 import 'package:qanoni/features/chatbot/presentation/views/chatbot_view.dart';
 import 'package:qanoni/features/home/presentation/views/card/lease_card.dart';
 import 'package:qanoni/features/home/presentation/views/home_view.dart';
