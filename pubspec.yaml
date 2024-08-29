@@ -49,6 +49,10 @@ dependencies:
   bloc: ^8.1.4
   firebase_auth: ^4.16.0
   cloud_firestore: ^4.14.0
+
+  user_repository:
+    path: packages/user_repository
+  equatable: ^2.0.5
   
 dev_dependencies:
   flutter_test:
