@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:qanoni/core/utils/app_router.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/constants/text_strings.dart';
 
@@ -15,7 +17,7 @@ class SignupButton extends StatelessWidget {
         children: [
           ElevatedButton(
             onPressed: () {
-              // Todo Handle sign-up logic here
+              GoRouter.of(context).pushReplacement(AppRouter.kLayout);
             },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 15),

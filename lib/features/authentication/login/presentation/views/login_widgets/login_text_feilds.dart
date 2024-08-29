@@ -13,17 +13,11 @@ class LoginTextFeilds extends StatefulWidget {
 class _LoginTextFeildsState extends State<LoginTextFeilds> {
   bool isObscureText = true;
 
-  bool hasLowercase = false;
-  bool hasUppercase = false;
-  bool hasSpecialCharacters = false;
-  bool hasNumber = false;
-  bool hasMinLength = false;
-
   late TextEditingController passwordController;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.only(bottom: 10, top: 10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,

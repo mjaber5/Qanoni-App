@@ -14,7 +14,7 @@ class SignupViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return const SafeArea(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+        padding: EdgeInsets.symmetric(horizontal: 28, vertical: 30),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -27,8 +27,11 @@ class SignupViewBody extends StatelessWidget {
               ),
               SignupTextFeilds(),
               SignupButton(),
-              SignupTextCondition(),
               SignupTextNavigator(),
+              SizedBox(
+                height: 16,
+              ),
+              SignupTextCondition(),
             ],
           ),
         ),

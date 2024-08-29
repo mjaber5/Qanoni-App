@@ -8,25 +8,20 @@ class LeaseHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
       children: [
-       Container(
-         width: MediaQuery.of(context).size.width * 1,
-         height: MediaQuery.of(context).size.height * 0.20,
-         decoration: const BoxDecoration(
-         
-         
-         color:  QColors.secondary,
-         borderRadius: BorderRadius.only(bottomRight: Radius.circular(50),
-         bottomLeft: Radius.circular(50)
-         )
-       ),
-       
-       
-       ),
-      
-    
-      ]
+        Container(
+          width: MediaQuery.of(context).size.width * 0.5,
+          height: MediaQuery.of(context).size.height * 0.20,
+          decoration: const BoxDecoration(
+            color: QColors.secondary,
+            borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(50),
+              bottomLeft: Radius.circular(50),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

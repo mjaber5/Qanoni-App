@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:qanoni/core/utils/app_router.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/constants/text_strings.dart';
 import 'package:qanoni/core/utils/styles.dart';
@@ -13,10 +15,10 @@ class LoginButton extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 14),
+          padding: const EdgeInsets.only(bottom: 12, top: 16),
           child: ElevatedButton(
             onPressed: () {
-              // Todo Navigator Screen
+              GoRouter.of(context).pushReplacement(AppRouter.kLayout);
             },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 15),

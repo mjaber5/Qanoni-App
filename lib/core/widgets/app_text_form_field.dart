@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/styles.dart';
+import 'package:qanoni/core/utils/theme/change_theme_notifire.dart';
 
 class AppTextFormField extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
@@ -31,6 +33,8 @@ class AppTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLight = context.watch<ThemeNotifier>().isLightTheme;
+
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
@@ -67,10 +71,14 @@ class AppTextFormField extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(16.0),
         ),
-        hintStyle: hintStyle ?? Styles.textStyle14,
+        hintStyle: isLight
+            ? hintStyle ?? Styles.textStyle14
+            : hintStyle ?? Styles.textStyle14.copyWith(color: QColors.darkGrey),
         hintText: hintText,
         suffixIcon: suffixIcon,
-        fillColor: backgroundColor ?? QColors.grey,
+        fillColor: isLight
+            ? backgroundColor ?? QColors.dark
+            : backgroundColor ?? QColors.light,
         filled: true,
       ),
       obscureText: isObscureText ?? false,

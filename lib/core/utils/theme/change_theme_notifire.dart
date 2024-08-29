@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ThemeNotifier with ChangeNotifier {
-  bool _isDarkTheme = false;
+  bool _isDarkTheme = true;
 
   bool get isLightTheme => _isDarkTheme;
 

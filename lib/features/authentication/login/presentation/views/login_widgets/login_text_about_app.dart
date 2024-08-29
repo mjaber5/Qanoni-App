@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/constants/text_strings.dart';
 import 'package:qanoni/core/utils/styles.dart';
+import 'package:qanoni/core/utils/theme/change_theme_notifire.dart';
 
 class LoginTextAboutApp extends StatelessWidget {
   const LoginTextAboutApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 16, left: 16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            QTexts.loginAboutApp,
-            style: Styles.textStyle16.copyWith(
-              color: QColors.darkGrey,
-            ),
+    bool isLight = context.watch<ThemeNotifier>().isLightTheme;
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          QTexts.loginAboutApp,
+          style: Styles.textStyle16.copyWith(
+            color: isLight ? QColors.grey : QColors.darkGrey,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

@@ -1,25 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
+import 'package:qanoni/core/utils/theme/change_theme_notifire.dart';
 
 class ButtonHomeView extends StatelessWidget {
   const ButtonHomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    bool isLight = context.watch<ThemeNotifier>().isLightTheme;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: List.generate(3, (index) {
-          return Container(
-            padding: const EdgeInsets.all(20.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(50),
-              color: QColors.secondary,
-            ),
-            child: const Icon(Icons.description_outlined),
-          );
-        }),
+      padding: const EdgeInsets.all(12),
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.8,
+        height: MediaQuery.of(context).size.height * 0.3,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: isLight ? QColors.dark : QColors.grey,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: List.generate(
+            2,
+            (rowIndex) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: List.generate(
+                  3,
+                  (colIndex) {
+                    return Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(14.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: QColors.secondary,
+                          ),
+                          child: const Icon(Icons.description_outlined),
+                        ),
+                        const Text('data'),
+                      ],
+                    );
+                  },
+                ),
+              );
+            },
+          ),
+        ),
       ),
     );
   }

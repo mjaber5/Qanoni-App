@@ -16,8 +16,6 @@ class LeaseCard extends StatelessWidget {
       ),
       body: Column(
         children: [
-         // const LeaseHeader(),
-          
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.8,
             child: ListView.builder(
@@ -28,17 +26,15 @@ class LeaseCard extends StatelessWidget {
                   padding: const EdgeInsets.all(12.0),
                   child: SingleChildScrollView(
                     child: InkWell(
-                      onTap: (){
-                         GoRouter.of(context).push(AppRouter.kAceaptView);
-
-
+                      onTap: () {
+                        GoRouter.of(context).push(AppRouter.kAceaptView);
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width * 0.9,
                         height: MediaQuery.of(context).size.height * 0.15,
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         decoration: BoxDecoration(
-                          color:  QColors.darkerGrey.withOpacity(0.5),
+                          color: QColors.darkerGrey.withOpacity(0.5),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: const Row(
@@ -49,7 +45,6 @@ class LeaseCard extends StatelessWidget {
                               style: Styles.textStyle20,
                             ),
                             Spacer(),
-                           
                           ],
                         ),
                       ),

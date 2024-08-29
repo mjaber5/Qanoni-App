@@ -15,7 +15,7 @@ class LoginViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return const SafeArea(
       child: Padding(
-        padding: EdgeInsets.all(8.0),
+        padding: EdgeInsets.symmetric(horizontal: 28, vertical: 30),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -24,7 +24,7 @@ class LoginViewBody extends StatelessWidget {
               LoginLogoText(),
               LoginTextAboutApp(),
               SizedBox(
-                height: 50,
+                height: 40,
               ),
               LoginTextFeilds(),
               LoginButton(),
