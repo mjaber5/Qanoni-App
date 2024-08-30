@@ -4,7 +4,6 @@ import 'package:qanoni/core/utils/theme/custom_themes/checkbox_theme.dart';
 import 'package:qanoni/core/utils/theme/custom_themes/chip_theme.dart';
 import 'package:qanoni/core/utils/theme/custom_themes/elevated_button_theme.dart';
 import 'package:qanoni/core/utils/theme/custom_themes/outlined_button_theme.dart';
-import 'package:qanoni/core/utils/theme/custom_themes/text_field_theme.dart';
 import 'package:qanoni/core/utils/theme/custom_themes/text_theme.dart';
 
 class QAppTheme {
@@ -20,7 +19,6 @@ class QAppTheme {
     elevatedButtonTheme: QElevatedButtonTheme.lightElevatedButtonTheme,
     chipTheme: QChipTheme.lightChipTheme,
     outlinedButtonTheme: QOutLinedButtonTheme.lightOutlinedButtonTheme,
-    inputDecorationTheme: QTextFormFieldTheme.lightInputDecorationTheme,
     checkboxTheme: QCheckboxTheme.lightCheckboxTheme,
   );
   static ThemeData darkTheme = ThemeData(
@@ -33,7 +31,6 @@ class QAppTheme {
     elevatedButtonTheme: QElevatedButtonTheme.darkElevatedButtonTheme,
     chipTheme: QChipTheme.darkChipTheme,
     outlinedButtonTheme: QOutLinedButtonTheme.darkOutlinedButtonTheme,
-    inputDecorationTheme: QTextFormFieldTheme.darkInputDecorationTheme,
     checkboxTheme: QCheckboxTheme.darkCheckboxTheme,
   );
 }

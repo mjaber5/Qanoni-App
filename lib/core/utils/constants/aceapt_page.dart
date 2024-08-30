@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 
-
 class AceaptPage extends StatefulWidget {
   const AceaptPage({super.key});
 
@@ -24,7 +23,7 @@ class _AceaptPageState extends State<AceaptPage> {
             Expanded(
               child: SingleChildScrollView(
                 child: Container(
-                  decoration:  BoxDecoration(
+                  decoration: BoxDecoration(
                     color: QColors.darkerGrey.withOpacity(0.5),
                     borderRadius: const BorderRadius.all(Radius.circular(12)),
                   ),
@@ -63,7 +62,8 @@ class _AceaptPageState extends State<AceaptPage> {
             const SizedBox(height: 20),
             Row(
               children: [
-                Checkbox(checkColor: Colors.white,
+                Checkbox(
+                  checkColor: Colors.white,
                   value: _agreed,
                   onChanged: (bool? value) {
                     setState(() {
@@ -73,7 +73,8 @@ class _AceaptPageState extends State<AceaptPage> {
                   activeColor: QColors.secondary,
                 ),
                 const Expanded(
-                  child: Text('I have read and agree with the above terms and conditions'),
+                  child: Text(
+                      'I have read and agree with the above terms and conditions'),
                 ),
               ],
             ),
@@ -87,8 +88,13 @@ class _AceaptPageState extends State<AceaptPage> {
                             // navigate
                           }
                         : null,
-                    style: ButtonStyle(backgroundColor:WidgetStateProperty.all(QColors.secondary)),
-                    child: const Text('Start',style: TextStyle(color: Colors.white),),
+                    style: ButtonStyle(
+                        backgroundColor:
+                            WidgetStateProperty.all(QColors.secondary)),
+                    child: const Text(
+                      'Start',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
               ],

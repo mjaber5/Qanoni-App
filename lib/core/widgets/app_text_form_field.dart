@@ -52,7 +52,7 @@ class AppTextFormField extends StatelessWidget {
         enabledBorder: enabledBorder ??
             OutlineInputBorder(
               borderSide: const BorderSide(
-                color: QColors.grey,
+                color: QColors.darkGrey,
                 width: 1.3,
               ),
               borderRadius: BorderRadius.circular(16.0),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
+import 'package:qanoni/core/utils/constants/text_strings.dart';
 import 'package:qanoni/core/utils/styles.dart';
 import 'package:qanoni/core/utils/theme/change_theme_notifire.dart';
 
@@ -28,18 +29,27 @@ class SignupPasswordValidations extends StatelessWidget {
       child: Column(
         children: [
           buildValidationRow(
-              'At least 1 lowercase letter', hasLowerCase, isLight),
+              QTexts.signupPasswordValidationAtLeastOneLowerCaseLetter,
+              hasLowerCase,
+              isLight),
           const SizedBox(height: 2),
           buildValidationRow(
-              'At least 1 uppercase letter', hasUpperCase, isLight),
+              QTexts.signupPasswordValidationAtLeastOneUpperCaseLetter,
+              hasUpperCase,
+              isLight),
           const SizedBox(height: 2),
           buildValidationRow(
-              'At least 1 special character', hasSpecialCharacters, isLight),
+              QTexts.signupPasswordValidationAtLeastOneSpecialCharacter,
+              hasSpecialCharacters,
+              isLight),
           const SizedBox(height: 2),
-          buildValidationRow('At least 1 number', hasNumber, isLight),
+          buildValidationRow(QTexts.signupPasswordValidationAtLeastOneNumber,
+              hasNumber, isLight),
           const SizedBox(height: 2),
           buildValidationRow(
-              'At least 8 characters long', hasMinLength, isLight),
+              QTexts.signupPasswordValidationAtLeastEightCharactersLong,
+              hasMinLength,
+              isLight),
         ],
       ),
     );
@@ -50,7 +60,7 @@ class SignupPasswordValidations extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: 2.5,
-          backgroundColor: isLight ? QColors.darkerGrey : QColors.darkGrey,
+          backgroundColor: isLight ? QColors.darkGrey : QColors.darkerGrey,
         ),
         const SizedBox(width: 6),
         Text(
@@ -59,7 +69,13 @@ class SignupPasswordValidations extends StatelessWidget {
             decoration: hasValidated ? TextDecoration.lineThrough : null,
             decorationColor: Colors.green,
             decorationThickness: 2,
-            color: hasValidated ? QColors.darkerGrey : QColors.darkGrey,
+            color: isLight
+                ? hasValidated
+                    ? QColors.darkGrey
+                    : QColors.grey
+                : hasValidated
+                    ? QColors.darkGrey
+                    : QColors.darkerGrey,
           ),
         )
       ],

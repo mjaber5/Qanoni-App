@@ -20,7 +20,7 @@ class LoginTextAboutApp extends StatelessWidget {
         Text(
           QTexts.loginAboutApp,
           style: Styles.textStyle16.copyWith(
-            color: isLight ? QColors.grey : QColors.darkGrey,
+            color: isLight ? QColors.darkGrey : QColors.darkerGrey,
           ),
         ),
       ],

@@ -34,6 +34,16 @@ class QTexts {
   static const String signupPrivacyPolicy = ' Privacy Policy';
   static const String signupAboutApp =
       'Sign up now and start exploring all that our app has to offer. We\'re excited to welcome you to our community!';
+  static const String signupPasswordValidationAtLeastOneLowerCaseLetter =
+      'At least 1 lowercase letter';
+  static const String signupPasswordValidationAtLeastOneUpperCaseLetter =
+      'At least 1 uppercase letter';
+  static const String signupPasswordValidationAtLeastOneSpecialCharacter =
+      'At least 1 special character';
+  static const String signupPasswordValidationAtLeastOneNumber =
+      'At least 1 number';
+  static const String signupPasswordValidationAtLeastEightCharactersLong =
+      'At least 8 characters long';
 
   // -- Home
   static const String homeAppbarTitle = 'Home';
