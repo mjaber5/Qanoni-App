@@ -53,6 +53,7 @@ dependencies:
   user_repository:
     path: packages/user_repository
   equatable: ^2.0.5
+  flutter_bloc: ^8.1.6
   
 dev_dependencies:
   flutter_test:

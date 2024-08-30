@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qanoni/core/utils/app_router.dart';
 import 'package:qanoni/core/utils/constants/text_strings.dart';
+import 'package:qanoni/features/authentication/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:qanoni/features/splash/presentation/views/widgets/sliding_text.dart';
 
 class SplashViewBody extends StatefulWidget {
@@ -21,16 +23,24 @@ class _SplashViewBodyState extends State<SplashViewBody>
     super.initState();
     initSlidingAnimation();
 
-    navigateToHome();
+    navigateToHome(context);
   }
 
-  void navigateToHome() {
-    Future.delayed(
-      const Duration(seconds: 2),
-      () {
+  void navigateToHome(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final authenticationState = context.read<AuthenticationBloc>().state;
+
+      if (authenticationState.status == AuthenticationStatus.authenticated) {
+        Future.delayed(
+          const Duration(seconds: 2),
+          () {
+            GoRouter.of(context).push(AppRouter.kLayout);
+          },
+        );
+      } else {
         GoRouter.of(context).push(AppRouter.kLoginView);
-      },
-    );
+      }
+    });
   }
 
   void initSlidingAnimation() {

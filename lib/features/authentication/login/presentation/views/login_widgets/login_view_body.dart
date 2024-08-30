@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:qanoni/features/authentication/login/presentation/views/login_widgets/login_button.dart';
 import 'package:qanoni/features/authentication/login/presentation/views/login_widgets/login_logo_text.dart';
 import 'package:qanoni/features/authentication/login/presentation/views/login_widgets/login_text_about_app.dart';
 import 'package:qanoni/features/authentication/login/presentation/views/login_widgets/login_text_condition.dart';
@@ -27,7 +26,6 @@ class LoginViewBody extends StatelessWidget {
                 height: 40,
               ),
               LoginTextFeilds(),
-              LoginButton(),
               LoginTextForgotPassword(),
               SizedBox(
                 height: 120,
