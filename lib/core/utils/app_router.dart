@@ -1,5 +1,9 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qanoni/core/utils/constants/aceapt_page.dart';
+import 'package:qanoni/features/authentication/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:qanoni/features/authentication/blocs/sign_in_bloc/signin_bloc.dart';
+import 'package:qanoni/features/authentication/blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'package:qanoni/features/authentication/login/presentation/views/login_view.dart';
 import 'package:qanoni/features/authentication/signup/presentation/views/signup_view.dart';
 import 'package:qanoni/features/chatbot/presentation/views/chatbot_view.dart';
@@ -30,11 +34,21 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kLoginView,
-        builder: (context, state) => const LoginView(),
+        builder: (context, state) => BlocProvider<SigninBloc>(
+          create: (context) => SigninBloc(
+            userRepository: context.read<AuthenticationBloc>().userRepository,
+          ),
+          child: const LoginView(),
+        ),
       ),
       GoRoute(
         path: kSignupView,
-        builder: (context, state) => const SignupView(),
+        builder: (context, state) => BlocProvider<SignUpBloc>(
+          create: (context) => SignUpBloc(
+            userRepository: context.read<AuthenticationBloc>().userRepository,
+          ),
+          child: const SignupView(),
+        ),
       ),
       GoRoute(
         path: kLayout,

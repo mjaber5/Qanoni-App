@@ -18,3 +18,14 @@ class SignInFailure extends SigninState {
 }
 
 class SignInProcess extends SigninState {}
+
+class SignOutSuccess extends SigninState {}
+
+class SignOutFailure extends SigninState {
+  final String error;
+
+  const SignOutFailure(this.error);
+
+  @override
+  List<Object> get props => [error];
+}

@@ -1,11 +1,20 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:qanoni/core/utils/app_router.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/constants/text_strings.dart';
 import 'package:qanoni/core/utils/styles.dart';
 
-class SettingsContainerLogout extends StatelessWidget {
+class SettingsContainerLogout extends StatefulWidget {
   const SettingsContainerLogout({super.key});
 
+  @override
+  State<SettingsContainerLogout> createState() =>
+      _SettingsContainerLogoutState();
+}
+
+class _SettingsContainerLogoutState extends State<SettingsContainerLogout> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,7 +32,12 @@ class SettingsContainerLogout extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ListTile(
-                onTap: () {},
+                onTap: () {
+                  setState(() {
+                    FirebaseAuth.instance.signOut();
+                  });
+                  GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
+                },
                 leading: const Icon(
                   Icons.logout_outlined,
                   color: QColors.error,

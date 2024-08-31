@@ -32,11 +32,12 @@ class MyUsers extends Equatable {
     String? confirmPassword,
   }) {
     return MyUsers(
-        phone: phone ?? this.phone,
-        userId: userId ?? this.userId,
-        email: email ?? this.email,
-        userName: userName ?? this.userName,
-        confirmPassword: confirmPassword ?? this.confirmPassword);
+      phone: phone ?? this.phone,
+      userId: userId ?? this.userId,
+      email: email ?? this.email,
+      userName: userName ?? this.userName,
+      confirmPassword: confirmPassword ?? this.confirmPassword,
+    );
   }
 
   MyUsersEntity toEntity() {
