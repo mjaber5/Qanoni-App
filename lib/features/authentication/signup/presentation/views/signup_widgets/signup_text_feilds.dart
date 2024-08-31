@@ -34,14 +34,12 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
   @override
   void initState() {
     super.initState();
-    passwordController =
-        TextEditingController(); // Initialize passwordController
+    passwordController = TextEditingController();
     setupPasswordControllerListener();
   }
 
   @override
   void dispose() {
-    // Dispose controllers to avoid memory leaks
     nameController.dispose();
     emailController.dispose();
     phoneController.dispose();
@@ -111,7 +109,7 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
             ),
             const SizedBox(height: 20),
             AppTextFormField(
-              controller: passwordController, // Assign the correct controller
+              controller: passwordController,
               hintText: 'Password',
               isObscureText: isPasswordObscureText,
               suffixIcon: GestureDetector(
@@ -169,7 +167,12 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
               hasMinLength: hasMinLength,
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 12, top: 16),
+              padding: const EdgeInsets.only(
+                bottom: 12,
+                top: 16,
+                left: 18,
+                right: 18,
+              ),
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {

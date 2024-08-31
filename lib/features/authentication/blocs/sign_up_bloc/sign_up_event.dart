@@ -6,3 +6,13 @@ sealed class SignUpBlocEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class SignUpRequired extends SignUpBlocEvent {
+  final MyUsers user;
+  final String password;
+
+  const SignUpRequired(
+    this.user,
+    this.password,
+  );
+}

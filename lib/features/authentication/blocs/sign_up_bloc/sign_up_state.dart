@@ -8,3 +8,9 @@ sealed class SignUpBlocState extends Equatable {
 }
 
 final class SignUpBlocInitial extends SignUpBlocState {}
+
+class SignUpSuccess extends SignUpBlocState {}
+
+class SignUpFailure extends SignUpBlocState {}
+
+class SignUpProcess extends SignUpBlocState {}

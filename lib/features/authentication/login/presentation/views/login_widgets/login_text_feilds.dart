@@ -64,7 +64,12 @@ class _LoginTextFeildsState extends State<LoginTextFeilds> {
               },
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 12, top: 16),
+              padding: const EdgeInsets.only(
+                bottom: 12,
+                top: 16,
+                left: 18,
+                right: 18,
+              ),
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
