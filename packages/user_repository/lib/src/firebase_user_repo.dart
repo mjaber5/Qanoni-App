@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:user_repository/src/models/user.dart';
@@ -36,13 +35,21 @@ class FirebaseUserRepo implements UserRepository {
   @override
   Future<MyUsers> signUp(MyUsers myUser, String password) async {
     try {
-      UserCredential user = await _firebaseAuth.createUserWithEmailAndPassword(
+      // Sign up the user in Firebase Authentication
+      UserCredential userCredential =
+          await _firebaseAuth.createUserWithEmailAndPassword(
         email: myUser.email,
         password: password,
       );
+
+      // Update MyUsers instance with the generated userId
       myUser = myUser.copyWith(
-        userId: user.user!.uid,
+        userId: userCredential.user!.uid,
       );
+
+      // Store user data in Firestore
+      await setUserData(myUser);
+
       return myUser;
     } catch (error) {
       log(error.toString());

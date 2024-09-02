@@ -6,14 +6,14 @@ class MyUsers extends Equatable {
   final String email;
   final String userName;
   final String phone;
-  final String confirmPassword;
+  final String? confirmPassword;
 
   const MyUsers({
     required this.phone,
     required this.userId,
     required this.email,
     required this.userName,
-    required this.confirmPassword,
+    this.confirmPassword,
   });
 
   static const empty = MyUsers(
@@ -46,7 +46,6 @@ class MyUsers extends Equatable {
       userId: userId,
       email: email,
       userName: userName,
-      confirmPassword: confirmPassword,
     );
   }
 
@@ -56,7 +55,6 @@ class MyUsers extends Equatable {
       userId: entity.userId,
       email: entity.email,
       userName: entity.userName,
-      confirmPassword: entity.confirmPassword,
     );
   }
 

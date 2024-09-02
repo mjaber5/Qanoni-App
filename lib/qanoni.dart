@@ -9,10 +9,7 @@ import 'package:user_repository/user_reposetory.dart';
 
 class Qanoni extends StatelessWidget {
   final UserRepository userRepository;
-  const Qanoni({
-    super.key,
-    required this.userRepository,
-  });
+  const Qanoni(this.userRepository, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +19,9 @@ class Qanoni extends StatelessWidget {
           create: (_) => ThemeNotifier(),
         ),
         RepositoryProvider<AuthenticationBloc>(
-          create: (context) =>
-              AuthenticationBloc(userRepository: userRepository),
+          create: (context) => AuthenticationBloc(
+            userRepository: userRepository,
+          ),
         ),
       ],
       child: Consumer<ThemeNotifier>(

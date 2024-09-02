@@ -5,10 +5,8 @@ class MyUsersEntity extends Equatable {
   final String email;
   final String userName;
   final String phone;
-  final String confirmPassword;
 
   const MyUsersEntity({
-    required this.confirmPassword,
     required this.phone,
     required this.userId,
     required this.email,
@@ -30,10 +28,9 @@ class MyUsersEntity extends Equatable {
       userId: doc['userId'],
       email: doc['email'],
       userName: doc['userName'],
-      confirmPassword: doc['confirmPassword'],
     );
   }
 
   @override
-  List<Object?> get props => [userId, userName, phone, email, confirmPassword];
+  List<Object?> get props => [userId, userName, phone, email];
 }

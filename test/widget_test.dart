@@ -14,9 +14,7 @@ import 'package:user_repository/user_reposetory.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(Qanoni(
-      userRepository: FirebaseUserRepo(),
-    ));
+    await tester.pumpWidget(Qanoni(FirebaseUserRepo()));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

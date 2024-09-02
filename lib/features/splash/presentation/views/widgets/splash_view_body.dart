@@ -22,25 +22,6 @@ class _SplashViewBodyState extends State<SplashViewBody>
   void initState() {
     super.initState();
     initSlidingAnimation();
-
-    navigateToHome(context);
-  }
-
-  void navigateToHome(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final authenticationState = context.read<AuthenticationBloc>().state;
-
-      if (authenticationState.status == AuthenticationStatus.authenticated) {
-        Future.delayed(
-          const Duration(seconds: 2),
-          () {
-            GoRouter.of(context).push(AppRouter.kLayout);
-          },
-        );
-      } else {
-        GoRouter.of(context).push(AppRouter.kLoginView);
-      }
-    });
   }
 
   void initSlidingAnimation() {
@@ -59,27 +40,41 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
   @override
   void dispose() {
-    super.dispose();
     animationController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        const Text(
-          QTexts.appLogoTitle,
-          style: TextStyle(
-            fontSize: 75,
-            fontWeight: FontWeight.bold,
+    return BlocListener<AuthenticationBloc, AuthenticationState>(
+      listener: (context, state) {
+        if (state.status == AuthenticationStatus.authenticated) {
+          Future.delayed(
+            const Duration(seconds: 2),
+            () {
+              GoRouter.of(context).pushReplacement(AppRouter.kLayout);
+            },
+          );
+        } else if (state.status == AuthenticationStatus.unauthenticated) {
+          GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
+        }
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Text(
+            QTexts.appLogoTitle,
+            style: TextStyle(
+              fontSize: 75,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
           ),
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 8),
-        SlidingText(slidingAnimation: slidingAnimation),
-      ],
+          const SizedBox(height: 8),
+          SlidingText(slidingAnimation: slidingAnimation),
+        ],
+      ),
     );
   }
 }

@@ -22,7 +22,7 @@ class HomeViewBody extends StatelessWidget {
             sliver: SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  //const ButtonHomeView(),
+                  // const ButtonHomeView(),
                   const ServicesCardListViewItem(),
                 ],
               ),
