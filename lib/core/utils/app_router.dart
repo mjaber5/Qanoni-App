@@ -11,7 +11,7 @@ import 'package:qanoni/features/home/presentation/views/card/lease_card.dart';
 import 'package:qanoni/features/home/presentation/views/home_view.dart';
 import 'package:qanoni/features/layout/layout.dart';
 import 'package:qanoni/features/notification/presentation/views/notification_view.dart';
-import 'package:qanoni/features/profile/presentation/settings_view.dart';
+import 'package:qanoni/features/profile/presentation/views/settings_view.dart';
 import 'package:qanoni/features/profile/presentation/views/profile_view.dart';
 import 'package:qanoni/features/splash/presentation/views/splash_view.dart';
 
@@ -72,7 +72,12 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kSettingsView,
-        builder: (context, state) => const SettingsView(),
+        builder: (context, state) => BlocProvider<SigninBloc>(
+          create: (context) => SigninBloc(
+            userRepository: context.read<AuthenticationBloc>().userRepository,
+          ),
+          child: const SettingsView(),
+        ),
       ),
       GoRoute(
         path: kAceaptView,
