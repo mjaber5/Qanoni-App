@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:qanoni/features/home/presentation/views/card/card_view.dart';
+import 'package:qanoni/features/home/presentation/views/widgets/button_head_home.dart';
 import 'package:qanoni/features/home/presentation/views/widgets/custom_home_view_app_bar.dart';
-import 'package:qanoni/features/home/presentation/views/widgets/services_card_list_view_item.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -22,8 +23,9 @@ class HomeViewBody extends StatelessWidget {
             sliver: SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  // const ButtonHomeView(),
-                  const ServicesCardListViewItem(),
+
+                  const ButtonHomeView(),
+                  const CardView(),
                 ],
               ),
             ),

@@ -13,7 +13,7 @@ class ButtonHomeView extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       child: Container(
         width: MediaQuery.of(context).size.width * 0.8,
-        height: MediaQuery.of(context).size.height * 0.3,
+        height: MediaQuery.of(context).size.height * 0.2,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: isLight ? QColors.dark : QColors.grey,
@@ -21,7 +21,7 @@ class ButtonHomeView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: List.generate(
-            2,
+            1,
             (rowIndex) {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
