@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/presentation/views/card/lease_card/lease_card_view_file/house_rental_contact/contract_Input_form.dart';
+import 'package:qanoni/features/home/presentation/views/card/lease_card/house_rental_contact/contract_Input_form.dart';
 
 class AceaptHouse extends StatefulWidget {
   const AceaptHouse({super.key});
@@ -89,7 +89,10 @@ class _AceaptPageState extends State<AceaptHouse> {
                     onPressed: _agreed
                         ? () {
                             // navigate
-                            Navigator.push(context, MaterialPageRoute(builder: (context) =>  ContractInputForm()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ContractInputForm()));
                           }
                         : null,
                     style: ButtonStyle(
