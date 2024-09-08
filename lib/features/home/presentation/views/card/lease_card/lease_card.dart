@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/aceapt_page.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
+import 'package:qanoni/features/home/presentation/views/card/lease_card/lease_card_view_file/car_rental_contact/acept_care.dart';
+import 'package:qanoni/features/home/presentation/views/card/lease_card/lease_card_view_file/house_rental_contact/aceapt_house.dart';
 
 class LeaseCard extends StatelessWidget {
   const LeaseCard({super.key});
@@ -17,7 +19,7 @@ class LeaseCard extends StatelessWidget {
         
           InkWell(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const AceaptPage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const AceptCare()));
                    
                 },
                 child: Container(
@@ -35,7 +37,40 @@ class LeaseCard extends StatelessWidget {
                       children: [
                         Center(
                           child: Text(
-                           "عقد ايجار سيارة"
+                           "Car rental contract عقد ايجار سيارة"
+                          ),
+                        ),
+                        Spacer(),
+                        
+                        
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox( height: MediaQuery.of(context).size.height * 0.01,),
+           
+          InkWell(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const AceaptHouse()));
+                   
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: MediaQuery.of(context).size.height * 0.15,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  decoration: BoxDecoration(
+                    color: QColors.darkerGrey.withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child:  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Center(
+                          child: Text(
+                           "House rent contract عقد ايجار بيت"
                           ),
                         ),
                         Spacer(),
@@ -68,7 +103,7 @@ class LeaseCard extends StatelessWidget {
                       children: [
                         Center(
                           child: Text(
-                           "عقد ايجار بيت"
+                           "Equipment rental contract عقد ايجار معدات"
                           ),
                         ),
                         Spacer(),
@@ -101,7 +136,7 @@ class LeaseCard extends StatelessWidget {
                       children: [
                         Center(
                           child: Text(
-                           "عقد ايجار عقار مياومة "
+                           "Daily rent contract عقد ايجار مياومة"
                           ),
                         ),
                         Spacer(),
@@ -134,40 +169,7 @@ class LeaseCard extends StatelessWidget {
                       children: [
                         Center(
                           child: Text(
-                           "نموذج الغاء عقد الاجار"
-                          ),
-                        ),
-                        Spacer(),
-                        
-                        
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox( height: MediaQuery.of(context).size.height * 0.01,),
-           
-          InkWell(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const AceaptPage()));
-                   
-                },
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  height: MediaQuery.of(context).size.height * 0.15,
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  decoration: BoxDecoration(
-                    color: QColors.darkerGrey.withOpacity(0.5),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child:  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Center(
-                          child: Text(
-                           "عقد ايجار معدات "
+                           "Rental contract cancellation form نموذج الغاء عقد ايجار "
                           ),
                         ),
                         Spacer(),
