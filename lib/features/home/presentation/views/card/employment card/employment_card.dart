@@ -35,7 +35,7 @@ class EmploymentCard extends StatelessWidget {
                       children: [
                         Center(
                           child: Text(
-                           "عقد ايجار سيارة"
+                           "Sell ​​a car بيع سيارة"
                           ),
                         ),
                         Spacer(),
@@ -68,7 +68,7 @@ class EmploymentCard extends StatelessWidget {
                       children: [
                         Center(
                           child: Text(
-                           "عقد ايجار بيت"
+                           "Selling a property بيع عقار "
                           ),
                         ),
                         Spacer(),
@@ -101,7 +101,7 @@ class EmploymentCard extends StatelessWidget {
                       children: [
                         Center(
                           child: Text(
-                           "عقد ايجار عقار مياومة "
+                           "Car insurance تأمين سيارة"
                           ),
                         ),
                         Spacer(),
@@ -134,7 +134,7 @@ class EmploymentCard extends StatelessWidget {
                       children: [
                         Center(
                           child: Text(
-                           "نموذج الغاء عقد الاجار"
+                           "Termination of a sales contract فسخ عقد بيع"
                           ),
                         ),
                         Spacer(),
@@ -168,7 +168,7 @@ class EmploymentCard extends StatelessWidget {
                       children: [
                         Center(
                           child: Text(
-                           "عقد ايجار معدات "
+                          "Waiver agreement اتفاق تنازل"
                           ),
                         ),
                         Spacer(),

@@ -36,8 +36,7 @@ class PurchaseCard extends StatelessWidget {
                         children: [
                           Center(
                             child: Text(
-                             "عقد ايجار سيارة"
-                            ),
+                              "Ministry work model نموذج عمل وزارة"                            ),
                           ),
                           Spacer(),
                           
@@ -69,8 +68,7 @@ class PurchaseCard extends StatelessWidget {
                         children: [
                           Center(
                             child: Text(
-                             "عقد ايجار بيت"
-                            ),
+                             "Recruitment of work استقدام عمل"                            ),
                           ),
                           Spacer(),
                           
@@ -102,8 +100,7 @@ class PurchaseCard extends StatelessWidget {
                         children: [
                           Center(
                             child: Text(
-                             "عقد ايجار عقار مياومة "
-                            ),
+                              "Public services contract عقد خدمات عامة"                            ),
                           ),
                           Spacer(),
                           
@@ -135,8 +132,7 @@ class PurchaseCard extends StatelessWidget {
                         children: [
                           Center(
                             child: Text(
-                             "نموذج الغاء عقد الاجار"
-                            ),
+                            "Make an agreement عقد اتفاق"                            ),
                           ),
                           Spacer(),
                           
@@ -168,8 +164,7 @@ class PurchaseCard extends StatelessWidget {
                         children: [
                           Center(
                             child: Text(
-                             "عقد ايجار معدات "
-                            ),
+                           "Termination of an employment contract by the employee انهاء عقد عمل من قبل الموظف"                            ),
                           ),
                           Spacer(),
                           
@@ -201,7 +196,7 @@ class PurchaseCard extends StatelessWidget {
                         children: [
                           Center(
                             child: Text(
-                             "عقد ايجار معدات "
+                            "Contracting agreement اتفاقية مقاولة "
                             ),
                           ),
                           Spacer(),
