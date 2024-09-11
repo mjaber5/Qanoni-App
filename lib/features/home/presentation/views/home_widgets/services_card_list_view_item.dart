@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/features/home/data/card_model.dart';
-import 'package:qanoni/features/home/presentation/views/card/cards_view.dart';
-// import 'package:qanoni/features/home/presentation/views/widgets/services_card_view_item.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/contracts_cards_view.dart';
 
 class ServicesCardListViewItem extends StatelessWidget {
   const ServicesCardListViewItem({super.key});
@@ -14,7 +13,7 @@ class ServicesCardListViewItem extends StatelessWidget {
         padding: EdgeInsets.zero,
         itemCount: cardModels.length,
         itemBuilder: (context, index) {
-          return const CardView();
+          return const ContractsCardsView();
         },
       ),
     );

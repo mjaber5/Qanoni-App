@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qanoni/core/utils/app_router.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
@@ -38,6 +39,15 @@ class _LoginTextFeildsState extends State<LoginTextFeilds> {
               signInRequired = false;
             });
             GoRouter.of(context).pushReplacement(AppRouter.kLayout);
+            Fluttertoast.showToast(
+              msg: '✓ Login Succeeded',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: QColors.darkerGrey,
+              textColor: Colors.white,
+              fontSize: 16.0,
+            );
           } else if (state is SignInProcess) {
             setState(() {
               signInRequired = true;
@@ -47,6 +57,15 @@ class _LoginTextFeildsState extends State<LoginTextFeilds> {
               signInRequired = false;
               errorMsg = 'Invalid email or password';
             });
+            Fluttertoast.showToast(
+              msg: 'Something wrong',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: QColors.darkerGrey,
+              textColor: Colors.white,
+              fontSize: 16.0,
+            );
           }
         },
         child: Form(

@@ -17,7 +17,7 @@ class QTexts {
   static const String loginAndText = 'and ';
   static const String loginPrivacyPolicy = 'Privacy Policy';
   static const String loginAboutApp =
-      'Make your services online with Qanoni app, can\'t wait to see what what you\'ve been up to since you last logged in.';
+      'Make your services online with Qanoni app.';
 
   // -- Signup
   static const String signupTitleView = 'Create Account';

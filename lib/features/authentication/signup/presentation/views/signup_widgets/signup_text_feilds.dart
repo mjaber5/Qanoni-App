@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qanoni/core/utils/app_router.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
@@ -78,11 +79,30 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
               signUpRequired = false;
             });
             GoRouter.of(context).pushReplacement(AppRouter.kLayout);
+
+            Fluttertoast.showToast(
+              msg: '✓ Signup Succeeded',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: QColors.darkerGrey,
+              textColor: Colors.white,
+              fontSize: 16.0,
+            );
           } else if (state is SignUpProcess) {
             setState(() {
               signUpRequired = true;
             });
           } else if (state is SignUpFailure) {
+            Fluttertoast.showToast(
+              msg: 'Something went wrong',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: QColors.darkerGrey,
+              textColor: Colors.white,
+              fontSize: 16.0,
+            );
             return;
           }
         },

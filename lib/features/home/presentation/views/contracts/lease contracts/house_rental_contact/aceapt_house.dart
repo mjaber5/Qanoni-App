@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/house_rental_contact/contract_Input_form.dart';
 
-class EmploymentAcept extends StatefulWidget {
-  const EmploymentAcept({super.key});
+class AceaptHouse extends StatefulWidget {
+  const AceaptHouse({super.key});
 
   @override
-  State<EmploymentAcept> createState() => _AceaptPageState();
+  State<AceaptHouse> createState() => _AceaptPageState();
 }
 
-class _AceaptPageState extends State<EmploymentAcept> {
+class _AceaptPageState extends State<AceaptHouse> {
   bool _agreed = false; // Declare _agreed here
 
   @override
@@ -29,7 +30,8 @@ class _AceaptPageState extends State<EmploymentAcept> {
                   ),
                   child: const Text(
                     '''[الشروط 
-                    EmploymentAcept
+
+                    House rent contract عقد ايجار بيت
                       
                       
                       
@@ -87,6 +89,10 @@ class _AceaptPageState extends State<EmploymentAcept> {
                     onPressed: _agreed
                         ? () {
                             // navigate
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ContractInputForm()));
                           }
                         : null,
                     style: ButtonStyle(

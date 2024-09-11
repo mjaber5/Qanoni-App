@@ -3,66 +3,116 @@ import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/constants/image_strings.dart';
 import 'package:qanoni/core/utils/constants/text_strings.dart';
 import 'package:qanoni/core/utils/styles.dart';
+import 'package:user_repository/user_reposetory.dart';
 
-class ProfileUserInformationCard extends StatelessWidget {
+class ProfileUserInformationCard extends StatefulWidget {
   const ProfileUserInformationCard({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
+  _ProfileUserInformationCardState createState() =>
+      _ProfileUserInformationCardState();
+}
+
+class _ProfileUserInformationCardState
+    extends State<ProfileUserInformationCard> {
+  late final FirebaseUserRepo _userRepo;
+  String? _userName;
+  bool _isLoading = true;
+  bool _hasError = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _userRepo = FirebaseUserRepo();
+    _loadUserInformation();
+  }
+
+  Future<void> _loadUserInformation() async {
+    try {
+      final currentUser = _userRepo.firebaseAuth.currentUser;
+      if (currentUser != null) {
+        final userDoc =
+            await _userRepo.usersCollection.doc(currentUser.uid).get();
+
+        if (userDoc.exists) {
+          setState(() {
+            _userName = userDoc.data()?['userName'] ?? 'Unknown';
+            _isLoading = false;
+          });
+        } else {
+          setState(() {
+            _userName = 'Unknown User';
+            _isLoading = false;
+          });
+        }
+      } else {
+        setState(() {
+          _userName = 'No User Logged In';
+          _isLoading = false;
+        });
+      }
+    } catch (error) {
+      setState(() {
+        _hasError = true;
+        _isLoading = false;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (_isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    if (_hasError) {
+      return const Center(child: Text('Error loading user information'));
+    }
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 30),
-      child: Column(
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width * 0.95,
-            height: MediaQuery.of(context).size.height * 0.2,
-            decoration: BoxDecoration(
-              color: QColors.darkerGrey.withOpacity(0.4),
-              borderRadius: BorderRadius.circular(30),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  const CircleAvatar(
-                    radius: 35,
-                    backgroundImage: AssetImage(
-                      QImages.profileImage,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.6,
-                          child: const Text(
-                            'Mohammed Amjed Ismail Jaber',
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: Styles.textStyle16,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.6,
-                          child: const Text(
-                            '${QTexts.idnumber} : 3202106002041',
-                            maxLines: 2,
-                            overflow: TextOverflow.visible,
-                            style: Styles.textStyle16,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.95,
+        height: MediaQuery.of(context).size.height * 0.2,
+        decoration: BoxDecoration(
+          color: QColors.darkerGrey.withOpacity(0.4),
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const CircleAvatar(
+                radius: 35,
+                backgroundImage: AssetImage(QImages.profileImage),
               ),
-            ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      _userName ?? 'No name available',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Styles.textStyle16,
+                    ),
+                    const SizedBox(height: 10),
+                    const Text(
+                      '${QTexts.idnumber} : 3202106002041',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Styles.textStyle16,
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

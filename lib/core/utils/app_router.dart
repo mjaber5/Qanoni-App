@@ -7,10 +7,10 @@ import 'package:qanoni/features/authentication/blocs/sign_up_bloc/sign_up_bloc.d
 import 'package:qanoni/features/authentication/login/presentation/views/login_view.dart';
 import 'package:qanoni/features/authentication/signup/presentation/views/signup_view.dart';
 import 'package:qanoni/features/chatbot/presentation/views/chatbot_view.dart';
-import 'package:qanoni/features/home/presentation/views/card/employment%20card/employment_acept.dart';
-import 'package:qanoni/features/home/presentation/views/card/employment%20card/employment_card.dart';
-import 'package:qanoni/features/home/presentation/views/card/lease_card/lease_card.dart';
-import 'package:qanoni/features/home/presentation/views/card/purchase%20card/purchase_card.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sales_contracts_acept.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sales_contracts_card.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/lease_card.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/waiver%20contracts/waiver_contracts_view.dart';
 import 'package:qanoni/features/home/presentation/views/home_view.dart';
 import 'package:qanoni/features/layout/layout.dart';
 import 'package:qanoni/features/notification/presentation/views/notification_view.dart';
@@ -28,11 +28,12 @@ abstract class AppRouter {
   static const kProfileView = '/profileView';
   static const kSettingsView = '/settingsView';
   static const kAceaptView = '/aceaptView';
-  static const kEmploymentAcept= '/employmentAcept';
+  static const kEmploymentAcept = '/employmentAcept';
   static const kLeaseCard = '/leaseCard';
-  static const kPurchaseCard = '/purchaseCard';
+  static const kPurchaseView = '/purchaseView';
+  static const kPurchaseCards = '/purchaseCards';
   static const kEmploymentCard = '/employmentCard';
-  
+
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -92,19 +93,21 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kEmploymentAcept,
-        builder: (context, state) => const EmploymentAcept(),
+        builder: (context, state) => const SalesContractsAcept(),
       ),
       GoRoute(
         path: kLeaseCard,
-        builder: (context, state) => const LeaseCard(),
+        //Todo Replace contains in this view to LeaseContractsView
+        builder: (context, state) => const LeaseContractsCards(),
       ),
       GoRoute(
         path: kEmploymentCard,
-        builder: (context, state) => const EmploymentCard(),
+        //Todo Replace contains in this view to SalesContractsView
+        builder: (context, state) => const SalesContractsCard(),
       ),
       GoRoute(
-        path: kPurchaseCard,
-        builder: (context, state) => const PurchaseCard(),
+        path: kPurchaseView,
+        builder: (context, state) => const WaiverContractsView(),
       ),
     ],
   );

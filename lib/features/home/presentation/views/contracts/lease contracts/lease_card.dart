@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/aceapt_page.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/presentation/views/card/lease_card/car_rental_contact/acept_care.dart';
-import 'package:qanoni/features/home/presentation/views/card/lease_card/house_rental_contact/aceapt_house.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/car_rental_contact/acept_care.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/house_rental_contact/aceapt_house.dart';
 
-class LeaseCard extends StatelessWidget {
-  const LeaseCard({super.key});
+class LeaseContractsCards extends StatelessWidget {
+  const LeaseContractsCards({super.key});
 
   @override
   Widget build(BuildContext context) {

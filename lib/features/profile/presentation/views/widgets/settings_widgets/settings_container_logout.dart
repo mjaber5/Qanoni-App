@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qanoni/core/utils/app_router.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
@@ -24,9 +25,28 @@ class _SettingsContainerLogoutState extends State<SettingsContainerLogout> {
       listener: (context, state) {
         if (state is SignOutSuccess) {
           log('Logout Success');
-          GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
+          GoRouter.of(context).go(AppRouter.kLoginView);
+          Fluttertoast.showToast(
+            msg: '✓  Logout Succeeded',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: QColors.darkerGrey,
+            textColor: Colors.white,
+            fontSize: 16.0,
+          );
         } else if (state is SignOutFailure) {
-          log('Logout fail');
+          log('Logout failed');
+
+          Fluttertoast.showToast(
+            msg: 'Something went wrong ',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: QColors.darkerGrey,
+            textColor: Colors.white,
+            fontSize: 16.0,
+          );
         }
       },
       child: Padding(
