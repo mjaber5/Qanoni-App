@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qanoni/core/utils/app_router.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
+import 'package:iconsax/iconsax.dart';
 
 class ContractsCardsView extends StatelessWidget {
   const ContractsCardsView({super.key});
@@ -15,6 +16,7 @@ class ContractsCardsView extends StatelessWidget {
             context,
             AppRouter.kLeaseCard,
             'Lease contracts',
+            Iconsax.document,
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.01,
@@ -22,7 +24,8 @@ class ContractsCardsView extends StatelessWidget {
           contractsCardsContainer(
             context,
             AppRouter.kPurchaseView,
-            'Waiver Contracts ',
+            'Waiver Contracts',
+            Iconsax.note,
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.01,
@@ -31,6 +34,7 @@ class ContractsCardsView extends StatelessWidget {
             context,
             AppRouter.kEmploymentCard,
             'Sales Contracts',
+            Iconsax.money,
           ),
         ],
       ),
@@ -38,7 +42,7 @@ class ContractsCardsView extends StatelessWidget {
   }
 
   InkWell contractsCardsContainer(
-      BuildContext context, String route, String textTitle) {
+      BuildContext context, String route, String textTitle, IconData icon) {
     return InkWell(
       onTap: () {
         GoRouter.of(context).push(route);
@@ -56,9 +60,9 @@ class ContractsCardsView extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Center(
-                child: Text(textTitle),
-              ),
+              Icon(icon, size: 30, color: Colors.white),
+              const SizedBox(width: 50), 
+              Text(textTitle, style: const TextStyle(color: Colors.white)),
             ],
           ),
         ),
