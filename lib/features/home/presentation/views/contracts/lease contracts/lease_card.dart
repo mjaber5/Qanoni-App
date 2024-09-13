@@ -3,6 +3,7 @@ import 'package:qanoni/core/utils/constants/aceapt_page.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/car_rental_contact/acept_care.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/daily_rental_contract/aceapt_daily.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/equipment_rental_contract/aceapt_equipment.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/house_rental_contact/aceapt_house.dart';
 
 class LeaseContractsCards extends StatelessWidget {
@@ -82,7 +83,7 @@ class LeaseContractsCards extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const AceaptPage()));
+                        builder: (context) => const AceaptEquipment()));
               },
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.9,
