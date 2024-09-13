@@ -4,15 +4,14 @@ import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/styles.dart';
 import 'package:qanoni/core/widgets/app_text_form_field.dart';
 
-class ContractInputForm extends StatefulWidget {
-  const ContractInputForm({super.key});
+class ContractInputFormCar extends StatefulWidget {
+  const ContractInputFormCar({super.key});
 
   @override
   _ContractInputFormState createState() => _ContractInputFormState();
 }
 
-
-class _ContractInputFormState extends State<ContractInputForm> {
+class _ContractInputFormState extends State<ContractInputFormCar> {
   final _formKey = GlobalKey<FormState>();
 
   // Controllers for text fields
@@ -20,18 +19,19 @@ class _ContractInputFormState extends State<ContractInputForm> {
   final TextEditingController landlordIdController = TextEditingController(); // Landlord ID
   final TextEditingController tenantNameController = TextEditingController(); // Tenant Name
   final TextEditingController tenantIdController = TextEditingController(); // Tenant ID
-  final TextEditingController propertyAddressController = TextEditingController(); // Property Address
+  final TextEditingController carModelController = TextEditingController(); // Car Model
+  final TextEditingController carTypeController = TextEditingController(); // Car Type
+  final TextEditingController carColorController = TextEditingController(); // Car Color
+  final TextEditingController engineCapacityController = TextEditingController(); // Engine Capacity
   final TextEditingController rentAmountController = TextEditingController(); // Rent Amount
   final TextEditingController startDateController = TextEditingController(); // Contract Start Date
   final TextEditingController contractDurationController = TextEditingController(); // Contract Duration
-  final TextEditingController contractNumberController = TextEditingController(); // Contract Number
-  final TextEditingController cityController = TextEditingController(); // City
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Enter Lease Contract Information'),
+        title: const Text('Enter Car Rental Contract Information'),
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -47,7 +47,7 @@ class _ContractInputFormState extends State<ContractInputForm> {
                 validatorMessage: 'Please enter the landlord\'s name',
               ),
               const SizedBox(height: 16),
-              
+
               // Landlord ID
               buildLabeledTextField(
                 label: 'Landlord ID',
@@ -55,7 +55,7 @@ class _ContractInputFormState extends State<ContractInputForm> {
                 validatorMessage: 'Please enter the landlord\'s ID number',
               ),
               const SizedBox(height: 16),
-              
+
               // Tenant Name
               buildLabeledTextField(
                 label: 'Tenant Name',
@@ -63,7 +63,7 @@ class _ContractInputFormState extends State<ContractInputForm> {
                 validatorMessage: 'Please enter the tenant\'s name',
               ),
               const SizedBox(height: 16),
-              
+
               // Tenant ID
               buildLabeledTextField(
                 label: 'Tenant ID',
@@ -71,31 +71,39 @@ class _ContractInputFormState extends State<ContractInputForm> {
                 validatorMessage: 'Please enter the tenant\'s ID number',
               ),
               const SizedBox(height: 16),
-              
-              // Property Address
+
+              // Car Type
               buildLabeledTextField(
-                label: 'Property Address',
-                controller: propertyAddressController,
-                validatorMessage: 'Please enter the property address',
+                label: 'Car Type',
+                controller: carTypeController,
+                validatorMessage: 'Please enter the car type',
               ),
               const SizedBox(height: 16),
-              
-              // City
+
+              // Car Model
               buildLabeledTextField(
-                label: 'City',
-                controller: cityController,
-                validatorMessage: 'Please enter the city',
+                label: 'Car Model',
+                controller: carModelController,
+                validatorMessage: 'Please enter the car model',
               ),
               const SizedBox(height: 16),
-              
-              // Contract Number
+
+              // Car Color
               buildLabeledTextField(
-                label: 'Contract Number',
-                controller: contractNumberController,
-                validatorMessage: 'Please enter the contract number',
+                label: 'Car Color',
+                controller: carColorController,
+                validatorMessage: 'Please enter the car color',
               ),
               const SizedBox(height: 16),
-              
+
+              // Engine Capacity
+              buildLabeledTextField(
+                label: 'Engine Capacity',
+                controller: engineCapacityController,
+                validatorMessage: 'Please enter the engine capacity',
+              ),
+              const SizedBox(height: 16),
+
               // Rent Amount
               buildLabeledTextField(
                 label: 'Rent Amount',
@@ -103,7 +111,7 @@ class _ContractInputFormState extends State<ContractInputForm> {
                 validatorMessage: 'Please enter the rent amount',
               ),
               const SizedBox(height: 16),
-              
+
               // Contract Start Date
               buildLabeledTextField(
                 label: 'Contract Start Date',
@@ -111,7 +119,7 @@ class _ContractInputFormState extends State<ContractInputForm> {
                 validatorMessage: 'Please enter the contract start date',
               ),
               const SizedBox(height: 16),
-              
+
               // Contract Duration
               buildLabeledTextField(
                 label: 'Contract Duration',
@@ -119,7 +127,7 @@ class _ContractInputFormState extends State<ContractInputForm> {
                 validatorMessage: 'Please enter the contract duration',
               ),
               const SizedBox(height: 32),
-              
+
               // Submit Button
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18),

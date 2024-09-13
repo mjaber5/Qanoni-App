@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 
+import 'contract_Input_form_car.dart';
+
 class AceptCare extends StatefulWidget {
   const AceptCare({super.key});
 
@@ -89,6 +91,10 @@ class _AceaptPageState extends State<AceptCare> {
                     onPressed: _agreed
                         ? () {
                             // navigate
+                             Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ContractInputFormCar()));
                           }
                         : null,
                     style: ButtonStyle(
