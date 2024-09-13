@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/car_rental_contact/acept_care.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/daily_rental_contract/aceapt_daily.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/equipment_rental_contract/aceapt_equipment.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/house_rental_contact/aceapt_house.dart';
-
-import 'rental_contract_cancellation/aceapt_cancellation.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/rental_contract_cancellation/aceapt_cancellation.dart';
 
 class LeaseContractsCards extends StatelessWidget {
   const LeaseContractsCards({super.key});
@@ -35,10 +35,9 @@ class LeaseContractsCards extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Center(
-                        child: Text("Car rental contract عقد ايجار سيارة"),
-                      ),
-                      Spacer(),
+                      Icon(Iconsax.car, size: 30, color: Colors.white),
+                      SizedBox(width: 40),
+                      Text("Car rental contract عقد ايجار سيارة"),
                     ],
                   ),
                 ),
@@ -67,10 +66,9 @@ class LeaseContractsCards extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Center(
-                        child: Text("House rent contract عقد ايجار بيت"),
-                      ),
-                      Spacer(),
+                      Icon(Iconsax.home, size: 30, color: Colors.white),
+                      SizedBox(width: 40),
+                      Text("House rent contract عقد ايجار بيت"),
                     ],
                   ),
                 ),
@@ -99,11 +97,9 @@ class LeaseContractsCards extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Center(
-                        child:
-                            Text("Equipment rental contract عقد ايجار معدات"),
-                      ),
-                      Spacer(),
+                      Icon(Iconsax.box, size: 30, color: Colors.white),
+                      SizedBox(width: 15),
+                      Text("Equipment rental contract عقد ايجار معدات"),
                     ],
                   ),
                 ),
@@ -132,10 +128,9 @@ class LeaseContractsCards extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Center(
-                        child: Text("Daily rent contract عقد ايجار مياومة"),
-                      ),
-                      Spacer(),
+                      Icon(Iconsax.calendar, size: 30, color: Colors.white),
+                      SizedBox(width: 40),
+                      Text("Daily rent contract عقد ايجار مياومة"),
                     ],
                   ),
                 ),
@@ -164,11 +159,10 @@ class LeaseContractsCards extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Center(
-                        child: Text(
-                            "Rental contract cancellation form نموذج الغاء عقد ايجار "),
-                      ),
-                      Spacer(),
+                      Icon(Iconsax.profile_delete, size: 30, color: Colors.white), // Changed to delete icon
+                      SizedBox(width: 40),
+                      Text(
+                          "Rental contract cancellation form"),
                     ],
                   ),
                 ),
