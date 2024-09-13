@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/styles.dart';
@@ -12,24 +11,27 @@ class ContractInputForm extends StatefulWidget {
   _ContractInputFormState createState() => _ContractInputFormState();
 }
 
+
 class _ContractInputFormState extends State<ContractInputForm> {
   final _formKey = GlobalKey<FormState>();
 
   // Controllers for text fields
-  final TextEditingController landlordNameController = TextEditingController();
-  final TextEditingController landlordIdController = TextEditingController();
-  final TextEditingController tenantNameController = TextEditingController();
-  final TextEditingController tenantIdController = TextEditingController();
-  final TextEditingController rentAmountController = TextEditingController();
-  final TextEditingController startDateController = TextEditingController();
-  final TextEditingController contractDurationController = TextEditingController();
-  final TextEditingController propertyAddressController = TextEditingController();
+  final TextEditingController landlordNameController = TextEditingController(); // Landlord Name
+  final TextEditingController landlordIdController = TextEditingController(); // Landlord ID
+  final TextEditingController tenantNameController = TextEditingController(); // Tenant Name
+  final TextEditingController tenantIdController = TextEditingController(); // Tenant ID
+  final TextEditingController propertyAddressController = TextEditingController(); // Property Address
+  final TextEditingController rentAmountController = TextEditingController(); // Rent Amount
+  final TextEditingController startDateController = TextEditingController(); // Contract Start Date
+  final TextEditingController contractDurationController = TextEditingController(); // Contract Duration
+  final TextEditingController contractNumberController = TextEditingController(); // Contract Number
+  final TextEditingController cityController = TextEditingController(); // City
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('إدخال معلومات عقد الإيجار'),
+        title: const Text('Enter Lease Contract Information'),
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -39,107 +41,85 @@ class _ContractInputFormState extends State<ContractInputForm> {
           child: ListView(
             children: [
               // Landlord Name
-              AppTextFormField(
+              buildLabeledTextField(
+                label: 'Landlord Name',
                 controller: landlordNameController,
-                hintText: 'اسم المؤجر',
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'يرجى إدخال اسم المؤجر';
-                  }
-                  return null;
-                },
+                validatorMessage: 'Please enter the landlord\'s name',
               ),
               const SizedBox(height: 16),
+              
               // Landlord ID
-              AppTextFormField(
+              buildLabeledTextField(
+                label: 'Landlord ID',
                 controller: landlordIdController,
-                hintText: 'رقم بطاقة المؤجر',
-                
-                // keyboardType: TextInputType.number,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'يرجى إدخال رقم بطاقة المؤجر';
-                  }
-                  return null;
-                },
+                validatorMessage: 'Please enter the landlord\'s ID number',
               ),
               const SizedBox(height: 16),
+              
               // Tenant Name
-              AppTextFormField(
+              buildLabeledTextField(
+                label: 'Tenant Name',
                 controller: tenantNameController,
-                hintText: 'اسم المستأجر',
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'يرجى إدخال اسم المستأجر';
-                  }
-                  return null;
-                },
+                validatorMessage: 'Please enter the tenant\'s name',
               ),
               const SizedBox(height: 16),
+              
               // Tenant ID
-              AppTextFormField(
+              buildLabeledTextField(
+                label: 'Tenant ID',
                 controller: tenantIdController,
-                hintText: 'رقم بطاقة المستأجر',
-                // keyboardType: TextInputType.number,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'يرجى إدخال رقم بطاقة المستأجر';
-                  }
-                  return null;
-                },
+                validatorMessage: 'Please enter the tenant\'s ID number',
               ),
               const SizedBox(height: 16),
+              
               // Property Address
-              AppTextFormField(
+              buildLabeledTextField(
+                label: 'Property Address',
                 controller: propertyAddressController,
-                hintText: 'عنوان العقار',
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'يرجى إدخال عنوان العقار';
-                  }
-                  return null;
-                },
+                validatorMessage: 'Please enter the property address',
               ),
               const SizedBox(height: 16),
+              
+              // City
+              buildLabeledTextField(
+                label: 'City',
+                controller: cityController,
+                validatorMessage: 'Please enter the city',
+              ),
+              const SizedBox(height: 16),
+              
+              // Contract Number
+              buildLabeledTextField(
+                label: 'Contract Number',
+                controller: contractNumberController,
+                validatorMessage: 'Please enter the contract number',
+              ),
+              const SizedBox(height: 16),
+              
               // Rent Amount
-              AppTextFormField(
+              buildLabeledTextField(
+                label: 'Rent Amount',
                 controller: rentAmountController,
-                hintText: 'مبلغ الإيجار',
-                // keyboardType: TextInputType.number,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'يرجى إدخال مبلغ الإيجار';
-                  }
-                  return null;
-                },
+                validatorMessage: 'Please enter the rent amount',
               ),
               const SizedBox(height: 16),
+              
               // Contract Start Date
-              AppTextFormField(
+              buildLabeledTextField(
+                label: 'Contract Start Date',
                 controller: startDateController,
-                hintText: 'تاريخ بداية العقد',
-                // keyboardType: TextInputType.datetime,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'يرجى إدخال تاريخ بداية العقد';
-                  }
-                  return null;
-                },
+                validatorMessage: 'Please enter the contract start date',
               ),
               const SizedBox(height: 16),
+              
               // Contract Duration
-              AppTextFormField(
+              buildLabeledTextField(
+                label: 'Contract Duration',
                 controller: contractDurationController,
-                hintText: 'مدة العقد',
-                // keyboardType: TextInputType.number,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'يرجى إدخال مدة العقد';
-                  }
-                  return null;
-                },
+                validatorMessage: 'Please enter the contract duration',
               ),
               const SizedBox(height: 32),
+              
               // Submit Button
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18),
@@ -148,7 +128,7 @@ class _ContractInputFormState extends State<ContractInputForm> {
                     if (_formKey.currentState!.validate()) {
                       log('Form is valid. Proceed with saving the contract.');
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('تم إدخال البيانات بنجاح')),
+                        const SnackBar(content: Text('Data entered successfully')),
                       );
                     } else {
                       log('Form is not valid. Show errors.');
@@ -168,6 +148,34 @@ class _ContractInputFormState extends State<ContractInputForm> {
           ),
         ),
       ),
+    );
+  }
+
+  // Helper function to build a labeled text field
+  Widget buildLabeledTextField({
+    required String label,
+    required TextEditingController controller,
+    required String validatorMessage,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: Styles.textStyle18.copyWith(color: QColors.secondary),
+        ),
+        const SizedBox(height: 8),
+        AppTextFormField(
+          controller: controller,
+          hintText: label,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return validatorMessage;
+            }
+            return null;
+          },
+        ),
+      ],
     );
   }
 }
