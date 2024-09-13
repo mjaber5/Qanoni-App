@@ -6,6 +6,8 @@ import 'package:qanoni/core/utils/styles.dart';
 import 'package:qanoni/core/widgets/app_text_form_field.dart';
 
 class ContractInputForm extends StatefulWidget {
+  const ContractInputForm({super.key});
+
   @override
   _ContractInputFormState createState() => _ContractInputFormState();
 }
