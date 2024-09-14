@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qanoni/core/utils/app_router.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
@@ -11,6 +10,8 @@ import 'package:qanoni/core/utils/helpers/app_regex.dart';
 import 'package:qanoni/core/widgets/app_text_form_field.dart';
 import 'package:qanoni/features/authentication/blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'package:qanoni/features/authentication/signup/presentation/views/signup_widgets/signup_password_condition_stronger.dart';
+import 'package:toasty_box/toast_enums.dart';
+import 'package:toasty_box/toast_service.dart';
 import 'package:user_repository/user_reposetory.dart';
 
 class SignupTextFeilds extends StatefulWidget {
@@ -80,28 +81,22 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
             });
             GoRouter.of(context).pushReplacement(AppRouter.kLayout);
 
-            Fluttertoast.showToast(
-              msg: '✓ Signup Succeeded',
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 1,
-              backgroundColor: QColors.darkerGrey,
-              textColor: Colors.white,
-              fontSize: 16.0,
+            ToastService.showSuccessToast(
+              context,
+              length: ToastLength.medium,
+              expandedHeight: 100,
+              message: "Create account sucess!",
             );
           } else if (state is SignUpProcess) {
             setState(() {
               signUpRequired = true;
             });
           } else if (state is SignUpFailure) {
-            Fluttertoast.showToast(
-              msg: 'Something went wrong',
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 1,
-              backgroundColor: QColors.darkerGrey,
-              textColor: Colors.white,
-              fontSize: 16.0,
+            ToastService.showWarningToast(
+              context,
+              length: ToastLength.medium,
+              expandedHeight: 100,
+              message: "Something went wrong!",
             );
             return;
           }
@@ -117,6 +112,12 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                 hintText: 'Name',
                 validator: (value) {
                   if (value == null || value.isEmpty) {
+                    ToastService.showErrorToast(
+                      context,
+                      length: ToastLength.medium,
+                      expandedHeight: 100,
+                      message: "Name wrong !",
+                    );
                     return 'Please enter a valid name';
                   }
                   return null;
@@ -130,6 +131,12 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                   if (value == null ||
                       value.isEmpty ||
                       !AppRegex.isPhoneNumberValid(value)) {
+                    ToastService.showErrorToast(
+                      context,
+                      length: ToastLength.medium,
+                      expandedHeight: 100,
+                      message: "Phone number wrong !",
+                    );
                     return 'Please enter a valid phone number';
                   }
                   return null;
@@ -143,6 +150,12 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                   if (value == null ||
                       value.isEmpty ||
                       !AppRegex.isEmailValid(value)) {
+                    ToastService.showErrorToast(
+                      context,
+                      length: ToastLength.medium,
+                      expandedHeight: 100,
+                      message: "Email wrong !",
+                    );
                     return 'Please enter a valid email';
                   }
                   return null;
@@ -167,6 +180,12 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
+                    ToastService.showErrorToast(
+                      context,
+                      length: ToastLength.medium,
+                      expandedHeight: 100,
+                      message: "Password wrong !",
+                    );
                     return 'Please enter a valid password';
                   }
                   return null;
@@ -192,9 +211,21 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
+                    ToastService.showWarningToast(
+                      context,
+                      length: ToastLength.medium,
+                      expandedHeight: 100,
+                      message: "confirm your password !",
+                    );
                     return 'Please confirm your password';
                   }
                   if (value != passwordController.text) {
+                    ToastService.showErrorToast(
+                      context,
+                      length: ToastLength.medium,
+                      expandedHeight: 100,
+                      message: "confirm password wrong !",
+                    );
                     return 'Passwords do not match';
                   }
                   return null;

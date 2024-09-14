@@ -51,12 +51,13 @@ dependencies:
   firebase_auth: ^5.2.0
   cloud_firestore: ^5.4.0
   
+  
 
   user_repository:
     path: packages/user_repository
   equatable: ^2.0.5
   flutter_bloc: ^8.1.6
-  fluttertoast: ^8.2.8
+  toasty_box: ^1.0.4
   
 dev_dependencies:
   flutter_test:

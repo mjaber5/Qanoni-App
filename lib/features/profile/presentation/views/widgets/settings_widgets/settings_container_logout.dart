@@ -2,13 +2,14 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qanoni/core/utils/app_router.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/constants/text_strings.dart';
 import 'package:qanoni/core/utils/styles.dart';
 import 'package:qanoni/features/authentication/blocs/sign_in_bloc/signin_bloc.dart';
+import 'package:toasty_box/toast_enums.dart';
+import 'package:toasty_box/toast_service.dart';
 
 class SettingsContainerLogout extends StatefulWidget {
   const SettingsContainerLogout({super.key});
@@ -26,26 +27,20 @@ class _SettingsContainerLogoutState extends State<SettingsContainerLogout> {
         if (state is SignOutSuccess) {
           log('Logout Success');
           GoRouter.of(context).go(AppRouter.kLoginView);
-          Fluttertoast.showToast(
-            msg: '✓  Logout Succeeded',
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: QColors.darkerGrey,
-            textColor: Colors.white,
-            fontSize: 16.0,
+          ToastService.showSuccessToast(
+            context,
+            length: ToastLength.medium,
+            expandedHeight: 100,
+            message: "Logout Success",
           );
         } else if (state is SignOutFailure) {
           log('Logout failed');
 
-          Fluttertoast.showToast(
-            msg: 'Something went wrong ',
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: QColors.darkerGrey,
-            textColor: Colors.white,
-            fontSize: 16.0,
+          ToastService.showWarningToast(
+            context,
+            length: ToastLength.medium,
+            expandedHeight: 100,
+            message: "Something went wrong!",
           );
         }
       },

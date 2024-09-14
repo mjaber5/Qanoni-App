@@ -1,33 +1,28 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qanoni/core/utils/app_router.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/core/utils/constants/text_strings.dart';
-
 import 'package:qanoni/core/utils/helpers/app_regex.dart';
-import 'package:qanoni/core/utils/styles.dart';
 import 'package:qanoni/core/widgets/app_text_form_field.dart';
 import 'package:qanoni/features/authentication/blocs/sign_in_bloc/signin_bloc.dart';
+import 'package:qanoni/features/authentication/login/presentation/views/login_widgets/login_button.dart';
+import 'package:toasty_box/toast_enums.dart';
+import 'package:toasty_box/toast_service.dart';
 
-class LoginTextFeilds extends StatefulWidget {
-  const LoginTextFeilds({super.key});
+class LoginInputsSection extends StatefulWidget {
+  const LoginInputsSection({super.key});
 
   @override
-  State<LoginTextFeilds> createState() => _LoginTextFeildsState();
+  State<LoginInputsSection> createState() => _LoginInputsSectionState();
 }
 
-class _LoginTextFeildsState extends State<LoginTextFeilds> {
+class _LoginInputsSectionState extends State<LoginInputsSection> {
   final _formKey = GlobalKey<FormState>();
   final passwordController = TextEditingController();
   final emailController = TextEditingController();
-  bool isObscureText = true;
   bool signInRequired = false;
   String? errorMsg;
-
+  bool isObscureText = true;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -39,14 +34,11 @@ class _LoginTextFeildsState extends State<LoginTextFeilds> {
               signInRequired = false;
             });
             GoRouter.of(context).pushReplacement(AppRouter.kLayout);
-            Fluttertoast.showToast(
-              msg: '✓ Login Succeeded',
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 1,
-              backgroundColor: QColors.darkerGrey,
-              textColor: Colors.white,
-              fontSize: 16.0,
+            ToastService.showSuccessToast(
+              context,
+              length: ToastLength.medium,
+              expandedHeight: 100,
+              message: "Login Success",
             );
           } else if (state is SignInProcess) {
             setState(() {
@@ -57,14 +49,11 @@ class _LoginTextFeildsState extends State<LoginTextFeilds> {
               signInRequired = false;
               errorMsg = 'Invalid email or password';
             });
-            Fluttertoast.showToast(
-              msg: 'Something wrong',
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 1,
-              backgroundColor: QColors.darkerGrey,
-              textColor: Colors.white,
-              fontSize: 16.0,
+            ToastService.showWarningToast(
+              context,
+              length: ToastLength.medium,
+              expandedHeight: 100,
+              message: "Something went wrong!",
             );
           }
         },
@@ -81,8 +70,15 @@ class _LoginTextFeildsState extends State<LoginTextFeilds> {
                   if (value == null ||
                       value.isEmpty ||
                       !AppRegex.isEmailValid(value)) {
+                    ToastService.showErrorToast(
+                      context,
+                      length: ToastLength.medium,
+                      expandedHeight: 100,
+                      message: "email wrong enter!",
+                    );
                     return 'Please enter a valid email';
                   }
+                  return null;
                 },
               ),
               const SizedBox(height: 20),
@@ -102,40 +98,21 @@ class _LoginTextFeildsState extends State<LoginTextFeilds> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
+                    ToastService.showErrorToast(
+                      context,
+                      length: ToastLength.medium,
+                      expandedHeight: 100,
+                      message: "password wrong enter!",
+                    );
                     return 'Please enter a valid password';
                   }
+                  return null;
                 },
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  bottom: 12,
-                  top: 16,
-                  left: 18,
-                  right: 18,
-                ),
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      context.read<SigninBloc>().add(
-                            SignInRequired(
-                              emailController.text,
-                              passwordController.text,
-                            ),
-                          );
-                      log('Form is valid. Proceed with login.');
-                    } else {
-                      log('Form is not valid. Show errors.');
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    backgroundColor: QColors.secondary,
-                  ),
-                  child: const Text(
-                    QTexts.loginButton,
-                    style: Styles.textStyle18,
-                  ),
-                ),
+              LoginButton(
+                formKey: _formKey,
+                emailController: emailController,
+                passwordController: passwordController,
               )
             ],
           ),
