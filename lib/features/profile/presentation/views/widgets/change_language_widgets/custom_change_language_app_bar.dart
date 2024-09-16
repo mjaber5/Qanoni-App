@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:qanoni/core/utils/constants/text_strings.dart';
 import 'package:qanoni/core/utils/styles.dart';
 
-class SettingsViewAppBar extends StatelessWidget {
-  const SettingsViewAppBar({super.key});
+class CustomChangeLanguageAppBar extends StatelessWidget {
+  const CustomChangeLanguageAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class SettingsViewAppBar extends StatelessWidget {
             icon: const Icon(Icons.arrow_back_ios),
           ),
           const Text(
-            QTexts.settingsAppbarTitle,
+            QTexts.changeLanguageAppBarTitle,
             style: Styles.textStyle30,
             textAlign: TextAlign.center,
           ),

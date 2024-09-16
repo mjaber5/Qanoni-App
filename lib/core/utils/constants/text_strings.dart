@@ -79,4 +79,9 @@ class QTexts {
   static const String settingsPrivacyPolicy = 'Privacy policy';
   static const String settingsAboutUS = 'About us';
   static const String settingsLogout = 'Logout';
+
+  // -- Change Language
+  static const String changeLanguageAppBarTitle = 'Language';
+  static const String changeLanguageEnglishOption = 'English';
+  static const String changeLanguageArabicOption = 'Arabic';
 }

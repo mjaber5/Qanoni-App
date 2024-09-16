@@ -248,7 +248,6 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      // ToDo fix errors on setData to FireStore
                       MyUsers myUser = MyUsers.empty;
                       myUser = myUser.copyWith(
                         email: emailController.text,
