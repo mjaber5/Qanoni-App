@@ -19,9 +19,11 @@ class __AppbarProfilStateState extends State<AppbarProfilState> {
       padding: const EdgeInsets.only(right: 24, left: 24, top: 40, bottom: 10),
       child: Row(
         children: [
-          const Text(
+          Text(
             QTexts.profileAppbarTitle,
-            style: Styles.textStyle30,
+            style: Styles.textStyle26.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
             textAlign: TextAlign.center,
           ),
           const Spacer(),

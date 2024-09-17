@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/styles.dart';
@@ -15,17 +16,28 @@ class _ContractInputFormState extends State<ContractInputFormCar> {
   final _formKey = GlobalKey<FormState>();
 
   // Controllers for text fields
-  final TextEditingController landlordNameController = TextEditingController(); // Landlord Name
-  final TextEditingController landlordIdController = TextEditingController(); // Landlord ID
-  final TextEditingController tenantNameController = TextEditingController(); // Tenant Name
-  final TextEditingController tenantIdController = TextEditingController(); // Tenant ID
-  final TextEditingController carModelController = TextEditingController(); // Car Model
-  final TextEditingController carTypeController = TextEditingController(); // Car Type
-  final TextEditingController carColorController = TextEditingController(); // Car Color
-  final TextEditingController engineCapacityController = TextEditingController(); // Engine Capacity
-  final TextEditingController rentAmountController = TextEditingController(); // Rent Amount
-  final TextEditingController startDateController = TextEditingController(); // Contract Start Date
-  final TextEditingController contractDurationController = TextEditingController(); // Contract Duration
+  final TextEditingController landlordNameController =
+      TextEditingController(); // Landlord Name
+  final TextEditingController landlordIdController =
+      TextEditingController(); // Landlord ID
+  final TextEditingController tenantNameController =
+      TextEditingController(); // Tenant Name
+  final TextEditingController tenantIdController =
+      TextEditingController(); // Tenant ID
+  final TextEditingController carModelController =
+      TextEditingController(); // Car Model
+  final TextEditingController carTypeController =
+      TextEditingController(); // Car Type
+  final TextEditingController carColorController =
+      TextEditingController(); // Car Color
+  final TextEditingController engineCapacityController =
+      TextEditingController(); // Engine Capacity
+  final TextEditingController rentAmountController =
+      TextEditingController(); // Rent Amount
+  final TextEditingController startDateController =
+      TextEditingController(); // Contract Start Date
+  final TextEditingController contractDurationController =
+      TextEditingController(); // Contract Duration
 
   @override
   Widget build(BuildContext context) {
@@ -128,7 +140,7 @@ class _ContractInputFormState extends State<ContractInputFormCar> {
               ),
               const SizedBox(height: 32),
 
-              // Submit Button
+              // Submit Bu,tton
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: ElevatedButton(
@@ -136,7 +148,8 @@ class _ContractInputFormState extends State<ContractInputFormCar> {
                     if (_formKey.currentState!.validate()) {
                       log('Form is valid. Proceed with saving the contract.');
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Data entered successfully')),
+                        const SnackBar(
+                            content: Text('Data entered successfully')),
                       );
                     } else {
                       log('Form is not valid. Show errors.');

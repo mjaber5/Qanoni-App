@@ -14,9 +14,7 @@ class AccountInformationSettings extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: ListTile(
-        onTap: () {
-          // Todo language Change
-        },
+        onTap: () {},
         leading: const Icon(
           Icons.person_2_outlined,
         ),

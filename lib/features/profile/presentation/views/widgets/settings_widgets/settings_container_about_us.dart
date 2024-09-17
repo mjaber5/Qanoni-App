@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:qanoni/core/utils/app_router.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/constants/sizes.dart';
 import 'package:qanoni/core/utils/constants/text_strings.dart';
@@ -28,7 +30,7 @@ class SettingsContainerAboutUs extends StatelessWidget {
             children: [
               ListTile(
                 onTap: () {
-                  // Todo Navigator to about us view
+                  GoRouter.of(context).push(AppRouter.kAboutUsView);
                 },
                 leading: const Icon(
                   Icons.info,

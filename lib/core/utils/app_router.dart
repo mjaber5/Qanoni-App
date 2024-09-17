@@ -14,10 +14,10 @@ import 'package:qanoni/features/home/presentation/views/contracts/waiver%20contr
 import 'package:qanoni/features/home/presentation/views/home_view.dart';
 import 'package:qanoni/features/layout/layout.dart';
 import 'package:qanoni/features/notification/presentation/views/notification_view.dart';
+import 'package:qanoni/features/profile/presentation/views/about_us_view.dart';
 import 'package:qanoni/features/profile/presentation/views/change_language_view.dart';
 import 'package:qanoni/features/profile/presentation/views/settings_view.dart';
 import 'package:qanoni/features/profile/presentation/views/profile_view.dart';
-import 'package:qanoni/features/profile/presentation/views/widgets/change_language_widgets/change_language_container_view.dart';
 import 'package:qanoni/features/splash/presentation/views/splash_view.dart';
 
 abstract class AppRouter {
@@ -36,7 +36,7 @@ abstract class AppRouter {
   static const kPurchaseCards = '/purchaseCards';
   static const kEmploymentCard = '/employmentCard';
   static const kChangeLanguageView = '/changeLanguageView';
-  static const kLanguageToogleView = '/languageToogleContainerView';
+  static const kAboutUsView = '/aboutUsView';
 
   static final router = GoRouter(
     routes: [
@@ -118,8 +118,8 @@ abstract class AppRouter {
         builder: (context, state) => const ChangeLanguageView(),
       ),
       GoRoute(
-        path: kLanguageToogleView,
-        builder: (context, state) => const LanguageToogleContainerView(),
+        path: kAboutUsView,
+        builder: (context, state) => const AboutUsView(),
       ),
     ],
   );

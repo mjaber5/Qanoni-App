@@ -18,9 +18,11 @@ class CustomChangeLanguageAppBar extends StatelessWidget {
             },
             icon: const Icon(Icons.arrow_back_ios),
           ),
-          const Text(
+          Text(
             QTexts.changeLanguageAppBarTitle,
-            style: Styles.textStyle30,
+            style: Styles.textStyle26.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
             textAlign: TextAlign.center,
           ),
         ],

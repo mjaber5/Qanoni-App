@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/rental_contract_cancellation/contract_Input_form_cancellation.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/rental_contract_cancellation/contract_input_form_cancellation.dart';
 
 class AceaptCancellation extends StatefulWidget {
   const AceaptCancellation({super.key});
@@ -92,7 +92,8 @@ class _AceaptPageState extends State<AceaptCancellation> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ContractInputFormCancellation()));
+                                    builder: (context) =>
+                                        const ContractInputFormCancellation()));
                           }
                         : null,
                     style: ButtonStyle(

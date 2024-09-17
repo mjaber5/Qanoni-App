@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/daily_rental_contract/contract_Input_form_daily.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/daily_rental_contract/contract_input_form_daily.dart';
 
 class AceaptEquipment extends StatefulWidget {
   const AceaptEquipment({super.key});
@@ -92,7 +92,8 @@ class _AceaptPageState extends State<AceaptEquipment> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ContractInputFormDaily()));
+                                    builder: (context) =>
+                                        const ContractInputFormDaily()));
                           }
                         : null,
                     style: ButtonStyle(

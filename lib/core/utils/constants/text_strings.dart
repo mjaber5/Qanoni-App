@@ -77,11 +77,16 @@ class QTexts {
   static const String settingsAccountInformation = 'Account information';
   static const String settingsChangePassword = 'Change password';
   static const String settingsPrivacyPolicy = 'Privacy policy';
-  static const String settingsAboutUS = 'About us';
+  static const String settingsAboutUS = 'About';
   static const String settingsLogout = 'Logout';
 
   // -- Change Language
   static const String changeLanguageAppBarTitle = 'Language';
   static const String changeLanguageEnglishOption = 'English';
   static const String changeLanguageArabicOption = 'Arabic';
+
+  // -- AboutUs
+  static const String aboutUsAppBarTitle = 'About';
+  static const String aboutUsBodyText =
+      'Qanoni is your geteway to digital ontracts services, at allows you to login with single username and password instaed of multiple passwords. ';
 }
