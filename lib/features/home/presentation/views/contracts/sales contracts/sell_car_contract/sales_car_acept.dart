@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/daily_rental_contract/contract_Input_form_daily.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell_car_contract/contract_input_form_car.dart';
 
-class SalesContractsAcept extends StatefulWidget {
-  const SalesContractsAcept({super.key});
+class SalesCarAccept extends StatefulWidget {
+  const SalesCarAccept({super.key});
 
   @override
-  State<SalesContractsAcept> createState() => _AceaptPageState();
+  State<SalesCarAccept> createState() => _SalesCarAcceptState();
 }
 
-// this is const file just condtions , after done we will edit it .
-
-class _AceaptPageState extends State<SalesContractsAcept> {
-  bool _agreed = false;
+class _SalesCarAcceptState extends State<SalesCarAccept> {
+  bool _agreed = false; // Declare _agreed variable
 
   @override
   Widget build(BuildContext context) {
@@ -25,38 +25,21 @@ class _AceaptPageState extends State<SalesContractsAcept> {
             Expanded(
               child: SingleChildScrollView(
                 child: Container(
+                  padding: const EdgeInsets.all(12.0),
                   decoration: BoxDecoration(
                     color: QColors.darkerGrey.withOpacity(0.5),
                     borderRadius: const BorderRadius.all(Radius.circular(12)),
                   ),
                   child: const Text(
                     '''[الشروط 
-                    EmploymentAcept
+
+                    Daily rent contract عقد ايجار بيت
+                      daddssddsssssssssss
+                      الشروط والبنود المتعلقة بعقد بيع السيارة، وأي التزامات أو حقوق مترتبة على البيع
+                      يجب الاطلاع على كل التفاصيل المتعلقة قبل الموافقة والتوقيع على العقد.
                       
                       
-                      
-                      
-                      
-                                                                                                                      j
-                      
-                      
-                      
-                      
-                      
-                                                                                                                      j
-                      
-                      
-                      
-                      
-                      
-                      
-                                                                                          j
-                      
-                      
-                      
-                      
-                      
-                      j                                                                                          ]''',
+                      ]''',
                     style: TextStyle(fontSize: 16.0),
                   ),
                 ),
@@ -88,12 +71,20 @@ class _AceaptPageState extends State<SalesContractsAcept> {
                   child: ElevatedButton(
                     onPressed: _agreed
                         ? () {
-                            // navigate
+                            // Navigate to the next page
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const ContractInputFormCarSales(),
+                              ),
+                            );
                           }
-                        : null,
-                    style: ButtonStyle(
-                        backgroundColor:
-                            WidgetStateProperty.all(QColors.secondary)),
+                        : null, // Disable button if not agreed
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: QColors.secondary,
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                    ),
                     child: const Text(
                       'Start',
                       style: TextStyle(color: Colors.white),

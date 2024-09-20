@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sales_contracts_acept.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell_car_contract/sales_car_acept.dart';
 
 class SalesContractsCard extends StatelessWidget {
   const SalesContractsCard({super.key});
+
+  // this is for cards just call widgets after isolate theme from here
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,7 @@ class SalesContractsCard extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const SalesContractsAcept(),
+                    builder: (context) => const SalesCarAccept(),
                   ),
                 );
               },

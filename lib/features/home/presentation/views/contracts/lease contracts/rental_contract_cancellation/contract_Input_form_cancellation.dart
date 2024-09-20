@@ -12,15 +12,22 @@ class ContractInputFormCancellation extends StatefulWidget {
   _LeaseCancellationFormState createState() => _LeaseCancellationFormState();
 }
 
+// done
+
 class _LeaseCancellationFormState extends State<ContractInputFormCancellation> {
   final _formKey = GlobalKey<FormState>();
 
   // Controllers for text fields
-  final TextEditingController landlordNameController = TextEditingController(); // Landlord Name
-  final TextEditingController tenantNameController = TextEditingController(); // Tenant Name
-  final TextEditingController contractStartDateController = TextEditingController(); // Contract Start Date
-  final TextEditingController contractEndDateController = TextEditingController(); // Contract End Date
-  final TextEditingController cancellationReasonController = TextEditingController(); // Reason for Cancellation
+  final TextEditingController landlordNameController =
+      TextEditingController(); // Landlord Name
+  final TextEditingController tenantNameController =
+      TextEditingController(); // Tenant Name
+  final TextEditingController contractStartDateController =
+      TextEditingController(); // Contract Start Date
+  final TextEditingController contractEndDateController =
+      TextEditingController(); // Contract End Date
+  final TextEditingController cancellationReasonController =
+      TextEditingController(); // Reason for Cancellation
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +90,8 @@ class _LeaseCancellationFormState extends State<ContractInputFormCancellation> {
                     if (_formKey.currentState!.validate()) {
                       log('Form is valid. Proceed with contract cancellation.');
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Form submitted successfully')),
+                        const SnackBar(
+                            content: Text('Form submitted successfully')),
                       );
                     } else {
                       log('Form is not valid. Show errors.');
