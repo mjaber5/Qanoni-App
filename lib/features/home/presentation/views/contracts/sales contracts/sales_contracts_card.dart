@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sales_contracts_acept.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell%20a%20land/sell_land_acept.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell%20a%20property/aceprt_property.dart';
+
 import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell_car_contract/sales_car_acept.dart';
 
 class SalesContractsCard extends StatelessWidget {
@@ -87,7 +89,7 @@ class SalesContractsCard extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const AceprtProperty()));
+                        builder: (context) => const SellLandAcept()));
               },
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.9,
@@ -103,7 +105,7 @@ class SalesContractsCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Center(
-                        child: Text("Car insurance تأمين سيارة"),
+                        child: Text("Land for sale بيع ارض"),
                       ),
                       Spacer(),
                     ],

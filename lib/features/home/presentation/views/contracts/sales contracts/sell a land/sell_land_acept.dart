@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell_car_contract/contract_input_form_car.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell%20a%20land/contract_input_form_land.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell%20a%20property/contract_input_form_property.dart';
 
-class SalesCarAccept extends StatefulWidget {
-  const SalesCarAccept({super.key});
+class SellLandAcept extends StatefulWidget {
+  const SellLandAcept({super.key});
 
   @override
-  State<SalesCarAccept> createState() => _SalesCarAcceptState();
+  State<SellLandAcept> createState() => _SellLandAceptState();
 }
 
-class _SalesCarAcceptState extends State<SalesCarAccept> {
+class _SellLandAceptState extends State<SellLandAcept> {
   bool _agreed = false; // Declare _agreed variable
 
   @override
@@ -75,7 +76,7 @@ class _SalesCarAcceptState extends State<SalesCarAccept> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    const ContractInputFormCarSales(),
+                                    const ContractInputFormLand(),
                               ),
                             );
                           }
