@@ -10,6 +10,7 @@ import 'package:qanoni/features/chatbot/presentation/views/chatbot_view.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sales_contracts_acept.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sales_contracts_card.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/lease_card.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/waiver%20contracts/waiver_contracts_card.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/waiver%20contracts/waiver_contracts_view.dart';
 import 'package:qanoni/features/home/presentation/views/home_view.dart';
 import 'package:qanoni/features/layout/layout.dart';
@@ -37,6 +38,7 @@ abstract class AppRouter {
   static const kEmploymentCard = '/employmentCard';
   static const kChangeLanguageView = '/changeLanguageView';
   static const kAboutUsView = '/aboutUsView';
+  static const kWaiverContractsCard = '/waiverContractsCard';
 
   static final router = GoRouter(
     routes: [
@@ -120,6 +122,10 @@ abstract class AppRouter {
       GoRoute(
         path: kAboutUsView,
         builder: (context, state) => const AboutUsView(),
+      ),
+      GoRoute(
+        path: kWaiverContractsCard,
+        builder: (context, state) => const WaiverContractsCard(),
       ),
     ],
   );

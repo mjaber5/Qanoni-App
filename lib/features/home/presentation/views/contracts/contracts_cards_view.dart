@@ -23,7 +23,7 @@ class ContractsCardsView extends StatelessWidget {
           ),
           contractsCardsContainer(
             context,
-            AppRouter.kPurchaseView,
+            AppRouter.kWaiverContractsCard,
             'Waiver Contracts',
             Iconsax.note,
           ),

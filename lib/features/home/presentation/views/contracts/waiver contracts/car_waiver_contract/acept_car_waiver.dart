@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell%20a%20land/contract_input_form_land.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/waiver%20contracts/car_waiver_contract/contract_input_form_waiver_car.dart';
 
-class SellLandAcept extends StatefulWidget {
-  const SellLandAcept({super.key});
+
+class AceptCarWaiver extends StatefulWidget {
+  const AceptCarWaiver({super.key});
 
   @override
-  State<SellLandAcept> createState() => _SellLandAceptState();
+  State<AceptCarWaiver> createState() => _AceaptPageState();
 }
 
-class _SellLandAceptState extends State<SellLandAcept> {
-  bool _agreed = false; // Declare _agreed variable
+class _AceaptPageState extends State<AceptCarWaiver> {
+  bool _agreed = false; // Declare _agreed here
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,6 @@ class _SellLandAceptState extends State<SellLandAcept> {
             Expanded(
               child: SingleChildScrollView(
                 child: Container(
-                  padding: const EdgeInsets.all(12.0),
                   decoration: BoxDecoration(
                     color: QColors.darkerGrey.withOpacity(0.5),
                     borderRadius: const BorderRadius.all(Radius.circular(12)),
@@ -32,13 +32,33 @@ class _SellLandAceptState extends State<SellLandAcept> {
                   child: const Text(
                     '''[الشروط 
 
-                    Daily rent contract عقد ايجار بيت
-                      daddssddsssssssssss
-                      الشروط والبنود المتعلقة بعقد بيع السيارة، وأي التزامات أو حقوق مترتبة على البيع
-                      يجب الاطلاع على كل التفاصيل المتعلقة قبل الموافقة والتوقيع على العقد.
+
+                    Acept Car Waiver
                       
                       
-                      ]''',
+                      
+                      
+                      
+                                                                                                                      j
+                      
+                      
+                      
+                      
+                      
+                                                                                                                      j
+                      
+                      
+                      
+                      
+                      
+                      
+                                                                                          j
+                      
+                      
+                      
+                      
+                      
+                      j                                                                                          ]''',
                     style: TextStyle(fontSize: 16.0),
                   ),
                 ),
@@ -70,20 +90,17 @@ class _SellLandAceptState extends State<SellLandAcept> {
                   child: ElevatedButton(
                     onPressed: _agreed
                         ? () {
-                            // Navigate to the next page
+                            // navigate
                             Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const ContractInputFormLand(),
-                              ),
-                            );
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ContractInputFormWaiverCar()));
                           }
-                        : null, // Disable button if not agreed
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: QColors.secondary,
-                      padding: const EdgeInsets.symmetric(vertical: 15),
-                    ),
+                        : null,
+                    style: ButtonStyle(
+                        backgroundColor:
+                            WidgetStateProperty.all(QColors.secondary)),
                     child: const Text(
                       'Start',
                       style: TextStyle(color: Colors.white),
