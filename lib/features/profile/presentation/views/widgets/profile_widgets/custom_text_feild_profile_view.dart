@@ -3,22 +3,24 @@ import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/theme/custom_themes/text_field_theme.dart';
 
 class CustomTextFieldProfileView extends StatelessWidget {
-  const CustomTextFieldProfileView({
-    super.key,
-    required this.controller,
-    required this.hintText,
-    required this.prefixIcon,
-    required this.inputType,
-  });
+  const CustomTextFieldProfileView(
+      {super.key,
+      required this.controller,
+      required this.hintText,
+      required this.prefixIcon,
+      required this.inputType,
+      this.initialValue});
 
   final TextEditingController controller;
   final String hintText;
   final IconButton prefixIcon;
   final TextInputType inputType;
+  final String? initialValue;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      initialValue: initialValue,
       controller: controller,
       keyboardType: inputType,
       decoration: InputDecoration(
