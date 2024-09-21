@@ -32,7 +32,7 @@ class ContractsCardsView extends StatelessWidget {
           ),
           contractsCardsContainer(
             context,
-            AppRouter.kEmploymentCard,
+            AppRouter.kSalesContractsCard,
             'Sales Contracts',
             Iconsax.money,
           ),

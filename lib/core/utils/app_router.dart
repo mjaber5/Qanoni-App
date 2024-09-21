@@ -21,6 +21,8 @@ import 'package:qanoni/features/profile/presentation/views/settings_view.dart';
 import 'package:qanoni/features/profile/presentation/views/profile_view.dart';
 import 'package:qanoni/features/splash/presentation/views/splash_view.dart';
 
+import '../../features/home/presentation/views/contracts/Employment contract/Employment_contract_card.dart';
+
 abstract class AppRouter {
   static const kLoginView = '/loginView';
   static const kSignupView = '/signupView';
@@ -36,6 +38,7 @@ abstract class AppRouter {
   static const kPurchaseView = '/purchaseView';
   static const kPurchaseCards = '/purchaseCards';
   static const kEmploymentCard = '/employmentCard';
+  static const kSalesContractsCard = '/salesContractsCard';
   static const kChangeLanguageView = '/changeLanguageView';
   static const kAboutUsView = '/aboutUsView';
   static const kWaiverContractsCard = '/waiverContractsCard';
@@ -107,7 +110,7 @@ abstract class AppRouter {
         builder: (context, state) => const LeaseContractsCards(),
       ),
       GoRoute(
-        path: kEmploymentCard,
+        path: kSalesContractsCard,
         //Todo Replace contains in this view to SalesContractsView
         builder: (context, state) => const SalesContractsCard(),
       ),
@@ -126,6 +129,10 @@ abstract class AppRouter {
       GoRoute(
         path: kWaiverContractsCard,
         builder: (context, state) => const WaiverContractsCard(),
+      ),
+      GoRoute(
+        path: kEmploymentCard,
+        builder: (context, state) => const EmploymentContractCard(),
       ),
     ],
   );
