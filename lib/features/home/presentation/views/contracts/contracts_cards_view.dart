@@ -36,6 +36,15 @@ class ContractsCardsView extends StatelessWidget {
             'Sales Contracts',
             Iconsax.money,
           ),
+           SizedBox(
+            height: MediaQuery.of(context).size.height * 0.01,
+          ),
+          contractsCardsContainer(
+            context,
+            AppRouter.kEmploymentCard,
+            'Employment contract ',
+            Iconsax.user_add ,
+          ),
         ],
       ),
     );
