@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 
-import 'Public services contract/acept_public_servic.dart';
+import 'public services contract/acept_public_servic.dart';
 import 'contract argeement/acept_argeement.dart';
 
 class EmploymentContractCard extends StatelessWidget {
@@ -24,10 +24,9 @@ class EmploymentContractCard extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const AceptArgeement()));
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AceptArgeement()));
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.9,
@@ -56,10 +55,9 @@ class EmploymentContractCard extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const AceptPublicServic()));
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AceptPublicServic()));
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.9,
