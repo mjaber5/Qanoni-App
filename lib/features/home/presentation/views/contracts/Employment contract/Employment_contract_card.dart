@@ -177,32 +177,8 @@ class EmploymentContractCard extends StatelessWidget {
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.01),
 
-                // Resignation Form
-                InkWell(
-                  onTap: () {
-                    // Navigate to ResignationFormAccept page
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    height: MediaQuery.of(context).size.height * 0.15,
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    decoration: BoxDecoration(
-                      color: QColors.darkerGrey.withOpacity(0.5),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Icon(Icons.assignment_return, size: 40),
-                          SizedBox(width: 12),
-                          Text("نموذج تقديم استقالة Resignation Form"),
-                          Spacer(),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                
+                
               ],
             ),
           ),
