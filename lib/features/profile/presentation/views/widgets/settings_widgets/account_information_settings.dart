@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:qanoni/core/utils/constants/sizes.dart';
 import 'package:qanoni/core/utils/constants/text_strings.dart';
@@ -14,7 +15,9 @@ class AccountInformationSettings extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: ListTile(
-        onTap: () {},
+        onTap: () {
+          GoRouter.of(context).pop();
+        },
         leading: const Icon(
           Icons.person_2_outlined,
         ),
