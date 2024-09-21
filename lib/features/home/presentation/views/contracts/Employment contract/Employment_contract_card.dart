@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 
+import 'ministery work model/acept_ministery_work.dart';
 import 'public services contract/acept_public_servic.dart';
 import 'contract argeement/acept_argeement.dart';
 import 'work import contract/acept_work_import.dart';
@@ -121,6 +122,11 @@ class EmploymentContractCard extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     // Navigate to MinistryContractsAccept page
+                    Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const AceptMinisteryWork()));
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.9,

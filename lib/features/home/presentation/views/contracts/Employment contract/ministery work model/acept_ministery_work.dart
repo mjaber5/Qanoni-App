@@ -35,8 +35,7 @@ class _AceaptPageState extends State<AceptMinisteryWork> {
                     '''[الشروط 
 
 
-                    Contract Agreement اتفاقية مقاولة
-                      
+                     Acept Ministery Work                      
                       
                       
                       
