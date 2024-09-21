@@ -17,6 +17,7 @@ import 'package:qanoni/features/layout/layout.dart';
 import 'package:qanoni/features/notification/presentation/views/notification_view.dart';
 import 'package:qanoni/features/profile/presentation/views/about_us_view.dart';
 import 'package:qanoni/features/profile/presentation/views/change_language_view.dart';
+import 'package:qanoni/features/profile/presentation/views/privacy_policy_view.dart';
 import 'package:qanoni/features/profile/presentation/views/settings_view.dart';
 import 'package:qanoni/features/profile/presentation/views/profile_view.dart';
 import 'package:qanoni/features/splash/presentation/views/splash_view.dart';
@@ -42,6 +43,7 @@ abstract class AppRouter {
   static const kChangeLanguageView = '/changeLanguageView';
   static const kAboutUsView = '/aboutUsView';
   static const kWaiverContractsCard = '/waiverContractsCard';
+  static const kPrivacyPolicyView = '/privacyPolicyView';
 
   static final router = GoRouter(
     routes: [
@@ -134,6 +136,10 @@ abstract class AppRouter {
         path: kEmploymentCard,
         builder: (context, state) => const EmploymentContractCard(),
       ),
+      GoRoute(
+        path: kPrivacyPolicyView,
+        builder: (context, state) => const PrivacyPolicyView(),
+      )
     ],
   );
 }

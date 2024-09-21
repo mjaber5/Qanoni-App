@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:qanoni/core/utils/app_router.dart';
 import 'package:qanoni/core/utils/constants/sizes.dart';
 import 'package:qanoni/core/utils/constants/text_strings.dart';
 import 'package:qanoni/core/utils/theme/change_theme_notifire.dart';
@@ -15,7 +17,7 @@ class PrivacyPolicySettings extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: ListTile(
         onTap: () {
-          // Todo language Change
+          GoRouter.of(context).push(AppRouter.kPrivacyPolicyView);
         },
         leading: const Icon(
           Icons.lock_clock_outlined,
