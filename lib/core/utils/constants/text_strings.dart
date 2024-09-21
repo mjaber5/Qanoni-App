@@ -92,4 +92,7 @@ class QTexts {
 
   // -- Privacy Prolicy
   static const String privacyPolicyAppBarTitle = 'Privacy Policy';
+
+  //-- History
+  static const String historyAppBarTitle = 'History';
 }
