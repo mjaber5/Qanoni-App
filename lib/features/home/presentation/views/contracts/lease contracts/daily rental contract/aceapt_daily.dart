@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/daily%20rental%20contract/contract_input_form_daily.dart';
 
-import 'contract_input_form_waiver_Intellectual.dart';
-
-
-class AceptIntellectual extends StatefulWidget {
-  const AceptIntellectual({super.key});
+class AceaptDaily extends StatefulWidget {
+  const AceaptDaily({super.key});
 
   @override
-  State<AceptIntellectual> createState() => _AceaptPageState();
+  State<AceaptDaily> createState() => _AceaptPageState();
 }
 
-class _AceaptPageState extends State<AceptIntellectual> {
+class _AceaptPageState extends State<AceaptDaily> {
   bool _agreed = false; // Declare _agreed here
 
   @override
@@ -33,8 +31,7 @@ class _AceaptPageState extends State<AceptIntellectual> {
                   child: const Text(
                     '''[الشروط 
 
-
-                    Acept Intellectual Waiver
+                    Daily rent contract عقد ايجار بيت
                       
                       
                       
@@ -96,7 +93,7 @@ class _AceaptPageState extends State<AceptIntellectual> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const ContractInputFormWaiverIntellectual()));
+                                        const ContractInputFormDaily()));
                           }
                         : null,
                     style: ButtonStyle(
