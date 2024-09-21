@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
-import 'car_waiver_contract/acept_car_waiver.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/waiver%20contracts/car_waiver_contract/acept_car_waiver.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/waiver%20contracts/property_waiver_contract/acept_property.dart';
+
 
 class WaiverContractsCard extends StatelessWidget {
   const WaiverContractsCard({super.key});
@@ -14,93 +16,149 @@ class WaiverContractsCard extends StatelessWidget {
         backgroundColor: QColors.secondary,
       ),
       body: Center(
-        child: Column(
-          children: [
-            // عقد تنازل عن سيارة
-            buildWaiverInkWell(
-              context,
-              AceptCarWaiver(),
-              Iconsax.car5,
-              "Car Waiver contract",
-              "عقد تنازل عن سيارة",
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                // 1. عقد التنازل عن الممتلكات العقارية
+                InkWell(
+                  onTap: () {
+                     Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const AceptProperty()));
+
+                  },
+                  child: buildWaiverCard(
+                    context,
+                    icon: Iconsax.home5,
+                    label: "Property Waiver contract",
+                  ),
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             
-            // عقد تنازل عن بيت
-            buildWaiverInkWell(
-              context,
-              null,  // تعديل هنا إذا كان لديك صفحة لعقد البيت
-              Iconsax.house5,
-              "House Waiver contract",
-              "عقد تنازل عن بيت",
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                // 2. عقد التنازل عن المركبات
+                InkWell(
+                  onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const AceptCarWaiver()));            
+                                               },
+                  child: buildWaiverCard(
+                    context,
+                    icon: Iconsax.car5,
+                    label: "Vehicle Waiver contract",
+                  ),
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             
-            // عقد تنازل عن معدات
-            buildWaiverInkWell(
-              context,
-              null,  // تعديل هنا إذا كان لديك صفحة لعقد المعدات
-              Iconsax.setting5,
-              "Equipment Waiver contract",
-              "عقد تنازل عن معدات",
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                // 3. عقد التنازل عن الحقوق الفكرية
+                InkWell(
+                  onTap: () {
+                    // Navigate to intellectual property waiver screen
+                  },
+                  child: buildWaiverCard(
+                    context,
+                    icon: Iconsax.book,
+                    label: "Intellectual Rights Waiver",
+                  ),
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             
-            // عقد تنازل مياومة
-            buildWaiverInkWell(
-              context,
-              null,  // تعديل هنا إذا كان لديك صفحة لعقد المياومة
-              Iconsax.calendar_1,
-              "Daily Waiver contract",
-              "عقد تنازل مياومة",
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                // 4. عقد التنازل عن الشراكات التجارية أو حصص الشركة
+                InkWell(
+                  onTap: () {
+                    // Navigate to business partnership waiver screen
+                  },
+                  child: buildWaiverCard(
+                    context,
+                    icon: Iconsax.briefcase5,
+                    label: "Business Partnership Waiver",
+                  ),
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             
-            // عقد تنازل عن عقد إيجار
-            buildWaiverInkWell(
-              context,
-              null,  // تعديل هنا إذا كان لديك صفحة لعقد الإيجار
-              Iconsax.close_circle,
-              "Rental Waiver contract",
-              "عقد تنازل عن عقد إيجار",
+                // 5. عقد التنازل عن الحقوق القانونية أو المالية
+                InkWell(
+                  onTap: () {
+                    // Navigate to legal or financial rights waiver screen
+                  },
+                  child: buildWaiverCard(
+                    context,
+                    icon: Iconsax.dollar_circle,
+                    label: "Legal or Financial Rights Waiver",
+                  ),
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+            
+                // 6. عقد التنازل عن الامتيازات والخدمات
+                InkWell(
+                  onTap: () {
+                    // Navigate to privileges or services waiver screen
+                  },
+                  child: buildWaiverCard(
+                    context,
+                    icon: Iconsax.crown5,
+                    label: "Privileges and Services Waiver",
+                  ),
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+            
+                // 7. عقد التنازل عن العضويات
+                InkWell(
+                  onTap: () {
+                    // Navigate to membership waiver screen
+                  },
+                  child: buildWaiverCard(
+                    context,
+                    icon: Iconsax.card5,
+                    label: "Membership Waiver",
+                  ),
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+            
+                // 8. عقد التنازل عن الأصول الشخصية
+                InkWell(
+                  onTap: () {
+                    // Navigate to personal assets waiver screen
+                  },
+                  child: buildWaiverCard(
+                    context,
+                    icon: Iconsax.box5,
+                    label: "Personal Assets Waiver",
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
   }
 
-  // Widget Helper لبناء InkWell وكرت التنازل
-  Widget buildWaiverInkWell(BuildContext context, Widget? targetPage, IconData icon, String label, String arabicLabel) {
-    return InkWell(
-      onTap: targetPage != null
-          ? () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => targetPage));
-            }
-          : null, // إضافة null إذا لم يكن هناك targetPage
-      child: buildWaiverCard(context, icon: icon, label: label, arabicLabel: arabicLabel),
-    );
-  }
-
   // Widget Helper لبناء كرت التنازل
   Widget buildWaiverCard(BuildContext context,
-      {required IconData icon, required String label, required String arabicLabel}) {
+      {required IconData icon, required String label }) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.15,
       padding: const EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
         color: QColors.darkerGrey.withOpacity(0.5),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius:  BorderRadius.circular(12),
       ),
-      child: Padding(
+      child:  Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(icon, size: 30, color: Colors.white),
             const SizedBox(width: 40),
-            Text("$label - $arabicLabel", style: const TextStyle(color: Colors.white)),
+            Text(label, style: const TextStyle(color: Colors.white)),
           ],
         ),
       ),
