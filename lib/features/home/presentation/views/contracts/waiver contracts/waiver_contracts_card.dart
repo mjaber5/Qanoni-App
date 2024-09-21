@@ -4,6 +4,8 @@ import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/waiver%20contracts/car_waiver_contract/acept_car_waiver.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/waiver%20contracts/property_waiver_contract/acept_property.dart';
 
+import 'Intellectual_waiver_contract/acept_Intellectual.dart';
+
 
 class WaiverContractsCard extends StatelessWidget {
   const WaiverContractsCard({super.key});
@@ -59,8 +61,11 @@ class WaiverContractsCard extends StatelessWidget {
                 // 3. عقد التنازل عن الحقوق الفكرية
                 InkWell(
                   onTap: () {
-                    // Navigate to intellectual property waiver screen
-                  },
+                           Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const AceptIntellectual()));                   },
                   child: buildWaiverCard(
                     context,
                     icon: Iconsax.book,
