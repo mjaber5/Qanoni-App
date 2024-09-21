@@ -4,6 +4,7 @@ import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/waiver%20contracts/car_waiver_contract/acept_car_waiver.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/waiver%20contracts/property_waiver_contract/acept_property.dart';
 
+import 'Business_Partnership_Waiver/acept_Business_Partnership_Waiver.dart';
 import 'Intellectual_waiver_contract/acept_Intellectual.dart';
 
 
@@ -77,8 +78,11 @@ class WaiverContractsCard extends StatelessWidget {
                 // 4. عقد التنازل عن الشراكات التجارية أو حصص الشركة
                 InkWell(
                   onTap: () {
-                    // Navigate to business partnership waiver screen
-                  },
+                             Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const AceptBusinessPartnershipWaiver()));                   },
                   child: buildWaiverCard(
                     context,
                     icon: Iconsax.briefcase5,
