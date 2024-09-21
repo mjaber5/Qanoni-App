@@ -21,7 +21,7 @@ import 'package:qanoni/features/profile/presentation/views/settings_view.dart';
 import 'package:qanoni/features/profile/presentation/views/profile_view.dart';
 import 'package:qanoni/features/splash/presentation/views/splash_view.dart';
 
-import '../../features/home/presentation/views/contracts/Employment contract/Employment_contract_card.dart';
+import '../../features/home/presentation/views/contracts/employment contract/employment_contract_card.dart';
 
 abstract class AppRouter {
   static const kLoginView = '/loginView';
