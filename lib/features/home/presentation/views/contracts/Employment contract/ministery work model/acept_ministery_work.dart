@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 
-import 'contract_input_form_work_import_contract.dart';
+import 'contract_input_form_mininstery_work.dart';
 
 
 
-
-class AceptWorkImport extends StatefulWidget {
-  const AceptWorkImport({super.key});
+class AceptMinisteryWork extends StatefulWidget {
+  const AceptMinisteryWork({super.key});
 
   @override
-  State<AceptWorkImport> createState() => _AceaptPageState();
+  State<AceptMinisteryWork> createState() => _AceaptPageState();
 }
 
-class _AceaptPageState extends State<AceptWorkImport> {
+class _AceaptPageState extends State<AceptMinisteryWork> {
   bool _agreed = false; // Declare _agreed here
 
   @override
@@ -36,7 +35,7 @@ class _AceaptPageState extends State<AceptWorkImport> {
                     '''[الشروط 
 
 
-                    Acept work import
+                    Contract Agreement اتفاقية مقاولة
                       
                       
                       
@@ -98,8 +97,7 @@ class _AceaptPageState extends State<AceptWorkImport> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                         const ContractInputFormWorkImportContract()
-                                        ));
+                                        const ContractInputFormMininsteryWork()));
                           }
                         : null,
                     style: ButtonStyle(
