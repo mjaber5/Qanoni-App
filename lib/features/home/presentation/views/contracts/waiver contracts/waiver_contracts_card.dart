@@ -6,6 +6,7 @@ import 'package:qanoni/features/home/presentation/views/contracts/waiver%20contr
 
 import 'Business_Partnership_Waiver/acept_Business_Partnership_Waiver.dart';
 import 'Intellectual_waiver_contract/acept_Intellectual.dart';
+import 'Legal or Financial Rights Waiver/acept_financial.dart';
 
 
 class WaiverContractsCard extends StatelessWidget {
@@ -94,7 +95,12 @@ class WaiverContractsCard extends StatelessWidget {
                 // 5. عقد التنازل عن الحقوق القانونية أو المالية
                 InkWell(
                   onTap: () {
-                    // Navigate to legal or financial rights waiver screen
+                    Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const AceptFinancial()));
+
                   },
                   child: buildWaiverCard(
                     context,
@@ -105,16 +111,16 @@ class WaiverContractsCard extends StatelessWidget {
                 SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             
                 // 6. عقد التنازل عن الامتيازات والخدمات
-                InkWell(
-                  onTap: () {
-                    // Navigate to privileges or services waiver screen
-                  },
-                  child: buildWaiverCard(
-                    context,
-                    icon: Iconsax.crown5,
-                    label: "Privileges and Services Waiver",
-                  ),
-                ),
+                // InkWell(
+                //   onTap: () {
+                //     // Navigate to privileges or services waiver screen
+                //   },
+                //   child: buildWaiverCard(
+                //     context,
+                //     icon: Iconsax.crown5,
+                //     label: "Privileges and Services Waiver",
+                //   ),
+                // ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             
                 // 7. عقد التنازل عن العضويات
