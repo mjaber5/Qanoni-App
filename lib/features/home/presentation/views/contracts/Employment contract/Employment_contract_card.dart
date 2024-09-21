@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 
+import 'contract argeement/acept_argeement.dart';
+
 class EmploymentContractCard extends StatelessWidget {
   const EmploymentContractCard({super.key});
 
@@ -20,7 +22,11 @@ class EmploymentContractCard extends StatelessWidget {
                 // Contract Agreement
                 InkWell(
                   onTap: () {
-                    // Navigate to ConstructionContractsAccept page
+                    Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const AceptArgeement()));
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.9,
