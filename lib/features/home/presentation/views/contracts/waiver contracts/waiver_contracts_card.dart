@@ -20,102 +20,99 @@ class WaiverContractsCard extends StatelessWidget {
         backgroundColor: QColors.secondary,
       ),
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                // 1. عقد التنازل عن الممتلكات العقارية
-                InkWell(
-                  onTap: () {
-                     Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const AceptProperty()));
-
-                  },
-                  child: buildWaiverCard(
-                    context,
-                    icon: Iconsax.home5,
-                    label: "Property Waiver contract",
-                  ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              // 1. عقد التنازل عن الممتلكات العقارية
+              InkWell(
+                onTap: () {
+                   Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const AceptProperty()));
+        
+                },
+                child: buildWaiverCard(
+                  context,
+                  icon: Iconsax.home5,
+                  label: "Property Waiver contract",
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-            
-                // 2. عقد التنازل عن المركبات
-                InkWell(
-                  onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const AceptCarWaiver()));            
-                                               },
-                  child: buildWaiverCard(
-                    context,
-                    icon: Iconsax.car5,
-                    label: "Vehicle Waiver contract",
-                  ),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+          
+              // 2. عقد التنازل عن المركبات
+              InkWell(
+                onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const AceptCarWaiver()));            
+                                             },
+                child: buildWaiverCard(
+                  context,
+                  icon: Iconsax.car5,
+                  label: "Vehicle Waiver contract",
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-            
-                // 3. عقد التنازل عن الحقوق الفكرية
-                InkWell(
-                  onTap: () {
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+          
+              // 3. عقد التنازل عن الحقوق الفكرية
+              InkWell(
+                onTap: () {
+                         Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const AceptIntellectual()));                   },
+                child: buildWaiverCard(
+                  context,
+                  icon: Iconsax.book,
+                  label: "Intellectual Rights Waiver",
+                ),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+          
+              // 4. عقد التنازل عن الشراكات التجارية أو حصص الشركة
+              InkWell(
+                onTap: () {
                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const AceptIntellectual()));                   },
-                  child: buildWaiverCard(
-                    context,
-                    icon: Iconsax.book,
-                    label: "Intellectual Rights Waiver",
-                  ),
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const AceptBusinessPartnershipWaiver()));                   },
+                child: buildWaiverCard(
+                  context,
+                  icon: Iconsax.briefcase5,
+                  label: "Business Partnership Waiver",
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-            
-                // 4. عقد التنازل عن الشراكات التجارية أو حصص الشركة
-                InkWell(
-                  onTap: () {
-                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const AceptBusinessPartnershipWaiver()));                   },
-                  child: buildWaiverCard(
-                    context,
-                    icon: Iconsax.briefcase5,
-                    label: "Business Partnership Waiver",
-                  ),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+          
+              // 5. عقد التنازل عن الحقوق القانونية أو المالية
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const AceptFinancial()));
+        
+                },
+                child: buildWaiverCard(
+                  context,
+                  icon: Iconsax.dollar_circle,
+                  label: "Legal or Financial Rights Waiver",
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+          
             
-                // 5. عقد التنازل عن الحقوق القانونية أو المالية
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const AceptFinancial()));
-
-                  },
-                  child: buildWaiverCard(
-                    context,
-                    icon: Iconsax.dollar_circle,
-                    label: "Legal or Financial Rights Waiver",
-                  ),
-                ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-            
+              SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+          
               
-                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-            
-                
-              ],
-            ),
+            ],
           ),
         ),
       ),
