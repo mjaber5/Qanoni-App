@@ -110,43 +110,10 @@ class WaiverContractsCard extends StatelessWidget {
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             
-                // 6. عقد التنازل عن الامتيازات والخدمات
-                // InkWell(
-                //   onTap: () {
-                //     // Navigate to privileges or services waiver screen
-                //   },
-                //   child: buildWaiverCard(
-                //     context,
-                //     icon: Iconsax.crown5,
-                //     label: "Privileges and Services Waiver",
-                //   ),
-                // ),
+              
                 SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             
-                // 7. عقد التنازل عن العضويات
-                InkWell(
-                  onTap: () {
-                    // Navigate to membership waiver screen
-                  },
-                  child: buildWaiverCard(
-                    context,
-                    icon: Iconsax.card5,
-                    label: "Membership Waiver",
-                  ),
-                ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-            
-                // 8. عقد التنازل عن الأصول الشخصية
-                InkWell(
-                  onTap: () {
-                    // Navigate to personal assets waiver screen
-                  },
-                  child: buildWaiverCard(
-                    context,
-                    icon: Iconsax.box5,
-                    label: "Personal Assets Waiver",
-                  ),
-                ),
+                
               ],
             ),
           ),
@@ -156,6 +123,13 @@ class WaiverContractsCard extends StatelessWidget {
   }
 
   // Widget Helper لبناء كرت التنازل
+
+
+
+
+
+
+
   Widget buildWaiverCard(BuildContext context,
       {required IconData icon, required String label }) {
     return Container(
