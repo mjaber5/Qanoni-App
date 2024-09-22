@@ -8,19 +8,23 @@ class ContractInputFormPublicServic extends StatefulWidget {
   const ContractInputFormPublicServic({super.key});
 
   @override
-  _ServiceContractInputFormState createState() => _ServiceContractInputFormState();
+  State<ContractInputFormPublicServic> createState() =>
+      _ServiceContractInputFormState();
 }
 
-class _ServiceContractInputFormState extends State<ContractInputFormPublicServic> {
+class _ServiceContractInputFormState
+    extends State<ContractInputFormPublicServic> {
   final _formKey = GlobalKey<FormState>();
 
   // Controllers for text fields
-  final TextEditingController firstPartyController = TextEditingController();   
-  final TextEditingController secondPartyController = TextEditingController();   
-  final TextEditingController serviceDescriptionController = TextEditingController();   
-  final TextEditingController contractDurationController = TextEditingController();   
-  final TextEditingController serviceFeeController = TextEditingController();   
-  final TextEditingController startDateController = TextEditingController();    
+  final TextEditingController firstPartyController = TextEditingController();
+  final TextEditingController secondPartyController = TextEditingController();
+  final TextEditingController serviceDescriptionController =
+      TextEditingController();
+  final TextEditingController contractDurationController =
+      TextEditingController();
+  final TextEditingController serviceFeeController = TextEditingController();
+  final TextEditingController startDateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +95,8 @@ class _ServiceContractInputFormState extends State<ContractInputFormPublicServic
                     if (_formKey.currentState!.validate()) {
                       log('تم إدخال البيانات بنجاح.');
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('تم إدخال البيانات بنجاح')),
+                        const SnackBar(
+                            content: Text('تم إدخال البيانات بنجاح')),
                       );
                     } else {
                       log('البيانات غير صحيحة. يرجى التحقق.');

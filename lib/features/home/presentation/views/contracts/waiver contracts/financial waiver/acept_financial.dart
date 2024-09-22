@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 
-import 'contract_input_form_Legal_or_Financial_Rights_Waiver.dart';
-
-
+import 'contract_input_form_legal_or_financial_rights_waiver.dart';
 
 class AceptFinancial extends StatefulWidget {
   const AceptFinancial({super.key});

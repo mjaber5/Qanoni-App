@@ -8,7 +8,7 @@ class ContractInputFormWaiverCar extends StatefulWidget {
   const ContractInputFormWaiverCar({super.key});
 
   @override
-  _ContractInputFormWaiverState createState() =>
+  State<ContractInputFormWaiverCar> createState() =>
       _ContractInputFormWaiverState();
 }
 
@@ -64,7 +64,6 @@ class _ContractInputFormWaiverState extends State<ContractInputFormWaiverCar> {
                 validatorMessage: 'Please enter the seller\'s address',
               ),
               const SizedBox(height: 32),
-
               const Text(
                 'Buyer Information',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -87,7 +86,6 @@ class _ContractInputFormWaiverState extends State<ContractInputFormWaiverCar> {
                 validatorMessage: 'Please enter the buyer\'s address',
               ),
               const SizedBox(height: 32),
-
               const Text(
                 'Waiver Information',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -116,7 +114,6 @@ class _ContractInputFormWaiverState extends State<ContractInputFormWaiverCar> {
                 validatorMessage: 'Please enter the ownership status',
               ),
               const SizedBox(height: 32),
-
               const Text(
                 'Transaction Information',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -139,7 +136,6 @@ class _ContractInputFormWaiverState extends State<ContractInputFormWaiverCar> {
                 validatorMessage: 'Please enter the waiver date',
               ),
               const SizedBox(height: 32),
-
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: ElevatedButton(

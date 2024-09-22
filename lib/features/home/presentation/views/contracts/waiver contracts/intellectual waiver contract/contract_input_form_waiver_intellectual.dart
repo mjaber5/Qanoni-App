@@ -8,7 +8,7 @@ class ContractInputFormWaiverIntellectual extends StatefulWidget {
   const ContractInputFormWaiverIntellectual({super.key});
 
   @override
-  _ContractInputFormWaiverIntellectualArabicState createState() =>
+  State<ContractInputFormWaiverIntellectual> createState() =>
       _ContractInputFormWaiverIntellectualArabicState();
 }
 
@@ -21,9 +21,12 @@ class _ContractInputFormWaiverIntellectualArabicState
   final TextEditingController ownerAddressController = TextEditingController();
   final TextEditingController receiverNameController = TextEditingController();
   final TextEditingController receiverIdController = TextEditingController();
-  final TextEditingController receiverAddressController = TextEditingController();
-  final TextEditingController intellectualPropertyTypeController = TextEditingController();
-  final TextEditingController intellectualPropertyDetailsController = TextEditingController();
+  final TextEditingController receiverAddressController =
+      TextEditingController();
+  final TextEditingController intellectualPropertyTypeController =
+      TextEditingController();
+  final TextEditingController intellectualPropertyDetailsController =
+      TextEditingController();
   final TextEditingController waiverReasonController = TextEditingController();
   final TextEditingController ownershipController = TextEditingController();
   final TextEditingController waiverPriceController = TextEditingController();
@@ -65,7 +68,6 @@ class _ContractInputFormWaiverIntellectualArabicState
                 validatorMessage: 'الرجاء إدخال عنوان المالك',
               ),
               const SizedBox(height: 32),
-
               const Text(
                 'معلومات المستلم',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -88,7 +90,6 @@ class _ContractInputFormWaiverIntellectualArabicState
                 validatorMessage: 'الرجاء إدخال عنوان المستلم',
               ),
               const SizedBox(height: 32),
-
               const Text(
                 'معلومات حقوق الملكية الفكرية',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -111,7 +112,6 @@ class _ContractInputFormWaiverIntellectualArabicState
                 validatorMessage: 'الرجاء إدخال سبب التنازل',
               ),
               const SizedBox(height: 32),
-
               const Text(
                 'معلومات المعاملة',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -134,7 +134,6 @@ class _ContractInputFormWaiverIntellectualArabicState
                 validatorMessage: 'الرجاء إدخال تاريخ التنازل',
               ),
               const SizedBox(height: 32),
-
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: ElevatedButton(

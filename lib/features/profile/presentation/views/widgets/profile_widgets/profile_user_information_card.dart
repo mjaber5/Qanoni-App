@@ -18,6 +18,7 @@ class _ProfileUserInformationCardState
     extends State<ProfileUserInformationCard> {
   late final FirebaseUserRepo _userRepo;
   String? _userName;
+  String? _idNumber;
   bool _isLoading = true;
   bool _hasError = false;
 
@@ -38,17 +39,20 @@ class _ProfileUserInformationCardState
         if (userDoc.exists) {
           setState(() {
             _userName = userDoc.data()?['userName'] ?? 'Unknown';
+            _idNumber = userDoc.data()?['idNumber'] ?? 'UnKnown';
             _isLoading = false;
           });
         } else {
           setState(() {
             _userName = 'Unknown User';
+            _idNumber = 'UnKnown User';
             _isLoading = false;
           });
         }
       } else {
         setState(() {
           _userName = 'No User Logged In';
+          _idNumber = 'No User Logged In';
           _isLoading = false;
         });
       }
@@ -101,8 +105,8 @@ class _ProfileUserInformationCardState
                       style: Styles.textStyle16,
                     ),
                     const SizedBox(height: 10),
-                    const Text(
-                      '${QTexts.idnumber} : 3202106002041',
+                    Text(
+                      '${QTexts.idnumber} : $_idNumber',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Styles.textStyle16,

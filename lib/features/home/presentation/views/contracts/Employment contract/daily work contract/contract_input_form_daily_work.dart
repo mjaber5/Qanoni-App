@@ -8,27 +8,42 @@ class ContractInputFormDailyWork extends StatefulWidget {
   const ContractInputFormDailyWork({super.key});
 
   @override
-  _DailyContractInputFormState createState() => _DailyContractInputFormState();
+  State<ContractInputFormDailyWork> createState() =>
+      _DailyContractInputFormState();
 }
 
 class _DailyContractInputFormState extends State<ContractInputFormDailyWork> {
   final _formKey = GlobalKey<FormState>();
 
   // Controllers for text fields
-  final TextEditingController firstPartyNameController = TextEditingController(); // اسم الطرف الأول
-  final TextEditingController firstPartyIdController = TextEditingController(); // رقم هوية/السجل التجاري للطرف الأول
-  final TextEditingController firstPartyAddressController = TextEditingController(); // عنوان الطرف الأول
-  final TextEditingController firstPartyPhoneController = TextEditingController(); // هاتف الطرف الأول
-  final TextEditingController secondPartyNameController = TextEditingController(); // اسم الطرف الثاني
-  final TextEditingController secondPartyIdController = TextEditingController(); // رقم الهوية للطرف الثاني
-  final TextEditingController secondPartyNationalityController = TextEditingController(); // جنسية الطرف الثاني
-  final TextEditingController secondPartyAddressController = TextEditingController(); // عنوان الطرف الثاني
-  final TextEditingController secondPartyPhoneController = TextEditingController(); // هاتف الطرف الثاني
-  final TextEditingController jobTitleController = TextEditingController(); // الوظيفة
-  final TextEditingController contractStartDateController = TextEditingController(); // تاريخ بدء العمل
-  final TextEditingController dailyWageController = TextEditingController(); // الأجر اليومي
-  final TextEditingController workingHoursController = TextEditingController(); // ساعات العمل
-  final TextEditingController breakDurationController = TextEditingController(); // مدة الاستراحة
+  final TextEditingController firstPartyNameController =
+      TextEditingController(); // اسم الطرف الأول
+  final TextEditingController firstPartyIdController =
+      TextEditingController(); // رقم هوية/السجل التجاري للطرف الأول
+  final TextEditingController firstPartyAddressController =
+      TextEditingController(); // عنوان الطرف الأول
+  final TextEditingController firstPartyPhoneController =
+      TextEditingController(); // هاتف الطرف الأول
+  final TextEditingController secondPartyNameController =
+      TextEditingController(); // اسم الطرف الثاني
+  final TextEditingController secondPartyIdController =
+      TextEditingController(); // رقم الهوية للطرف الثاني
+  final TextEditingController secondPartyNationalityController =
+      TextEditingController(); // جنسية الطرف الثاني
+  final TextEditingController secondPartyAddressController =
+      TextEditingController(); // عنوان الطرف الثاني
+  final TextEditingController secondPartyPhoneController =
+      TextEditingController(); // هاتف الطرف الثاني
+  final TextEditingController jobTitleController =
+      TextEditingController(); // الوظيفة
+  final TextEditingController contractStartDateController =
+      TextEditingController(); // تاريخ بدء العمل
+  final TextEditingController dailyWageController =
+      TextEditingController(); // الأجر اليومي
+  final TextEditingController workingHoursController =
+      TextEditingController(); // ساعات العمل
+  final TextEditingController breakDurationController =
+      TextEditingController(); // مدة الاستراحة
 
   @override
   Widget build(BuildContext context) {
@@ -163,7 +178,8 @@ class _DailyContractInputFormState extends State<ContractInputFormDailyWork> {
                     if (_formKey.currentState!.validate()) {
                       log('تم إدخال البيانات بنجاح.');
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('تم إدخال البيانات بنجاح')),
+                        const SnackBar(
+                            content: Text('تم إدخال البيانات بنجاح')),
                       );
                     } else {
                       log('البيانات غير صحيحة. يرجى التحقق.');

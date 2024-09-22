@@ -8,27 +8,43 @@ class ContractInputFormMininsteryWork extends StatefulWidget {
   const ContractInputFormMininsteryWork({super.key});
 
   @override
-  _MinistryLaborContractFormState createState() => _MinistryLaborContractFormState();
+  State<ContractInputFormMininsteryWork> createState() =>
+      _MinistryLaborContractFormState();
 }
 
-class _MinistryLaborContractFormState extends State<ContractInputFormMininsteryWork> {
+class _MinistryLaborContractFormState
+    extends State<ContractInputFormMininsteryWork> {
   final _formKey = GlobalKey<FormState>();
 
   // Controllers for text fields
-  final TextEditingController firstPartyController = TextEditingController(); // الطرف الأول (الشركة)
-  final TextEditingController legalRepController = TextEditingController(); // الممثل القانوني
-  final TextEditingController commercialRegisterController = TextEditingController(); // السجل التجاري
-  final TextEditingController firstPartyAddressController = TextEditingController(); // عنوان الطرف الأول
-  final TextEditingController firstPartyPhoneController = TextEditingController(); // هاتف الطرف الأول
-  final TextEditingController secondPartyController = TextEditingController(); // الطرف الثاني (الموظف)
-  final TextEditingController nationalityController = TextEditingController(); // جنسية الطرف الثاني
-  final TextEditingController idController = TextEditingController(); // رقم الهوية/الإقامة للطرف الثاني
-  final TextEditingController secondPartyAddressController = TextEditingController(); // عنوان الطرف الثاني
-  final TextEditingController secondPartyPhoneController = TextEditingController(); // هاتف الطرف الثاني
-  final TextEditingController jobTitleController = TextEditingController(); // الوظيفة
-  final TextEditingController contractDurationController = TextEditingController(); // مدة العقد
-  final TextEditingController salaryController = TextEditingController(); // الأجر الشهري
-  final TextEditingController startDateController = TextEditingController(); // تاريخ بدء العقد
+  final TextEditingController firstPartyController =
+      TextEditingController(); // الطرف الأول (الشركة)
+  final TextEditingController legalRepController =
+      TextEditingController(); // الممثل القانوني
+  final TextEditingController commercialRegisterController =
+      TextEditingController(); // السجل التجاري
+  final TextEditingController firstPartyAddressController =
+      TextEditingController(); // عنوان الطرف الأول
+  final TextEditingController firstPartyPhoneController =
+      TextEditingController(); // هاتف الطرف الأول
+  final TextEditingController secondPartyController =
+      TextEditingController(); // الطرف الثاني (الموظف)
+  final TextEditingController nationalityController =
+      TextEditingController(); // جنسية الطرف الثاني
+  final TextEditingController idController =
+      TextEditingController(); // رقم الهوية/الإقامة للطرف الثاني
+  final TextEditingController secondPartyAddressController =
+      TextEditingController(); // عنوان الطرف الثاني
+  final TextEditingController secondPartyPhoneController =
+      TextEditingController(); // هاتف الطرف الثاني
+  final TextEditingController jobTitleController =
+      TextEditingController(); // الوظيفة
+  final TextEditingController contractDurationController =
+      TextEditingController(); // مدة العقد
+  final TextEditingController salaryController =
+      TextEditingController(); // الأجر الشهري
+  final TextEditingController startDateController =
+      TextEditingController(); // تاريخ بدء العقد
 
   @override
   Widget build(BuildContext context) {
@@ -163,7 +179,8 @@ class _MinistryLaborContractFormState extends State<ContractInputFormMininsteryW
                     if (_formKey.currentState!.validate()) {
                       log('تم إدخال البيانات بنجاح.');
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('تم إدخال البيانات بنجاح')),
+                        const SnackBar(
+                            content: Text('تم إدخال البيانات بنجاح')),
                       );
                     } else {
                       log('البيانات غير صحيحة. يرجى التحقق.');

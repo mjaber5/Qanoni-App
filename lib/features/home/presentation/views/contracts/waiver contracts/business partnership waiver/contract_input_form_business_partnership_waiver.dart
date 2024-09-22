@@ -8,7 +8,7 @@ class ContractInputFormWaiverBusinessPartnership extends StatefulWidget {
   const ContractInputFormWaiverBusinessPartnership({super.key});
 
   @override
-  _ContractInputFormWaiverBusinessPartnershipArabicState createState() =>
+  State<ContractInputFormWaiverBusinessPartnership> createState() =>
       _ContractInputFormWaiverBusinessPartnershipArabicState();
 }
 
@@ -23,7 +23,8 @@ class _ContractInputFormWaiverBusinessPartnershipArabicState
   final TextEditingController buyerIdController = TextEditingController();
   final TextEditingController buyerAddressController = TextEditingController();
   final TextEditingController businessTypeController = TextEditingController();
-  final TextEditingController businessDetailsController = TextEditingController();
+  final TextEditingController businessDetailsController =
+      TextEditingController();
   final TextEditingController waiverReasonController = TextEditingController();
   final TextEditingController ownershipController = TextEditingController();
   final TextEditingController waiverPriceController = TextEditingController();
@@ -65,7 +66,6 @@ class _ContractInputFormWaiverBusinessPartnershipArabicState
                 validatorMessage: 'الرجاء إدخال عنوان البائع',
               ),
               const SizedBox(height: 32),
-
               const Text(
                 'معلومات المشتري',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -88,7 +88,6 @@ class _ContractInputFormWaiverBusinessPartnershipArabicState
                 validatorMessage: 'الرجاء إدخال عنوان المشتري',
               ),
               const SizedBox(height: 32),
-
               const Text(
                 'معلومات الشركة',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -111,7 +110,6 @@ class _ContractInputFormWaiverBusinessPartnershipArabicState
                 validatorMessage: 'الرجاء إدخال سبب التنازل',
               ),
               const SizedBox(height: 32),
-
               const Text(
                 'معلومات المعاملة',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -134,7 +132,6 @@ class _ContractInputFormWaiverBusinessPartnershipArabicState
                 validatorMessage: 'الرجاء إدخال تاريخ التنازل',
               ),
               const SizedBox(height: 32),
-
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: ElevatedButton(

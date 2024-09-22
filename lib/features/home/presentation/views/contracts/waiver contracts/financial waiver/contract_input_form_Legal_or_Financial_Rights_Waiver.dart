@@ -8,7 +8,7 @@ class ContractInputFormWaiverLegalFinancialArabic extends StatefulWidget {
   const ContractInputFormWaiverLegalFinancialArabic({super.key});
 
   @override
-  _ContractInputFormWaiverLegalFinancialArabicState createState() =>
+  State<ContractInputFormWaiverLegalFinancialArabic> createState() =>
       _ContractInputFormWaiverLegalFinancialArabicState();
 }
 
@@ -18,7 +18,8 @@ class _ContractInputFormWaiverLegalFinancialArabicState
 
   final TextEditingController rightsHolderNameController =
       TextEditingController();
-  final TextEditingController rightsHolderIdController = TextEditingController();
+  final TextEditingController rightsHolderIdController =
+      TextEditingController();
   final TextEditingController rightsHolderAddressController =
       TextEditingController();
   final TextEditingController transfereeNameController =
@@ -37,7 +38,8 @@ class _ContractInputFormWaiverLegalFinancialArabicState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('إدخال معلومات عقد التنازل عن الحقوق القانونية أو المالية'),
+        title: const Text(
+            'إدخال معلومات عقد التنازل عن الحقوق القانونية أو المالية'),
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -68,7 +70,6 @@ class _ContractInputFormWaiverLegalFinancialArabicState
                 validatorMessage: 'الرجاء إدخال عنوان حامل الحقوق',
               ),
               const SizedBox(height: 32),
-
               const Text(
                 'معلومات المستلم',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -91,7 +92,6 @@ class _ContractInputFormWaiverLegalFinancialArabicState
                 validatorMessage: 'الرجاء إدخال عنوان المستلم',
               ),
               const SizedBox(height: 32),
-
               const Text(
                 'معلومات الحقوق',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -114,7 +114,6 @@ class _ContractInputFormWaiverLegalFinancialArabicState
                 validatorMessage: 'الرجاء إدخال سبب التنازل',
               ),
               const SizedBox(height: 32),
-
               const Text(
                 'معلومات المعاملة',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -137,7 +136,6 @@ class _ContractInputFormWaiverLegalFinancialArabicState
                 validatorMessage: 'الرجاء إدخال تاريخ التنازل',
               ),
               const SizedBox(height: 32),
-
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: ElevatedButton(

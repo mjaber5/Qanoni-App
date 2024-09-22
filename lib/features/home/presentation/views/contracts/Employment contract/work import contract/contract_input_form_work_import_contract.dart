@@ -8,23 +8,35 @@ class ContractInputFormWorkImportContract extends StatefulWidget {
   const ContractInputFormWorkImportContract({super.key});
 
   @override
-  _RecruitmentContractInputFormState createState() => _RecruitmentContractInputFormState();
+  State<ContractInputFormWorkImportContract> createState() =>
+      _RecruitmentContractInputFormState();
 }
 
-class _RecruitmentContractInputFormState extends State<ContractInputFormWorkImportContract> {
+class _RecruitmentContractInputFormState
+    extends State<ContractInputFormWorkImportContract> {
   final _formKey = GlobalKey<FormState>();
 
   // Controllers for text fields
-  final TextEditingController firstPartyController = TextEditingController(); // الطرف الأول
-  final TextEditingController firstPartyIdController = TextEditingController(); // رقم هوية الطرف الأول
-  final TextEditingController nationalityController = TextEditingController(); // جنسية الطرف الأول
-  final TextEditingController secondPartyController = TextEditingController(); // الطرف الثاني
-  final TextEditingController secondPartyPassportController = TextEditingController(); // رقم جواز سفر الطرف الثاني
-  final TextEditingController secondPartyNationalityController = TextEditingController(); // جنسية الطرف الثاني
-  final TextEditingController jobTitleController = TextEditingController(); // الوظيفة
-  final TextEditingController contractDurationController = TextEditingController(); // مدة العقد
-  final TextEditingController salaryController = TextEditingController(); // الأجر
-  final TextEditingController startDateController = TextEditingController(); // تاريخ بدء العقد
+  final TextEditingController firstPartyController =
+      TextEditingController(); // الطرف الأول
+  final TextEditingController firstPartyIdController =
+      TextEditingController(); // رقم هوية الطرف الأول
+  final TextEditingController nationalityController =
+      TextEditingController(); // جنسية الطرف الأول
+  final TextEditingController secondPartyController =
+      TextEditingController(); // الطرف الثاني
+  final TextEditingController secondPartyPassportController =
+      TextEditingController(); // رقم جواز سفر الطرف الثاني
+  final TextEditingController secondPartyNationalityController =
+      TextEditingController(); // جنسية الطرف الثاني
+  final TextEditingController jobTitleController =
+      TextEditingController(); // الوظيفة
+  final TextEditingController contractDurationController =
+      TextEditingController(); // مدة العقد
+  final TextEditingController salaryController =
+      TextEditingController(); // الأجر
+  final TextEditingController startDateController =
+      TextEditingController(); // تاريخ بدء العقد
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +139,8 @@ class _RecruitmentContractInputFormState extends State<ContractInputFormWorkImpo
                     if (_formKey.currentState!.validate()) {
                       log('تم إدخال البيانات بنجاح.');
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('تم إدخال البيانات بنجاح')),
+                        const SnackBar(
+                            content: Text('تم إدخال البيانات بنجاح')),
                       );
                     } else {
                       log('البيانات غير صحيحة. يرجى التحقق.');

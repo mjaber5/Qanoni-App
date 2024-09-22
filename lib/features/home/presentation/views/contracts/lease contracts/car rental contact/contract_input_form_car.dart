@@ -9,7 +9,7 @@ class ContractInputFormCar extends StatefulWidget {
   const ContractInputFormCar({super.key});
 
   @override
-  _ContractInputFormState createState() => _ContractInputFormState();
+  State<ContractInputFormCar> createState() => _ContractInputFormState();
 }
 
 class _ContractInputFormState extends State<ContractInputFormCar> {

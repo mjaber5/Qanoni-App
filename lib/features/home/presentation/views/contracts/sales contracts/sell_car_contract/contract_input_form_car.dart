@@ -8,7 +8,7 @@ class ContractInputFormCarSales extends StatefulWidget {
   const ContractInputFormCarSales({super.key});
 
   @override
-  _ContractInputFormCarSalesState createState() =>
+  State<ContractInputFormCarSales> createState() =>
       _ContractInputFormCarSalesState();
 }
 

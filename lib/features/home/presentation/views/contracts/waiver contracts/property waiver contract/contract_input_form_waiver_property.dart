@@ -8,7 +8,7 @@ class ContractInputFormWaiverProperty extends StatefulWidget {
   const ContractInputFormWaiverProperty({super.key});
 
   @override
-  _ContractInputFormWaiverPropertyState createState() =>
+  State<ContractInputFormWaiverProperty> createState() =>
       _ContractInputFormWaiverPropertyState();
 }
 

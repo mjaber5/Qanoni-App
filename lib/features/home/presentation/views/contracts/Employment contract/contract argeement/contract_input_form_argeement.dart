@@ -8,22 +8,31 @@ class ContractInputFormArgeement extends StatefulWidget {
   const ContractInputFormArgeement({super.key});
 
   @override
-  _ContractInputFormState createState() => _ContractInputFormState();
+  State<ContractInputFormArgeement> createState() => _ContractInputFormState();
 }
 
 class _ContractInputFormState extends State<ContractInputFormArgeement> {
   final _formKey = GlobalKey<FormState>();
 
   // Controllers for text fields
-  final TextEditingController projectNameController = TextEditingController(); // اسم المشروع
-  final TextEditingController projectOwnerNameController = TextEditingController(); // اسم صاحب المشروع
-  final TextEditingController projectOwnerIdController = TextEditingController(); // رقم هوية صاحب المشروع
-  final TextEditingController contractorNameController = TextEditingController(); // اسم المقاول
-  final TextEditingController contractorIdController = TextEditingController(); // رقم هوية المقاول
-  final TextEditingController contractDurationController = TextEditingController(); // مدة العقد
-  final TextEditingController contractValueController = TextEditingController(); // قيمة العقد الإجمالية
-  final TextEditingController materialsProvidedController = TextEditingController(); // المواد والمعدات
-  final TextEditingController startDateController = TextEditingController(); // تاريخ بدء العقد
+  final TextEditingController projectNameController =
+      TextEditingController(); // اسم المشروع
+  final TextEditingController projectOwnerNameController =
+      TextEditingController(); // اسم صاحب المشروع
+  final TextEditingController projectOwnerIdController =
+      TextEditingController(); // رقم هوية صاحب المشروع
+  final TextEditingController contractorNameController =
+      TextEditingController(); // اسم المقاول
+  final TextEditingController contractorIdController =
+      TextEditingController(); // رقم هوية المقاول
+  final TextEditingController contractDurationController =
+      TextEditingController(); // مدة العقد
+  final TextEditingController contractValueController =
+      TextEditingController(); // قيمة العقد الإجمالية
+  final TextEditingController materialsProvidedController =
+      TextEditingController(); // المواد والمعدات
+  final TextEditingController startDateController =
+      TextEditingController(); // تاريخ بدء العقد
 
   @override
   Widget build(BuildContext context) {
@@ -118,7 +127,8 @@ class _ContractInputFormState extends State<ContractInputFormArgeement> {
                     if (_formKey.currentState!.validate()) {
                       log('تم إدخال البيانات بنجاح.');
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('تم إدخال البيانات بنجاح')),
+                        const SnackBar(
+                            content: Text('تم إدخال البيانات بنجاح')),
                       );
                     } else {
                       log('البيانات غير صحيحة. يرجى التحقق.');
