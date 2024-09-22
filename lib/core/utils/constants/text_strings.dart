@@ -45,10 +45,53 @@ class QTexts {
   static const String signupPasswordValidationAtLeastEightCharactersLong =
       'At least 8 characters long';
 
+  // -- Search
+
   // -- Home
   static const String homeAppbarTitle = 'Home';
 
-  // -- Search
+  // -- Accept argeement
+  static const String iAgreeTermsAndConditions =
+      'I have read and agree with the above terms and conditions';
+
+  // Sales Contracts
+  static const String carSaleContractInfoAppBar = 'Car Sale Contract info';
+  static const String dateLabel = 'Date';
+  static const String validatoreMessageEnterDate = 'Please enter the date';
+  static const String paritesInformation = 'Parties Information';
+  static const String sellerName = 'Seller Name';
+  static const String sellerNameValidatoreMessage =
+      'Please enter the seller\'s name';
+  static const String sellerAddress = 'Seller Address';
+  static const String sellerAddressValidatoreMessage =
+      'Please enter the seller\'s address';
+  static const String buyerName = 'Buyer Name';
+  static const String buyerNameValidatorMessage =
+      'Please enter the buyer\'s address';
+  static const String buyerAddress = 'Buyer Address';
+  static const String buyerAddressValidatorMessage =
+      'Please enter the buyer\'s address';
+  static const String propertyDetails = 'Property Details';
+  static const String propertyType = 'Property Type';
+  static const String propertyTypeValidatorMessage =
+      'Please enter the property type';
+  static const String propertyNumber = 'Property Number';
+  static const String propertyNumberValidatorMessage =
+      'Please enter the property number';
+  static const String parcelNumber = 'parcel Number';
+  static const String parcelNumberValidatorMessage =
+      'Please enter the parcel number';
+  static const String landArea = 'Land Area';
+  static const String landAreaValidatorMessage = 'Please enter the land area';
+  static const String apartmentNumber = 'Apartment Number';
+  static const String apartmentNumberValidatorMessage =
+      'Please enter the apartment number';
+  static const String propertyPrice = 'Property Price';
+  static const amountLabel = 'Amount';
+  static const amountLabelValidatorMessage =
+      'Please enter the price of the property';
+  static const String dateEnteredSuccessfuly = 'Data entered successfully';
+  static const String saveButton = 'Save';
 
   // -- Chatbot
   static const String chatbotAppbarTitle = 'Chatbot';
