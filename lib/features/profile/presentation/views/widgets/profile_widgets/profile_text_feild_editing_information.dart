@@ -1,18 +1,63 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/text_strings.dart';
 import 'package:qanoni/features/profile/presentation/views/widgets/profile_widgets/custom_label_text_field_profile_view.dart';
 import 'package:qanoni/features/profile/presentation/views/widgets/profile_widgets/custom_text_feild_profile_view.dart';
 import 'package:qanoni/features/profile/presentation/views/widgets/profile_widgets/profile_date_picker.dart';
+import 'package:user_repository/user_reposetory.dart';
 
-class ProfileUserInformationEditingField extends StatelessWidget {
+class ProfileUserInformationEditingField extends StatefulWidget {
   const ProfileUserInformationEditingField({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    TextEditingController birthdayController = TextEditingController();
-    TextEditingController phoneController = TextEditingController();
-    TextEditingController emailController = TextEditingController();
+  State<ProfileUserInformationEditingField> createState() =>
+      _ProfileUserInformationEditingFieldState();
+}
 
+class _ProfileUserInformationEditingFieldState
+    extends State<ProfileUserInformationEditingField> {
+  late final FirebaseUserRepo _userRepo;
+  String? _email;
+  String? _phone;
+  TextEditingController birthdayController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _userRepo = FirebaseUserRepo();
+    _loadUserInformation();
+  }
+
+  Future<void> _loadUserInformation() async {
+    try {
+      final currentUser = _userRepo.firebaseAuth.currentUser;
+      if (currentUser != null) {
+        final userDoc =
+            await _userRepo.usersCollection.doc(currentUser.uid).get();
+
+        if (userDoc.exists) {
+          setState(() {
+            _email = userDoc.data()?['email'] ?? 'Unknown';
+            emailController.text = _email!;
+            _phone = userDoc.data()?['phone'] ?? 'Unknown';
+            phoneController.text = _phone!;
+          });
+        } else {
+          _email = 'Unknown User';
+          _phone = 'Unknown User';
+        }
+      }
+    } catch (error) {
+      log(error.toString());
+      log('Error on fetch email');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Column(

@@ -10,15 +10,20 @@ import 'package:qanoni/features/chatbot/presentation/views/chatbot_view.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sales_contracts_acept.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sales_contracts_card.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/lease_card.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/waiver%20contracts/waiver_contracts_card.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/waiver%20contracts/waiver_contracts_view.dart';
 import 'package:qanoni/features/home/presentation/views/home_view.dart';
 import 'package:qanoni/features/layout/layout.dart';
 import 'package:qanoni/features/notification/presentation/views/notification_view.dart';
 import 'package:qanoni/features/profile/presentation/views/about_us_view.dart';
 import 'package:qanoni/features/profile/presentation/views/change_language_view.dart';
+import 'package:qanoni/features/profile/presentation/views/history_view.dart';
+import 'package:qanoni/features/profile/presentation/views/privacy_policy_view.dart';
 import 'package:qanoni/features/profile/presentation/views/settings_view.dart';
 import 'package:qanoni/features/profile/presentation/views/profile_view.dart';
 import 'package:qanoni/features/splash/presentation/views/splash_view.dart';
+
+import '../../features/home/presentation/views/contracts/employment contract/employment_contract_card.dart';
 
 abstract class AppRouter {
   static const kLoginView = '/loginView';
@@ -35,8 +40,12 @@ abstract class AppRouter {
   static const kPurchaseView = '/purchaseView';
   static const kPurchaseCards = '/purchaseCards';
   static const kEmploymentCard = '/employmentCard';
+  static const kSalesContractsCard = '/salesContractsCard';
   static const kChangeLanguageView = '/changeLanguageView';
   static const kAboutUsView = '/aboutUsView';
+  static const kWaiverContractsCard = '/waiverContractsCard';
+  static const kPrivacyPolicyView = '/privacyPolicyView';
+  static const kHistoryView = '/HistoryView';
 
   static final router = GoRouter(
     routes: [
@@ -105,7 +114,7 @@ abstract class AppRouter {
         builder: (context, state) => const LeaseContractsCards(),
       ),
       GoRoute(
-        path: kEmploymentCard,
+        path: kSalesContractsCard,
         //Todo Replace contains in this view to SalesContractsView
         builder: (context, state) => const SalesContractsCard(),
       ),
@@ -120,6 +129,22 @@ abstract class AppRouter {
       GoRoute(
         path: kAboutUsView,
         builder: (context, state) => const AboutUsView(),
+      ),
+      GoRoute(
+        path: kWaiverContractsCard,
+        builder: (context, state) => const WaiverContractsCard(),
+      ),
+      GoRoute(
+        path: kEmploymentCard,
+        builder: (context, state) => const EmploymentContractCard(),
+      ),
+      GoRoute(
+        path: kPrivacyPolicyView,
+        builder: (context, state) => const PrivacyPolicyView(),
+      ),
+      GoRoute(
+        path: kHistoryView,
+        builder: (context, state) => const HistoryView(),
       ),
     ],
   );

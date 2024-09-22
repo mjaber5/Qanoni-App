@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell%20a%20property/contract_input_form_property.dart';
 

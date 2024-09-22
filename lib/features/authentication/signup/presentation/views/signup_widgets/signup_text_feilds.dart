@@ -24,7 +24,6 @@ class SignupTextFeilds extends StatefulWidget {
 class _SignupTextFeildsState extends State<SignupTextFeilds> {
   final _formKey = GlobalKey<FormState>();
   bool isPasswordObscureText = true;
-  bool isPasswordConfirmationObscureText = true;
   bool hasLowercase = false;
   bool hasUppercase = false;
   bool hasSpecialCharacters = false;
@@ -36,8 +35,6 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  TextEditingController passwordConfirmationController =
-      TextEditingController();
 
   @override
   void initState() {
@@ -52,7 +49,6 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
     emailController.dispose();
     phoneController.dispose();
     passwordController.dispose();
-    passwordConfirmationController.dispose();
     super.dispose();
   }
 
@@ -192,45 +188,6 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                 },
               ),
               const SizedBox(height: 20),
-              AppTextFormField(
-                controller: passwordConfirmationController,
-                hintText: 'Password Confirmation',
-                isObscureText: isPasswordConfirmationObscureText,
-                suffixIcon: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      isPasswordConfirmationObscureText =
-                          !isPasswordConfirmationObscureText;
-                    });
-                  },
-                  child: Icon(
-                    isPasswordConfirmationObscureText
-                        ? Icons.visibility_off
-                        : Icons.visibility,
-                  ),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    ToastService.showWarningToast(
-                      context,
-                      length: ToastLength.medium,
-                      expandedHeight: 100,
-                      message: "confirm your password !",
-                    );
-                    return 'Please confirm your password';
-                  }
-                  if (value != passwordController.text) {
-                    ToastService.showErrorToast(
-                      context,
-                      length: ToastLength.medium,
-                      expandedHeight: 100,
-                      message: "confirm password wrong !",
-                    );
-                    return 'Passwords do not match';
-                  }
-                  return null;
-                },
-              ),
               SignupPasswordValidations(
                 hasLowerCase: hasLowercase,
                 hasUpperCase: hasUppercase,
@@ -253,7 +210,6 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                         email: emailController.text,
                         userName: nameController.text,
                         phone: phoneController.text,
-                        confirmPassword: passwordConfirmationController.text,
                       );
                       setState(() {
                         context.read<SignUpBloc>().add(

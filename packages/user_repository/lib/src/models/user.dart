@@ -6,14 +6,14 @@ class MyUsers extends Equatable {
   final String email;
   final String userName;
   final String phone;
-  final String? confirmPassword;
+  final String idNumber;
 
   const MyUsers({
     required this.phone,
     required this.userId,
     required this.email,
     required this.userName,
-    this.confirmPassword,
+    required this.idNumber,
   });
 
   static const empty = MyUsers(
@@ -21,7 +21,7 @@ class MyUsers extends Equatable {
     userId: '',
     email: '',
     userName: '',
-    confirmPassword: '',
+    idNumber: '',
   );
 
   MyUsers copyWith({
@@ -29,14 +29,14 @@ class MyUsers extends Equatable {
     String? email,
     String? userName,
     String? phone,
-    String? confirmPassword,
+    String? idNumber,
   }) {
     return MyUsers(
       phone: phone ?? this.phone,
       userId: userId ?? this.userId,
       email: email ?? this.email,
       userName: userName ?? this.userName,
-      confirmPassword: confirmPassword ?? this.confirmPassword,
+      idNumber: idNumber ?? this.idNumber,
     );
   }
 
@@ -46,6 +46,7 @@ class MyUsers extends Equatable {
       userId: userId,
       email: email,
       userName: userName,
+      idNumber: idNumber,
     );
   }
 
@@ -55,9 +56,10 @@ class MyUsers extends Equatable {
       userId: entity.userId,
       email: entity.email,
       userName: entity.userName,
+      idNumber: entity.idNumber,
     );
   }
 
   @override
-  List<Object?> get props => [userId, email, userName, phone];
+  List<Object?> get props => [userId, email, userName, phone, idNumber];
 }

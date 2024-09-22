@@ -37,19 +37,16 @@ class FirebaseUserRepo implements UserRepository {
   @override
   Future<MyUsers> signUp(MyUsers myUser, String password) async {
     try {
-      // Sign up the user in Firebase Authentication
       UserCredential userCredential =
           await _firebaseAuth.createUserWithEmailAndPassword(
         email: myUser.email,
         password: password,
       );
 
-      // Update MyUsers instance with the generated userId
       myUser = myUser.copyWith(
         userId: userCredential.user!.uid,
       );
 
-      // Store user data in Firestore
       await setUserData(myUser);
 
       return myUser;

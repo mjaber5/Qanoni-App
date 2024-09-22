@@ -89,4 +89,10 @@ class QTexts {
   static const String aboutUsAppBarTitle = 'About';
   static const String aboutUsBodyText =
       'Qanoni is your geteway to digital ontracts services, at allows you to login with single username and password instaed of multiple passwords. ';
+
+  // -- Privacy Prolicy
+  static const String privacyPolicyAppBarTitle = 'Privacy Policy';
+
+  //-- History
+  static const String historyAppBarTitle = 'History';
 }

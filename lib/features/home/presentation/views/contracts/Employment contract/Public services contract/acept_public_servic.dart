@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/daily%20rental%20contract/contract_input_form_daily.dart';
 
-class AceaptEquipment extends StatefulWidget {
-  const AceaptEquipment({super.key});
+import 'contract_input_form_public_servic.dart';
+
+
+
+class AceptPublicServic extends StatefulWidget {
+  const AceptPublicServic({super.key});
 
   @override
-  State<AceaptEquipment> createState() => _AceaptPageState();
+  State<AceptPublicServic> createState() => _AceaptPageState();
 }
 
-class _AceaptPageState extends State<AceaptEquipment> {
+class _AceaptPageState extends State<AceptPublicServic> {
   bool _agreed = false; // Declare _agreed here
 
   @override
@@ -31,7 +34,8 @@ class _AceaptPageState extends State<AceaptEquipment> {
                   child: const Text(
                     '''[الشروط 
 
-                    AceaptEquipment
+
+                    Acept Public Servic
                       
                       
                       
@@ -93,7 +97,8 @@ class _AceaptPageState extends State<AceaptEquipment> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const ContractInputFormDaily()));
+                                        const ContractInputFormPublicServic()
+                                        ));
                           }
                         : null,
                     style: ButtonStyle(

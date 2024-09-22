@@ -23,7 +23,7 @@ class ContractsCardsView extends StatelessWidget {
           ),
           contractsCardsContainer(
             context,
-            AppRouter.kPurchaseView,
+            AppRouter.kWaiverContractsCard,
             'Waiver Contracts',
             Iconsax.note,
           ),
@@ -32,9 +32,18 @@ class ContractsCardsView extends StatelessWidget {
           ),
           contractsCardsContainer(
             context,
-            AppRouter.kEmploymentCard,
+            AppRouter.kSalesContractsCard,
             'Sales Contracts',
             Iconsax.money,
+          ),
+           SizedBox(
+            height: MediaQuery.of(context).size.height * 0.01,
+          ),
+          contractsCardsContainer(
+            context,
+            AppRouter.kEmploymentCard,
+            'Employment contract ',
+            Iconsax.user_add ,
           ),
         ],
       ),
