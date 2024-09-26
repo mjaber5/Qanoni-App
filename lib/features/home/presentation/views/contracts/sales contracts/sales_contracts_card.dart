@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sales_contracts_acept.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/Cancellation%20of%20sales%20contract/Cancellation_aceept.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell%20a%20equipment/equipment_acepet.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell%20a%20land/sell_land_acept.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell%20a%20property/aceprt_property.dart';
 
@@ -14,7 +15,7 @@ class SalesContractsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     appBar: AppBar(
+      appBar: AppBar(
         title: const Text("Sales Contracts"),
         backgroundColor: QColors.secondary,
       ),
@@ -126,7 +127,7 @@ class SalesContractsCard extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const SalesContractsAcept()));
+                          builder: (context) => const EquipmentAcepet()));
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.9,
@@ -142,8 +143,7 @@ class SalesContractsCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Center(
-                          child:
-                              Text("Equipment sale   بيع معدات "),
+                          child: Text("Equipment sale   بيع معدات "),
                         ),
                         Spacer(),
                       ],
@@ -159,7 +159,7 @@ class SalesContractsCard extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const SalesContractsAcept()));
+                          builder: (context) => const CancellationAceept()));
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.9,
@@ -175,8 +175,8 @@ class SalesContractsCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Center(
-                          child: 
-                              Text("Termination of a sales contract فسخ عقد بيع"),
+                          child: Text(
+                              "Termination of a sales contract فسخ عقد بيع"),
                         ),
                         Spacer(),
                       ],
