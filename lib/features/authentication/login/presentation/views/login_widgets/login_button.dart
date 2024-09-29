@@ -6,7 +6,7 @@ import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/constants/text_strings.dart';
 import 'package:qanoni/core/utils/styles.dart';
 import 'package:qanoni/features/authentication/blocs/sign_in_bloc/signin_bloc.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class LoginButton extends StatelessWidget {
   const LoginButton({
     super.key,
@@ -21,6 +21,7 @@ class LoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.only(
         bottom: 12,
@@ -46,8 +47,8 @@ class LoginButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 15),
           backgroundColor: QColors.secondary,
         ),
-        child: const Text(
-          QTexts.loginButton,
+        child:  Text(
+          localizations.login,
           style: Styles.textStyle18,
         ),
       ),

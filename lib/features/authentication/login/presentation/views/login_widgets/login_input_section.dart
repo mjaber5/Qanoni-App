@@ -8,7 +8,7 @@ import 'package:qanoni/features/authentication/blocs/sign_in_bloc/signin_bloc.da
 import 'package:qanoni/features/authentication/login/presentation/views/login_widgets/login_button.dart';
 import 'package:toasty_box/toast_enums.dart';
 import 'package:toasty_box/toast_service.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class LoginInputsSection extends StatefulWidget {
   const LoginInputsSection({super.key});
 
@@ -25,6 +25,7 @@ class _LoginInputsSectionState extends State<LoginInputsSection> {
   bool isObscureText = true;
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.only(bottom: 10, top: 10),
       child: BlocListener<SigninBloc, SigninState>(
@@ -65,7 +66,7 @@ class _LoginInputsSectionState extends State<LoginInputsSection> {
             children: [
               AppTextFormField(
                 controller: emailController,
-                hintText: 'Email',
+                hintText: localizations.email,
                 validator: (value) {
                   if (value == null ||
                       value.isEmpty ||
@@ -84,7 +85,7 @@ class _LoginInputsSectionState extends State<LoginInputsSection> {
               const SizedBox(height: 20),
               AppTextFormField(
                 controller: passwordController,
-                hintText: 'Password',
+                hintText: localizations.password,
                 isObscureText: isObscureText,
                 suffixIcon: GestureDetector(
                   onTap: () {

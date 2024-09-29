@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:qanoni/core/utils/app_router.dart';
 import 'package:qanoni/core/utils/theme/change_theme_notifire.dart';
 import 'package:qanoni/core/utils/theme/theme.dart';
 import 'package:qanoni/features/authentication/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:user_repository/user_reposetory.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Qanoni extends StatelessWidget {
   final UserRepository userRepository;
+
   const Qanoni(this.userRepository, {super.key});
 
   @override
@@ -31,6 +34,26 @@ class Qanoni extends StatelessWidget {
           theme: QAppTheme.lightTheme,
           darkTheme: QAppTheme.darkTheme,
           debugShowCheckedModeBanner: false,
+          locale: const Locale('ar'), // Set the default locale here
+          supportedLocales: AppLocalizations.supportedLocales, // Use your supported locales
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          localeResolutionCallback: (locale, supportedLocales) {
+            if (locale == null) {
+              return supportedLocales.first;
+            }
+            for (var supportedLocale in supportedLocales) {
+              if (supportedLocale.languageCode == locale.languageCode &&
+                  supportedLocale.countryCode == locale.countryCode) {
+                return supportedLocale;
+              }
+            }
+            return supportedLocales.first;
+          },
         ),
       ),
     );

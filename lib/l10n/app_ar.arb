@@ -1,162 +1,100 @@
 {
+  "welcomeBack": "مرحبًا بعودتك",
+  "makeYourServicesApp": "اجعل خدماتك متاحة عبر الإنترنت مع تطبيق قانوني.",
+  "loginForgotPassword": "هل نسيت كلمة السر؟",
+  "loginTextQuestion": "ليس لديك حساب؟",
+  "loginSignupTextNavigator": "سجل",
+  "loginConditionText": "من خلال تسجيل الدخول، فإنك توافق على شروط الاستخدام الخاصة بنا",
+  "loginTermsAndConditions": "الشروط والأحكام",
+  "loginPrivacyPolicy": "سياسة الخصوصية",
+  "loginAndText": "و",
+  "signupPasswordValidationAtLeastOneLowerCaseLetter": "يجب أن يحتوي على حرف صغير واحد على الأقل",
+  "signupPasswordValidationAtLeastOneUpperCaseLetter": "يجب أن يحتوي على حرف كبير واحد على الأقل",
+  "signupPasswordValidationAtLeastOneSpecialCharacter": "يجب أن يحتوي على رمز خاص واحد على الأقل",
+  "signupPasswordValidationAtLeastOneNumber": "يجب أن يحتوي على رقم واحد على الأقل",
+  "phone": "رقم الهاتف",
+  "signupTextQuestion": "هل لديك حساب بالفعل؟",
+  "signupPasswordValidationAtLeastEightCharactersLong": "يجب أن يحتوي على 8 أحرف على الأقل",
+  "signupAboutApp": "سجل الآن وابدأ في استكشاف كل ما يقدمه تطبيقنا. نحن متحمسون للترحيب بك في مجتمعنا!",
+  "signupConditionText": "عند تسجيل الدخول، فإنك توافق على",
   "helloWorld": "أهلا بك!",
-  "@helloWorld": {
-    "description": "تحية مبرمج حديثي الولادة التقليدية"
-  },
-  "socialMedia": "وسائل التواصل الاجتماعي ",
-  "@socialMedia": {
-    "description": "المنصات والأدوات عبر الإنترنت التي تمكن الأشخاص من إنشاء المحتوى ومشاركته والتفاعل معه في المجتمعات الافتراضية."
-  },
-  "loginScreen": " تسجيل الدخول",
-  "@loginScreen": {
-    "description": "الشاشة التي يدخل فيها المستخدمون بياناتهم للوصول إلى التطبيق."
-  },
+  "helloWorldDescription": "تحية مبرمج حديثي الولادة التقليدية",
+  "socialMedia": "وسائل التواصل الاجتماعي",
+  "socialMediaDescription": "المنصات والأدوات عبر الإنترنت التي تمكن الأشخاص من إنشاء المحتوى ومشاركته والتفاعل معه في المجتمعات الافتراضية.",
+  "loginScreen": "تسجيل الدخول",
+  "loginScreenDescription": "الشاشة التي يدخل فيها المستخدمون بياناتهم للوصول إلى التطبيق.",
   "signupScreen": "انشاء حساب",
-  "@signupScreen": {
-    "description": "الشاشة التي يقوم فيها المستخدمون الجدد بإنشاء حساب للانضمام إلى التطبيق."
-  },
+  "signupScreenDescription": "الشاشة التي يقوم فيها المستخدمون الجدد بإنشاء حساب للانضمام إلى التطبيق.",
   "resetPassword": "إعادة تعيين كلمة المرور",
-  "@resetPassword": {
-    "description": "خيار للمستخدمين لإعادة تعيين كلمة المرور في حال نسواها."
-  },
-  "homeScreen": " الرئيسية",
-  "@homeScreen": {
-    "description": "الشاشة الرئيسية للتطبيق حيث يدخل المستخدمون بعد تسجيل الدخول."
-  },
-  "chatScreen": " الدردشة",
-  "@chatScreen": {
-    "description": "الشاشة للرسائل الفورية بين المستخدمين."
-  },
-  "searchScreen": " البحث",
-  "@searchScreen": {
-    "description": "الشاشة التي يبحث فيها المستخدمون عن مستخدمين آخرين أو مشاركات أو محتويات."
-  },
-  "addScreen": " الإضافة",
-  "@addScreen": {
-    "description": "الشاشة لإضافة محتوى جديد أو مشاركات."
-  },
-  "profileScreen": " الملف الشخصي",
-  "@profileScreen": {
-    "description": "الشاشة التي تعرض معلومات ملف المستخدم وإعداداته."
-  },
+  "resetPasswordDescription": "خيار للمستخدمين لإعادة تعيين كلمة المرور في حال نسواها.",
+  "homeScreen": "الرئيسية",
+  "homeScreenDescription": "الشاشة الرئيسية للتطبيق حيث يدخل المستخدمون بعد تسجيل الدخول.",
+  "chatScreen": "الدردشة",
+  "chatScreenDescription": "الشاشة للرسائل الفورية بين المستخدمين.",
+  "searchScreen": "البحث",
+  "searchScreenDescription": "الشاشة التي يبحث فيها المستخدمون عن مستخدمين آخرين أو مشاركات أو محتويات.",
+  "addScreen": "الإضافة",
+  "addScreenDescription": "الشاشة لإضافة محتوى جديد أو مشاركات.",
+  "profileScreen": "الملف الشخصي",
+  "profileScreenDescription": "الشاشة التي تعرض معلومات ملف المستخدم وإعداداته.",
   "editProfileScreen": "شاشة تعديل الملف الشخصي",
-  "@editProfileScreen": {
-    "description": "الشاشة التي يمكن فيها للمستخدمين تعديل معلومات ملفهم الشخصي."
-  },
-  "notificationScreen": " الإشعارات",
-  "@notificationScreen": {
-    "description": "الشاشة التي تعرض الإشعارات حول تفاعلات المستخدم."
-  },
+  "editProfileScreenDescription": "الشاشة التي يمكن فيها للمستخدمين تعديل معلومات ملفهم الشخصي.",
+  "notificationScreen": "الإشعارات",
+  "notificationScreenDescription": "الشاشة التي تعرض الإشعارات حول تفاعلات المستخدم.",
   "chatBot": "الروبوت الدردشة",
-  "@chatBot": {
-    "description": "الروبوت الآلي لمساعدة المستخدمين في الدردشة."
-  },
+  "chatBotDescription": "الروبوت الآلي لمساعدة المستخدمين في الدردشة.",
   "description": "الوصف",
-  "@description": {
-    "description": "نص يصف ملف المستخدم أو المحتوى."
-  },
+  "descriptionDescription": "نص يصف ملف المستخدم أو المحتوى.",
   "post": "منشور",
-  "@post": {
-    "description": "المحتوى المشارك من قبل المستخدمين على المنصة."
-  },
+  "postDescription": "المحتوى المشارك من قبل المستخدمين على المنصة.",
   "photos": "الصور",
-  "@photos": {
-    "description": "الصور التي يتم تحميلها أو مشاركتها من قبل المستخدمين."
-  },
+  "photosDescription": "الصور التي يتم تحميلها أو مشاركتها من قبل المستخدمين.",
   "displayName": "اسم العرض",
-  "@displayName": {
-    "description": "الاسم الذي يظهر علناً على التطبيق."
-  },
+  "displayNameDescription": "الاسم الذي يظهر علناً على التطبيق.",
   "userName": "اسم المستخدم",
-  "@userName": {
-    "description": "معرف فريد يختاره المستخدم لحسابه."
-  },
+  "userNameDescription": "معرف فريد يختاره المستخدم لحسابه.",
   "update": "تحديث",
-  "@update": {
-    "description": "إجراء لحفظ التغييرات أو تحديث المعلومات."
-  },
+  "updateDescription": "إجراء لحفظ التغييرات أو تحديث المعلومات.",
   "typeMessage": "اكتب رسالة..",
-  "@typeMessage": {
-    "description": "الحقل الذي يدخل فيه المستخدمون الرسائل للدردشة أو المشاركات."
-  },
+  "typeMessageDescription": "الحقل الذي يدخل فيه المستخدمون الرسائل للدردشة أو المشاركات.",
   "you": "أنت",
-  "@you": {
-    "description": "يشير إلى المستخدم نفسه."
-  },
+  "youDescription": "يشير إلى المستخدم نفسه.",
   "email": "البريد الإلكتروني",
-  "@email": {
-    "description": "عنوان البريد الإلكتروني للمستخدم."
-  },
+  "emailDescription": "عنوان البريد الإلكتروني للمستخدم.",
   "password": "كلمة المرور",
-  "@password": {
-    "description": "الكود السري المستخدم لمصادقة المستخدم."
-  },
+  "passwordDescription": "الكود السري المستخدم لمصادقة المستخدم.",
   "login": "تسجيل الدخول",
-  "@login": {
-    "description": "الإجراء لدخول التطبيق ببيانات الاعتماد."
-  },
+  "loginDescription": "الإجراء لدخول التطبيق ببيانات الاعتماد.",
   "signup": "الاشتراك",
-  "@signup": {
-    "description": "الإجراء لإنشاء حساب جديد."
-  },
+  "signupDescription": "الإجراء لإنشاء حساب جديد.",
   "show": "إظهار",
-  "@show": {
-    "description": "الإجراء لإظهار المحتوى المخفي."
-  },
+  "showDescription": "الإجراء لإظهار المحتوى المخفي.",
   "hide": "إخفاء",
-  "@hide": {
-    "description": "الإجراء لإخفاء المحتوى."
-  },
+  "hideDescription": "الإجراء لإخفاء المحتوى.",
   "uppercase": "أحرف كبيرة",
-  "@uppercase": {
-    "description": "نص أو حروف بأحرف كبيرة."
-  },
+  "uppercaseDescription": "نص أو حروف بأحرف كبيرة.",
   "lowercase": "أحرف صغيرة",
-  "@lowercase": {
-    "description": "نص أو حروف بأحرف صغيرة."
-  },
+  "lowercaseDescription": "نص أو حروف بأحرف صغيرة.",
   "number": "رقم",
-  "@number": {
-    "description": "قيمة رقمية أو رقم."
-  },
+  "numberDescription": "قيمة رقمية أو رقم.",
   "specialCharacter": "حرف خاص",
-  "@specialCharacter": {
-    "description": "حرف غير أبجدي مثل !، @، #، $، إلخ."
-  },
+  "specialCharacterDescription": "حرف غير أبجدي مثل !، @، #، $، إلخ.",
   "minimumCharacter": "أدنى عدد من الأحرف",
-  "@minimumCharacter": {
-    "description": "المتطلب المحدد لأقل عدد من الأحرف المسموح به."
-  },
+  "minimumCharacterDescription": "المتطلب المحدد لأقل عدد من الأحرف المسموح به.",
   "alreadyHaveAnAccount": "هل لديك حساب بالفعل؟",
-  "@alreadyHaveAnAccount": {
-    "description": "سؤال يشير إلى ما إذا كان لدى المستخدم حساب قائم بالفعل."
-  },
+  "alreadyHaveAnAccountDescription": "سؤال يشير إلى ما إذا كان لدى المستخدم حساب قائم بالفعل.",
   "youDontHaveAnAccount": "ليس لديك حساب؟",
-  "@youDon'tHaveAnAccount": {
-    "description": "سؤال يشير إلى عدم وجود حساب لدى المستخدم بعد."
-  },
+  "youDontHaveAnAccountDescription": "سؤال يشير إلى عدم وجود حساب لدى المستخدم بعد.",
   "createAccount": "إنشاء حساب",
-  "@createAccount": {
-    "description": "الإجراء لبدء عملية إنشاء حساب جديد."
-  },
+  "createAccountDescription": "الإجراء لبدء عملية إنشاء حساب جديد.",
   "deletePost": "حذف المنشور",
-  "@deletePost": {
-    "description": "الإجراء لإزالة منشور أو محتوى."
-  },
+  "deletePostDescription": "الإجراء لإزالة منشور أو محتوى.",
   "editPost": "تحرير المنشور",
-  "@editPost": {
-    "description": "الإجراء لتعديل منشور أو محتوى موجود."
-  },
+  "editPostDescription": "الإجراء لتعديل منشور أو محتوى موجود.",
   "savePost": "حفظ المنشور",
-  "@savePost": {
-    "description": "الإجراء للحفاظ على التغييرات التي تم إجراؤها على منشور أو محتوى."
-  },
+  "savePostDescription": "الإجراء للحفاظ على التغييرات التي تم إجراؤها على منشور أو محتوى.",
   "comments": "التعليقات",
-  "@comments": {
-    "description": "ردود الفعل أو الآراء المشاركة من قبل المستخدمين على المنشورات."
-  },
+  "commentsDescription": "ردود الفعل أو الآراء المشاركة من قبل المستخدمين على المنشورات.",
   "typeComment": "اكتب تعليقا..",
-  "@typeComment": {
-    "description": "الحقل الذي يدخل فيه المستخدمون التعليقات على المنشورات."
-  }
+  "typeCommentDescription": "الحقل الذي يدخل فيه المستخدمون التعليقات على المنشورات."
 }

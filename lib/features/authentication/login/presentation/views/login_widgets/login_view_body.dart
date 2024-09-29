@@ -6,12 +6,15 @@ import 'package:qanoni/features/authentication/login/presentation/views/login_wi
 import 'package:qanoni/features/authentication/login/presentation/views/login_widgets/login_input_section.dart';
 import 'package:qanoni/features/authentication/login/presentation/views/login_widgets/login_forgot_password.dart';
 import 'package:qanoni/features/authentication/login/presentation/views/login_widgets/login_text_navigator_signup.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginViewBody extends StatelessWidget {
   const LoginViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    final localizations = AppLocalizations.of(context)!;
     return const SafeArea(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 28, vertical: 30),

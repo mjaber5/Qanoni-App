@@ -14,6 +14,8 @@ import 'package:toasty_box/toast_enums.dart';
 import 'package:toasty_box/toast_service.dart';
 import 'package:user_repository/user_reposetory.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class SignupTextFeilds extends StatefulWidget {
   const SignupTextFeilds({super.key});
 
@@ -67,6 +69,7 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.only(bottom: 10, top: 10),
       child: BlocListener<SignUpBloc, SignUpBlocState>(
@@ -105,7 +108,7 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
             children: [
               AppTextFormField(
                 controller: nameController,
-                hintText: 'Name',
+                hintText: localizations.userName,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     ToastService.showErrorToast(
@@ -122,7 +125,7 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
               const SizedBox(height: 20),
               AppTextFormField(
                 controller: phoneController,
-                hintText: 'Phone number',
+                hintText: localizations.phone,
                 validator: (value) {
                   if (value == null ||
                       value.isEmpty ||
@@ -141,7 +144,7 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
               const SizedBox(height: 20),
               AppTextFormField(
                 controller: emailController,
-                hintText: 'Email',
+                hintText: localizations.email,
                 validator: (value) {
                   if (value == null ||
                       value.isEmpty ||
@@ -160,7 +163,7 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
               const SizedBox(height: 20),
               AppTextFormField(
                 controller: passwordController,
-                hintText: 'Password',
+                hintText: localizations.password,
                 isObscureText: isPasswordObscureText,
                 suffixIcon: GestureDetector(
                   onTap: () {
@@ -228,8 +231,8 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     backgroundColor: QColors.secondary,
                   ),
-                  child: const Text(
-                    QTexts.signupTitleView,
+                  child:  Text(
+                    localizations.createAccount,
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.white,

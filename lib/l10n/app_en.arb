@@ -1,162 +1,100 @@
 {
+  "welcomeBack": "Welcome Back",
+  "makeYourServicesApp": "Make your services online with Qanoni app.",
   "helloWorld": "Hello World!",
-  "@helloWorld": {
-    "description": "The conventional newborn programmer greeting"
-  },
+  "loginForgotPassword": "Forgot Passwrod?",
+  "loginTextQuestion": "Dont't have an account ? ",
+  "loginSignupTextNavigator": "Signup",
+  "loginConditionText": "By logging, you agree to our",
+  "loginTermsAndConditions": "Terms & Conditions ",
+  "loginAndText": "and",
+  "loginPrivacyPolicy": "Privacy Policy",
+  "helloWorldDescription": "The conventional newborn programmer greeting",
   "socialMedia": "Social Media",
-  "@socialMedia": {
-    "description": "Online platforms and tools that enable people to create, share, and interact with content in virtual communities."
-  },
-  "loginScreen": "Login ",
-  "@loginScreen": {
-    "description": "Screen where users enter their credentials to access the app."
-  },
-  "signupScreen": "Signup ",
-  "@signupScreen": {
-    "description": "Screen where new users create an account to join the app."
-  },
+  "socialMediaDescription": "Online platforms and tools that enable people to create, share, and interact with content in virtual communities.",
+  "loginScreen": "Login",
+  "loginScreenDescription": "Screen where users enter their credentials to access the app.",
+  "signupScreen": "Signup",
+  "signupScreenDescription": "Screen where new users create an account to join the app.",
   "resetPassword": "Reset Password",
-  "@resetPassword": {
-    "description": "Option for users to reset their forgotten password."
-  },
-  "homeScreen": "Home ",
-  "@homeScreen": {
-    "description": "Main screen of the app where users land after logging in."
-  },
-  "chatScreen": "Chat ",
-  "@chatScreen": {
-    "description": "Screen for real-time messaging between users."
-  },
-  "searchScreen": "Search ",
-  "@searchScreen": {
-    "description": "Screen for users to search for other users, posts, or content."
-  },
-  "addScreen": "Add ",
-  "@addScreen": {
-    "description": "Screen for adding new content or posts."
-  },
-  "profileScreen": "Profile ",
-  "@profileScreen": {
-    "description": "Screen displaying user's profile information and settings."
-  },
-  "editProfileScreen": "Edit Profile ",
-  "@editProfileScreen": {
-    "description": "Screen where users can edit their profile information."
-  },
-  "notificationScreen": "Notification ",
-  "@notificationScreen": {
-    "description": "Screen displaying notifications about user interactions."
-  },
+  "resetPasswordDescription": "Option for users to reset their forgotten password.",
+  "homeScreen": "Home",
+  "homeScreenDescription": "Main screen of the app where users land after logging in.",
+  "chatScreen": "Chat",
+  "chatScreenDescription": "Screen for real-time messaging between users.",
+  "searchScreen": "Search",
+  "searchScreenDescription": "Screen for users to search for other users, posts, or content.",
+  "addScreen": "Add",
+  "addScreenDescription": "Screen for adding new content or posts.",
+  "profileScreen": "Profile",
+  "profileScreenDescription": "Screen displaying user's profile information and settings.",
+  "editProfileScreen": "Edit Profile",
+  "editProfileScreenDescription": "Screen where users can edit their profile information.",
+  "notificationScreen": "Notification",
+  "notificationScreenDescription": "Screen displaying notifications about user interactions.",
   "chatBot": "ChatBot",
-  "@chatBot": {
-    "description": "Automated bot for assisting users in the chat."
-  },
+  "chatBotDescription": "Automated bot for assisting users in the chat.",
   "description": "Description",
-  "@description": {
-    "description": "Text describing a user's profile or content."
-  },
+  "descriptionDescription": "Text describing a user's profile or content.",
   "post": "Post",
-  "@post": {
-    "description": "Content shared by users on the platform."
-  },
+  "postDescription": "Content shared by users on the platform.",
   "photos": "Photos",
-  "@photos": {
-    "description": "Images uploaded or shared by users."
-  },
+  "photosDescription": "Images uploaded or shared by users.",
   "displayName": "Display name",
-  "@displayName": {
-    "description": "Name shown publicly on the app."
-  },
+  "displayNameDescription": "Name shown publicly on the app.",
   "userName": "User name",
-  "@userName": {
-    "description": "Unique identifier chosen by the user for their account."
-  },
+  "userNameDescription": "Unique identifier chosen by the user for their account.",
   "update": "Update",
-  "@update": {
-    "description": "Action to save changes or refresh information."
-  },
+  "updateDescription": "Action to save changes or refresh information.",
   "typeMessage": "Type message..",
-  "@typeMessage": {
-    "description": "Field where users enter messages for chat or posts."
-  },
+  "typeMessageDescription": "Field where users enter messages for chat or posts.",
   "you": "You",
-  "@you": {
-    "description": "Indicates the user themselves."
-  },
+  "youDescription": "Indicates the user themselves.",
   "email": "Email",
-  "@email": {
-    "description": "User's email address."
-  },
+  "emailDescription": "User's email address.",
   "password": "Password",
-  "@password": {
-    "description": "Secret code used for user authentication."
-  },
+  "passwordDescription": "Secret code used for user authentication.",
   "login": "Login",
-  "@login": {
-    "description": "Action to enter the app with credentials."
-  },
+  "loginDescription": "Action to enter the app with credentials.",
   "signup": "Signup",
-  "@signup": {
-    "description": "Action to create a new account."
-  },
+  "signupDescription": "Action to create a new account.",
   "show": "Show",
-  "@show": {
-    "description": "Action to reveal hidden content."
-  },
+  "showDescription": "Action to reveal hidden content.",
   "hide": "Hide",
-  "@hide": {
-    "description": "Action to conceal content."
-  },
+  "hideDescription": "Action to conceal content.",
   "uppercase": "Uppercase",
-  "@uppercase": {
-    "description": "Text or characters in capital letters."
-  },  
+  "uppercaseDescription": "Text or characters in capital letters.",
   "lowercase": "Lowercase",
-  "@lowercase": {
-    "description": "Text or characters in small letters."
-  },  
+  "lowercaseDescription": "Text or characters in small letters.",
   "number": "Number",
-  "@number": {
-    "description": "Numeric value or digit."
-  },  
+  "numberDescription": "Numeric value or digit.",
   "specialCharacter": "Special Character",
-  "@specialCharacter": {
-    "description": "Non-alphanumeric character like !, @, #, $, etc."
-  },  
+  "specialCharacterDescription": "Non-alphanumeric character like !, @, #, $, etc.",
   "minimumCharacter": "Minimum Character",
-  "@minimumCharacter": {
-    "description": "Requirement specifying the smallest count of characters allowed."
-  },  
+  "minimumCharacterDescription": "Requirement specifying the smallest count of characters allowed.",
   "alreadyHaveAnAccount": "Already Have An Account?",
-  "@alreadyHaveAnAccount": {
-    "description": "Question indicating whether the user already has an existing account."
-  },  
+  "alreadyHaveAnAccountDescription": "Question indicating whether the user already has an existing account.",
   "youDontHaveAnAccount": "You Don't Have An Account?",
-  "@youDon'tHaveAnAccount": {
-    "description": "Question indicating whether the user doesn't have an existing account."
-  },  
+  "youDontHaveAnAccountDescription": "Question indicating whether the user doesn't have an existing account.",
   "createAccount": "Create Account",
-  "@createAccount": {
-    "description": "Action to start the process of creating a new account."
-  },
+  "phone": "phone",
+  "signupTextQuestion" :"Already have an account ? ",
+  "signupConditionText": "By logging, you agree to our",
+  "signupAboutApp": "Sign up now and start exploring all that our app has to offer. We\\'re excited to welcome you to our community!",
+  "signupPasswordValidationAtLeastOneLowerCaseLetter": "At least 1 lowercase letter",
+  "signupPasswordValidationAtLeastOneUpperCaseLetter": "At least 1 uppercase letter",
+  "signupPasswordValidationAtLeastOneSpecialCharacter": "At least 1 special character",
+  "signupPasswordValidationAtLeastOneNumber": "At least 1 number",
+  "signupPasswordValidationAtLeastEightCharactersLong": "At least 8 characters long",
+  "createAccountDescription": "Action to start the process of creating a new account.",
   "deletePost": "Delete Post",
-  "@deletePost": {
-    "description": "Action to remove a post or content."
-  },
+  "deletePostDescription": "Action to remove a post or content.",
   "editPost": "Edit Post",
-  "@editPost": {
-    "description": "Action to modify an existing post or content."
-  },
+  "editPostDescription": "Action to modify an existing post or content.",
   "savePost": "Save Post",
-  "@savePost": {
-    "description": "Action to preserve changes made to a post or content."
-  },
+  "savePostDescription": "Action to preserve changes made to a post or content.",
   "comments": "Comments",
-  "@comments": {
-    "description": "Reactions or opinions shared by users on posts."
-  },
+  "commentsDescription": "Reactions or opinions shared by users on posts.",
   "typeComment": "Type Comment..",
-  "@typeComment": {
-    "description": "Field where users enter reactions or opinions on posts."
-  }
+  "typeCommentDescription": "Field where users enter reactions or opinions on posts."
 }

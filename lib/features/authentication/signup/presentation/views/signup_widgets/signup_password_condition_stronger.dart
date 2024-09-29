@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/core/utils/constants/text_strings.dart';
 import 'package:qanoni/core/utils/styles.dart';
 import 'package:qanoni/core/utils/theme/change_theme_notifire.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class SignupPasswordValidations extends StatelessWidget {
   final bool hasLowerCase;
   final bool hasUpperCase;
@@ -22,6 +21,7 @@ class SignupPasswordValidations extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     bool isLight = context.watch<ThemeNotifier>().isLightTheme;
 
     return Padding(
@@ -29,25 +29,25 @@ class SignupPasswordValidations extends StatelessWidget {
       child: Column(
         children: [
           buildValidationRow(
-              QTexts.signupPasswordValidationAtLeastOneLowerCaseLetter,
+              localizations.signupPasswordValidationAtLeastOneLowerCaseLetter,
               hasLowerCase,
               isLight),
           const SizedBox(height: 2),
           buildValidationRow(
-              QTexts.signupPasswordValidationAtLeastOneUpperCaseLetter,
+              localizations.signupPasswordValidationAtLeastOneUpperCaseLetter,
               hasUpperCase,
               isLight),
           const SizedBox(height: 2),
           buildValidationRow(
-              QTexts.signupPasswordValidationAtLeastOneSpecialCharacter,
+              localizations.signupPasswordValidationAtLeastOneSpecialCharacter,
               hasSpecialCharacters,
               isLight),
           const SizedBox(height: 2),
-          buildValidationRow(QTexts.signupPasswordValidationAtLeastOneNumber,
+          buildValidationRow(localizations.signupPasswordValidationAtLeastOneNumber,
               hasNumber, isLight),
           const SizedBox(height: 2),
           buildValidationRow(
-              QTexts.signupPasswordValidationAtLeastEightCharactersLong,
+              localizations.signupPasswordValidationAtLeastEightCharactersLong,
               hasMinLength,
               isLight),
         ],

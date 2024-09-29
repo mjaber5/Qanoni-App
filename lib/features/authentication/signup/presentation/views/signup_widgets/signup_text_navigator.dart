@@ -7,11 +7,13 @@ import 'package:qanoni/core/utils/constants/text_strings.dart';
 import 'package:qanoni/core/utils/styles.dart';
 import 'package:qanoni/core/utils/theme/change_theme_notifire.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class SignupTextNavigator extends StatelessWidget {
   const SignupTextNavigator({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     bool isLight = context.watch<ThemeNotifier>().isLightTheme;
 
     return Column(
@@ -22,13 +24,13 @@ class SignupTextNavigator extends StatelessWidget {
           },
           child: Text.rich(
             TextSpan(
-              text: QTexts.signupTextQuestion,
+              text: localizations.signupTextQuestion,
               style: Styles.textStyle14.copyWith(
                 color: isLight ? QColors.grey : QColors.darkerGrey,
               ),
               children: [
                 TextSpan(
-                  text: QTexts.signupLoginTextNavigator,
+                  text: localizations.login,
                   style: Styles.textStyle14.copyWith(
                     color: QColors.secondary,
                     fontWeight: FontWeight.w500,

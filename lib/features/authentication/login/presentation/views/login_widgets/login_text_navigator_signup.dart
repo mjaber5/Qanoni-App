@@ -6,12 +6,14 @@ import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/constants/text_strings.dart';
 import 'package:qanoni/core/utils/styles.dart';
 import 'package:qanoni/core/utils/theme/change_theme_notifire.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class LoginTextNavigatorSignup extends StatelessWidget {
   const LoginTextNavigatorSignup({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    final localizations = AppLocalizations.of(context)!;
     bool isLight = context.watch<ThemeNotifier>().isLightTheme;
 
     return Padding(
@@ -24,13 +26,13 @@ class LoginTextNavigatorSignup extends StatelessWidget {
             },
             child: Text.rich(
               TextSpan(
-                text: QTexts.loginTextQuestion,
+                text: localizations.loginTextQuestion,
                 style: Styles.textStyle14.copyWith(
                   color: isLight ? QColors.grey : QColors.darkerGrey,
                 ),
                 children: [
                   TextSpan(
-                    text: QTexts.loginSignupTextNavigator,
+                    text: localizations.loginSignupTextNavigator,
                     style: Styles.textStyle14.copyWith(
                       color: QColors.secondary,
                       fontWeight: FontWeight.w500,
