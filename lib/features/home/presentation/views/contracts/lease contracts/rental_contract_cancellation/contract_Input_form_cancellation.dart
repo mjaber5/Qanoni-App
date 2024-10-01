@@ -8,8 +8,8 @@ class ContractInputFormCancellation extends StatefulWidget {
   const ContractInputFormCancellation({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _LeaseCancellationFormState createState() => _LeaseCancellationFormState();
+  State<ContractInputFormCancellation> createState() =>
+      _LeaseCancellationFormState();
 }
 
 // done

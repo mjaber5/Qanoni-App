@@ -8,8 +8,7 @@ class ContractInputFormHouse extends StatefulWidget {
   const ContractInputFormHouse({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _ContractInputFormState createState() => _ContractInputFormState();
+  State<ContractInputFormHouse> createState() => _ContractInputFormState();
 }
 
 class _ContractInputFormState extends State<ContractInputFormHouse> {

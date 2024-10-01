@@ -8,8 +8,7 @@ class ContractInputFormEquipment extends StatefulWidget {
   const ContractInputFormEquipment({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _EquipmentRentalContractFormState createState() =>
+  State<ContractInputFormEquipment> createState() =>
       _EquipmentRentalContractFormState();
 }
 

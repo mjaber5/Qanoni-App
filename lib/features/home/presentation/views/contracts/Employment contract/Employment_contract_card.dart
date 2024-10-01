@@ -23,7 +23,6 @@ class EmploymentContractCard extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                // Contract Agreement
                 InkWell(
                   onTap: () {
                     Navigator.push(
