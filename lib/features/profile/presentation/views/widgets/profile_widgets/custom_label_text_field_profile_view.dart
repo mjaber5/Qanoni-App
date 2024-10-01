@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/styles.dart';
+import '../../../../../../core/utils/styles.dart';
 
 class LabelTextFieldProfileView extends StatelessWidget {
   const LabelTextFieldProfileView({

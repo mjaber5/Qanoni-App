@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:qanoni/core/utils/app_router.dart';
-import 'package:qanoni/core/utils/helpers/app_regex.dart';
-import 'package:qanoni/core/widgets/app_text_form_field.dart';
-import 'package:qanoni/features/authentication/blocs/sign_in_bloc/signin_bloc.dart';
-import 'package:qanoni/features/authentication/login/presentation/views/login_widgets/login_button.dart';
+import '../../../../../../core/utils/app_router.dart';
+import '../../../../../../core/utils/helpers/app_regex.dart';
+import '../../../../../../core/widgets/app_text_form_field.dart';
+import '../../../../blocs/sign_in_bloc/signin_bloc.dart';
+import 'login_button.dart';
 import 'package:toasty_box/toast_enums.dart';
 import 'package:toasty_box/toast_service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class LoginInputsSection extends StatefulWidget {
   const LoginInputsSection({super.key});
 

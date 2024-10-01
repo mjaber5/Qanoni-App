@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/features/profile/presentation/views/widgets/settings_widgets/settings_view_body.dart';
+
+import 'widgets/settings_widgets/settings_view_body.dart';
 
 class SettingsView extends StatelessWidget {
   const SettingsView({super.key});

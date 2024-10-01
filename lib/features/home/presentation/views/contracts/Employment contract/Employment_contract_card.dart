@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
+import '../../../../../../core/utils/constants/colors.dart';
 
 import 'daily work contract/acept_daily_work.dart';
 import 'ministery work model/acept_ministery_work.dart';
@@ -89,10 +89,9 @@ class EmploymentContractCard extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const AceptWorkImport()));
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AceptWorkImport()));
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.9,
@@ -122,10 +121,9 @@ class EmploymentContractCard extends StatelessWidget {
                   onTap: () {
                     // Navigate to MinistryContractsAccept page
                     Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const AceptMinisteryWork()));
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AceptMinisteryWork()));
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.9,
@@ -155,10 +153,9 @@ class EmploymentContractCard extends StatelessWidget {
                   onTap: () {
                     // Navigate to TemporaryWorkContractsAccept page
                     Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const AceptDailyWork()));
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AceptDailyWork()));
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.9,
@@ -182,9 +179,6 @@ class EmploymentContractCard extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-
-                
-                
               ],
             ),
           ),

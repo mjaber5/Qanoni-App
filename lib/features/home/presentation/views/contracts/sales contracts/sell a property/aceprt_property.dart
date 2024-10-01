@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell%20a%20property/contract_input_form_property.dart';
+import '../../../../../../../core/utils/constants/colors.dart';
+import '../../sales%20contracts/sell%20a%20property/contract_input_form_property.dart';
 
 class AceprtProperty extends StatefulWidget {
   const AceprtProperty({super.key});

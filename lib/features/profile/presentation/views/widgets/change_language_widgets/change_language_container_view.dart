@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/profile/presentation/views/widgets/change_language_widgets/change_language_options_view.dart';
+import '../../../../../../core/utils/constants/colors.dart';
+import 'change_language_options_view.dart';
 
 class LanguageToogleContainerView extends StatelessWidget {
   const LanguageToogleContainerView({super.key});

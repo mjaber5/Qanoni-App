@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:qanoni/core/utils/app_router.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/core/utils/styles.dart';
-import 'package:qanoni/features/home/data/card_model.dart';
-
+import '../../../../../core/utils/app_router.dart';
+import '../../../../../core/utils/constants/colors.dart';
+import '../../../../../core/utils/styles.dart';
+import '../../../data/card_model.dart';
 
 class ServicesCardItem extends StatefulWidget {
-
   final CardModel cardModels;
-  const ServicesCardItem({super.key,  required this.cardModels});
+  const ServicesCardItem({super.key, required this.cardModels});
 
   @override
   State<ServicesCardItem> createState() => _ServicesCardItemState();
@@ -23,9 +21,8 @@ class _ServicesCardItemState extends State<ServicesCardItem> {
       child: Column(
         children: [
           InkWell(
-            onTap: (){
-              
-               GoRouter.of(context).push(AppRouter.kLeaseCard);
+            onTap: () {
+              GoRouter.of(context).push(AppRouter.kLeaseCard);
             },
             child: Container(
               width: MediaQuery.of(context).size.width * 0.9,
@@ -35,14 +32,13 @@ class _ServicesCardItemState extends State<ServicesCardItem> {
                 color: QColors.darkerGrey.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child:  Column(
+              child: Column(
                 children: [
                   Text(
-                   widget.cardModels.servicname,
+                    widget.cardModels.servicname,
                     style: Styles.textStyle20,
                   ),
                   const SizedBox(height: 10),
-                 
                 ],
               ),
             ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/features/notification/presentation/views/widgets/services_card_list_view_nofification.dart';
+import 'services_card_list_view_nofification.dart';
 
 import 'custom_notification_app_bar.dart';
 

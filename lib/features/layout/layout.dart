@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/core/utils/constants/text_strings.dart';
-import 'package:qanoni/features/chatbot/presentation/views/chatbot_view.dart';
-import 'package:qanoni/features/home/presentation/views/home_view.dart';
-import 'package:qanoni/features/notification/presentation/views/notification_view.dart';
-import 'package:qanoni/features/profile/presentation/views/profile_view.dart';
+import '../../core/utils/constants/colors.dart';
+import '../../core/utils/constants/text_strings.dart';
+import '../chatbot/presentation/views/chatbot_view.dart';
+import '../home/presentation/views/home_view.dart';
+import '../notification/presentation/views/notification_view.dart';
+import '../profile/presentation/views/profile_view.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class LayoutView extends StatefulWidget {
@@ -26,8 +25,6 @@ class _LayoutViewState extends State<LayoutView> {
   ];
   @override
   Widget build(BuildContext context) {
-
-    final localizations = AppLocalizations.of(context)!;
     return Scaffold(
       body: screens[_currentIndex],
       bottomNavigationBar: SalomonBottomBar(

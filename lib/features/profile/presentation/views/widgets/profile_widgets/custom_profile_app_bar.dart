@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:qanoni/core/utils/app_router.dart';
-import 'package:qanoni/core/utils/constants/text_strings.dart';
-import 'package:qanoni/core/utils/styles.dart';
+import '../../../../../../core/utils/app_router.dart';
+import '../../../../../../core/utils/constants/text_strings.dart';
+import '../../../../../../core/utils/styles.dart';
 
 class AppbarProfilState extends StatefulWidget {
   const AppbarProfilState({super.key});

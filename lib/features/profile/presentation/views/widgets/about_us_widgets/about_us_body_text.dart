@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/text_strings.dart';
+import '../../../../../../core/utils/constants/text_strings.dart';
 
 class AboutUsBodyText extends StatelessWidget {
   const AboutUsBodyText({super.key});

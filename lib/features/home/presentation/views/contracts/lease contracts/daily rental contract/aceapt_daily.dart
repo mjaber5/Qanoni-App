@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/daily%20rental%20contract/contract_input_form_daily.dart';
+import '../../../../../../../core/utils/constants/colors.dart';
+import '../../lease%20contracts/daily%20rental%20contract/contract_input_form_daily.dart';
 
 class AceaptDaily extends StatefulWidget {
   const AceaptDaily({super.key});

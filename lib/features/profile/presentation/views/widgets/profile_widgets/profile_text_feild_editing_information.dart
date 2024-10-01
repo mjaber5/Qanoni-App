@@ -1,10 +1,10 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/text_strings.dart';
-import 'package:qanoni/features/profile/presentation/views/widgets/profile_widgets/custom_label_text_field_profile_view.dart';
-import 'package:qanoni/features/profile/presentation/views/widgets/profile_widgets/custom_text_feild_profile_view.dart';
-import 'package:qanoni/features/profile/presentation/views/widgets/profile_widgets/profile_date_picker.dart';
+import '../../../../../../core/utils/constants/text_strings.dart';
+import 'custom_label_text_field_profile_view.dart';
+import 'custom_text_feild_profile_view.dart';
+import 'profile_date_picker.dart';
 import 'package:user_repository/user_reposetory.dart';
 
 class ProfileUserInformationEditingField extends StatefulWidget {

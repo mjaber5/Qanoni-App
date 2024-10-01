@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/core/utils/constants/image_strings.dart';
-import 'package:qanoni/core/utils/constants/text_strings.dart';
-import 'package:qanoni/core/utils/styles.dart';
+import '../../../../../../core/utils/constants/colors.dart';
+import '../../../../../../core/utils/constants/image_strings.dart';
+import '../../../../../../core/utils/constants/text_strings.dart';
+import '../../../../../../core/utils/styles.dart';
 import 'package:user_repository/user_reposetory.dart';
 
 class ProfileUserInformationCard extends StatefulWidget {

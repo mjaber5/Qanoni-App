@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/core/utils/styles.dart';
-import 'package:qanoni/core/utils/theme/change_theme_notifire.dart';
+import '../utils/constants/colors.dart';
+import '../utils/styles.dart';
+import '../utils/theme/change_theme_notifire.dart';
 
 class AppTextFormField extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;

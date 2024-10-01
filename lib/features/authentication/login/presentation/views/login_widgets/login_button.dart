@@ -2,11 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/core/utils/constants/text_strings.dart';
-import 'package:qanoni/core/utils/styles.dart';
-import 'package:qanoni/features/authentication/blocs/sign_in_bloc/signin_bloc.dart';
+import '../../../../../../core/utils/constants/colors.dart';
+import '../../../../../../core/utils/styles.dart';
+import '../../../../blocs/sign_in_bloc/signin_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class LoginButton extends StatelessWidget {
   const LoginButton({
     super.key,
@@ -47,7 +47,7 @@ class LoginButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 15),
           backgroundColor: QColors.secondary,
         ),
-        child:  Text(
+        child: Text(
           localizations.login,
           style: Styles.textStyle18,
         ),

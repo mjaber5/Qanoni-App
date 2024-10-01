@@ -1,8 +1,8 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/core/utils/styles.dart';
-import 'package:qanoni/core/widgets/app_text_form_field.dart';
+import '../../../../../../../core/utils/constants/colors.dart';
+import '../../../../../../../core/utils/styles.dart';
+import '../../../../../../../core/widgets/app_text_form_field.dart';
 
 class ContractInputFormArgeement extends StatefulWidget {
   const ContractInputFormArgeement({super.key});

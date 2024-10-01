@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:qanoni/core/utils/app_router.dart';
-import 'package:qanoni/core/utils/theme/change_theme_notifire.dart';
-import 'package:qanoni/core/utils/theme/theme.dart';
-import 'package:qanoni/features/authentication/blocs/authentication_bloc/authentication_bloc.dart';
+import 'core/utils/app_router.dart';
+import 'core/utils/theme/change_theme_notifire.dart';
+import 'core/utils/theme/theme.dart';
+import 'features/authentication/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:user_repository/user_reposetory.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

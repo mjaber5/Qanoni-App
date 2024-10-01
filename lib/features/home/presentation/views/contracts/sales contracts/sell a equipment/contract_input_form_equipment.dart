@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/core/utils/styles.dart';
-import 'package:qanoni/core/widgets/app_text_form_field.dart';
+import '../../../../../../../core/utils/constants/colors.dart';
+import '../../../../../../../core/utils/styles.dart';
+import '../../../../../../../core/widgets/app_text_form_field.dart';
 
 class ContractInputFormEquipmentt extends StatefulWidget {
   const ContractInputFormEquipmentt({super.key});
@@ -19,11 +19,15 @@ class _ContractInputFormEquipmentState
   final TextEditingController vendorNameController = TextEditingController();
   final TextEditingController vendorAddressController = TextEditingController();
   final TextEditingController purchaserNameController = TextEditingController();
-  final TextEditingController purchaserAddressController = TextEditingController();
+  final TextEditingController purchaserAddressController =
+      TextEditingController();
   final TextEditingController equipmentTypeController = TextEditingController();
-  final TextEditingController equipmentModelController = TextEditingController();
-  final TextEditingController equipmentSerialNumberController = TextEditingController();
-  final TextEditingController equipmentConditionController = TextEditingController();
+  final TextEditingController equipmentModelController =
+      TextEditingController();
+  final TextEditingController equipmentSerialNumberController =
+      TextEditingController();
+  final TextEditingController equipmentConditionController =
+      TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController saleDateController = TextEditingController();
 

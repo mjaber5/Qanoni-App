@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/equipment_rental_contract/contract_Input_form_equipment.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell%20a%20equipment/contract_input_form_equipment.dart';
+import '../../../../../../../core/utils/constants/colors.dart';
+import '../../sales%20contracts/sell%20a%20equipment/contract_input_form_equipment.dart';
 
 class EquipmentAcepet extends StatefulWidget {
   const EquipmentAcepet({super.key});

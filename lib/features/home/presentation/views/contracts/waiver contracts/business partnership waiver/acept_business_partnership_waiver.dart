@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
 
+import '../../../../../../../core/utils/constants/colors.dart';
 import 'contract_input_form_business_partnership_waiver.dart';
 
 class AceptBusinessPartnershipWaiver extends StatefulWidget {

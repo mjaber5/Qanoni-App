@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:qanoni/core/utils/constants/text_strings.dart';
-import 'package:qanoni/core/utils/styles.dart';
-import 'package:qanoni/features/profile/presentation/views/widgets/about_us_widgets/about_us_body_text.dart';
-import 'package:qanoni/features/profile/presentation/views/widgets/about_us_widgets/about_us_contact_information.dart';
-import 'package:qanoni/features/profile/presentation/views/widgets/about_us_widgets/custom_about_us_app_bar.dart';
+import '../../../../../../core/utils/constants/text_strings.dart';
+import '../../../../../../core/utils/styles.dart';
+import 'about_us_body_text.dart';
+import 'about_us_contact_information.dart';
+import 'custom_about_us_app_bar.dart';
 
 class AboutUsViewBody extends StatelessWidget {
   const AboutUsViewBody({super.key});

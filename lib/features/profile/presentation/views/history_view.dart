@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/features/profile/presentation/views/widgets/history_widgets/history_view_body.dart';
+import 'widgets/history_widgets/history_view_body.dart';
 
 class HistoryView extends StatelessWidget {
   const HistoryView({super.key});

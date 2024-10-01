@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
+import '../../../../../../core/utils/constants/colors.dart';
 
-import 'package:qanoni/core/utils/styles.dart';
+import '../../../../../../core/utils/styles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-class SignupLogoText extends StatelessWidget {
 
+class SignupLogoText extends StatelessWidget {
   const SignupLogoText({super.key});
 
   @override

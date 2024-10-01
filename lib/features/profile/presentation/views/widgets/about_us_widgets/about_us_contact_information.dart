@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
+
+import '../../../../../../core/utils/constants/colors.dart';
 
 class ContactIformation extends StatelessWidget {
   const ContactIformation({super.key});

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/waiver%20contracts/car_waiver_contract/acept_car_waiver.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/waiver%20contracts/property%20waiver%20contract/acept_property.dart';
+import '../../../../../../core/utils/constants/colors.dart';
+import '../waiver%20contracts/car_waiver_contract/acept_car_waiver.dart';
+import '../waiver%20contracts/property%20waiver%20contract/acept_property.dart';
 
 import 'business partnership waiver/acept_business_partnership_waiver.dart';
 import 'intellectual waiver contract/acept_intellectual.dart';

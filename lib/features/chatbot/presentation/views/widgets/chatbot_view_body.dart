@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/features/chatbot/presentation/views/widgets/chatbot_messages_list_view.dart';
-import 'package:qanoni/features/chatbot/presentation/views/widgets/chatbot_text_feild.dart';
-import 'package:qanoni/features/chatbot/presentation/views/widgets/custom_chatbot_app_bar.dart';
+import 'chatbot_messages_list_view.dart';
+import 'chatbot_text_feild.dart';
+import 'custom_chatbot_app_bar.dart';
 
 class ChatbotViewBody extends StatefulWidget {
   const ChatbotViewBody({super.key});

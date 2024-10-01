@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:qanoni/core/utils/app_router.dart';
-import 'package:qanoni/core/utils/constants/text_strings.dart';
-import 'package:qanoni/features/authentication/blocs/authentication_bloc/authentication_bloc.dart';
-import 'package:qanoni/features/splash/presentation/views/widgets/sliding_text.dart';
+
+import '../../../../../core/utils/app_router.dart';
+import '../../../../../core/utils/constants/text_strings.dart';
+import '../../../../authentication/blocs/authentication_bloc/authentication_bloc.dart';
+import 'sliding_text.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});

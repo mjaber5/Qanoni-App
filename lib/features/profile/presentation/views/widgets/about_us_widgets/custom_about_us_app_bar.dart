@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:qanoni/core/utils/constants/text_strings.dart';
-import 'package:qanoni/core/utils/styles.dart';
+
+import '../../../../../../core/utils/constants/text_strings.dart';
+import '../../../../../../core/utils/styles.dart';
 
 class CustomAboutUsAppBar extends StatelessWidget {
   const CustomAboutUsAppBar({super.key});

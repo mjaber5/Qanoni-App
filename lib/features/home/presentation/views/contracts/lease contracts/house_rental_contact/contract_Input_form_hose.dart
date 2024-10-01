@@ -1,8 +1,8 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/core/utils/styles.dart';
-import 'package:qanoni/core/widgets/app_text_form_field.dart';
+import '../../../../../../../core/utils/constants/colors.dart';
+import '../../../../../../../core/utils/styles.dart';
+import '../../../../../../../core/widgets/app_text_form_field.dart';
 
 class ContractInputFormHouse extends StatefulWidget {
   const ContractInputFormHouse({super.key});
@@ -12,22 +12,30 @@ class ContractInputFormHouse extends StatefulWidget {
   _ContractInputFormState createState() => _ContractInputFormState();
 }
 
-
 class _ContractInputFormState extends State<ContractInputFormHouse> {
   final _formKey = GlobalKey<FormState>();
 
-  // done 
+  // done
 
   // Controllers for text fields
-  final TextEditingController landlordNameController = TextEditingController(); // Landlord Name
-  final TextEditingController landlordIdController = TextEditingController(); // Landlord ID
-  final TextEditingController tenantNameController = TextEditingController(); // Tenant Name
-  final TextEditingController tenantIdController = TextEditingController(); // Tenant ID
-  final TextEditingController propertyAddressController = TextEditingController(); // Property Address
-  final TextEditingController rentAmountController = TextEditingController(); // Rent Amount
-  final TextEditingController startDateController = TextEditingController(); // Contract Start Date
-  final TextEditingController contractDurationController = TextEditingController(); // Contract Duration
-  final TextEditingController contractNumberController = TextEditingController(); // Contract Number
+  final TextEditingController landlordNameController =
+      TextEditingController(); // Landlord Name
+  final TextEditingController landlordIdController =
+      TextEditingController(); // Landlord ID
+  final TextEditingController tenantNameController =
+      TextEditingController(); // Tenant Name
+  final TextEditingController tenantIdController =
+      TextEditingController(); // Tenant ID
+  final TextEditingController propertyAddressController =
+      TextEditingController(); // Property Address
+  final TextEditingController rentAmountController =
+      TextEditingController(); // Rent Amount
+  final TextEditingController startDateController =
+      TextEditingController(); // Contract Start Date
+  final TextEditingController contractDurationController =
+      TextEditingController(); // Contract Duration
+  final TextEditingController contractNumberController =
+      TextEditingController(); // Contract Number
   final TextEditingController cityController = TextEditingController(); // City
 
   @override
@@ -50,7 +58,7 @@ class _ContractInputFormState extends State<ContractInputFormHouse> {
                 validatorMessage: 'Please enter the landlord\'s name',
               ),
               const SizedBox(height: 16),
-              
+
               // Landlord ID
               buildLabeledTextField(
                 label: 'Landlord ID',
@@ -58,7 +66,7 @@ class _ContractInputFormState extends State<ContractInputFormHouse> {
                 validatorMessage: 'Please enter the landlord\'s ID number',
               ),
               const SizedBox(height: 16),
-              
+
               // Tenant Name
               buildLabeledTextField(
                 label: 'Tenant Name',
@@ -66,7 +74,7 @@ class _ContractInputFormState extends State<ContractInputFormHouse> {
                 validatorMessage: 'Please enter the tenant\'s name',
               ),
               const SizedBox(height: 16),
-              
+
               // Tenant ID
               buildLabeledTextField(
                 label: 'Tenant ID',
@@ -74,7 +82,7 @@ class _ContractInputFormState extends State<ContractInputFormHouse> {
                 validatorMessage: 'Please enter the tenant\'s ID number',
               ),
               const SizedBox(height: 16),
-              
+
               // Property Address
               buildLabeledTextField(
                 label: 'Property Address',
@@ -82,7 +90,7 @@ class _ContractInputFormState extends State<ContractInputFormHouse> {
                 validatorMessage: 'Please enter the property address',
               ),
               const SizedBox(height: 16),
-              
+
               // City
               buildLabeledTextField(
                 label: 'City',
@@ -90,7 +98,7 @@ class _ContractInputFormState extends State<ContractInputFormHouse> {
                 validatorMessage: 'Please enter the city',
               ),
               const SizedBox(height: 16),
-              
+
               // Contract Number
               buildLabeledTextField(
                 label: 'Contract Number',
@@ -98,7 +106,7 @@ class _ContractInputFormState extends State<ContractInputFormHouse> {
                 validatorMessage: 'Please enter the contract number',
               ),
               const SizedBox(height: 16),
-              
+
               // Rent Amount
               buildLabeledTextField(
                 label: 'Rent Amount',
@@ -106,7 +114,7 @@ class _ContractInputFormState extends State<ContractInputFormHouse> {
                 validatorMessage: 'Please enter the rent amount',
               ),
               const SizedBox(height: 16),
-              
+
               // Contract Start Date
               buildLabeledTextField(
                 label: 'Contract Start Date',
@@ -114,7 +122,7 @@ class _ContractInputFormState extends State<ContractInputFormHouse> {
                 validatorMessage: 'Please enter the contract start date',
               ),
               const SizedBox(height: 16),
-              
+
               // Contract Duration
               buildLabeledTextField(
                 label: 'Contract Duration',
@@ -122,7 +130,7 @@ class _ContractInputFormState extends State<ContractInputFormHouse> {
                 validatorMessage: 'Please enter the contract duration',
               ),
               const SizedBox(height: 32),
-              
+
               // Submit Button
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18),
@@ -131,7 +139,8 @@ class _ContractInputFormState extends State<ContractInputFormHouse> {
                     if (_formKey.currentState!.validate()) {
                       log('Form is valid. Proceed with saving the contract.');
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Data entered successfully')),
+                        const SnackBar(
+                            content: Text('Data entered successfully')),
                       );
                     } else {
                       log('Form is not valid. Show errors.');

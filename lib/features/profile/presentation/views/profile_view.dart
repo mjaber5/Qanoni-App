@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/features/profile/presentation/views/widgets/profile_widgets/profile_view_body.dart';
+import 'widgets/profile_widgets/profile_view_body.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});

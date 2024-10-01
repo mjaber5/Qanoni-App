@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/features/home/presentation/views/home_widgets/home_view_body.dart';
+import 'home_widgets/home_view_body.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

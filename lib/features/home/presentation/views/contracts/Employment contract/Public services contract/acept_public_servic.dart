@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
+import '../../../../../../../core/utils/constants/colors.dart';
 
 import 'contract_input_form_public_servic.dart';
-
-
 
 class AceptPublicServic extends StatefulWidget {
   const AceptPublicServic({super.key});
@@ -97,8 +95,7 @@ class _AceaptPageState extends State<AceptPublicServic> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const ContractInputFormPublicServic()
-                                        ));
+                                        const ContractInputFormPublicServic()));
                           }
                         : null,
                     style: ButtonStyle(

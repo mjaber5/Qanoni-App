@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/cancellation%20of%20sales%20contract/cancellation_aceept.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell%20a%20equipment/equipment_acepet.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell%20a%20land/sell_land_acept.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell%20a%20property/aceprt_property.dart';
+import '../../../../../../core/utils/constants/colors.dart';
+import '../sales%20contracts/cancellation%20of%20sales%20contract/cancellation_aceept.dart';
+import '../sales%20contracts/sell%20a%20equipment/equipment_acepet.dart';
+import '../sales%20contracts/sell%20a%20land/sell_land_acept.dart';
+import '../sales%20contracts/sell%20a%20property/aceprt_property.dart';
 
-import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell_car_contract/sales_car_acept.dart';
+import '../sales%20contracts/sell_car_contract/sales_car_acept.dart';
 
 class SalesContractsCard extends StatelessWidget {
   const SalesContractsCard({super.key});

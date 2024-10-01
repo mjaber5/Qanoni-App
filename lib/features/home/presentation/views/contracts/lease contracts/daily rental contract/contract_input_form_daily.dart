@@ -1,29 +1,38 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/core/utils/styles.dart';
-import 'package:qanoni/core/widgets/app_text_form_field.dart';
+import '../../../../../../../core/utils/constants/colors.dart';
+import '../../../../../../../core/utils/styles.dart';
+import '../../../../../../../core/widgets/app_text_form_field.dart';
 
 class ContractInputFormDaily extends StatefulWidget {
   const ContractInputFormDaily({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _DailyRentalContractFormState createState() => _DailyRentalContractFormState();
+  _DailyRentalContractFormState createState() =>
+      _DailyRentalContractFormState();
 }
 
 class _DailyRentalContractFormState extends State<ContractInputFormDaily> {
   final _formKey = GlobalKey<FormState>();
 
   // Controllers for text fields
-  final TextEditingController landlordNameController = TextEditingController(); // Landlord Name
-  final TextEditingController landlordAddressController = TextEditingController(); // Landlord Address
-  final TextEditingController tenantNameController = TextEditingController(); // Tenant Name
-  final TextEditingController tenantAddressController = TextEditingController(); // Tenant Address
-  final TextEditingController propertyLocationController = TextEditingController(); // Property Location
-  final TextEditingController rentValueController = TextEditingController(); // Rent Value (daily)
-  final TextEditingController startDateController = TextEditingController(); // Contract Start Date
-  final TextEditingController endDateController = TextEditingController(); // Contract End Date
+  final TextEditingController landlordNameController =
+      TextEditingController(); // Landlord Name
+  final TextEditingController landlordAddressController =
+      TextEditingController(); // Landlord Address
+  final TextEditingController tenantNameController =
+      TextEditingController(); // Tenant Name
+  final TextEditingController tenantAddressController =
+      TextEditingController(); // Tenant Address
+  final TextEditingController propertyLocationController =
+      TextEditingController(); // Property Location
+  final TextEditingController rentValueController =
+      TextEditingController(); // Rent Value (daily)
+  final TextEditingController startDateController =
+      TextEditingController(); // Contract Start Date
+  final TextEditingController endDateController =
+      TextEditingController(); // Contract End Date
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +119,8 @@ class _DailyRentalContractFormState extends State<ContractInputFormDaily> {
                     if (_formKey.currentState!.validate()) {
                       log('Form is valid. Proceed with saving the contract.');
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Data entered successfully')),
+                        const SnackBar(
+                            content: Text('Data entered successfully')),
                       );
                     } else {
                       log('Form is not valid. Show errors.');

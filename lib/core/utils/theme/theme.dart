@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/core/utils/theme/custom_themes/checkbox_theme.dart';
-import 'package:qanoni/core/utils/theme/custom_themes/chip_theme.dart';
-import 'package:qanoni/core/utils/theme/custom_themes/elevated_button_theme.dart';
-import 'package:qanoni/core/utils/theme/custom_themes/outlined_button_theme.dart';
-import 'package:qanoni/core/utils/theme/custom_themes/text_theme.dart';
+
+import '../constants/colors.dart';
+import 'custom_themes/checkbox_theme.dart';
+import 'custom_themes/chip_theme.dart';
+import 'custom_themes/elevated_button_theme.dart';
+import 'custom_themes/outlined_button_theme.dart';
+import 'custom_themes/text_theme.dart';
 
 class QAppTheme {
   QAppTheme._();

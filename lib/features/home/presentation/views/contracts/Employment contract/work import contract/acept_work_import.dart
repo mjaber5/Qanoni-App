@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
+import '../../../../../../../core/utils/constants/colors.dart';
 
 import 'contract_input_form_work_import_contract.dart';
-
-
-
 
 class AceptWorkImport extends StatefulWidget {
   const AceptWorkImport({super.key});
@@ -98,8 +95,7 @@ class _AceaptPageState extends State<AceptWorkImport> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                         const ContractInputFormWorkImportContract()
-                                        ));
+                                        const ContractInputFormWorkImportContract()));
                           }
                         : null,
                     style: ButtonStyle(

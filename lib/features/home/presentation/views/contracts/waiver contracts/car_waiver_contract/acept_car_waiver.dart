@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/waiver%20contracts/car_waiver_contract/contract_input_form_waiver_car.dart';
-
+import '../../../../../../../core/utils/constants/colors.dart';
+import '../../waiver%20contracts/car_waiver_contract/contract_input_form_waiver_car.dart';
 
 class AceptCarWaiver extends StatefulWidget {
   const AceptCarWaiver({super.key});

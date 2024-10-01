@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/core/utils/theme/custom_themes/text_field_theme.dart';
+import '../../../../../../core/utils/constants/colors.dart';
+import '../../../../../../core/utils/theme/custom_themes/text_field_theme.dart';
 
 class CustomTextFieldProfileView extends StatelessWidget {
   const CustomTextFieldProfileView(

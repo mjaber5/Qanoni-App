@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
+
+import '../../constants/colors.dart';
 
 class QElevatedButtonTheme {
   QElevatedButtonTheme._();

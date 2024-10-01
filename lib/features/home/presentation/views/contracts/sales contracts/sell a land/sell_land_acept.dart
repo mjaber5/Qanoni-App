@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell%20a%20land/contract_input_form_land.dart';
+import '../../../../../../../core/utils/constants/colors.dart';
+import '../../sales%20contracts/sell%20a%20land/contract_input_form_land.dart';
 
 class SellLandAcept extends StatefulWidget {
   const SellLandAcept({super.key});

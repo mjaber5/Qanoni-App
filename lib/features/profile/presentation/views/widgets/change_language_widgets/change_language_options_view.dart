@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/core/utils/constants/text_strings.dart';
+import '../../../../../../core/utils/constants/colors.dart';
+import '../../../../../../core/utils/constants/text_strings.dart';
 
 enum SingingCharacter { english, arabic }
 

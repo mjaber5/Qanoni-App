@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/house_rental_contact/contract_input_form_hose.dart';
+import '../../../../../../../core/utils/constants/colors.dart';
+import '../../lease%20contracts/house_rental_contact/contract_input_form_hose.dart';
 
 class AceaptHouse extends StatefulWidget {
   const AceaptHouse({super.key});

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/features/notification/presentation/views/widgets/services_card_notif_item.dart';
+
+import 'services_card_notif_item.dart';
 
 class ServicesCardListViewNotification extends StatelessWidget {
   const ServicesCardListViewNotification({super.key});

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/features/home/data/card_model.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/contracts_cards_view.dart';
+
+import '../../../data/card_model.dart';
+import '../contracts/contracts_cards_view.dart';
 
 class ServicesCardListViewItem extends StatelessWidget {
   const ServicesCardListViewItem({super.key});

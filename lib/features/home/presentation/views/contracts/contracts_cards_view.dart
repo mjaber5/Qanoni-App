@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:qanoni/core/utils/app_router.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
+import '../../../../../core/utils/app_router.dart';
+import '../../../../../core/utils/constants/colors.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ContractsCardsView extends StatelessWidget {
@@ -36,14 +36,14 @@ class ContractsCardsView extends StatelessWidget {
             'Sales Contracts',
             Iconsax.money,
           ),
-           SizedBox(
+          SizedBox(
             height: MediaQuery.of(context).size.height * 0.01,
           ),
           contractsCardsContainer(
             context,
             AppRouter.kEmploymentCard,
             'Employment contract ',
-            Iconsax.user_add ,
+            Iconsax.user_add,
           ),
         ],
       ),
@@ -70,7 +70,7 @@ class ContractsCardsView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(icon, size: 30, color: Colors.white),
-              const SizedBox(width: 50), 
+              const SizedBox(width: 50),
               Text(textTitle, style: const TextStyle(color: Colors.white)),
             ],
           ),
