@@ -36,23 +36,19 @@ class Qanoni extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           locale: const Locale(
             'en',
-          ), // Set the default locale here
-          supportedLocales:
-              AppLocalizations.supportedLocales, // Use your supported locales
+          ),
+          supportedLocales: const [Locale('en'), Locale('ar')],
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          localeResolutionCallback: (locale, supportedLocales) {
-            if (locale == null) {
-              return supportedLocales.first;
-            }
-            for (var supportedLocale in supportedLocales) {
-              if (supportedLocale.languageCode == locale.languageCode &&
-                  supportedLocale.countryCode == locale.countryCode) {
-                return supportedLocale;
+          localeResolutionCallback: (deviceLocale, supportedLocales) {
+            for (var locale in supportedLocales) {
+              if (deviceLocale != null &&
+                  deviceLocale.languageCode == locale.languageCode) {
+                return deviceLocale;
               }
             }
             return supportedLocales.first;
