@@ -34,8 +34,11 @@ class Qanoni extends StatelessWidget {
           theme: QAppTheme.lightTheme,
           darkTheme: QAppTheme.darkTheme,
           debugShowCheckedModeBanner: false,
-          locale: const Locale('ar'), // Set the default locale here
-          supportedLocales: AppLocalizations.supportedLocales, // Use your supported locales
+          locale: const Locale(
+            'en',
+          ), // Set the default locale here
+          supportedLocales:
+              AppLocalizations.supportedLocales, // Use your supported locales
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,

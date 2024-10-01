@@ -231,9 +231,9 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     backgroundColor: QColors.secondary,
                   ),
-                  child:  Text(
+                  child: Text(
                     localizations.createAccount,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18,
                       color: Colors.white,
                     ),
