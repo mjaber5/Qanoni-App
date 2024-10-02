@@ -63,11 +63,103 @@ class QTexts {
 
   // -- Waiver Contacts 
 
+  //-- Waiver Contacts Card View
+  static const String waiverContractsTitle = "Waiver Contracts";
+  static const String propertyWaiverLabel = "Property Waiver contract";
+  static const String vehicleWaiverLabel = "Vehicle Waiver contract";
+  static const String intellectualRightsWaiverLabel = "Intellectual Rights Waiver";
+  static const String businessPartnershipWaiverLabel = "Business Partnership Waiver";
+  static const String legalFinancialRightsWaiverLabel = "Legal or Financial Rights Waiver";
+
+ // Rights Holder Information
+static const String rightsHolderInfo = 'Rights Holder Information';
+static const String rightsHolderName = 'Rights Holder Name';
+static const String rightsHolderId = 'Rights Holder ID';
+static const String rightsHolderAddress = 'Rights Holder Address';
+static const String rightsHolderNameValidation = 'Please enter the rights holder\'s name';
+static const String rightsHolderIdValidation = 'Please enter the rights holder\'s ID';
+static const String rightsHolderAddressValidation = 'Please enter the rights holder\'s address';
+
+// Transferee Information
+static const String transfereeInfo = 'Transferee Information';
+static const String transfereeName = 'Transferee Name';
+static const String transfereeId = 'Transferee ID';
+static const String transfereeAddress = 'Transferee Address';
+static const String transfereeNameValidation = 'Please enter the transferee\'s name';
+static const String transfereeIdValidation = 'Please enter the transferee\'s ID';
+static const String transfereeAddressValidation = 'Please enter the transferee\'s address';
+
+// Rights Information
+static const String rightsInfo = 'Rights Information';
+static const String rightsType = 'Type of Rights (Legal / Financial)';
+static const String rightsDetails = 'Rights Details';
+static const String waiverReason = 'Reason for Waiver';
+static const String rightsTypeValidation = 'Please enter the type of rights';
+static const String rightsDetailsValidation = 'Please enter the rights details';
+static const String waiverReasonValidation = 'Please enter the reason for the waiver';
+static const String propertyInfo = 'Property Information';
+  static const String propertyType = 'Property Type';
+  static const String propertyTypeValidation = 'Please enter the property type';
+  static const String propertyDetails = 'Property Details (location, size)';
+  static const String propertyDetailsValidation = 'Please enter property details';
+// Waiver Information
+static const String waiverInfo = 'Waiver Information';
+static const String assetType = 'Asset Type';
+static const String assetTypeValidation = 'Please enter the asset type';
+static const String assetDetails = 'Asset Details';
+static const String assetDetailsValidation = 'Please enter the asset details';
+static const String ownershipStatus = 'Ownership Status';
+static const String ownershipStatusValidation = 'Please enter the ownership status';
+ static const String appBarTitleWaiverIntellectual = 'Enter Information for Intellectual Property Waiver Contract';
+
+// App Bar Titles
+static const String appBarTitleWaiverBusinessPartnership = 'Enter Business Partnership Waiver Information';
+static const String appBarTitleWaiverCar = 'Enter Car Waiver Information';
+static const String appBarTitleWaiverLegalFinancial = 'Enter Legal or Financial Rights Waiver Information';
+static const String appBarTitleWaiverProperty = 'Enter Property Waiver Contract Information';
+// Section Titles
+static const String sellerInfo = 'Seller Information';
+static const String buyerInfo = 'Buyer Information';
+static const String businessDetails = 'Business Details';
+static const String transactionDetails = 'Transaction Details';
+
+// Field Labels
+static const String sellerName = 'Seller Name';
+static const String sellerId = 'Seller ID';
+static const String sellerAddress = 'Seller Address';
+static const String buyerName = 'Buyer Name';
+static const String buyerId = 'Buyer ID';
+static const String buyerAddress = 'Buyer Address';
+static const String businessType = 'Business Type';
+static const String businessDetailsLabel = 'Partnership Details (Shares, Company Info)';
+static const String waiverPrice = 'Waiver Price';
+static const String paymentMethod = 'Payment Method';
+static const String waiverDate = 'Waiver Date';
+
+// Validation Messages
+static const String sellerNameValidation = 'Please enter the seller\'s name';
+static const String sellerIdValidation = 'Please enter the seller\'s ID';
+static const String sellerAddressValidation = 'Please enter the seller\'s address';
+static const String buyerNameValidation = 'Please enter the buyer\'s name';
+static const String buyerIdValidation = 'Please enter the buyer\'s ID';
+static const String buyerAddressValidation = 'Please enter the buyer\'s address';
+static const String businessTypeValidation = 'Please enter the business type';
+static const String businessDetailsValidation = 'Please enter the partnership details';
+static const String waiverPriceValidation = 'Please enter the waiver price';
+static const String paymentMethodValidation = 'Please enter the payment method';
+static const String waiverDateValidation = 'Please enter the waiver date';
+
+// Success Messages
+static const String dataEnteredSuccessfully = 'Data entered successfully';
+
+ 
+
 
 
 
 
 // sell card
+   static const String sellCardAppBar =  "Sales Contracts";
   static const String sellCardCar =  "Sell a car بيع سيارة";
   static const String sellPropertyCard = "Selling a property بيع عقار ";
   static const String sellLandCard = "Land for sale بيع ارض";
@@ -113,44 +205,29 @@ static const String appBarTitleEquipment = 'Enter Equipment Sale Contract Inform
 static const String appBarTitleCar = 'Car Sale Contract Information';
 
   // Section Titles
-  static const String sellerInfo = 'Seller Information';
-  static const String buyerInfo = 'Buyer Information';
+  
   static const String propertyInfoCar = 'Car Information';
   static const String transactionInfo = 'Transaction Information';
 
   // Labels
-  static const String sellerName = 'Seller Name';
-  static const String sellerId = 'Seller ID';
-  static const String sellerAddress = 'Seller Address';
-  static const String buyerName = 'Buyer Name';
-  static const String buyerId = 'Buyer ID';
-  static const String buyerAddress = 'Buyer Address';
+  
   static const String carBrand = 'Car Brand';
   static const String carModel = 'Car Model';
   static const String carYear = 'Car Year of Manufacture';
   static const String vin = 'VIN';
   static const String mechanicalCondition = 'Mechanical Condition';
-  static const String ownershipStatus = 'Ownership Status';
   static const String sellingPrice = 'Selling Price';
-  static const String paymentMethod = 'Payment Method';
 
   // Validation Messages
-  static const String sellerNameValidation = 'Please enter the seller name.';
-  static const String sellerIdValidation = 'Please enter the seller ID.';
-  static const String sellerAddressValidation = 'Please enter the seller address.';
-  static const String buyerNameValidation = 'Please enter the buyer name.';
-  static const String buyerIdValidation = 'Please enter the buyer ID.';
-  static const String buyerAddressValidation = 'Please enter the buyer address.';
+ 
   static const String carBrandValidation = 'Please enter the car brand.';
   static const String carModelValidation = 'Please enter the car model.';
   static const String carYearValidation = 'Please enter the car year.';
   static const String vinValidation = 'Please enter the VIN.';
   static const String mechanicalConditionValidation =
       'Please enter the mechanical condition.';
-  static const String ownershipStatusValidation =
-      'Please enter the ownership status.';
+
   static const String sellingPriceValidation = 'Please enter the selling price.';
-  static const String paymentMethodValidation = 'Please enter the payment method.';
 
   
 
@@ -194,8 +271,7 @@ static const String appBarTitleCar = 'Car Sale Contract Information';
   // static const String buyerAddress = 'Buyer Address';
   static const String buyerAddressValidatorMessage =
       'Please enter the buyer\'s address';
-  static const String propertyDetails = 'Property Details';
-  static const String propertyType = 'Property Type';
+
   static const String propertyTypeValidatorMessage =
       'Please enter the property type';
   static const String propertyNumber = 'Property Number';

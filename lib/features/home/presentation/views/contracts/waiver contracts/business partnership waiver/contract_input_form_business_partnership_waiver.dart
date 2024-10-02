@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
+import 'package:qanoni/core/utils/constants/text_strings.dart';  
 
 class ContractInputFormWaiverBusinessPartnership extends StatefulWidget {
   const ContractInputFormWaiverBusinessPartnership({super.key});
@@ -23,10 +24,8 @@ class _ContractInputFormWaiverBusinessPartnershipArabicState
   final TextEditingController buyerIdController = TextEditingController();
   final TextEditingController buyerAddressController = TextEditingController();
   final TextEditingController businessTypeController = TextEditingController();
-  final TextEditingController businessDetailsController =
-      TextEditingController();
+  final TextEditingController businessDetailsController = TextEditingController();
   final TextEditingController waiverReasonController = TextEditingController();
-  final TextEditingController ownershipController = TextEditingController();
   final TextEditingController waiverPriceController = TextEditingController();
   final TextEditingController paymentMethodController = TextEditingController();
   final TextEditingController waiverDateController = TextEditingController();
@@ -35,7 +34,7 @@ class _ContractInputFormWaiverBusinessPartnershipArabicState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('إدخال معلومات عقد التنازل عن شراكة تجارية'),
+        title: const Text(QTexts.appBarTitleWaiverBusinessPartnership),
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -45,91 +44,91 @@ class _ContractInputFormWaiverBusinessPartnershipArabicState
           child: ListView(
             children: [
               const Text(
-                'معلومات البائع',
+                QTexts.sellerInfo,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: 'اسم البائع',
+                label: QTexts.sellerName,
                 controller: sellerNameController,
-                validatorMessage: 'الرجاء إدخال اسم البائع',
+                validatorMessage: QTexts.sellerNameValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'رقم هوية البائع',
+                label: QTexts.sellerId,
                 controller: sellerIdController,
-                validatorMessage: 'الرجاء إدخال رقم هوية البائع',
+                validatorMessage: QTexts.sellerIdValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'عنوان البائع',
+                label: QTexts.sellerAddress,
                 controller: sellerAddressController,
-                validatorMessage: 'الرجاء إدخال عنوان البائع',
+                validatorMessage: QTexts.sellerAddressValidation,
               ),
               const SizedBox(height: 32),
               const Text(
-                'معلومات المشتري',
+                QTexts.buyerInfo,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: 'اسم المشتري',
+                label: QTexts.buyerName,
                 controller: buyerNameController,
-                validatorMessage: 'الرجاء إدخال اسم المشتري',
+                validatorMessage: QTexts.buyerNameValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'رقم هوية المشتري',
+                label: QTexts.buyerId,
                 controller: buyerIdController,
-                validatorMessage: 'الرجاء إدخال رقم هوية المشتري',
+                validatorMessage: QTexts.buyerIdValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'عنوان المشتري',
+                label: QTexts.buyerAddress,
                 controller: buyerAddressController,
-                validatorMessage: 'الرجاء إدخال عنوان المشتري',
+                validatorMessage: QTexts.buyerAddressValidation,
               ),
               const SizedBox(height: 32),
               const Text(
-                'معلومات الشركة',
+                QTexts.businessDetails,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: 'نوع الشركة',
+                label: QTexts.businessType,
                 controller: businessTypeController,
-                validatorMessage: 'الرجاء إدخال نوع الشركة',
+                validatorMessage: QTexts.businessTypeValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'تفاصيل الشراكة (أسهم، معلومات الشركة)',
+                label: QTexts.businessDetailsLabel,
                 controller: businessDetailsController,
-                validatorMessage: 'الرجاء إدخال تفاصيل الشراكة',
+                validatorMessage: QTexts.businessDetailsValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'سبب التنازل',
+                label: QTexts.waiverReason,
                 controller: waiverReasonController,
-                validatorMessage: 'الرجاء إدخال سبب التنازل',
+                validatorMessage: QTexts.waiverReasonValidation,
               ),
               const SizedBox(height: 32),
               const Text(
-                'معلومات المعاملة',
+                QTexts.transactionDetails,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: 'سعر التنازل',
+                label: QTexts.waiverPrice,
                 controller: waiverPriceController,
-                validatorMessage: 'الرجاء إدخال سعر التنازل',
+                validatorMessage: QTexts.waiverPriceValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'طريقة الدفع',
+                label: QTexts.paymentMethod,
                 controller: paymentMethodController,
-                validatorMessage: 'الرجاء إدخال طريقة الدفع',
+                validatorMessage: QTexts.paymentMethodValidation,
               ),
-              const SizedBox(height: 16),
+                            const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'تاريخ التنازل',
+                label: QTexts.waiverDate,
                 controller: waiverDateController,
-                validatorMessage: 'الرجاء إدخال تاريخ التنازل',
+                validatorMessage: QTexts.waiverDateValidation,
               ),
               const SizedBox(height: 32),
               Padding(
@@ -139,8 +138,7 @@ class _ContractInputFormWaiverBusinessPartnershipArabicState
                     if (_formKey.currentState!.validate()) {
                       log('النموذج صالح. حفظ البيانات.');
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text('تم إدخال البيانات بنجاح')),
+                        const SnackBar(content: Text(QTexts.dataEnteredSuccessfully)),
                       );
                     } else {
                       log('النموذج غير صالح. إظهار الأخطاء.');
@@ -151,7 +149,7 @@ class _ContractInputFormWaiverBusinessPartnershipArabicState
                     backgroundColor: QColors.secondary,
                   ),
                   child: const Text(
-                    "حفظ",
+                    QTexts.saveButton,
                     style: Styles.textStyle18,
                   ),
                 ),

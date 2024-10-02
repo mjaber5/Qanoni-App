@@ -15,7 +15,7 @@ class SalesContractsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Sales Contracts"),
+        title: const Text(QTexts.sellCardAppBar),
         backgroundColor: QColors.secondary,
       ),
       body: Center(

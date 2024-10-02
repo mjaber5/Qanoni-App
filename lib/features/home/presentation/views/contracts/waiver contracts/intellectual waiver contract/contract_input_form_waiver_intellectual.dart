@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import '../../../../../../../core/utils/constants/colors.dart';
+import '../../../../../../../core/utils/constants/text_strings.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
 
@@ -9,10 +10,10 @@ class ContractInputFormWaiverIntellectual extends StatefulWidget {
 
   @override
   State<ContractInputFormWaiverIntellectual> createState() =>
-      _ContractInputFormWaiverIntellectualArabicState();
+      _ContractInputFormWaiverIntellectualState();
 }
 
-class _ContractInputFormWaiverIntellectualArabicState
+class _ContractInputFormWaiverIntellectualState
     extends State<ContractInputFormWaiverIntellectual> {
   final _formKey = GlobalKey<FormState>();
 
@@ -28,7 +29,6 @@ class _ContractInputFormWaiverIntellectualArabicState
   final TextEditingController intellectualPropertyDetailsController =
       TextEditingController();
   final TextEditingController waiverReasonController = TextEditingController();
-  final TextEditingController ownershipController = TextEditingController();
   final TextEditingController waiverPriceController = TextEditingController();
   final TextEditingController paymentMethodController = TextEditingController();
   final TextEditingController waiverDateController = TextEditingController();
@@ -37,7 +37,7 @@ class _ContractInputFormWaiverIntellectualArabicState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('إدخال معلومات عقد التنازل عن حقوق فكرية'),
+        title: const Text(QTexts.appBarTitleWaiverIntellectual),
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -47,91 +47,91 @@ class _ContractInputFormWaiverIntellectualArabicState
           child: ListView(
             children: [
               const Text(
-                'معلومات المالك',
+                QTexts.rightsHolderInfo,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: 'اسم المالك',
+                label: QTexts.rightsHolderName,
                 controller: ownerNameController,
-                validatorMessage: 'الرجاء إدخال اسم المالك',
+                validatorMessage: QTexts.rightsHolderNameValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'رقم هوية المالك',
+                label: QTexts.rightsHolderId,
                 controller: ownerIdController,
-                validatorMessage: 'الرجاء إدخال رقم هوية المالك',
+                validatorMessage: QTexts.rightsHolderIdValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'عنوان المالك',
+                label: QTexts.rightsHolderAddress,
                 controller: ownerAddressController,
-                validatorMessage: 'الرجاء إدخال عنوان المالك',
+                validatorMessage: QTexts.rightsHolderAddressValidation,
               ),
               const SizedBox(height: 32),
               const Text(
-                'معلومات المستلم',
+                QTexts.transfereeInfo,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: 'اسم المستلم',
+                label: QTexts.transfereeName,
                 controller: receiverNameController,
-                validatorMessage: 'الرجاء إدخال اسم المستلم',
+                validatorMessage: QTexts.transfereeNameValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'رقم هوية المستلم',
+                label: QTexts.transfereeId,
                 controller: receiverIdController,
-                validatorMessage: 'الرجاء إدخال رقم هوية المستلم',
+                validatorMessage: QTexts.transfereeIdValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'عنوان المستلم',
+                label: QTexts.transfereeAddress,
                 controller: receiverAddressController,
-                validatorMessage: 'الرجاء إدخال عنوان المستلم',
+                validatorMessage: QTexts.transfereeAddressValidation,
               ),
               const SizedBox(height: 32),
               const Text(
-                'معلومات حقوق الملكية الفكرية',
+                QTexts.rightsInfo,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: 'نوع الملكية الفكرية',
+                label: QTexts.rightsType,
                 controller: intellectualPropertyTypeController,
-                validatorMessage: 'الرجاء إدخال نوع الملكية الفكرية',
+                validatorMessage: QTexts.rightsTypeValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'تفاصيل الملكية الفكرية',
+                label: QTexts.rightsDetails,
                 controller: intellectualPropertyDetailsController,
-                validatorMessage: 'الرجاء إدخال تفاصيل الملكية الفكرية',
+                validatorMessage: QTexts.rightsDetailsValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'سبب التنازل',
+                label: QTexts.waiverReason,
                 controller: waiverReasonController,
-                validatorMessage: 'الرجاء إدخال سبب التنازل',
+                validatorMessage: QTexts.waiverReasonValidation,
               ),
               const SizedBox(height: 32),
               const Text(
-                'معلومات المعاملة',
+                QTexts.transactionInfo,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: 'سعر التنازل',
+                label: QTexts.waiverPrice,
                 controller: waiverPriceController,
-                validatorMessage: 'الرجاء إدخال سعر التنازل',
+                validatorMessage: QTexts.waiverPriceValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'طريقة الدفع',
+                label: QTexts.paymentMethod,
                 controller: paymentMethodController,
-                validatorMessage: 'الرجاء إدخال طريقة الدفع',
+                validatorMessage: QTexts.paymentMethodValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'تاريخ التنازل',
+                label: QTexts.waiverDate,
                 controller: waiverDateController,
-                validatorMessage: 'الرجاء إدخال تاريخ التنازل',
+                validatorMessage: QTexts.waiverDateValidation,
               ),
               const SizedBox(height: 32),
               Padding(
@@ -139,13 +139,12 @@ class _ContractInputFormWaiverIntellectualArabicState
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      log('نموذج صالح. حفظ البيانات.');
+                      log('Valid form. Saving data.');
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text('تم إدخال البيانات بنجاح')),
+                        const SnackBar(content: Text(QTexts.dataEnteredSuccessfully)),
                       );
                     } else {
-                      log('النموذج غير صالح. إظهار الأخطاء.');
+                      log('Invalid form. Showing errors.');
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -153,7 +152,7 @@ class _ContractInputFormWaiverIntellectualArabicState
                     backgroundColor: QColors.secondary,
                   ),
                   child: const Text(
-                    "حفظ",
+                    QTexts.saveButton,
                     style: Styles.textStyle18,
                   ),
                 ),
