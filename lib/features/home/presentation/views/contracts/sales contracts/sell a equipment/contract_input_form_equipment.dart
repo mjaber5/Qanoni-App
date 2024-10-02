@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qanoni/core/utils/constants/text_strings.dart';
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
@@ -14,8 +15,6 @@ class ContractInputFormEquipmentt extends StatefulWidget {
 class _ContractInputFormEquipmentState
     extends State<ContractInputFormEquipmentt> {
   final _formKey = GlobalKey<FormState>();
-
-  // Controllers for form fields
   final TextEditingController vendorNameController = TextEditingController();
   final TextEditingController vendorAddressController = TextEditingController();
   final TextEditingController purchaserNameController = TextEditingController();
@@ -35,7 +34,7 @@ class _ContractInputFormEquipmentState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Enter Equipment Sale Contract Information'),
+        title: const Text(QTexts.appBarTitleEquipment),
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -44,85 +43,78 @@ class _ContractInputFormEquipmentState
           key: _formKey,
           child: ListView(
             children: [
-              // 1. Vendor and Purchaser Information
               const Text(
-                'Parties Information',
+                QTexts.partiesInfo,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: 'Vendor Name',
+                label: QTexts.vendorName,
                 controller: vendorNameController,
-                validatorMessage: 'Please enter the vendor\'s name',
+                validatorMessage: QTexts.vendorNameValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Vendor Address',
+                label: QTexts.vendorAddress,
                 controller: vendorAddressController,
-                validatorMessage: 'Please enter the vendor\'s address',
+                validatorMessage: QTexts.vendorAddressValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Purchaser Name',
+                label: QTexts.purchaserName,
                 controller: purchaserNameController,
-                validatorMessage: 'Please enter the purchaser\'s name',
+                validatorMessage: QTexts.purchaserNameValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Purchaser Address',
+                label: QTexts.purchaserAddress,
                 controller: purchaserAddressController,
-                validatorMessage: 'Please enter the purchaser\'s address',
+                validatorMessage: QTexts.purchaserAddressValidation,
               ),
               const SizedBox(height: 32),
-
-              // 2. Equipment Details
               const Text(
-                'Equipment Details',
+                QTexts.equipmentDetails,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: 'Equipment Type',
+                label: QTexts.equipmentType,
                 controller: equipmentTypeController,
-                validatorMessage: 'Please enter the equipment type',
+                validatorMessage: QTexts.equipmentTypeValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Equipment Model',
+                label: QTexts.equipmentModel,
                 controller: equipmentModelController,
-                validatorMessage: 'Please enter the equipment model',
+                validatorMessage: QTexts.equipmentModelValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Serial Number',
+                label: QTexts.equipmentSerialNumber,
                 controller: equipmentSerialNumberController,
-                validatorMessage: 'Please enter the equipment serial number',
+                validatorMessage: QTexts.equipmentSerialNumberValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Condition',
+                label: QTexts.equipmentCondition,
                 controller: equipmentConditionController,
-                validatorMessage: 'Please enter the equipment condition',
+                validatorMessage: QTexts.equipmentConditionValidation,
               ),
               const SizedBox(height: 32),
-
-              // 3. Sale Details
               const Text(
-                'Sale Details',
+                QTexts.saleDetails,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: 'Price',
+                label: QTexts.price,
                 controller: priceController,
-                validatorMessage: 'Please enter the price',
+                validatorMessage: QTexts.priceValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Sale Date',
+                label: QTexts.saleDate,
                 controller: saleDateController,
-                validatorMessage: 'Please enter the sale date',
+                validatorMessage: QTexts.saleDateValidation,
               ),
               const SizedBox(height: 32),
-
-              // Submit Button
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: ElevatedButton(
@@ -130,7 +122,7 @@ class _ContractInputFormEquipmentState
                     if (_formKey.currentState!.validate()) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                            content: Text('Data entered successfully')),
+                            content: Text(QTexts.dateEnteredSuccessfuly)),
                       );
                     }
                   },
@@ -139,7 +131,7 @@ class _ContractInputFormEquipmentState
                     backgroundColor: QColors.secondary,
                   ),
                   child: const Text(
-                    "Save",
+                    QTexts.saveButton,
                     style: Styles.textStyle18,
                   ),
                 ),
@@ -151,7 +143,6 @@ class _ContractInputFormEquipmentState
     );
   }
 
-  // Helper function to build a labeled text field
   Widget buildLabeledTextField({
     required String label,
     required TextEditingController controller,

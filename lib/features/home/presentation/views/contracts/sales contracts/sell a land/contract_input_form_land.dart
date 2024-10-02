@@ -35,7 +35,7 @@ class _ContractInputFormPropertyState extends State<ContractInputFormLand> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(QTexts.carSaleContractInfoAppBar),
+        title: const Text(QTexts.landSaleContractInfoAppBar),
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
