@@ -67,8 +67,14 @@ class QTexts {
 
 
 
+// sell card
+  static const String sellCardCar =  "Sell a car بيع سيارة";
+  static const String sellPropertyCard = "Selling a property بيع عقار ";
+  static const String sellLandCard = "Land for sale بيع ارض";
+  static const String sellEquipmentCard = "Equipment sale بيع معدات ";
+  static const String sellTerminationCard = "Termination of a sales contract فسخ عقد بيع";
 
-  
+
   // Sales Contracts Equipment
 
 static const String appBarTitleEquipment = 'Enter Equipment Sale Contract Information';

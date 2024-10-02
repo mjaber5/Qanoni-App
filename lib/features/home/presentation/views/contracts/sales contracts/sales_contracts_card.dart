@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart'; // استيراد مكتبة iconsax
+import 'package:iconsax/iconsax.dart'; 
 import '../../../../../../core/utils/constants/colors.dart';
+import '../../../../../../core/utils/constants/text_strings.dart';
 import '../sales contracts/cancellation of sales contract/cancellation_aceept.dart';
 import '../sales contracts/sell a equipment/equipment_acepet.dart';
 import '../sales contracts/sell a land/sell_land_acept.dart';
@@ -44,9 +45,11 @@ class SalesContractsCard extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Iconsax.car, size: 24), // أيقونة بيع سيارة
+                        Icon(Iconsax.car, size: 24),
                         SizedBox(width: 8),
-                        Text("Sell a car بيع سيارة"),
+                        Text(
+                          QTexts.sellCardCar
+                          ),
                         Spacer(),
                       ],
                     ),
@@ -74,9 +77,9 @@ class SalesContractsCard extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Iconsax.home, size: 24), // أيقونة بيع عقار
+                        Icon(Iconsax.home, size: 24), 
                         SizedBox(width: 8),
-                        Text("Selling a property بيع عقار "),
+                        Text(QTexts.sellPropertyCard),
                         Spacer(),
                       ],
                     ),
@@ -104,9 +107,9 @@ class SalesContractsCard extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Iconsax.building, size: 24), // أيقونة بديلة
+                        Icon(Iconsax.building, size: 24), 
                         SizedBox(width: 8),
-                        Text("Land for sale بيع ارض"),
+                        Text(QTexts.sellLandCard),
                         Spacer(),
                       ],
                     ),
@@ -134,9 +137,9 @@ class SalesContractsCard extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Iconsax.box, size: 24), // أيقونة بديلة لبيع معدات
+                        Icon(Iconsax.box, size: 24), 
                         SizedBox(width: 8),
-                        Text("Equipment sale بيع معدات "),
+                        Text(QTexts.sellEquipmentCard),
                         Spacer(),
                       ],
                     ),
@@ -164,9 +167,9 @@ class SalesContractsCard extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Iconsax.trash, size: 24), // أيقونة فسخ عقد
+                        Icon(Iconsax.trash, size: 24), 
                         SizedBox(width: 8),
-                        Text("Termination of a sales contract فسخ عقد بيع"),
+                        Text(QTexts.sellTerminationCard),
                         Spacer(),
                       ],
                     ),
