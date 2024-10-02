@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart'; // استيراد مكتبة iconsax
 import '../../../../../../core/utils/constants/colors.dart';
-import '../sales%20contracts/cancellation%20of%20sales%20contract/cancellation_aceept.dart';
-import '../sales%20contracts/sell%20a%20equipment/equipment_acepet.dart';
-import '../sales%20contracts/sell%20a%20land/sell_land_acept.dart';
-import '../sales%20contracts/sell%20a%20property/aceprt_property.dart';
-
-import '../sales%20contracts/sell_car_contract/sales_car_acept.dart';
+import '../sales contracts/cancellation of sales contract/cancellation_aceept.dart';
+import '../sales contracts/sell a equipment/equipment_acepet.dart';
+import '../sales contracts/sell a land/sell_land_acept.dart';
+import '../sales contracts/sell a property/aceprt_property.dart';
+import '../sales contracts/sell_car_contract/sales_car_acept.dart';
 
 class SalesContractsCard extends StatelessWidget {
   const SalesContractsCard({super.key});
-
-  // this is for cards just call widgets after isolate theme from here
 
   @override
   Widget build(BuildContext context) {
@@ -46,18 +44,16 @@ class SalesContractsCard extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Center(
-                          child: Text("Sell ​​a car بيع سيارة"),
-                        ),
+                        Icon(Iconsax.car, size: 24), // أيقونة بيع سيارة
+                        SizedBox(width: 8),
+                        Text("Sell a car بيع سيارة"),
                         Spacer(),
                       ],
                     ),
                   ),
                 ),
               ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.01,
-              ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.01),
               InkWell(
                 onTap: () {
                   Navigator.push(
@@ -78,18 +74,16 @@ class SalesContractsCard extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Center(
-                          child: Text("Selling a property بيع عقار "),
-                        ),
+                        Icon(Iconsax.home, size: 24), // أيقونة بيع عقار
+                        SizedBox(width: 8),
+                        Text("Selling a property بيع عقار "),
                         Spacer(),
                       ],
                     ),
                   ),
                 ),
               ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.01,
-              ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.01),
               InkWell(
                 onTap: () {
                   Navigator.push(
@@ -110,18 +104,16 @@ class SalesContractsCard extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Center(
-                          child: Text("Land for sale بيع ارض"),
-                        ),
+                        Icon(Iconsax.building, size: 24), // أيقونة بديلة
+                        SizedBox(width: 8),
+                        Text("Land for sale بيع ارض"),
                         Spacer(),
                       ],
                     ),
                   ),
                 ),
               ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.01,
-              ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.01),
               InkWell(
                 onTap: () {
                   Navigator.push(
@@ -142,18 +134,16 @@ class SalesContractsCard extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Center(
-                          child: Text("Equipment sale   بيع معدات "),
-                        ),
+                        Icon(Iconsax.box, size: 24), // أيقونة بديلة لبيع معدات
+                        SizedBox(width: 8),
+                        Text("Equipment sale بيع معدات "),
                         Spacer(),
                       ],
                     ),
                   ),
                 ),
               ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.01,
-              ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.01),
               InkWell(
                 onTap: () {
                   Navigator.push(
@@ -174,10 +164,9 @@ class SalesContractsCard extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Center(
-                          child: Text(
-                              "Termination of a sales contract فسخ عقد بيع"),
-                        ),
+                        Icon(Iconsax.trash, size: 24), // أيقونة فسخ عقد
+                        SizedBox(width: 8),
+                        Text("Termination of a sales contract فسخ عقد بيع"),
                         Spacer(),
                       ],
                     ),

@@ -62,6 +62,13 @@ class QTexts {
 
 
   // -- Waiver Contacts 
+
+
+
+
+
+
+  
   // Sales Contracts Equipment
 
 static const String appBarTitleEquipment = 'Enter Equipment Sale Contract Information';
