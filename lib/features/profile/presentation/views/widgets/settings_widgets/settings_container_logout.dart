@@ -7,7 +7,7 @@ import '../../../../../../core/utils/app_router.dart';
 import '../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../core/utils/constants/text_strings.dart';
 import '../../../../../../core/utils/styles.dart';
-import '../../../../../authentication/blocs/sign_in_bloc/signin_bloc.dart';
+import '../../../../../authentication/login/presentation/view_model/sign_in_bloc/signin_bloc.dart';
 import 'package:toasty_box/toast_enums.dart';
 import 'package:toasty_box/toast_service.dart';
 

@@ -5,7 +5,7 @@ import 'package:qanoni/features/splash/presentation/views/widgets/custom_splash_
 
 import '../../../../../core/utils/app_router.dart';
 import '../../../../../core/utils/constants/text_strings.dart';
-import '../../../../authentication/blocs/authentication_bloc/authentication_bloc.dart';
+import '../../../../authentication/auth_blocs/authentication_bloc/authentication_bloc.dart';
 import 'sliding_text.dart';
 
 class SplashViewBody extends StatefulWidget {

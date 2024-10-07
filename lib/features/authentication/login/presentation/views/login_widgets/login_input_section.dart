@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../../../core/utils/app_router.dart';
 import '../../../../../../core/utils/helpers/app_regex.dart';
 import '../../../../../../core/widgets/app_text_form_field.dart';
-import '../../../../blocs/sign_in_bloc/signin_bloc.dart';
+import '../../view_model/sign_in_bloc/signin_bloc.dart';
 import 'login_button.dart';
 import 'package:toasty_box/toast_enums.dart';
 import 'package:toasty_box/toast_service.dart';

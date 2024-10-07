@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'constants/aceapt_page.dart';
-import '../../features/authentication/blocs/authentication_bloc/authentication_bloc.dart';
-import '../../features/authentication/blocs/sign_in_bloc/signin_bloc.dart';
-import '../../features/authentication/blocs/sign_up_bloc/sign_up_bloc.dart';
+import '../../features/authentication/auth_blocs/authentication_bloc/authentication_bloc.dart';
+import '../../features/authentication/login/presentation/view_model/sign_in_bloc/signin_bloc.dart';
+import '../../features/authentication/signup/presentation/view_model/sign_up_bloc/sign_up_bloc.dart';
 import '../../features/authentication/login/presentation/views/login_view.dart';
 import '../../features/authentication/signup/presentation/views/signup_view.dart';
 import '../../features/chatbot/presentation/views/chatbot_view.dart';

@@ -5,7 +5,7 @@ class QTexts {
   static const String splashSupTitle = "Make your works online";
 
   // -- Login
-  static const String loginWelcomeBackText = 'Welcome Back';
+  static const String loginWelcomeBackText = 'Welcome back,';
   static const String loginUsernameTextFeildHint = "username";
   static const String loginPasswordTextFeildHint = "password";
   static const String loginButton = "Login";

@@ -7,7 +7,7 @@ import '../../../../../../core/utils/app_router.dart';
 import '../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../core/utils/helpers/app_regex.dart';
 import '../../../../../../core/widgets/app_text_form_field.dart';
-import '../../../../blocs/sign_up_bloc/sign_up_bloc.dart';
+import '../../view_model/sign_up_bloc/sign_up_bloc.dart';
 import 'signup_password_condition_stronger.dart';
 import 'package:toasty_box/toast_enums.dart';
 import 'package:toasty_box/toast_service.dart';
