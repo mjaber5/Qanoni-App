@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:qanoni/core/utils/constants/text_strings.dart';
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
@@ -38,7 +39,7 @@ class _ContractInputFormCarSalesState extends State<ContractInputFormCarSales> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Enter Car Sale Contract Information'),
+        title: const Text(QTexts.appBarTitleCar),
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -49,115 +50,115 @@ class _ContractInputFormCarSalesState extends State<ContractInputFormCarSales> {
             children: [
               // Seller Information Section
               const Text(
-                'Seller Information',
+                QTexts.sellerInfo,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: 'Seller Name',
+                label: QTexts.sellerName,
                 controller: sellerNameController,
-                validatorMessage: 'Please enter the seller\'s name',
+                validatorMessage: QTexts.sellerNameValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Seller ID',
+                label:  QTexts.sellerId,
                 controller: sellerIdController,
-                validatorMessage: 'Please enter the seller\'s ID',
+                validatorMessage:  QTexts.sellerIdValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Seller Address',
+                label: QTexts.sellerAddress,
                 controller: sellerAddressController,
-                validatorMessage: 'Please enter the seller\'s address',
+                validatorMessage:  QTexts.sellerAddressValidation,
               ),
               const SizedBox(height: 32),
 
               // Buyer Information Section
               const Text(
-                'Buyer Information',
+                 QTexts.buyerInfo,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: 'Buyer Name',
+                label:  QTexts.buyerName,
                 controller: buyerNameController,
-                validatorMessage: 'Please enter the buyer\'s name',
+                validatorMessage: QTexts.buyerNameValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Buyer ID',
+                label: QTexts.buyerId,
                 controller: buyerIdController,
-                validatorMessage: 'Please enter the buyer\'s ID',
+                validatorMessage: QTexts.buyerIdValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Buyer Address',
+                label: QTexts.buyerAddress,
                 controller: buyerAddressController,
-                validatorMessage: 'Please enter the buyer\'s address',
+                validatorMessage: QTexts.buyerAddressValidation,
               ),
               const SizedBox(height: 32),
 
               // Car Information Section
               const Text(
-                'Car Information',
+                QTexts.propertyInfoCar,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: 'Car Brand',
+                label: QTexts.carBrand,
                 controller: carBrandController,
-                validatorMessage: 'Please enter the car brand',
+                validatorMessage:QTexts.carBrandValidation ,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Car Model',
+                label: QTexts.carModel,
                 controller: carModelController,
-                validatorMessage: 'Please enter the car model',
+                validatorMessage: QTexts.carBrandValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Year of Manufacture',
+                label: QTexts.carYear,
                 controller: carYearController,
-                validatorMessage: 'Please enter the year of manufacture',
+                validatorMessage: QTexts.carYearValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'VIN (Vehicle Identification Number)',
+                label: QTexts.vin,
                 controller: vinController,
-                validatorMessage: 'Please enter the VIN',
+                validatorMessage: QTexts.carYearValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Mechanical Condition',
+                label: QTexts.mechanicalCondition,
                 controller: mechanicalConditionController,
-                validatorMessage: 'Please enter the mechanical condition',
+                validatorMessage: QTexts.mechanicalConditionValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Ownership Status',
+                label: QTexts.ownershipStatus,
                 controller: ownershipController,
-                validatorMessage: 'Please enter the ownership status',
+                validatorMessage: QTexts.ownershipStatusValidation,
               ),
               const SizedBox(height: 32),
 
               // Transaction Information Section
               const Text(
-                'Transaction Information',
+                QTexts.transactionInfo,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: 'Selling Price',
+                label: QTexts.sellingPrice,
                 controller: sellingPriceController,
-                validatorMessage: 'Please enter the selling price',
+                validatorMessage: QTexts.sellingPriceValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Payment Method',
+                label: QTexts.paymentMethod,
                 controller: paymentMethodController,
-                validatorMessage: 'Please enter the payment method',
+                validatorMessage:QTexts.paymentMethodValidation ,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Sale Date',
+                label: QTexts.saleDate,
                 controller: saleDateController,
-                validatorMessage: 'Please enter the sale date',
+                validatorMessage: QTexts.saleDateValidation,
               ),
               const SizedBox(height: 32),
 
@@ -170,7 +171,7 @@ class _ContractInputFormCarSalesState extends State<ContractInputFormCarSales> {
                       log('Form is valid. Proceed with saving the contract.');
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                            content: Text('Data entered successfully')),
+                            content: Text(QTexts.dateEnteredSuccessfuly)),
                       );
                     } else {
                       log('Form is not valid. Show errors.');
@@ -181,7 +182,7 @@ class _ContractInputFormCarSalesState extends State<ContractInputFormCarSales> {
                     backgroundColor: QColors.secondary,
                   ),
                   child: const Text(
-                    "Save",
+                    QTexts.saveButton,
                     style: Styles.textStyle18,
                   ),
                 ),

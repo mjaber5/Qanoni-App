@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../../../core/utils/constants/colors.dart';
-import '../waiver%20contracts/car_waiver_contract/acept_car_waiver.dart';
-import '../waiver%20contracts/property%20waiver%20contract/acept_property.dart';
+import '../../../../../../core/utils/constants/text_strings.dart';
+import '../waiver contracts/car_waiver_contract/acept_car_waiver.dart';
+import '../waiver contracts/property waiver contract/acept_property.dart';
 
 import 'business partnership waiver/acept_business_partnership_waiver.dart';
 import 'intellectual waiver contract/acept_intellectual.dart';
@@ -15,14 +16,14 @@ class WaiverContractsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Waiver Contracts"),
+        title: const Text(QTexts.waiverContractsTitle),
         backgroundColor: QColors.secondary,
       ),
       body: Center(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // 1. عقد التنازل عن الممتلكات العقارية
+            
               InkWell(
                 onTap: () {
                   Navigator.push(
@@ -33,12 +34,12 @@ class WaiverContractsCard extends StatelessWidget {
                 child: buildWaiverCard(
                   context,
                   icon: Iconsax.home5,
-                  label: "Property Waiver contract",
+                  label: QTexts.propertyWaiverLabel, 
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
 
-              // 2. عقد التنازل عن المركبات
+              
               InkWell(
                 onTap: () {
                   Navigator.push(
@@ -49,12 +50,12 @@ class WaiverContractsCard extends StatelessWidget {
                 child: buildWaiverCard(
                   context,
                   icon: Iconsax.car5,
-                  label: "Vehicle Waiver contract",
+                  label: QTexts.vehicleWaiverLabel,
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
 
-              // 3. عقد التنازل عن الحقوق الفكرية
+             
               InkWell(
                 onTap: () {
                   Navigator.push(
@@ -65,12 +66,11 @@ class WaiverContractsCard extends StatelessWidget {
                 child: buildWaiverCard(
                   context,
                   icon: Iconsax.book,
-                  label: "Intellectual Rights Waiver",
+                  label: QTexts.intellectualRightsWaiverLabel, 
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
 
-              // 4. عقد التنازل عن الشراكات التجارية أو حصص الشركة
               InkWell(
                 onTap: () {
                   Navigator.push(
@@ -82,12 +82,11 @@ class WaiverContractsCard extends StatelessWidget {
                 child: buildWaiverCard(
                   context,
                   icon: Iconsax.briefcase5,
-                  label: "Business Partnership Waiver",
+                  label: QTexts.businessPartnershipWaiverLabel, 
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
 
-              // 5. عقد التنازل عن الحقوق القانونية أو المالية
               InkWell(
                 onTap: () {
                   Navigator.push(
@@ -98,7 +97,7 @@ class WaiverContractsCard extends StatelessWidget {
                 child: buildWaiverCard(
                   context,
                   icon: Iconsax.dollar_circle,
-                  label: "Legal or Financial Rights Waiver",
+                  label: QTexts.legalFinancialRightsWaiverLabel, 
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
@@ -111,7 +110,7 @@ class WaiverContractsCard extends StatelessWidget {
     );
   }
 
-  // Widget Helper لبناء كرت التنازل
+  
 
   Widget buildWaiverCard(BuildContext context,
       {required IconData icon, required String label}) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qanoni/core/utils/constants/text_strings.dart';
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
@@ -32,7 +33,7 @@ class _ContractInputFormPropertyState extends State<ContractInputFormProperty> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Enter Property Sale Contract Information'),
+        title: const Text(QTexts.appBarTitleProperty),
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -43,91 +44,91 @@ class _ContractInputFormPropertyState extends State<ContractInputFormProperty> {
             children: [
               // Section for seller information
               const Text(
-                'Seller Information',
+                QTexts.sellerInfoProperty,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: 'Seller Name',
+                label: QTexts.sellerName,
                 controller: sellerNameController,
-                validatorMessage: 'Please enter the seller\'s name',
+                validatorMessage: QTexts.sellerNameValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Seller ID',
+                label: QTexts.sellerId,
                 controller: sellerIdController,
-                validatorMessage: 'Please enter the seller\'s ID',
+                validatorMessage: QTexts.sellerIdValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Seller Address',
+                label: QTexts.sellerAddress,
                 controller: sellerAddressController,
-                validatorMessage: 'Please enter the seller\'s address',
+                validatorMessage: QTexts.sellerAddressValidation,
               ),
               const SizedBox(height: 32),
 
               // Buyer Information Section
               const Text(
-                'Buyer Information',
+                QTexts.buyerInfoProperty,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: 'Buyer Name',
+                label: QTexts.buyerName,
                 controller: buyerNameController,
-                validatorMessage: 'Please enter the buyer\'s name',
+                validatorMessage: QTexts.buyerNameValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Buyer ID',
+                label: QTexts.buyerId,
                 controller: buyerIdController,
-                validatorMessage: 'Please enter the buyer\'s ID',
+                validatorMessage: QTexts.buyerIdValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Buyer Address',
+                label: QTexts.buyerAddress,
                 controller: buyerAddressController,
-                validatorMessage: 'Please enter the buyer\'s address',
+                validatorMessage: QTexts.buyerAddressValidation,
               ),
               const SizedBox(height: 32),
 
               // Property Information Section
               const Text(
-                'Property Information',
+                QTexts.propertyInfoProperty,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: 'Property Address',
+                label: QTexts.propertyAddress,
                 controller: propertyAddressController,
-                validatorMessage: 'Please enter the property address',
+                validatorMessage: QTexts.propertyAddressValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Property Size (in sq. meters)',
+                label: QTexts.propertySize,
                 controller: propertySizeController,
-                validatorMessage: 'Please enter the property size',
+                validatorMessage: QTexts.propertySizeValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Property Price',
+                label: QTexts.propertyPrice,
                 controller: propertyPriceController,
-                validatorMessage: 'Please enter the property price',
+                validatorMessage: QTexts.propertyPriceValidation,
               ),
               const SizedBox(height: 32),
 
               // Transaction Information Section
               const Text(
-                'Transaction Information',
+                QTexts.transactionInfoProperty,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: 'Payment Method',
+                label: QTexts.paymentMethod,
                 controller: paymentMethodController,
-                validatorMessage: 'Please enter the payment method',
+                validatorMessage: QTexts.paymentMethodValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Sale Date',
+                label: QTexts.saleDate,
                 controller: saleDateController,
-                validatorMessage: 'Please enter the sale date',
+                validatorMessage: QTexts.saleDateValidation,
               ),
               const SizedBox(height: 32),
 
@@ -139,7 +140,7 @@ class _ContractInputFormPropertyState extends State<ContractInputFormProperty> {
                     if (_formKey.currentState!.validate()) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                            content: Text('Data entered successfully')),
+                            content: Text(QTexts.dateEnteredSuccessfuly)),
                       );
                     }
                   },
@@ -148,7 +149,7 @@ class _ContractInputFormPropertyState extends State<ContractInputFormProperty> {
                     backgroundColor: QColors.secondary,
                   ),
                   child: const Text(
-                    "Save",
+                    QTexts.saveButton,
                     style: Styles.textStyle18,
                   ),
                 ),

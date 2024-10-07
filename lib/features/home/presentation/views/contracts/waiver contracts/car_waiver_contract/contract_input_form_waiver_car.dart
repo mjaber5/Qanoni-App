@@ -1,20 +1,20 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
-
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
+import 'package:qanoni/core/utils/constants/text_strings.dart'; // تأكد من أن لديك ملف النصوص الصحيح
 
 class ContractInputFormWaiverCar extends StatefulWidget {
   const ContractInputFormWaiverCar({super.key});
 
   @override
   State<ContractInputFormWaiverCar> createState() =>
-      _ContractInputFormWaiverState();
+      _ContractInputFormWaiverCarState();
 }
 
-class _ContractInputFormWaiverState extends State<ContractInputFormWaiverCar> {
+class _ContractInputFormWaiverCarState
+    extends State<ContractInputFormWaiverCar> {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController sellerNameController = TextEditingController();
@@ -35,7 +35,7 @@ class _ContractInputFormWaiverState extends State<ContractInputFormWaiverCar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Enter Waiver Contract Information'),
+        title: const Text(QTexts.appBarTitleWaiverCar),
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -45,97 +45,97 @@ class _ContractInputFormWaiverState extends State<ContractInputFormWaiverCar> {
           child: ListView(
             children: [
               const Text(
-                'Seller Information',
+                QTexts.sellerInfo,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: 'Seller Name',
+                label: QTexts.sellerName,
                 controller: sellerNameController,
-                validatorMessage: 'Please enter the seller\'s name',
+                validatorMessage: QTexts.sellerNameValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Seller ID',
+                label: QTexts.sellerId,
                 controller: sellerIdController,
-                validatorMessage: 'Please enter the seller\'s ID',
+                validatorMessage: QTexts.sellerIdValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Seller Address',
+                label: QTexts.sellerAddress,
                 controller: sellerAddressController,
-                validatorMessage: 'Please enter the seller\'s address',
+                validatorMessage: QTexts.sellerAddressValidation,
               ),
               const SizedBox(height: 32),
               const Text(
-                'Buyer Information',
+                QTexts.buyerInfo,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: 'Buyer Name',
+                label: QTexts.buyerName,
                 controller: buyerNameController,
-                validatorMessage: 'Please enter the buyer\'s name',
+                validatorMessage: QTexts.buyerNameValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Buyer ID',
+                label: QTexts.buyerId,
                 controller: buyerIdController,
-                validatorMessage: 'Please enter the buyer\'s ID',
+                validatorMessage: QTexts.buyerIdValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Buyer Address',
+                label: QTexts.buyerAddress,
                 controller: buyerAddressController,
-                validatorMessage: 'Please enter the buyer\'s address',
+                validatorMessage: QTexts.buyerAddressValidation,
               ),
               const SizedBox(height: 32),
               const Text(
-                'Waiver Information',
+                QTexts.waiverInfo,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: 'Asset Type',
+                label: QTexts.assetType,
                 controller: assetTypeController,
-                validatorMessage: 'Please enter the asset type',
+                validatorMessage: QTexts.assetTypeValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Asset Details',
+                label: QTexts.assetDetails,
                 controller: assetDetailsController,
-                validatorMessage: 'Please enter asset details',
+                validatorMessage: QTexts.assetDetailsValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Reason for Waiver',
+                label: QTexts.waiverReason,
                 controller: waiverReasonController,
-                validatorMessage: 'Please enter the reason for waiver',
+                validatorMessage: QTexts.waiverReasonValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Ownership Status',
+                label: QTexts.ownershipStatus,
                 controller: ownershipController,
-                validatorMessage: 'Please enter the ownership status',
+                validatorMessage: QTexts.ownershipStatusValidation,
               ),
               const SizedBox(height: 32),
               const Text(
-                'Transaction Information',
+                QTexts.transactionInfo,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: 'Waiver Price',
+                label: QTexts.waiverPrice,
                 controller: waiverPriceController,
-                validatorMessage: 'Please enter the waiver price',
+                validatorMessage: QTexts.waiverPriceValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Payment Method',
+                label: QTexts.paymentMethod,
                 controller: paymentMethodController,
-                validatorMessage: 'Please enter the payment method',
+                validatorMessage: QTexts.paymentMethodValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: 'Waiver Date',
+                label: QTexts.waiverDate,
                 controller: waiverDateController,
-                validatorMessage: 'Please enter the waiver date',
+                validatorMessage: QTexts.waiverDateValidation,
               ),
               const SizedBox(height: 32),
               Padding(
@@ -143,13 +143,12 @@ class _ContractInputFormWaiverState extends State<ContractInputFormWaiverCar> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      log('Form is valid. Proceed with saving the contract.');
+                      log('النموذج صالح. حفظ البيانات.');
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text('Data entered successfully')),
+                        const SnackBar(content: Text(QTexts.dataEnteredSuccessfully)),
                       );
                     } else {
-                      log('Form is not valid. Show errors.');
+                      log('النموذج غير صالح. إظهار الأخطاء.');
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -157,7 +156,7 @@ class _ContractInputFormWaiverState extends State<ContractInputFormWaiverCar> {
                     backgroundColor: QColors.secondary,
                   ),
                   child: const Text(
-                    "Save",
+                    QTexts.saveButton,
                     style: Styles.textStyle18,
                   ),
                 ),
