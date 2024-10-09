@@ -58,7 +58,12 @@ class _SplashViewBodyState extends State<SplashViewBody>
             },
           );
         } else if (state.status == AuthenticationStatus.unauthenticated) {
-          GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
+          Future.delayed(
+            const Duration(seconds: 2),
+            () {
+              GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
+            },
+          );
         }
       },
       child: Column(
