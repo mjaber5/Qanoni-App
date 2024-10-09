@@ -33,7 +33,7 @@ class QTexts {
   static const String signupAndText = 'and';
   static const String signupPrivacyPolicy = ' Privacy Policy';
   static const String signupAboutApp =
-      'Sign up now and start exploring all that our app has to offer. We\'re excited to welcome you to our community!';
+      'Sign up now and start exploring all that our app has to offer.';
   static const String signupPasswordValidationAtLeastOneLowerCaseLetter =
       'At least 1 lowercase letter';
   static const String signupPasswordValidationAtLeastOneUpperCaseLetter =

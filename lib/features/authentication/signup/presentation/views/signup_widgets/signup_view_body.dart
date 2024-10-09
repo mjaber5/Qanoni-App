@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:qanoni/features/authentication/signup/presentation/views/signup_widgets/signup_text_about_app.dart';
 
 import 'signup_logo_text.dart';
-import 'signup_text_about_app.dart';
 import 'signup_text_condition.dart';
 import 'signup_text_feilds.dart';
-import 'signup_text_navigator.dart';
 
 class SignupViewBody extends StatelessWidget {
   const SignupViewBody({super.key});
@@ -25,10 +24,7 @@ class SignupViewBody extends StatelessWidget {
                 height: 25,
               ),
               SignupTextFeilds(),
-              SignupTextNavigator(),
-              SizedBox(
-                height: 16,
-              ),
+              SizedBox(height: 40),
               SignupTextCondition(),
             ],
           ),

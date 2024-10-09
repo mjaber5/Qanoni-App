@@ -70,6 +70,11 @@ class _LoginInputsSectionState extends State<LoginInputsSection> {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: AppTextFormField(
                   controller: emailController,
+                  prefixIcon: Image.asset(
+                    'assets/icons/email.png',
+                    scale: 20,
+                    color: Colors.grey[700],
+                  ),
                   hintText: localizations.email,
                   validator: (value) {
                     if (value == null ||
@@ -92,6 +97,11 @@ class _LoginInputsSectionState extends State<LoginInputsSection> {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: AppTextFormField(
                   controller: passwordController,
+                  prefixIcon: Image.asset(
+                    'assets/icons/password-icon.png',
+                    scale: 20,
+                    color: Colors.grey[700],
+                  ),
                   hintText: localizations.password,
                   isObscureText: isObscureText,
                   suffixIcon: GestureDetector(

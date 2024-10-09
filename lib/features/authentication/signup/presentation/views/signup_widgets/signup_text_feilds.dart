@@ -8,7 +8,6 @@ import '../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../core/utils/helpers/app_regex.dart';
 import '../../../../../../core/widgets/app_text_form_field.dart';
 import '../../view_model/sign_up_bloc/sign_up_bloc.dart';
-import 'signup_password_condition_stronger.dart';
 import 'package:toasty_box/toast_enums.dart';
 import 'package:toasty_box/toast_service.dart';
 import 'package:user_repository/user_reposetory.dart';
@@ -70,7 +69,7 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10, top: 10),
+      padding: const EdgeInsets.only(bottom: 12, top: 12),
       child: BlocListener<SignUpBloc, SignUpBlocState>(
         listener: (context, state) {
           if (state is SignUpSuccess) {
@@ -107,6 +106,11 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
             children: [
               AppTextFormField(
                 controller: nameController,
+                prefixIcon: Image.asset(
+                  'assets/icons/user.png',
+                  scale: 20,
+                  color: Colors.grey[700],
+                ),
                 hintText: localizations.userName,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -124,6 +128,11 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
               const SizedBox(height: 20),
               AppTextFormField(
                 controller: phoneController,
+                prefixIcon: Image.asset(
+                  'assets/icons/telephone.png',
+                  scale: 20,
+                  color: Colors.grey[700],
+                ),
                 hintText: localizations.phone,
                 validator: (value) {
                   if (value == null ||
@@ -143,6 +152,11 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
               const SizedBox(height: 20),
               AppTextFormField(
                 controller: emailController,
+                prefixIcon: Image.asset(
+                  'assets/icons/email.png',
+                  scale: 20,
+                  color: Colors.grey[700],
+                ),
                 hintText: localizations.email,
                 validator: (value) {
                   if (value == null ||
@@ -162,6 +176,11 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
               const SizedBox(height: 20),
               AppTextFormField(
                 controller: passwordController,
+                prefixIcon: Image.asset(
+                  'assets/icons/password-icon.png',
+                  scale: 20,
+                  color: Colors.grey[700],
+                ),
                 hintText: localizations.password,
                 isObscureText: isPasswordObscureText,
                 suffixIcon: GestureDetector(
@@ -190,19 +209,17 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                 },
               ),
               const SizedBox(height: 20),
-              SignupPasswordValidations(
-                hasLowerCase: hasLowercase,
-                hasUpperCase: hasUppercase,
-                hasSpecialCharacters: hasSpecialCharacters,
-                hasNumber: hasNumber,
-                hasMinLength: hasMinLength,
-              ),
+              // SignupPasswordValidations(
+              //   hasLowerCase: hasLowercase,
+              //   hasUpperCase: hasUppercase,
+              //   hasSpecialCharacters: hasSpecialCharacters,
+              //   hasNumber: hasNumber,
+              //   hasMinLength: hasMinLength,
+              // ),
               Padding(
                 padding: const EdgeInsets.only(
                   bottom: 12,
                   top: 16,
-                  left: 18,
-                  right: 18,
                 ),
                 child: ElevatedButton(
                   onPressed: () {
