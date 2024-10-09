@@ -13,6 +13,7 @@ class AppTextFormField extends StatelessWidget {
   final String hintText;
   final bool? isObscureText;
   final Widget? suffixIcon;
+  final Widget? prefixIcon;
   final Color? backgroundColor;
   final TextEditingController? controller;
   final Function(String?) validator;
@@ -29,6 +30,7 @@ class AppTextFormField extends StatelessWidget {
     this.backgroundColor,
     this.controller,
     required this.validator,
+    this.prefixIcon,
   });
 
   @override
@@ -38,7 +40,8 @@ class AppTextFormField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
-        isDense: true,
+        prefixIcon: prefixIcon,
+        isDense: false,
         contentPadding: contentPadding ??
             const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
         focusedBorder: focusedBorder ??

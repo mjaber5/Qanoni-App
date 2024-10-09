@@ -26,30 +26,41 @@ class LoginButton extends StatelessWidget {
       padding: const EdgeInsets.only(
         bottom: 12,
         top: 16,
-        left: 18,
-        right: 18,
+        left: 8,
+        right: 8,
       ),
-      child: ElevatedButton(
-        onPressed: () {
-          if (_formKey.currentState!.validate()) {
-            context.read<SigninBloc>().add(
-                  SignInRequired(
-                    emailController.text,
-                    passwordController.text,
-                  ),
-                );
-            log('Form is valid. Proceed with login.');
-          } else {
-            log('Form is not valid. Show errors.');
-          }
-        },
-        style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(vertical: 15),
-          backgroundColor: QColors.secondary,
-        ),
-        child: Text(
-          localizations.login,
-          style: Styles.textStyle18,
+      child: SizedBox(
+        child: ElevatedButton(
+          onPressed: () {
+            if (_formKey.currentState!.validate()) {
+              context.read<SigninBloc>().add(
+                    SignInRequired(
+                      emailController.text,
+                      passwordController.text,
+                    ),
+                  );
+              log('Form is valid. Proceed with login.');
+            } else {
+              log('Form is not valid. Show errors.');
+            }
+          },
+          style: ElevatedButton.styleFrom(
+            elevation: 0,
+            foregroundColor: Colors.white,
+            backgroundColor: QColors.secondary,
+            disabledBackgroundColor: Colors.grey,
+            disabledForegroundColor: Colors.grey,
+            padding: const EdgeInsets.symmetric(vertical: 18),
+            textStyle: const TextStyle(
+                fontSize: 16, color: Colors.white, fontWeight: FontWeight.w600),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+          child: Text(
+            localizations.login,
+            style: Styles.textStyle18,
+          ),
         ),
       ),
     );

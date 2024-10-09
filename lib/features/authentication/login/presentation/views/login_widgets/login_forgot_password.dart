@@ -23,6 +23,7 @@ class LoginTextForgotPassword extends StatelessWidget {
               localizations.loginForgotPassword,
               style: Styles.textStyle14.copyWith(
                 color: QColors.secondary,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),

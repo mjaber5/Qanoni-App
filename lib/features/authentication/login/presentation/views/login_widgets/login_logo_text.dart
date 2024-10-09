@@ -1,18 +1,40 @@
 import 'package:flutter/material.dart';
-import '../../../../../../core/utils/constants/colors.dart';
-import '../../../../../../core/utils/styles.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginLogoText extends StatelessWidget {
   const LoginLogoText({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
-    return Text(
-      localizations.welcomeBack,
-      style: Styles.textStyle30.copyWith(
-        color: QColors.secondary,
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Qanoni',
+            style: TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          const SizedBox(height: 12),
+          const Text(
+            'Welcome back,',
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'Make your contracts online with Qanoni app .',
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.grey[600],
+            ),
+          ),
+        ],
       ),
     );
   }
