@@ -3,14 +3,14 @@ import 'package:qanoni/core/utils/constants/colors.dart';
 
 import 'contract_input_form_car.dart';
 
-class AceptCare extends StatefulWidget {
-  const AceptCare({super.key});
+class AceptCar extends StatefulWidget {
+  const AceptCar({super.key});
 
   @override
-  State<AceptCare> createState() => _AceaptPageState();
+  State<AceptCar> createState() => _AceaptPageState();
 }
 
-class _AceaptPageState extends State<AceptCare> {
+class _AceaptPageState extends State<AceptCar> {
   bool _agreed = false; // Declare _agreed here
 
   @override

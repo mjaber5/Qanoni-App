@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/car_rental_contact/acept_care.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/daily_rental_contract/aceapt_daily.dart';
 import '../../../../../../core/utils/constants/colors.dart';
-import '../lease%20contracts/car%20rental%20contact/acept_care.dart';
-import '../lease%20contracts/daily%20rental%20contract/aceapt_daily.dart';
 import '../lease%20contracts/equipment_rental_contract/aceapt_equipment.dart';
 import '../lease%20contracts/house_rental_contact/aceapt_house.dart';
 import '../lease%20contracts/rental_contract_cancellation/aceapt_cancellation.dart';
@@ -27,7 +27,7 @@ class LeaseContractsCards extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const AceptCare()));
+                          builder: (context) => const AceptCar()));
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.9,
