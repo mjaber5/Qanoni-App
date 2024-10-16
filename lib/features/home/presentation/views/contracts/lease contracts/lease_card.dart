@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/car_rental_contact/acept_care.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/car_rental_contact/acept_car.dart';
 import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/daily_rental_contract/aceapt_daily.dart';
 import '../../../../../../core/utils/constants/colors.dart';
 import '../lease%20contracts/equipment_rental_contract/aceapt_equipment.dart';

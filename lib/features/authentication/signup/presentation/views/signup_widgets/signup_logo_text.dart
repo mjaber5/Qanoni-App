@@ -13,7 +13,7 @@ class SignupLogoText extends StatelessWidget {
     return Text(
       localizations.createAccount,
       style: Styles.textStyle30.copyWith(
-        color: QColors.secondary,
+        color: QColors.black,
       ),
     );
   }
