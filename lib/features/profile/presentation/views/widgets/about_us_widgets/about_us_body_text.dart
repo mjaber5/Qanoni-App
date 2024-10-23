@@ -12,7 +12,7 @@ class AboutUsBodyText extends StatelessWidget {
         children: [
           Text(
             QTexts.aboutUsBodyText,
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(fontSize: 16),
           ),
         ],
       ),

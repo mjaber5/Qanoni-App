@@ -18,14 +18,6 @@ class PrivacyPolicyDetailsBody extends StatelessWidget {
             textAlign: TextAlign.center,
             QTexts.aboutUsBodyText,
           ),
-          Text(
-            textAlign: TextAlign.center,
-            QTexts.aboutUsBodyText,
-          ),
-          Text(
-            textAlign: TextAlign.center,
-            QTexts.aboutUsBodyText,
-          ),
         ],
       ),
     );

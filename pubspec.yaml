@@ -58,6 +58,7 @@ dependencies:
 
   user_repository:
     path: packages/user_repository
+  dio: ^5.7.0
 
 dev_dependencies:
   flutter_test:
