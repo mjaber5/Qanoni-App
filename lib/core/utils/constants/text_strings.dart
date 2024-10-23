@@ -313,7 +313,7 @@ class QTexts {
   static const String saveButton = 'Save';
 
   // -- Chatbot
-  static const String chatbotAppbarTitle = 'Chatbot';
+  static const String chatbotAppbarTitle = 'Ask lawyer';
   static const String chatbotTextFieldHintText = 'Type your message...';
 
   // -- Notification
@@ -350,7 +350,7 @@ class QTexts {
   // -- AboutUs
   static const String aboutUsAppBarTitle = 'About';
   static const String aboutUsBodyText =
-      'Qanoni is your geteway to digital ontracts services, at allows you to login with single username and password instaed of multiple passwords. ';
+      'The Qanoni App aims to digitize and simplify the management of contracts such as rentalagreements, sales contracts, and concessions by transforming user inputs into electronic contracts. These contracts will be based on predefined templates for each contract type.';
 
   // -- Privacy Prolicy
   static const String privacyPolicyAppBarTitle = 'Privacy Policy';

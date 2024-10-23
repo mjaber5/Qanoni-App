@@ -24,6 +24,9 @@ class AboutUsViewBody extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         const AboutUsBodyText(),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.25,
+        ),
         const ContactIformation(),
       ],
     );

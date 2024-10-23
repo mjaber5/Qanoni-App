@@ -11,20 +11,8 @@ class AboutUsBodyText extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            textAlign: TextAlign.center,
             QTexts.aboutUsBodyText,
-          ),
-          Text(
-            textAlign: TextAlign.center,
-            QTexts.aboutUsBodyText,
-          ),
-          Text(
-            textAlign: TextAlign.center,
-            QTexts.aboutUsBodyText,
-          ),
-          Text(
-            textAlign: TextAlign.center,
-            QTexts.aboutUsBodyText,
+            style: TextStyle(fontSize: 20),
           ),
         ],
       ),

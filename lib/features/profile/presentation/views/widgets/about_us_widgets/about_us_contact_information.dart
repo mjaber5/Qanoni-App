@@ -23,7 +23,7 @@ class ContactIformation extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Contact Information',
+                'Contact Information : mhammdjbr@gmail.com',
               ),
               Text(
                 'Website : github/mjaber5',

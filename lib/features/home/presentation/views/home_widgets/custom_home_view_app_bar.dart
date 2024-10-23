@@ -12,7 +12,7 @@ class CustomAppBar extends StatelessWidget {
       child: Row(
         children: [
           const Text(
-            QTexts.homeAppbarTitle,
+            QTexts.appLogoTitle,
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,
