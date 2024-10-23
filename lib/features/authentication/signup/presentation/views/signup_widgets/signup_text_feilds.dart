@@ -77,7 +77,6 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
               signUpRequired = false;
             });
             GoRouter.of(context).pushReplacement(AppRouter.kLayout);
-
             ToastService.showSuccessToast(
               context,
               length: ToastLength.medium,
@@ -114,12 +113,6 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                 hintText: localizations.userName,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    ToastService.showErrorToast(
-                      context,
-                      length: ToastLength.medium,
-                      expandedHeight: 100,
-                      message: "Name wrong !",
-                    );
                     return 'Please enter a valid name';
                   }
                   return null;
@@ -138,12 +131,6 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                   if (value == null ||
                       value.isEmpty ||
                       !AppRegex.isPhoneNumberValid(value)) {
-                    ToastService.showErrorToast(
-                      context,
-                      length: ToastLength.medium,
-                      expandedHeight: 100,
-                      message: "Phone number wrong !",
-                    );
                     return 'Please enter a valid phone number';
                   }
                   return null;
@@ -162,12 +149,6 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                   if (value == null ||
                       value.isEmpty ||
                       !AppRegex.isEmailValid(value)) {
-                    ToastService.showErrorToast(
-                      context,
-                      length: ToastLength.medium,
-                      expandedHeight: 100,
-                      message: "Email wrong !",
-                    );
                     return 'Please enter a valid email';
                   }
                   return null;
@@ -197,25 +178,12 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    ToastService.showErrorToast(
-                      context,
-                      length: ToastLength.medium,
-                      expandedHeight: 100,
-                      message: "Password wrong !",
-                    );
                     return 'Please enter a valid password';
                   }
                   return null;
                 },
               ),
               const SizedBox(height: 20),
-              // SignupPasswordValidations(
-              //   hasLowerCase: hasLowercase,
-              //   hasUpperCase: hasUppercase,
-              //   hasSpecialCharacters: hasSpecialCharacters,
-              //   hasNumber: hasNumber,
-              //   hasMinLength: hasMinLength,
-              // ),
               Padding(
                 padding: const EdgeInsets.only(
                   bottom: 12,
@@ -240,6 +208,12 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                       });
                       log('Form is valid. Proceed with signup.');
                     } else {
+                      ToastService.showErrorToast(
+                        context,
+                        length: ToastLength.medium,
+                        expandedHeight: 100,
+                        message: "Please fill fields!",
+                      );
                       log('Form is not valid. Show errors.');
                     }
                   },

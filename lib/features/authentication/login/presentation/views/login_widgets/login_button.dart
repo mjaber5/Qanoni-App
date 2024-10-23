@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:toasty_box/toast_enums.dart';
+import 'package:toasty_box/toast_service.dart';
 import '../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../core/utils/styles.dart';
 import '../../view_model/sign_in_bloc/signin_bloc.dart';
@@ -41,6 +43,12 @@ class LoginButton extends StatelessWidget {
                   );
               log('Form is valid. Proceed with login.');
             } else {
+              ToastService.showErrorToast(
+                context,
+                length: ToastLength.medium,
+                expandedHeight: 100,
+                message: "Please fill fields!",
+              );
               log('Form is not valid. Show errors.');
             }
           },

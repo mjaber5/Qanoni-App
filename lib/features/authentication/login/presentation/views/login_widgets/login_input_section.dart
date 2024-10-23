@@ -36,6 +36,7 @@ class _LoginInputsSectionState extends State<LoginInputsSection> {
             setState(() {
               signInRequired = false;
             });
+
             GoRouter.of(context).pushReplacement(AppRouter.kLayout);
             ToastService.showSuccessToast(
               context,
@@ -56,7 +57,7 @@ class _LoginInputsSectionState extends State<LoginInputsSection> {
               context,
               length: ToastLength.medium,
               expandedHeight: 100,
-              message: "Something went wrong!",
+              message: errorMsg,
             );
           }
         },
@@ -80,12 +81,6 @@ class _LoginInputsSectionState extends State<LoginInputsSection> {
                     if (value == null ||
                         value.isEmpty ||
                         !AppRegex.isEmailValid(value)) {
-                      ToastService.showErrorToast(
-                        context,
-                        length: ToastLength.medium,
-                        expandedHeight: 100,
-                        message: "email wrong enter!",
-                      );
                       return 'Please enter a valid email';
                     }
                     return null;
@@ -116,12 +111,6 @@ class _LoginInputsSectionState extends State<LoginInputsSection> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      ToastService.showErrorToast(
-                        context,
-                        length: ToastLength.medium,
-                        expandedHeight: 100,
-                        message: "password wrong enter!",
-                      );
                       return 'Please enter a valid password';
                     }
                     return null;
