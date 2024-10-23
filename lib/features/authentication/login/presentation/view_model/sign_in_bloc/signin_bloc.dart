@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:qanoni/core/errors/failures.dart';
 import 'package:user_repository/user_reposetory.dart';
 
 part 'signin_event.dart';
@@ -20,7 +22,10 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
       } on FirebaseAuthException catch (errorException) {
         emit(SignInFailure(message: errorException.code));
       } catch (error) {
-        emit(const SignInFailure());
+        if (error is DioException) {
+          emit(SignInFailure(
+              message: ServerFailure.fromDioException(error) as String));
+        }
       }
     });
     on<SignOutRequired>((event, emit) async {
@@ -28,7 +33,9 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
         await _userRepository.logOut();
         emit(SignOutSuccess());
       } catch (error) {
-        emit(SignOutFailure(error.toString()));
+        if (error is DioException) {
+          emit(SignOutFailure(ServerFailure.fromDioException(error) as String));
+        }
       }
     });
   }

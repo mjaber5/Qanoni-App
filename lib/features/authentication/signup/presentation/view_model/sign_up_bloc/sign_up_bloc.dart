@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:qanoni/core/errors/failures.dart';
 import 'package:user_repository/user_reposetory.dart';
 
 part 'sign_up_event.dart';
@@ -18,7 +20,9 @@ class SignUpBloc extends Bloc<SignUpBlocEvent, SignUpBlocState> {
         await _userRepository.setUserData(user);
         emit(SignUpSuccess());
       } catch (error) {
-        emit(SignUpFailure());
+        if (error is DioException) {
+          emit(SignUpFailure(ServerFailure.fromDioException(error) as String));
+        }
       }
     });
   }

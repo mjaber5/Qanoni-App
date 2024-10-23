@@ -11,6 +11,10 @@ final class SignUpBlocInitial extends SignUpBlocState {}
 
 class SignUpSuccess extends SignUpBlocState {}
 
-class SignUpFailure extends SignUpBlocState {}
+class SignUpFailure extends SignUpBlocState {
+  final String errorMessage;
+
+  const SignUpFailure(this.errorMessage);
+}
 
 class SignUpProcess extends SignUpBlocState {}
