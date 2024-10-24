@@ -10,8 +10,7 @@ class LoginTextCondition extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 16.0, top: 16.0),
       child: Center(
         child: Column(
-          crossAxisAlignment:
-              CrossAxisAlignment.center, // Aligns text to the left
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
               "By logging in, you agree to our:",
@@ -20,14 +19,12 @@ class LoginTextCondition extends StatelessWidget {
                 fontSize: 13,
               ),
             ),
-            const SizedBox(height: 4), // Adds some space between the texts
+            const SizedBox(height: 4),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 GestureDetector(
-                  onTap: () {
-                    // Handle Privacy Policy tap
-                  },
+                  onTap: () {},
                   child: const Text(
                     "Privacy Policy",
                     style: TextStyle(
@@ -45,9 +42,7 @@ class LoginTextCondition extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
-                    // Handle Terms of Use tap
-                  },
+                  onTap: () {},
                   child: const Text(
                     "Terms of Use",
                     style: TextStyle(

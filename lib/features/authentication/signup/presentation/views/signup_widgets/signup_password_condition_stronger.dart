@@ -61,10 +61,11 @@ class SignupPasswordValidations extends StatelessWidget {
         Text(
           text,
           style: Styles.textStyle14.copyWith(
-              decoration: hasValidated ? TextDecoration.lineThrough : null,
-              decorationColor: Colors.green,
-              decorationThickness: 2,
-              color: QColors.darkGrey),
+            decoration: hasValidated ? TextDecoration.lineThrough : null,
+            decorationColor: Colors.green,
+            decorationThickness: 2,
+            color: QColors.darkGrey,
+          ),
         )
       ],
     );

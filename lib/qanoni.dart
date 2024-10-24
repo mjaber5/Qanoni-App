@@ -61,7 +61,6 @@ class Qanoni extends StatelessWidget {
       child:
           BlocBuilder<ThemeCubit, ThemeState>(builder: (context, themeState) {
         return BlocBuilder<LocaleCubit, LocaleState>(
-          // Listen to LocaleCubit
           builder: (context, localeState) {
             return MaterialApp.router(
               routerConfig: AppRouter.router,
@@ -69,7 +68,7 @@ class Qanoni extends StatelessWidget {
               theme: QAppTheme.lightTheme,
               darkTheme: QAppTheme.darkTheme,
               debugShowCheckedModeBanner: false,
-              locale: localeState.locale, // Use the current locale state
+              locale: localeState.locale,
               supportedLocales: const [Locale('en'), Locale('ar')],
               localizationsDelegates: const [
                 AppLocalizations.delegate,

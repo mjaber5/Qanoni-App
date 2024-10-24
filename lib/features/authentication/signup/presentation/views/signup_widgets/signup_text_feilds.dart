@@ -108,9 +108,10 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                 prefixIcon: Image.asset(
                   'assets/icons/user.png',
                   scale: 20,
-                  color: Colors.grey[700],
+                  color: Colors.grey[200],
                 ),
                 hintText: localizations.userName,
+                hintStyle: const TextStyle(color: QColors.white),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a valid name';
@@ -124,9 +125,10 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                 prefixIcon: Image.asset(
                   'assets/icons/telephone.png',
                   scale: 20,
-                  color: Colors.grey[700],
+                  color: Colors.grey[200],
                 ),
                 hintText: localizations.phone,
+                hintStyle: const TextStyle(color: QColors.white),
                 validator: (value) {
                   if (value == null ||
                       value.isEmpty ||
@@ -142,9 +144,10 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                 prefixIcon: Image.asset(
                   'assets/icons/email.png',
                   scale: 20,
-                  color: Colors.grey[700],
+                  color: Colors.grey[200],
                 ),
                 hintText: localizations.email,
+                hintStyle: const TextStyle(color: QColors.white),
                 validator: (value) {
                   if (value == null ||
                       value.isEmpty ||
@@ -160,9 +163,10 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                 prefixIcon: Image.asset(
                   'assets/icons/password-icon.png',
                   scale: 20,
-                  color: Colors.grey[700],
+                  color: Colors.grey[200],
                 ),
                 hintText: localizations.password,
+                hintStyle: const TextStyle(color: QColors.white),
                 isObscureText: isPasswordObscureText,
                 suffixIcon: GestureDetector(
                   onTap: () {
@@ -171,6 +175,7 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                     });
                   },
                   child: Icon(
+                    color: QColors.white,
                     isPasswordObscureText
                         ? Icons.visibility_off
                         : Icons.visibility,

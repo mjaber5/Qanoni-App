@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/features/authentication/login/presentation/views/login_widgets/login_button.dart';
 import 'package:qanoni/features/authentication/login/presentation/views/login_widgets/remember_me_check_box.dart';
 import '../../../../../../core/utils/app_router.dart';
@@ -74,9 +75,10 @@ class _LoginInputsSectionState extends State<LoginInputsSection> {
                   prefixIcon: Image.asset(
                     'assets/icons/email.png',
                     scale: 20,
-                    color: Colors.grey[700],
+                    color: QColors.white,
                   ),
                   hintText: localizations.email,
+                  hintStyle: const TextStyle(color: QColors.white),
                   validator: (value) {
                     if (value == null ||
                         value.isEmpty ||
@@ -95,9 +97,10 @@ class _LoginInputsSectionState extends State<LoginInputsSection> {
                   prefixIcon: Image.asset(
                     'assets/icons/password-icon.png',
                     scale: 20,
-                    color: Colors.grey[700],
+                    color: QColors.white,
                   ),
                   hintText: localizations.password,
+                  hintStyle: const TextStyle(color: QColors.white),
                   isObscureText: isObscureText,
                   suffixIcon: GestureDetector(
                     onTap: () {
@@ -106,6 +109,7 @@ class _LoginInputsSectionState extends State<LoginInputsSection> {
                       });
                     },
                     child: Icon(
+                      color: QColors.white,
                       isObscureText ? Icons.visibility_off : Icons.visibility,
                     ),
                   ),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qanoni/core/utils/theme/custom_themes/text_theme.dart';
 import '../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../core/utils/constants/text_strings.dart';
-import '../../../../../../features/theme/presentation/view_model/cubit/change_theme_cubit.dart'; // Ensure this import is correct
+import '../../../../../../features/theme/presentation/view_model/cubit/change_theme_cubit.dart';
 
 class SettingsChangeTheme extends StatefulWidget {
   const SettingsChangeTheme({super.key});
@@ -15,6 +16,10 @@ class _SettingsChangeTheme extends State<SettingsChangeTheme> {
   @override
   Widget build(BuildContext context) {
     final themeState = context.watch<ThemeCubit>().state;
+
+    final textTheme = themeState.themeMode == ThemeMode.light
+        ? QTextTheme.lightTextTheme
+        : QTextTheme.darkTextTheme;
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0),
@@ -30,8 +35,9 @@ class _SettingsChangeTheme extends State<SettingsChangeTheme> {
           child: GestureDetector(
             child: Row(
               children: [
-                const Text(
+                Text(
                   QTexts.settingsChangeThemeSwitch,
+                  style: textTheme.headlineSmall,
                 ),
                 const Spacer(),
                 Switch(

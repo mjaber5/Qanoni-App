@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../../../core/utils/constants/colors.dart';
 
 import '../../../../../../core/utils/styles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -12,9 +11,7 @@ class SignupLogoText extends StatelessWidget {
     final localizations = AppLocalizations.of(context)!;
     return Text(
       localizations.createAccount,
-      style: Styles.textStyle30.copyWith(
-        color: QColors.black,
-      ),
+      style: Styles.textStyle30,
     );
   }
 }

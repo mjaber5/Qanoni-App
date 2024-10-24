@@ -15,7 +15,7 @@ class SignupTextAboutApp extends StatelessWidget {
         Text(
           QTexts.signupAboutApp,
           style: Styles.textStyle16.copyWith(
-            color: QColors.darkerGrey,
+            color: QColors.darkGrey,
           ),
         ),
       ],
