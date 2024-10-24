@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:qanoni/features/profile/presentation/views/change_password_view.dart';
 import 'constants/aceapt_page.dart';
 import '../../features/authentication/auth_blocs/authentication_bloc/authentication_bloc.dart';
 import '../../features/authentication/login/presentation/view_model/sign_in_bloc/signin_bloc.dart';
@@ -45,7 +46,8 @@ abstract class AppRouter {
   static const kAboutUsView = '/aboutUsView';
   static const kWaiverContractsCard = '/waiverContractsCard';
   static const kPrivacyPolicyView = '/privacyPolicyView';
-  static const kHistoryView = '/HistoryView';
+  static const kHistoryView = '/historyView';
+  static const kChangePasswordView = '/changePasswordView';
 
   static final router = GoRouter(
     routes: [
@@ -146,6 +148,10 @@ abstract class AppRouter {
         path: kHistoryView,
         builder: (context, state) => const HistoryView(),
       ),
+      GoRoute(
+        path: kChangePasswordView,
+        builder: (context, state) => const ChangePasswordView(),
+      )
     ],
   );
 }
