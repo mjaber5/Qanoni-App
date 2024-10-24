@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 import '../../../../../../core/utils/app_router.dart';
 import '../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../core/utils/constants/sizes.dart';
 import '../../../../../../core/utils/constants/text_strings.dart';
-import '../../../../../../core/utils/theme/change_theme_notifire.dart';
-import '../../../../../../core/utils/theme/custom_themes/text_theme.dart';
 
 class SettingsContainerAboutUs extends StatelessWidget {
   const SettingsContainerAboutUs({super.key});
 
   @override
   Widget build(BuildContext context) {
-    bool isLight = context.watch<ThemeNotifier>().isLightTheme;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0),
       child: Container(
@@ -35,11 +31,8 @@ class SettingsContainerAboutUs extends StatelessWidget {
                 leading: const Icon(
                   Icons.info,
                 ),
-                title: Text(
+                title: const Text(
                   QTexts.settingsAboutUS,
-                  style: isLight
-                      ? QTextTheme.darkTextTheme.headlineSmall
-                      : QTextTheme.lightTextTheme.headlineSmall,
                 ),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,

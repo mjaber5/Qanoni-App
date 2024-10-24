@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../core/utils/constants/text_strings.dart';
-import '../../../../../../core/utils/theme/change_theme_notifire.dart';
-import '../../../../../../core/utils/theme/custom_themes/text_theme.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:intl/intl.dart';
 
@@ -38,7 +35,6 @@ class _ProfileDatePickerState extends State<ProfileDatePicker> {
 
   @override
   Widget build(BuildContext context) {
-    bool isLight = context.watch<ThemeNotifier>().isLightTheme;
     return SfDateRangePicker(
       onSelectionChanged: _onSelectionChanged,
       selectionMode: DateRangePickerSelectionMode.single,
@@ -48,24 +44,17 @@ class _ProfileDatePickerState extends State<ProfileDatePicker> {
       onSubmit: (Object? value) {
         _onOk();
       },
-      backgroundColor: isLight ? QColors.dark : QColors.light,
       selectionColor: QColors.secondary.withOpacity(0.8),
       startRangeSelectionColor: QColors.secondary,
       endRangeSelectionColor: QColors.secondary,
       rangeTextStyle: const TextStyle(color: QColors.white),
-      headerStyle: DateRangePickerHeaderStyle(
+      headerStyle: const DateRangePickerHeaderStyle(
         textAlign: TextAlign.center,
         backgroundColor: QColors.secondary,
-        textStyle: isLight
-            ? QTextTheme.darkTextTheme.bodyMedium
-            : QTextTheme.lightTextTheme.bodyMedium,
       ),
       monthViewSettings: DateRangePickerMonthViewSettings(
         viewHeaderStyle: DateRangePickerViewHeaderStyle(
           backgroundColor: QColors.secondary.withOpacity(0.2),
-          textStyle: isLight
-              ? QTextTheme.darkTextTheme.bodyMedium
-              : QTextTheme.lightTextTheme.bodyMedium,
         ),
       ),
       todayHighlightColor: QColors.success,

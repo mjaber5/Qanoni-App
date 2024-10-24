@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../../../../core/utils/constants/colors.dart';
-import '../../../../../core/utils/theme/change_theme_notifire.dart';
 
 class ButtonHomeView extends StatelessWidget {
   const ButtonHomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    bool isLight = context.watch<ThemeNotifier>().isLightTheme;
     return Padding(
       padding: const EdgeInsets.all(12),
       child: Container(
@@ -16,7 +13,6 @@ class ButtonHomeView extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.2,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          color: isLight ? QColors.dark : QColors.grey,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

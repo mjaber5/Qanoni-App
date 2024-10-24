@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../core/utils/constants/text_strings.dart';
-import '../../../../../../core/utils/theme/change_theme_notifire.dart';
-import '../../../../../../core/utils/theme/custom_themes/text_theme.dart';
+import '../../../../../../features/theme/presentation/view_model/cubit/change_theme_cubit.dart'; // Ensure this import is correct
 
 class SettingsChangeTheme extends StatefulWidget {
   const SettingsChangeTheme({super.key});
 
   @override
-  State<SettingsChangeTheme> createState() => _SettingsViewCChangeTheme();
+  State<SettingsChangeTheme> createState() => _SettingsChangeTheme();
 }
 
-class _SettingsViewCChangeTheme extends State<SettingsChangeTheme> {
+class _SettingsChangeTheme extends State<SettingsChangeTheme> {
   @override
   Widget build(BuildContext context) {
-    bool isLight = context.watch<ThemeNotifier>().isLightTheme;
+    final themeState = context.watch<ThemeCubit>().state;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0),
       child: Container(
@@ -30,19 +30,16 @@ class _SettingsViewCChangeTheme extends State<SettingsChangeTheme> {
           child: GestureDetector(
             child: Row(
               children: [
-                Text(
+                const Text(
                   QTexts.settingsChangeThemeSwitch,
-                  style: isLight
-                      ? QTextTheme.darkTextTheme.headlineSmall
-                      : QTextTheme.lightTextTheme.headlineSmall,
                 ),
                 const Spacer(),
                 Switch(
                   trackColor: WidgetStateProperty.all(QColors.grey),
                   activeColor: QColors.secondary,
-                  value: isLight,
+                  value: themeState.themeMode == ThemeMode.light,
                   onChanged: (themeChange) {
-                    context.read<ThemeNotifier>().toggleTheme(themeChange);
+                    context.read<ThemeCubit>().toggleTheme();
                   },
                 ),
               ],

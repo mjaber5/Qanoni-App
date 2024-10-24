@@ -5,14 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
+import 'package:qanoni/core/utils/theme/theme.dart';
 import 'package:qanoni/features/languages/view_model/app_langauge_cubit/app_language_cubit.dart';
-
 import 'core/utils/app_router.dart';
-import 'core/utils/theme/change_theme_notifire.dart';
-import 'core/utils/theme/theme.dart';
 import 'features/authentication/auth_blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:user_repository/user_reposetory.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'features/theme/presentation/view_model/cubit/change_theme_cubit.dart';
+import 'features/theme/presentation/view_model/cubit/change_theme_state.dart';
 
 class Qanoni extends StatelessWidget {
   final UserRepository userRepository;
@@ -33,11 +33,9 @@ class Qanoni extends StatelessWidget {
         }
 
         if (snapshot.hasData) {
-          List<ConnectivityResult>? results = snapshot.data;
-
-          bool isConnected = results != null &&
-              results.any((result) => result != ConnectivityResult.none);
-
+          List<ConnectivityResult>? result = snapshot.data;
+          bool isConnected =
+              result?.any((r) => r != ConnectivityResult.none) ?? false;
           if (!isConnected) {
             return noInternet();
           } else {
@@ -53,50 +51,45 @@ class Qanoni extends StatelessWidget {
   Widget buildMainApp(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<ThemeNotifier>(
-          create: (_) => ThemeNotifier(),
-        ),
         RepositoryProvider<AuthenticationBloc>(
-          create: (context) => AuthenticationBloc(
-            userRepository: userRepository,
-          ),
+          create: (context) =>
+              AuthenticationBloc(userRepository: userRepository),
         ),
-        BlocProvider(
-          create: (context) => LocaleCubit(),
-        ),
+        BlocProvider(create: (context) => LocaleCubit()),
+        BlocProvider(create: (context) => ThemeCubit()),
       ],
-      child: Consumer<ThemeNotifier>(
-        builder: (context, themeNotifier, child) {
-          return BlocBuilder<LocaleCubit, LocaleState>(
-            builder: (context, localeState) {
-              return MaterialApp.router(
-                routerConfig: AppRouter.router,
-                themeMode: themeNotifier.currentTheme,
-                theme: QAppTheme.lightTheme,
-                darkTheme: QAppTheme.darkTheme,
-                debugShowCheckedModeBanner: false,
-                locale: localeState.locale,
-                supportedLocales: const [Locale('en'), Locale('ar')],
-                localizationsDelegates: const [
-                  AppLocalizations.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                localeResolutionCallback: (deviceLocale, supportedLocales) {
-                  for (var locale in supportedLocales) {
-                    if (deviceLocale != null &&
-                        deviceLocale.languageCode == locale.languageCode) {
-                      return deviceLocale;
-                    }
+      child:
+          BlocBuilder<ThemeCubit, ThemeState>(builder: (context, themeState) {
+        return BlocBuilder<LocaleCubit, LocaleState>(
+          // Listen to LocaleCubit
+          builder: (context, localeState) {
+            return MaterialApp.router(
+              routerConfig: AppRouter.router,
+              themeMode: themeState.themeMode,
+              theme: QAppTheme.lightTheme,
+              darkTheme: QAppTheme.darkTheme,
+              debugShowCheckedModeBanner: false,
+              locale: localeState.locale, // Use the current locale state
+              supportedLocales: const [Locale('en'), Locale('ar')],
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              localeResolutionCallback: (deviceLocale, supportedLocales) {
+                for (var locale in supportedLocales) {
+                  if (deviceLocale != null &&
+                      deviceLocale.languageCode == locale.languageCode) {
+                    return deviceLocale;
                   }
-                  return supportedLocales.first;
-                },
-              );
-            },
-          );
-        },
-      ),
+                }
+                return supportedLocales.first;
+              },
+            );
+          },
+        );
+      }),
     );
   }
 
