@@ -1,11 +1,12 @@
 import 'dart:developer';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
+import 'package:qanoni/features/languages/view_model/app_langauge_cubit/app_language_cubit.dart';
+
 import 'core/utils/app_router.dart';
 import 'core/utils/theme/change_theme_notifire.dart';
 import 'core/utils/theme/theme.dart';
@@ -22,34 +23,33 @@ class Qanoni extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: Connectivity().onConnectivityChanged,
-      builder: (context, AsyncSnapshot<List<ConnectivityResult>> snapshot) {
+      builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return loading();
         }
 
         if (snapshot.hasError) {
-          return noInternet(); // Error handling
+          return noInternet();
         }
 
         if (snapshot.hasData) {
           List<ConnectivityResult>? results = snapshot.data;
-          // Check if there's any connectivity result that's not 'none'
-          bool isConnected =
-              results?.any((result) => result != ConnectivityResult.none) ??
-                  false;
+
+          bool isConnected = results != null &&
+              results.any((result) => result != ConnectivityResult.none);
+
           if (!isConnected) {
-            return noInternet(); // Show no internet widget if all results are 'none'
+            return noInternet();
           } else {
-            return buildMainApp(context); // Build the main app if connected
+            return buildMainApp(context);
           }
         } else {
-          return loading(); // Show loading if no data
+          return loading();
         }
       },
     );
   }
 
-  /// This method builds the main app and is called when there's internet access.
   Widget buildMainApp(BuildContext context) {
     return MultiProvider(
       providers: [
@@ -61,37 +61,45 @@ class Qanoni extends StatelessWidget {
             userRepository: userRepository,
           ),
         ),
+        BlocProvider(
+          create: (context) => LocaleCubit(),
+        ),
       ],
       child: Consumer<ThemeNotifier>(
-        builder: (context, themeNotifier, child) => MaterialApp.router(
-          routerConfig: AppRouter.router,
-          themeMode: themeNotifier.currentTheme,
-          theme: QAppTheme.lightTheme,
-          darkTheme: QAppTheme.darkTheme,
-          debugShowCheckedModeBanner: false,
-          locale: const Locale('en'),
-          supportedLocales: const [Locale('en'), Locale('ar')],
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          localeResolutionCallback: (deviceLocale, supportedLocales) {
-            for (var locale in supportedLocales) {
-              if (deviceLocale != null &&
-                  deviceLocale.languageCode == locale.languageCode) {
-                return deviceLocale;
-              }
-            }
-            return supportedLocales.first;
-          },
-        ),
+        builder: (context, themeNotifier, child) {
+          return BlocBuilder<LocaleCubit, LocaleState>(
+            builder: (context, localeState) {
+              return MaterialApp.router(
+                routerConfig: AppRouter.router,
+                themeMode: themeNotifier.currentTheme,
+                theme: QAppTheme.lightTheme,
+                darkTheme: QAppTheme.darkTheme,
+                debugShowCheckedModeBanner: false,
+                locale: localeState.locale,
+                supportedLocales: const [Locale('en'), Locale('ar')],
+                localizationsDelegates: const [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                localeResolutionCallback: (deviceLocale, supportedLocales) {
+                  for (var locale in supportedLocales) {
+                    if (deviceLocale != null &&
+                        deviceLocale.languageCode == locale.languageCode) {
+                      return deviceLocale;
+                    }
+                  }
+                  return supportedLocales.first;
+                },
+              );
+            },
+          );
+        },
       ),
     );
   }
 
-  /// Show loading widget while waiting for connectivity data.
   Widget loading() {
     return const Directionality(
       textDirection: TextDirection.ltr,
@@ -103,7 +111,6 @@ class Qanoni extends StatelessWidget {
     );
   }
 
-  /// Show no internet widget when there is no connectivity.
   Widget noInternet() {
     return Directionality(
       textDirection: TextDirection.ltr,
@@ -131,7 +138,7 @@ class Qanoni extends StatelessWidget {
           ElevatedButton(
             style: ButtonStyle(
               backgroundColor: WidgetStateProperty.all(QColors.white),
-              foregroundColor: const WidgetStatePropertyAll(QColors.black),
+              foregroundColor: WidgetStateProperty.all(QColors.black),
             ),
             onPressed: () async {
               List<ConnectivityResult> result =

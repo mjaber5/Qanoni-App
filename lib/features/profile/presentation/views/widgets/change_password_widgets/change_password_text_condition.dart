@@ -10,7 +10,8 @@ class ChangePasswordTextCondition extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 16.0, top: 16.0),
       child: Center(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center, // Aligns text to the left
+          crossAxisAlignment:
+              CrossAxisAlignment.center, // Aligns text to the left
           children: [
             const Text(
               "By changing your password, you agree to our:",
@@ -44,9 +45,7 @@ class ChangePasswordTextCondition extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
-                    // Handle Terms of Use tap
-                  },
+                  onTap: () {},
                   child: const Text(
                     "Terms of Use",
                     style: TextStyle(

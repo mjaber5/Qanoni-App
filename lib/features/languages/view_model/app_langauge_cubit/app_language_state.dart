@@ -1,16 +1,7 @@
-part of 'app_language_cubit.dart';
+import 'package:flutter/material.dart';
 
-sealed class AppLanguageState extends Equatable {
-  const AppLanguageState();
+class LocaleState {
+  final Locale locale;
 
-  @override
-  List<Object> get props => [];
-}
-
-final class AppLanguageInitial extends AppLanguageState {}
-
-final class AppChangeLanguage extends AppLanguageState {
-  final String? languageCode;
-
-  const AppChangeLanguage({this.languageCode});
+  LocaleState(this.locale);
 }

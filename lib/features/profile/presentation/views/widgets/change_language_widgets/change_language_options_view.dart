@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qanoni/features/languages/view_model/app_langauge_cubit/app_language_cubit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../core/utils/constants/text_strings.dart';
 
@@ -12,7 +15,29 @@ class OptionsLanguage extends StatefulWidget {
 }
 
 class _OptionsLanguageState extends State<OptionsLanguage> {
-  SingingCharacter? _character = SingingCharacter.english;
+  SingingCharacter? _character;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSelectedLanguage();
+  }
+
+  Future<void> _loadSelectedLanguage() async {
+    final prefs = await SharedPreferences.getInstance();
+    final savedLocaleCode = prefs.getString('selected_locale');
+
+    if (savedLocaleCode != null) {
+      setState(() {
+        _character = savedLocaleCode == 'ar'
+            ? SingingCharacter.arabic
+            : SingingCharacter.english;
+      });
+    } else {
+      _character = SingingCharacter.english;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,11 +50,13 @@ class _OptionsLanguageState extends State<OptionsLanguage> {
             title: const Text(QTexts.changeLanguageArabicOption),
             leading: Radio<SingingCharacter>(
               fillColor: WidgetStateProperty.all(QColors.secondary),
-              value: SingingCharacter.english,
+              value: SingingCharacter.arabic,
               groupValue: _character,
               onChanged: (SingingCharacter? value) {
                 setState(() {
                   _character = value;
+
+                  context.read<LocaleCubit>().setLocale(const Locale('ar'));
                 });
               },
             ),
@@ -43,11 +70,13 @@ class _OptionsLanguageState extends State<OptionsLanguage> {
             title: const Text(QTexts.changeLanguageEnglishOption),
             leading: Radio<SingingCharacter>(
               fillColor: WidgetStateProperty.all(QColors.secondary),
-              value: SingingCharacter.arabic,
+              value: SingingCharacter.english,
               groupValue: _character,
               onChanged: (SingingCharacter? value) {
                 setState(() {
                   _character = value;
+
+                  context.read<LocaleCubit>().setLocale(const Locale('en'));
                 });
               },
             ),

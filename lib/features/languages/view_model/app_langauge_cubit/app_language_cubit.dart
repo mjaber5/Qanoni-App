@@ -1,18 +1,34 @@
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:qanoni/features/languages/model/enums/languages_event_type.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-part 'app_language_state.dart';
+class LocaleState {
+  final Locale locale;
+  LocaleState(this.locale);
+}
 
-class AppLanguageCubit extends Cubit<AppLanguageState> {
-  AppLanguageCubit() : super(AppLanguageInitial());
+class LocaleCubit extends Cubit<LocaleState> {
+  LocaleCubit() : super(LocaleState(const Locale('en'))) {
+    _loadSavedLocale();
+  }
 
-  appLanguageFunction(LanguagesEventEnums eventType) {
-    switch (eventType) {
-      case LanguagesEventEnums.initialLanguage:
-      case LanguagesEventEnums.arabicLanguage:
-        break;
-      case LanguagesEventEnums.englishLanguage:
+  void setLocale(Locale locale) async {
+    emit(LocaleState(locale));
+
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selected_locale', locale.languageCode);
+  }
+
+  Future<void> _loadSavedLocale() async {
+    final prefs = await SharedPreferences.getInstance();
+    final savedLocaleCode = prefs.getString('selected_locale');
+
+    if (savedLocaleCode != null) {
+      emit(
+        LocaleState(
+          Locale(savedLocaleCode),
+        ),
+      );
     }
   }
 }

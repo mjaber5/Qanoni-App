@@ -13,9 +13,8 @@ class ChangePasswordViewBody extends StatelessWidget {
     return const SingleChildScrollView(
       child: Column(
         children: [
-         
           CustomChangePasswordAppBar(),
-           ChangePasswordText(),
+          ChangePasswordText(),
           ChangePassword(),
           ChangePasswordTextCondition()
         ],
