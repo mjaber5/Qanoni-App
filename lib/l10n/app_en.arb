@@ -96,5 +96,9 @@
   "comments": "Comments",
   "commentsDescription": "Reactions or opinions shared by users on posts.",
   "typeComment": "Type Comment..",
+  "currentPassword": "Current Password",
+  "newPassword": "New Password",
+  "confirmPassword": "Confirm Password",
+  "changePassword": "Change Password",
   "typeCommentDescription": "Field where users enter reactions or opinions on posts."
 }

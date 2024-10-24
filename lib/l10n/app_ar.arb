@@ -96,5 +96,8 @@
   "comments": "التعليقات",
   "commentsDescription": "ردود الفعل أو الآراء المشاركة من قبل المستخدمين على المنشورات.",
   "typeComment": "اكتب تعليقا..",
+  "currentPassword": "كلمة المرور الحالية",
+  "newPassword": "كلمة المرور الجديدة",
+  "confirmPassword": "تأكيد كلمة المرور",
   "typeCommentDescription": "الحقل الذي يدخل فيه المستخدمون التعليقات على المنشورات."
 }
