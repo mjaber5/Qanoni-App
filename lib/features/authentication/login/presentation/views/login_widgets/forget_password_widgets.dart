@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 // import 'package:go_router/go_router.dart';
 import 'package:toasty_box/toast_enums.dart';
 import 'package:toasty_box/toast_service.dart';
@@ -18,8 +19,8 @@ class ForgetPasswordWidgets extends StatefulWidget {
 
 class _ForgetPasswordState extends State<ForgetPasswordWidgets> {
   final _formKey = GlobalKey<FormState>();
-    final _emailController = TextEditingController();
-   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final _emailController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -27,46 +28,42 @@ class _ForgetPasswordState extends State<ForgetPasswordWidgets> {
 
     return Scaffold(
       appBar: AppBar(
-       
-         title: Text(localizations.forgotPassword), // عنوان شريط التطبيق
+        title: Text(localizations.forgotPassword), // عنوان شريط التطبيق
       ),
       body: Column(
         children: [
-
-
-         const Padding(
-  padding: EdgeInsets.all(12.0),
-  child: Column(
-    mainAxisAlignment: MainAxisAlignment.start,
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        'Qanoni',
-        style: TextStyle(
-          fontSize: 40,
-          fontWeight: FontWeight.w800,
-        ),
-      ),
-      SizedBox(height: 12),
-      Text(
-        'Forgot Your Password?',
-        style: TextStyle(
-          fontSize: 22,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-      SizedBox(height: 4),
-      Text(
-        'Enter your email to reset your password.',
-        style: TextStyle(
-          fontSize: 16,
-          color: QColors.darkGrey,
-        ),
-      ),
-    ],
-  ),
-)
-          ,
+          Padding(
+            padding: EdgeInsets.all(12.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  localizations.qanoni,
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                SizedBox(height: 12),
+                Text(
+                  localizations.forgotPassword,
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: 4),
+                Text(
+                  localizations.restEmail,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: QColors.darkGrey,
+                  ),
+                ),
+              ],
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.all(10),
             child: Form(
@@ -75,106 +72,91 @@ class _ForgetPasswordState extends State<ForgetPasswordWidgets> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Padding(
-          
-               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: LabelFeild(text: localizations.email), 
-                          ),
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: LabelFeild(text: localizations.email),
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: TextFormField(
                       controller: _emailController,
                       decoration: InputDecoration(
                         hintText: localizations.email,
-                        hintStyle: const TextStyle(color: QColors.white), 
-                       
-                       
+                        hintStyle: const TextStyle(color: QColors.white),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8.0), 
-                          borderSide: const BorderSide(color: QColors.secondary),
-                       
-                       
-                       
-                       
+                          borderRadius: BorderRadius.circular(8.0),
+                          borderSide:
+                              const BorderSide(color: QColors.secondary),
                         ),
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                        
                           return 'Please enter your email address';
-          
-                        } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                               return 'Please enter a valid email address';
+                        } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+')
+                            .hasMatch(value)) {
+                          return 'Please enter a valid email address';
                         }
                         return null;
                       },
                     ),
-          
-          
                   ),
                   const SizedBox(height: 20),
                   _buildSendEmailButton(localizations.sendResetEmail),
-
                   Padding(
-  padding: const EdgeInsets.only(bottom: 16.0, top: 16.0),
-  child: Center(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const Text(
-          "By requesting a password reset, you agree to our:",
-          style: TextStyle(
-            color: Colors.grey,
-            fontSize: 13,
-          ),
-        ),
-        const SizedBox(height: 4),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GestureDetector(
-              onTap: () {
-                // أضف الوظيفة المطلوبة هنا
-              },
-              child: const Text(
-                "Privacy Policy",
-                style: TextStyle(
-                  fontSize: 14,
-                  color: QColors.secondary,
-                  decoration: TextDecoration.underline,
-                ),
-              ),
-            ),
-            const Text(
-              " and ",
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: 13,
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                // أضف الوظيفة المطلوبة هنا
-              },
-              child: const Text(
-                "Terms of Use",
-                style: TextStyle(
-                  fontSize: 14,
-                  color: QColors.secondary,
-                  decoration: TextDecoration.underline,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
-    ),
-  ),
-)
-
-
-
-                 
-
+                    padding: const EdgeInsets.only(bottom: 16.0, top: 16.0),
+                    child: Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            localizations.byRequest,
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 13,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  // أضف الوظيفة المطلوبة هنا
+                                },
+                                child: Text(
+                                  localizations.loginPrivacyPolicy,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: QColors.secondary,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                localizations.loginAndText,
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 13,
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  // أضف الوظيفة المطلوبة هنا
+                                },
+                                child: Text(
+                                  localizations.termsOfUs,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: QColors.secondary,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
