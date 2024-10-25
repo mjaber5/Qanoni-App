@@ -23,6 +23,7 @@
   "resetPassword": "Reset Password",
   "resetPasswordDescription": "Option for users to reset their forgotten password.",
   "homeScreen": "Home",
+  "chatbotAppbarTitle": "Ask lawyer",
   "homeScreenDescription": "Main screen of the app where users land after logging in.",
   "chatScreen": "Chat",
   "chatScreenDescription": "Screen for real-time messaging between users.",
