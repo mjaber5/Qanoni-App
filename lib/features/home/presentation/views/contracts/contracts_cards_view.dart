@@ -10,70 +10,101 @@ class ContractsCardsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        children: [
-          contractsCardsContainer(
-            context,
-            AppRouter.kLeaseCard,
-            'Lease contracts',
-            Iconsax.document,
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.01,
-          ),
-          contractsCardsContainer(
-            context,
-            AppRouter.kWaiverContractsCard,
-            'Waiver Contracts',
-            Iconsax.note,
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.01,
-          ),
-          contractsCardsContainer(
-            context,
-            AppRouter.kSalesContractsCard,
-            'Sales Contracts',
-            Iconsax.money,
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.01,
-          ),
-          contractsCardsContainer(
-            context,
-            AppRouter.kEmploymentCard,
-            'Employment contract ',
-            Iconsax.user_add,
-          ),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Choose Your Contract',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,  // تصغير حجم الخط
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 20),
+            contractsCardsContainer(
+              context,
+              AppRouter.kLeaseCard,
+              'Lease Contracts',
+              Iconsax.document,
+            ),
+            const SizedBox(height: 12),  // تصغير الفجوة بين العناصر
+            contractsCardsContainer(
+              context,
+              AppRouter.kWaiverContractsCard,
+              'Waiver Contracts',
+              Iconsax.note,
+            ),
+            const SizedBox(height: 12),
+            contractsCardsContainer(
+              context,
+              AppRouter.kSalesContractsCard,
+              'Sales Contracts',
+              Iconsax.money,
+            ),
+            const SizedBox(height: 12),
+            contractsCardsContainer(
+              context,
+              AppRouter.kEmploymentCard,
+              'Employment Contract',
+              Iconsax.user_add,
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  InkWell contractsCardsContainer(
+  Widget contractsCardsContainer(
       BuildContext context, String route, String textTitle, IconData icon) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         GoRouter.of(context).push(route);
       },
       child: Container(
         width: MediaQuery.of(context).size.width * 0.9,
-        height: MediaQuery.of(context).size.height * 0.13,
-        padding: const EdgeInsets.symmetric(vertical: 12),
+        height: MediaQuery.of(context).size.height * 0.15, // تصغير ارتفاع الحاوية
+        padding: const EdgeInsets.all(16), // تصغير المساحة الداخلية
         decoration: BoxDecoration(
-          color: QColors.darkerGrey.withOpacity(0.5),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(icon, size: 30, color: Colors.white),
-              const SizedBox(width: 50),
-              Text(textTitle, style: const TextStyle(color: Colors.white)),
+          gradient: LinearGradient(
+            colors: [
+              QColors.secondary.withOpacity(0.9),
+              QColors.darkerGrey.withOpacity(0.9),
             ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
+          borderRadius: BorderRadius.circular(15), // تعديل الزوايا
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 10, // تصغير الظل
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            CircleAvatar(
+              radius: 25, // تصغير الدائرة
+              backgroundColor: Colors.white,
+              child: Icon(icon, size: 28, color: QColors.secondary), // تصغير الأيقونة
+            ),
+            const SizedBox(width: 16), // تصغير الفجوة بين الأيقونة والنص
+            Expanded(
+              child: Text(
+                textTitle,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 18, // تصغير حجم الخط
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 22), // تصغير الأيقونة
+          ],
         ),
       ),
     );
