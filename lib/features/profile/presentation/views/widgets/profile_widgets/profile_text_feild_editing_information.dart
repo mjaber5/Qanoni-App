@@ -1,11 +1,11 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import '../../../../../../core/utils/constants/text_strings.dart';
 import 'custom_label_text_field_profile_view.dart';
 import 'custom_text_feild_profile_view.dart';
 import 'profile_date_picker.dart';
 import 'package:user_repository/user_reposetory.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileUserInformationEditingField extends StatefulWidget {
   const ProfileUserInformationEditingField({super.key});
@@ -58,16 +58,17 @@ class _ProfileUserInformationEditingFieldState
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const LabelTextFieldProfileView(text: '${QTexts.birthday} :'),
+           LabelTextFieldProfileView(text: '${localizations.birthday} :'),
           const SizedBox(height: 8),
           CustomTextFieldProfileView(
               controller: birthdayController,
-              hintText: QTexts.profileBirthdayHintText,
+              hintText: localizations.profileBirthdayHintText,
               prefixIcon: IconButton(
                 icon: const Icon(Icons.date_range),
                 onPressed: () {
@@ -76,11 +77,11 @@ class _ProfileUserInformationEditingFieldState
               ),
               inputType: TextInputType.datetime),
           const SizedBox(height: 18),
-          const LabelTextFieldProfileView(text: '${QTexts.phone} :'),
+           LabelTextFieldProfileView(text: '${localizations.phone} :'),
           const SizedBox(height: 8),
           CustomTextFieldProfileView(
               controller: phoneController,
-              hintText: QTexts.profilePhoneHintText,
+              hintText: localizations.profilePhoneHintText,
               prefixIcon: IconButton(
                 onPressed: () {},
                 icon: const Icon(
@@ -89,11 +90,11 @@ class _ProfileUserInformationEditingFieldState
               ),
               inputType: TextInputType.number),
           const SizedBox(height: 18),
-          const LabelTextFieldProfileView(text: '${QTexts.email} :'),
+           LabelTextFieldProfileView(text: '${localizations.email} :'),
           const SizedBox(height: 8),
           CustomTextFieldProfileView(
             controller: emailController,
-            hintText: QTexts.profileEmailHintText,
+            hintText: localizations.profileEmailHintText,
             prefixIcon: IconButton(
               icon: const Icon(
                 Icons.email,

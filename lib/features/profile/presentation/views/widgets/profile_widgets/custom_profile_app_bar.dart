@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../../core/utils/app_router.dart';
-import '../../../../../../core/utils/constants/text_strings.dart';
 import '../../../../../../core/utils/styles.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppbarProfilState extends StatefulWidget {
   const AppbarProfilState({super.key});
@@ -15,12 +15,13 @@ class AppbarProfilState extends StatefulWidget {
 class __AppbarProfilStateState extends State<AppbarProfilState> {
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.only(right: 24, left: 24, top: 40, bottom: 10),
       child: Row(
         children: [
           Text(
-            QTexts.profileAppbarTitle,
+            localizations.profileScreen,
             style: Styles.textStyle26.copyWith(
               fontWeight: FontWeight.bold,
             ),
