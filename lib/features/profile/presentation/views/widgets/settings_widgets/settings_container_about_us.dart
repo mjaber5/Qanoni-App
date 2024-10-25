@@ -6,13 +6,14 @@ import 'package:qanoni/features/theme/presentation/view_model/cubit/change_theme
 import '../../../../../../core/utils/app_router.dart';
 import '../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../core/utils/constants/sizes.dart';
-import '../../../../../../core/utils/constants/text_strings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsContainerAboutUs extends StatelessWidget {
   const SettingsContainerAboutUs({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     final themeState = context.watch<ThemeCubit>().state;
 
     final textTheme = themeState.themeMode == ThemeMode.light
@@ -41,7 +42,7 @@ class SettingsContainerAboutUs extends StatelessWidget {
                   Icons.info,
                 ),
                 title: Text(
-                  QTexts.settingsAboutUS,
+                 localizations.about,
                   style: textTheme.headlineSmall,
                 ),
                 trailing: const Icon(
