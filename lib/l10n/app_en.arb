@@ -18,6 +18,7 @@
   "socialMediaDescription": "Online platforms and tools that enable people to create, share, and interact with content in virtual communities.",
   "loginScreen": "Login",
   "chatbotTextFieldHintText": "Type your message...",
+  "notificatiomDescreption":" Notification Description",
   "loginScreenDescription": "Screen where users enter their credentials to access the app.",
   "signupScreen": "Signup",
   "signupScreenDescription": "Screen where new users create an account to join the app.",
@@ -49,6 +50,8 @@
   "displayName": "Display name",
   "displayNameDescription": "Name shown publicly on the app.",
   "userName": "User name",
+  "userNameNotification": "@username",
+
   "userNameDescription": "Unique identifier chosen by the user for their account.",
   "update": "Update",
   "updateDescription": "Action to save changes or refresh information.",

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../../../../../core/utils/constants/colors.dart';
 
 import '../../../data/modelnotification.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class ServicesCardNotifItem extends StatelessWidget {
   final List<NotificationItem> notifications;
@@ -9,6 +11,7 @@ class ServicesCardNotifItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Column(
@@ -21,26 +24,26 @@ class ServicesCardNotifItem extends StatelessWidget {
               color: QColors.darkerGrey.withOpacity(0.4),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: const Column(
+            child:  Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
-                      CircleAvatar(
+                      const CircleAvatar(
                         radius: 20,
                         backgroundImage:
                             NetworkImage("https://via.placeholder.com/150"),
                       ),
-                      SizedBox(width: 20),
-                      Text("@username"),
-                      Spacer(),
-                      Text("12:00"),
-                      SizedBox(width: 20),
+                      const SizedBox(width: 20),
+                      Text(localizations.userNameNotification),
+                      const Spacer(),
+                      const Text("12:00"),
+                      const SizedBox(width: 20),
                     ],
                   ),
                 ),
-                Text("Notification Descreption")
+                Text(localizations.notificatiomDescreption)
               ],
             ),
           ),

@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/utils/constants/text_strings.dart';
 import '../../../../../core/utils/styles.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class AppbarNotification extends StatelessWidget {
   const AppbarNotification({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
+    final localizations = AppLocalizations.of(context)!;
+    return  Padding(
       padding: EdgeInsets.only(right: 24, left: 24, top: 40, bottom: 10),
       child: Row(
         children: [
           Text(
-            QTexts.notificationAppbarTitle,
+            localizations.notificationScreen,
             style: Styles.textStyle30,
             textAlign: TextAlign.center,
           ),

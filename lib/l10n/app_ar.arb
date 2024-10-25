@@ -93,7 +93,8 @@
   "chooseYourContract": "اختر عقدك",
   "leaseContracts": "عقود الإيجار",
   "waiverContractsTitle": "عقود التنازل",
-
+  "notificatiomDescreption":" وصف الإشعار",
+  "userNameNotification": "@اسم المستخدم",
   "sellCardAppBar": "عقود البيع",
   "employmentContract": "عقد العمل",
   "chatbotAppbarTitle": "اسال محامي",
