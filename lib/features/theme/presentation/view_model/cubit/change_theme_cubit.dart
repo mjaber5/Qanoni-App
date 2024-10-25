@@ -4,28 +4,24 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'change_theme_state.dart';
 
 class ThemeCubit extends Cubit<ThemeState> {
-  ThemeCubit() : super(ThemeState(ThemeMode.light)) {
+  final SharedPreferences _prefs;
+
+  ThemeCubit(this._prefs) : super(ThemeState(ThemeMode.light)) {
     _loadThemeMode();
   }
 
-  Future<void> _loadThemeMode() async {
-    final prefs = await SharedPreferences.getInstance();
-    final isDarkMode = prefs.getBool('isDarkMode') ?? false;
-    emit(isDarkMode ? ThemeState(ThemeMode.dark) : ThemeState(ThemeMode.light));
+  void _loadThemeMode() {
+    final isDarkMode = _prefs.getBool('isDarkMode') ?? false;
+    emit(ThemeState(isDarkMode ? ThemeMode.dark : ThemeMode.light));
   }
 
-  Future<void> toggleTheme() async {
-    if (state.themeMode == ThemeMode.light) {
-      emit(ThemeState(ThemeMode.dark));
-      await _saveThemeMode(true);
-    } else {
-      emit(ThemeState(ThemeMode.light));
-      await _saveThemeMode(false);
+  void toggleTheme() async {
+    final isCurrentlyDark = state.themeMode == ThemeMode.dark;
+    final newMode = isCurrentlyDark ? ThemeMode.light : ThemeMode.dark;
+
+    if (state.themeMode != newMode) {
+      emit(ThemeState(newMode));
+      await _prefs.setBool('isDarkMode', !isCurrentlyDark);
     }
-  }
-
-  Future<void> _saveThemeMode(bool isDarkMode) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('isDarkMode', isDarkMode);
   }
 }
