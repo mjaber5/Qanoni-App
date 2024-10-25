@@ -100,5 +100,13 @@
   "newPassword": "New Password",
   "confirmPassword": "Confirm Password",
   "changePassword": "Change Password",
+  "forgotPassword": "Forgot Password",
+    "resetPasswordInstructions": "Enter your email or phone number to search for your account.",
+    "enterEmailOrPhone": "Enter your email or phone number",
+    "enterValidContact": "Please enter a valid email or phone number",
+    "sendRequest": "Send Request",
+    "requestSent": "Request sent successfully",
+    "errorOccurred": "An error occurred, please try again",
+    "sendResetEmail": "Send Reset Email",
   "typeCommentDescription": "Field where users enter reactions or opinions on posts."
 }

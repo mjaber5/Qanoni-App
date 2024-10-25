@@ -54,6 +54,8 @@ class LoginTextCondition extends StatelessWidget {
                 ),
               ],
             ),
+
+            
           ],
         ),
       ),

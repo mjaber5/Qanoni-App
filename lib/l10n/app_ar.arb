@@ -99,5 +99,12 @@
   "currentPassword": "كلمة المرور الحالية",
   "newPassword": "كلمة المرور الجديدة",
   "confirmPassword": "تأكيد كلمة المرور",
-  "typeCommentDescription": "الحقل الذي يدخل فيه المستخدمون التعليقات على المنشورات."
+  "typeCommentDescription": "الحقل الذي يدخل فيه المستخدمون التعليقات على المنشورات.",
+  "forgotPassword": "نسيت كلمة المرور",
+  "resetPasswordInstructions": "أدخل بريدك الإلكتروني أو رقم الهاتف للبحث عن حسابك.",
+  "enterEmailOrPhone": "أدخل بريدك الإلكتروني أو رقم الهاتف",
+  "enterValidContact": "يرجى إدخال بريد إلكتروني أو رقم هاتف صحيح",
+  "sendRequest": "إرسال الطلب",
+  "sendResetEmail_ar": "إرسال بريد إعادة تعيين كلمة المرور",
+  "requestSent": "تم إرسال الطلب بنجاح"
 }

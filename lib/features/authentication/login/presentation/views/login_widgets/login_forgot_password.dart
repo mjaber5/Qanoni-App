@@ -3,6 +3,7 @@ import '../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../core/utils/styles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+
 class LoginTextForgotPassword extends StatelessWidget {
   const LoginTextForgotPassword({super.key});
 
@@ -17,7 +18,7 @@ class LoginTextForgotPassword extends StatelessWidget {
         children: [
           TextButton(
             onPressed: () {
-              // ToDo Navigator Forgot password view
+              
             },
             child: Text(
               localizations.loginForgotPassword,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 
+import 'forget_password_widgets.dart';
+
 class LoginActionText extends StatelessWidget {
   const LoginActionText({super.key});
 
@@ -25,7 +27,14 @@ class LoginActionText extends StatelessWidget {
           ),
           const SizedBox(width: 35),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ForgetPasswordWidgets(),
+                ),
+              );
+            },
             child: const Text(
               'Forget Password?',
               style: TextStyle(
