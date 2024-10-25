@@ -3,21 +3,23 @@ import 'package:go_router/go_router.dart';
 import '../../../../../core/utils/app_router.dart';
 import '../../../../../core/utils/constants/colors.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ContractsCardsView extends StatelessWidget {
   const ContractsCardsView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Choose Your Contract',
-              style: TextStyle(
+             Text(
+            localizations.chooseYourContract  ,
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 20,  // تصغير حجم الخط
                 fontWeight: FontWeight.bold,
@@ -27,28 +29,28 @@ class ContractsCardsView extends StatelessWidget {
             contractsCardsContainer(
               context,
               AppRouter.kLeaseCard,
-              'Lease Contracts',
+              localizations.leaseContracts,
               Iconsax.document,
             ),
             const SizedBox(height: 12),  // تصغير الفجوة بين العناصر
             contractsCardsContainer(
               context,
               AppRouter.kWaiverContractsCard,
-              'Waiver Contracts',
+              localizations.waiverContractsTitle,
               Iconsax.note,
             ),
             const SizedBox(height: 12),
             contractsCardsContainer(
               context,
               AppRouter.kSalesContractsCard,
-              'Sales Contracts',
+             localizations.sellCardAppBar,
               Iconsax.money,
             ),
             const SizedBox(height: 12),
             contractsCardsContainer(
               context,
               AppRouter.kEmploymentCard,
-              'Employment Contract',
+              localizations.employmentContract,
               Iconsax.user_add,
             ),
           ],
@@ -78,10 +80,10 @@ class ContractsCardsView extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(15), // تعديل الزوايا
           boxShadow: [
-            BoxShadow(
+            const BoxShadow(
               color: Colors.black12,
               blurRadius: 10, // تصغير الظل
-              offset: const Offset(0, 4),
+              offset: Offset(0, 4),
             ),
           ],
         ),

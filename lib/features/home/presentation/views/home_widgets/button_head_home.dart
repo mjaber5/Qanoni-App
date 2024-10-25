@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/utils/constants/colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class ButtonHomeView extends StatelessWidget {
   const ButtonHomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(12),
       child: Container(
@@ -31,7 +34,7 @@ class ButtonHomeView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Logo with text "Qanoni"
-              const Row(
+               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
@@ -41,7 +44,7 @@ class ButtonHomeView extends StatelessWidget {
                   ),
                   SizedBox(width: 10),
                   Text(
-                    'Qanoni',
+                    localizations.qanoni,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 48, // Font size
@@ -59,10 +62,10 @@ class ButtonHomeView extends StatelessWidget {
               ),
               const SizedBox(height: 15),
               // Brief Description
-              const Padding(
+               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0),
                 child: Text(
-                  'منصة مبتكرة لإنشاء وإدارة العقود الإلكترونية بسهولة ويسر.',
+localizations.descAppContenar,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white70,
