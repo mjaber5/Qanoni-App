@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/utils/constants/colors.dart';
-import '../../../../../core/utils/constants/text_strings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChatbotTextField extends StatelessWidget {
   final TextEditingController chatbotMessageController;
@@ -14,6 +14,7 @@ class ChatbotTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Row(
@@ -22,7 +23,7 @@ class ChatbotTextField extends StatelessWidget {
             child: TextField(
               controller: chatbotMessageController,
               decoration: InputDecoration(
-                hintText: QTexts.chatbotTextFieldHintText,
+                hintText: localizations.chatbotTextFieldHintText,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: const BorderSide(color: QColors.secondary),

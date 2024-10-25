@@ -28,6 +28,7 @@
   "addScreen": "إضافة",
   "addScreenDescription": "الشاشة لإضافة محتوى أو منشورات جديدة.",
   "profileScreen": "الملف الشخصي",
+  "chatbotTextFieldHintText": "اكتب رسالتك...",
   "profileScreenDescription": "الشاشة التي تعرض معلومات وإعدادات الملف الشخصي للمستخدم.",
   "editProfileScreen": "تعديل الملف الشخصي",
   "editProfileScreenDescription": "الشاشة حيث يمكن للمستخدمين تعديل معلومات ملفهم الشخصي.",

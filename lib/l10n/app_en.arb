@@ -17,6 +17,7 @@
   "socialMedia": "Social Media",
   "socialMediaDescription": "Online platforms and tools that enable people to create, share, and interact with content in virtual communities.",
   "loginScreen": "Login",
+  "chatbotTextFieldHintText": "Type your message...",
   "loginScreenDescription": "Screen where users enter their credentials to access the app.",
   "signupScreen": "Signup",
   "signupScreenDescription": "Screen where new users create an account to join the app.",
