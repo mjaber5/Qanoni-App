@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/text_strings.dart';
 import '../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../core/utils/styles.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignupTextAboutApp extends StatelessWidget {
   const SignupTextAboutApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          QTexts.signupAboutApp,
+         localizations.signupAboutAppp,
           style: Styles.textStyle16.copyWith(
             color: QColors.darkGrey,
           ),

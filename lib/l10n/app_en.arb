@@ -85,6 +85,7 @@
   "signupTextQuestion": "Already have an account?",
   "signupConditionText": "By logging in, you agree to our",
   "signupAboutApp": "Sign up now and start exploring all that our app has to offer. We're excited to welcome you to our community!",
+  "signupAboutAppp": "Sign up now and start exploring all that our app has to offer.",
   "signupPasswordValidationAtLeastOneLowerCaseLetter": "At least 1 lowercase letter",
   "signupPasswordValidationAtLeastOneUpperCaseLetter": "At least 1 uppercase letter",
   "signupPasswordValidationAtLeastOneSpecialCharacter": "At least 1 special character",
