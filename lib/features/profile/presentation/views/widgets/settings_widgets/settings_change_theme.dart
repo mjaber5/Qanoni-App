@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qanoni/core/utils/theme/custom_themes/text_theme.dart';
 import '../../../../../../core/utils/constants/colors.dart';
-import '../../../../../../core/utils/constants/text_strings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../../../features/theme/presentation/view_model/cubit/change_theme_cubit.dart';
 
 class SettingsChangeTheme extends StatefulWidget {
@@ -15,6 +15,7 @@ class SettingsChangeTheme extends StatefulWidget {
 class _SettingsChangeTheme extends State<SettingsChangeTheme> {
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     final themeState = context.watch<ThemeCubit>().state;
 
     final textTheme = themeState.themeMode == ThemeMode.light
@@ -36,7 +37,7 @@ class _SettingsChangeTheme extends State<SettingsChangeTheme> {
             child: Row(
               children: [
                 Text(
-                  QTexts.settingsChangeThemeSwitch,
+                localizations.dark,
                   style: textTheme.headlineSmall,
                 ),
                 const Spacer(),
