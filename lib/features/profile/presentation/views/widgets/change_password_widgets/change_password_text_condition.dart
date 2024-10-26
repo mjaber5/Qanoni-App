@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChangePasswordTextCondition extends StatelessWidget {
   const ChangePasswordTextCondition({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.only(bottom: 16.0, top: 16.0),
       child: Center(
@@ -13,8 +15,8 @@ class ChangePasswordTextCondition extends StatelessWidget {
           crossAxisAlignment:
               CrossAxisAlignment.center, // Aligns text to the left
           children: [
-            const Text(
-              "By changing your password, you agree to our:",
+             Text(localizations.byChanePassword
+             ,
               style: TextStyle(
                 color: Colors.grey,
                 fontSize: 13,
@@ -28,8 +30,8 @@ class ChangePasswordTextCondition extends StatelessWidget {
                   onTap: () {
                     // Handle Privacy Policy tap
                   },
-                  child: const Text(
-                    "Privacy Policy",
+                  child:  Text(
+              localizations.loginPrivacyPolicy,
                     style: TextStyle(
                       fontSize: 14,
                       color: QColors.secondary,
@@ -37,8 +39,7 @@ class ChangePasswordTextCondition extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Text(
-                  " and ",
+                 Text(localizations.loginAndText,
                   style: TextStyle(
                     color: Colors.grey,
                     fontSize: 13,
@@ -46,8 +47,8 @@ class ChangePasswordTextCondition extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {},
-                  child: const Text(
-                    "Terms of Use",
+                  child:  Text(
+                    localizations.termsOfUs,
                     style: TextStyle(
                       fontSize: 14,
                       color: QColors.secondary,

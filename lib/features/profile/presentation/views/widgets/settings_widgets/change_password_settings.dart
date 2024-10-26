@@ -5,13 +5,14 @@ import 'package:qanoni/core/utils/app_router.dart';
 import 'package:qanoni/core/utils/theme/custom_themes/text_theme.dart';
 import 'package:qanoni/features/theme/presentation/view_model/cubit/change_theme_cubit.dart';
 import '../../../../../../core/utils/constants/sizes.dart';
-import '../../../../../../core/utils/constants/text_strings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChangePasswordSettings extends StatelessWidget {
   const ChangePasswordSettings({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     final themeState = context.watch<ThemeCubit>().state;
 
     final textTheme = themeState.themeMode == ThemeMode.light
@@ -28,7 +29,7 @@ class ChangePasswordSettings extends StatelessWidget {
           Icons.lock_outlined,
         ),
         title: Text(
-          QTexts.settingsChangePassword,
+          localizations.changePassword,
           style: textTheme.headlineSmall,
         ),
         trailing: const Icon(

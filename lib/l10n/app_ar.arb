@@ -121,7 +121,9 @@
   "changeLanguageArabicOption": "العربيه",
   "profileBirthdayHintText":"أدخل تاريخ ميلادك",
   "historyAppBarTitle": "التاريخ",
-
+  "updateYourCredentials": "تحديث بيانات الاعتماد الخاصة بك،",
+  "secureChange": "قم بتأمين حسابك عن طريق تغيير كلمة المرور الخاصة بك بانتظام.",
+  "byChanePassword": "من خلال تغيير كلمة المرور الخاصة بك، فإنك توافق على:",
   "profilePhoneHintText":"أدخل رقم هاتقك",
 
   "byLogin":" من خلال تسجيل الدخول، فإنك توافق على:",

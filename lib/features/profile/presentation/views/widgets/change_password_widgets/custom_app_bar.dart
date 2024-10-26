@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../../core/utils/constants/text_strings.dart';
 import '../../../../../../core/utils/styles.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomChangePasswordAppBar extends StatelessWidget {
   const CustomChangePasswordAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.only(right: 8, left: 8, top: 40, bottom: 10),
       child: Row(
@@ -20,7 +21,7 @@ class CustomChangePasswordAppBar extends StatelessWidget {
             icon: const Icon(Icons.arrow_back_ios),
           ),
           Text(
-            QTexts.settingsChangePassword,
+            localizations.changePassword,
             style: Styles.textStyle26.copyWith(
               fontWeight: FontWeight.bold,
             ),

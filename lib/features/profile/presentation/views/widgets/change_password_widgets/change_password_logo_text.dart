@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChangePasswordText extends StatelessWidget {
   const ChangePasswordText({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Column(
@@ -13,8 +15,8 @@ class ChangePasswordText extends StatelessWidget {
         children: [
           
           const SizedBox(height: 12),
-          const Text(
-            'Update your credentials,',
+           Text(
+           localizations.updateYourCredentials,
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.w600,
@@ -22,7 +24,7 @@ class ChangePasswordText extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            'Secure your account by changing your password regularly.',
+            localizations.secureChange,
             style: TextStyle(
               fontSize: 16,
               color: Colors.grey[600],
