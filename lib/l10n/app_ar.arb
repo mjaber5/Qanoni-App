@@ -116,7 +116,9 @@
   "accountInformation": "معلومات الحساب",
   "birthday": "تاريخ ميلادك",
   "profileEmailHintText":"أدخل البريد الالكتروني",
-
+  "settingsLanguage": "اللغة",
+  "changeLanguageEnglishOption": "الانجليزيه",
+  "changeLanguageArabicOption": "العربيه",
   "profileBirthdayHintText":"أدخل تاريخ ميلادك",
 
   "profilePhoneHintText":"أدخل رقم هاتقك",
