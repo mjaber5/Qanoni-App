@@ -21,6 +21,7 @@
   "settingsLanguage": "Language",
   "changeLanguageEnglishOption": "English",
   "changeLanguageArabicOption": "Arabic",
+  "historyAppBarTitle": "History",
   "profileBirthdayHintText":"Enter your birthday",
   "profileEmailHintText":"Enter your Email",
   "profilePhoneHintText":"Enter your phone",
