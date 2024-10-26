@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../../core/utils/app_router.dart';
 import '../../../../../../core/utils/constants/colors.dart';
-import '../../../../../../core/utils/constants/text_strings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../../../core/utils/styles.dart';
 import '../../../../../authentication/login/presentation/view_model/sign_in_bloc/signin_bloc.dart';
 import 'package:toasty_box/toast_enums.dart';
@@ -22,6 +22,7 @@ class SettingsContainerLogout extends StatefulWidget {
 class _SettingsContainerLogoutState extends State<SettingsContainerLogout> {
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return BlocListener<SigninBloc, SigninState>(
       listener: (context, state) {
         if (state is SignOutSuccess) {
@@ -69,7 +70,7 @@ class _SettingsContainerLogoutState extends State<SettingsContainerLogout> {
                     color: QColors.error,
                   ),
                   title: Text(
-                    QTexts.settingsLogout,
+                    localizations.logout,
                     style: Styles.textStyle20.copyWith(
                       color: QColors.error,
                     ),
