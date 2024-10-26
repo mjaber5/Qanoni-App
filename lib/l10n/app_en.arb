@@ -148,6 +148,25 @@
   "sellLandCard": "Land Sales Contract",
   "sellEquipmentCard": "Equipment Sales Contract",
   "sellTerminationCard": "Sales Cancellation Contract",
+  "leaseContracts": "Lease Contracts",
+  "chooseYourContract": "Choose Your Contract",
+  "carRentalContract": "Car Rental Contract",
+  "houseRentalContract": "House Rental Contract",
+    "equipmentRentalContract": "Equipment Rental Contract",
+  "dailyRentalContract": "Daily Rental Contract",
+  "cancellationForm": "Cancellation Form",
+  "contract_agreement": "Contract Agreement",
+    "public_services_contract": "Public Services Contract",
+  "work_import_contract": "Work Import Contract",
+  "contracts": "Contracts",
+   "businessPartnershipWaiverLabel": "Business Partnership Waiver",
+"propertyWaiverLabel": "Property Waiver",
+  "vehicleWaiverLabel": "Vehicle Waiver",
+  "intellectualRightsWaiverLabel": "Intellectual Rights Waiver",
+  "legalFinancialRightsWaiverLabel": "Legal/Financial Rights Waiver",
+
+  "ministry_work_model": "Ministry Work Model",
+  "daily_work_contract": "Daily Work Contract",
   "aboutUsBodyText":"The Qanoni App aims to digitize and simplify the management of contracts such as rentalagreements, sales contracts, and concessions by transforming user inputs into electronic contracts. These contracts will be based on predefined templates for each contract type.\n"
 
 }

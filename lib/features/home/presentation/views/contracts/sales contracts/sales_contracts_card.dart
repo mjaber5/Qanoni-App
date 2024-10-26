@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell%20a%20equipment/equipment_acepet.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell%20a%20property/aceprt_property.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell_car_contract/sales_car_acept.dart';
 import '../../../../../../core/utils/constants/colors.dart';
-import '../../../../../../core/utils/constants/text_strings.dart';
-import '../waiver contracts/business partnership waiver/acept_business_partnership_waiver.dart';
-import '../waiver contracts/car_waiver_contract/acept_car_waiver.dart';
-import '../waiver contracts/financial waiver/acept_financial.dart';
-import '../waiver contracts/intellectual waiver contract/acept_intellectual.dart';
-import '../waiver contracts/property waiver contract/acept_property.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'cancellation of sales contract/cancellation_aceept.dart';
+import 'sell a land/sell_land_acept.dart';
+
 
 class SalesContractsCard extends StatelessWidget {
   const SalesContractsCard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text(QTexts.waiverContractsTitle),
+        title: Text(localizations.sellCardAppBar),
         backgroundColor: QColors.secondary,
       ),
       body: Center(
@@ -24,58 +28,58 @@ class SalesContractsCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Choose Your Contract",
-                style: TextStyle(
+              Text(
+                localizations.chooseYourContract,
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 20),
-              
-              // Property Waiver Card
-              buildWaiverCard(
+
+              // Car Sale Contract Card
+              buildSaleCard(
                 context,
-                QTexts.propertyWaiverLabel,
-                Iconsax.home5,
-                const AceptProperty(),
-              ),
-              const SizedBox(height: 12),
-              
-              // Car Waiver Card
-              buildWaiverCard(
-                context,
-                QTexts.vehicleWaiverLabel,
+                localizations.sellCardCar,
                 Iconsax.car5,
-                const AceptCarWaiver(),
+                const SalesCarAccept(),
               ),
               const SizedBox(height: 12),
-              
-              // Intellectual Rights Waiver Card
-              buildWaiverCard(
+
+              // Property Sale Contract Card
+              buildSaleCard(
                 context,
-                QTexts.intellectualRightsWaiverLabel,
-                Iconsax.book,
-                const AceptIntellectual(),
+                localizations.sellPropertyCard,
+                Iconsax.home5,
+                const AceprtProperty(),
               ),
               const SizedBox(height: 12),
-              
-              // Business Partnership Waiver Card
-              buildWaiverCard(
+
+              // Land Sale Contract Card
+              buildSaleCard(
                 context,
-                QTexts.businessPartnershipWaiverLabel,
+                localizations.sellLandCard,
+                Iconsax.map5,
+                const SellLandAcept(),
+              ),
+              const SizedBox(height: 12),
+
+              // Equipment Sale Contract Card
+              buildSaleCard(
+                context,
+                localizations.sellEquipmentCard,
                 Iconsax.briefcase5,
-                const AceptBusinessPartnershipWaiver(),
+                const EquipmentAcepet(),
               ),
               const SizedBox(height: 12),
-              
-              // Legal/Financial Rights Waiver Card
-              buildWaiverCard(
+
+              // Sale Termination Contract Card
+              buildSaleCard(
                 context,
-                QTexts.legalFinancialRightsWaiverLabel,
-                Iconsax.dollar_circle,
-                const AceptFinancial(),
+                localizations.sellTerminationCard,
+                Iconsax.close_circle,
+                const CancellationAceept(),
               ),
               const SizedBox(height: 12),
             ],
@@ -85,7 +89,7 @@ class SalesContractsCard extends StatelessWidget {
     );
   }
 
-  Widget buildWaiverCard(BuildContext context, String label, IconData icon, Widget page) {
+  Widget buildSaleCard(BuildContext context, String label, IconData icon, Widget page) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -95,8 +99,8 @@ class SalesContractsCard extends StatelessWidget {
       },
       child: Container(
         width: MediaQuery.of(context).size.width * 0.9,
-        height: MediaQuery.of(context).size.height * 0.15, // تقليل الارتفاع
-        padding: const EdgeInsets.all(16), // تقليل المسافة الداخلية
+        height: MediaQuery.of(context).size.height * 0.15,
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -106,11 +110,11 @@ class SalesContractsCard extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          borderRadius: BorderRadius.circular(15), // تعديل الزوايا لتكون ناعمة
+          borderRadius: BorderRadius.circular(15),
           boxShadow: [
             const BoxShadow(
               color: Colors.black12,
-              blurRadius: 10, // تقليل تأثير الظل
+              blurRadius: 10,
               offset: Offset(0, 4),
             ),
           ],
@@ -118,22 +122,22 @@ class SalesContractsCard extends StatelessWidget {
         child: Row(
           children: [
             CircleAvatar(
-              radius: 25, // حجم أصغر للدائرة
+              radius: 25,
               backgroundColor: Colors.white,
-              child: Icon(icon, size: 28, color: QColors.secondary), // تصغير الأيقونة
+              child: Icon(icon, size: 28, color: QColors.secondary),
             ),
-            const SizedBox(width: 16), // تقليل المسافة بين الأيقونة والنص
+            const SizedBox(width: 16),
             Expanded(
               child: Text(
                 label,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 18, // تصغير حجم الخط
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 22), // تصغير الأيقونة
+            const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 22),
           ],
         ),
       ),

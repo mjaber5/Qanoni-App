@@ -148,6 +148,25 @@
   "sellLandCard": "عقد بيع أرض",
   "sellEquipmentCard": "عقد بيع معدات",
   "sellTerminationCard": "عقد إلغاء بيع",
+  "leaseContracts": "عقود الإيجار",
+   "carRentalContract": "عقد إيجار سيارة",
+     "houseRentalContract": "عقد إيجار بيت",
+  "equipmentRentalContract": "عقد إيجار معدات",
+  "dailyRentalContract": "عقد إيجار مياومة",
+  "cancellationForm": "استمارة إلغاء عقد الإيجار",
+  "contracts": "العقود",
+    "contract_agreement": "اتفاقية مقاولة",
+      "public_services_contract": "عقد خدمات عامة",
+  "work_import_contract": "استقدام عمل",
+  "ministry_work_model": "نموذج عمل وزاري",
+  "daily_work_contract": "عقد عمل مياومة",
+    "intellectualRightsWaiverLabel": "تنازل عن حقوق فكرية",
+"businessPartnershipWaiverLabel": "تنازل عن شراكة تجارية",
+  "legalFinancialRightsWaiverLabel": "تنازل عن حقوق قانونية / مالية",
+"propertyWaiverLabel": "تنازل عن ملكية",
+  "vehicleWaiverLabel": "تنازل عن مركبة",
+
+
   "aboutUsBodyText": "يهدف تطبيق قانوني إلى رقمنة وتبسيط إدارة العقود مثل عقود الإيجار وعقود البيع والتنازلات من خلال تحويل مدخلات المستخدم إلى عقود إلكترونية، وستعتمد هذه العقود على قوالب محددة مسبقًا لكل نوع من أنواع العقود."
 
 }

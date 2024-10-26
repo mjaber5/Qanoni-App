@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../../../core/utils/constants/colors.dart';
-import '../../../../../../core/utils/constants/text_strings.dart';
 import '../waiver contracts/car_waiver_contract/acept_car_waiver.dart';
 import '../waiver contracts/property waiver contract/acept_property.dart';
 import 'business partnership waiver/acept_business_partnership_waiver.dart';
 import 'intellectual waiver contract/acept_intellectual.dart';
 import 'financial waiver/acept_financial.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WaiverContractsCard extends StatelessWidget {
   const WaiverContractsCard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text(QTexts.waiverContractsTitle),
+        title: Text(localizations.waiverContractsTitle),
         backgroundColor: QColors.secondary,
       ),
       body: Center(
@@ -24,56 +26,56 @@ class WaiverContractsCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Choose Your Contract",
-                style: TextStyle(
+              Text(
+                localizations.chooseYourContract,
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 20),
-              
+
               // Property Waiver Card
               buildWaiverCard(
                 context,
-                QTexts.propertyWaiverLabel,
+                localizations.propertyWaiverLabel,
                 Iconsax.home5,
                 const AceptProperty(),
               ),
               const SizedBox(height: 12),
-              
+
               // Car Waiver Card
               buildWaiverCard(
                 context,
-                QTexts.vehicleWaiverLabel,
+                localizations.vehicleWaiverLabel,
                 Iconsax.car5,
                 const AceptCarWaiver(),
               ),
               const SizedBox(height: 12),
-              
+
               // Intellectual Rights Waiver Card
               buildWaiverCard(
                 context,
-                QTexts.intellectualRightsWaiverLabel,
+                localizations.intellectualRightsWaiverLabel,
                 Iconsax.book,
                 const AceptIntellectual(),
               ),
               const SizedBox(height: 12),
-              
+
               // Business Partnership Waiver Card
               buildWaiverCard(
                 context,
-                QTexts.businessPartnershipWaiverLabel,
+                localizations.businessPartnershipWaiverLabel,
                 Iconsax.briefcase5,
                 const AceptBusinessPartnershipWaiver(),
               ),
               const SizedBox(height: 12),
-              
+
               // Legal/Financial Rights Waiver Card
               buildWaiverCard(
                 context,
-                QTexts.legalFinancialRightsWaiverLabel,
+                localizations.legalFinancialRightsWaiverLabel,
                 Iconsax.dollar_circle,
                 const AceptFinancial(),
               ),
