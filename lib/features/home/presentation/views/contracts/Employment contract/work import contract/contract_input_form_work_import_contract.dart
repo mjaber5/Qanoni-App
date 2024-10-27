@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
+import 'package:qanoni/core/utils/app_router.dart';
 
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
@@ -58,7 +60,8 @@ class _RecruitmentContractInputFormState
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.firstPartyLabel,
                 controller: firstPartyController,
-                validatorMessage: AppLocalizations.of(context)!.firstPartyValidator,
+                validatorMessage:
+                    AppLocalizations.of(context)!.firstPartyValidator,
               ),
               const SizedBox(height: 16),
 
@@ -66,7 +69,8 @@ class _RecruitmentContractInputFormState
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.firstPartyIdLabel,
                 controller: firstPartyIdController,
-                validatorMessage: AppLocalizations.of(context)!.firstPartyIdValidator,
+                validatorMessage:
+                    AppLocalizations.of(context)!.firstPartyIdValidator,
               ),
               const SizedBox(height: 16),
 
@@ -74,7 +78,8 @@ class _RecruitmentContractInputFormState
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.firstPartyNationalityLabel,
                 controller: nationalityController,
-                validatorMessage: AppLocalizations.of(context)!.firstPartyNationalityValidator,
+                validatorMessage: AppLocalizations.of(context)!
+                    .firstPartyNationalityValidator,
               ),
               const SizedBox(height: 16),
 
@@ -82,7 +87,8 @@ class _RecruitmentContractInputFormState
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.secondPartyLabel,
                 controller: secondPartyController,
-                validatorMessage: AppLocalizations.of(context)!.secondPartyValidator,
+                validatorMessage:
+                    AppLocalizations.of(context)!.secondPartyValidator,
               ),
               const SizedBox(height: 16),
 
@@ -90,15 +96,18 @@ class _RecruitmentContractInputFormState
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.secondPartyPassportLabel,
                 controller: secondPartyPassportController,
-                validatorMessage: AppLocalizations.of(context)!.secondPartyPassportValidator,
+                validatorMessage:
+                    AppLocalizations.of(context)!.secondPartyPassportValidator,
               ),
               const SizedBox(height: 16),
 
               // Second Party Nationality
               buildLabeledTextField(
-                label: AppLocalizations.of(context)!.secondPartyNationalityLabel,
+                label:
+                    AppLocalizations.of(context)!.secondPartyNationalityLabel,
                 controller: secondPartyNationalityController,
-                validatorMessage: AppLocalizations.of(context)!.secondPartyNationalityValidator,
+                validatorMessage: AppLocalizations.of(context)!
+                    .secondPartyNationalityValidator,
               ),
               const SizedBox(height: 16),
 
@@ -106,7 +115,8 @@ class _RecruitmentContractInputFormState
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.jobTitleLabel,
                 controller: jobTitleController,
-                validatorMessage: AppLocalizations.of(context)!.jobTitleValidator,
+                validatorMessage:
+                    AppLocalizations.of(context)!.jobTitleValidator,
               ),
               const SizedBox(height: 16),
 
@@ -114,7 +124,8 @@ class _RecruitmentContractInputFormState
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.contractDurationLabel,
                 controller: contractDurationController,
-                validatorMessage: AppLocalizations.of(context)!.contractDurationValidator,
+                validatorMessage:
+                    AppLocalizations.of(context)!.contractDurationValidator,
               ),
               const SizedBox(height: 16),
 
@@ -130,7 +141,8 @@ class _RecruitmentContractInputFormState
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.startDateLabel,
                 controller: startDateController,
-                validatorMessage: AppLocalizations.of(context)!.startDateValidator,
+                validatorMessage:
+                    AppLocalizations.of(context)!.startDateValidator,
               ),
               const SizedBox(height: 32),
 
@@ -142,8 +154,11 @@ class _RecruitmentContractInputFormState
                     if (_formKey.currentState!.validate()) {
                       log(AppLocalizations.of(context)!.dataEnteredSuccess);
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(AppLocalizations.of(context)!.dataEnteredSuccess)),
+                        SnackBar(
+                            content: Text(AppLocalizations.of(context)!
+                                .dataEnteredSuccess)),
                       );
+                      GoRouter.of(context).push(AppRouter.kSuccessView);
                     } else {
                       log(AppLocalizations.of(context)!.dataInvalid);
                     }
@@ -152,7 +167,8 @@ class _RecruitmentContractInputFormState
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     backgroundColor: QColors.secondary,
                   ),
-                  child: Text(AppLocalizations.of(context)!.submitButton, style: Styles.textStyle18),
+                  child: Text(AppLocalizations.of(context)!.submitButton,
+                      style: Styles.textStyle18),
                 ),
               ),
             ],

@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // تأكد من استيراد AppLocalizations
+import 'package:go_router/go_router.dart';
+import 'package:qanoni/core/utils/app_router.dart';
 
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
@@ -109,6 +111,7 @@ class _ContractInputFormState extends State<ContractInputFormArgeement> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text(localizations.successMessage)),
                       );
+                      GoRouter.of(context).push(AppRouter.kSuccessView);
                     } else {
                       log(localizations.errorMessage);
                     }

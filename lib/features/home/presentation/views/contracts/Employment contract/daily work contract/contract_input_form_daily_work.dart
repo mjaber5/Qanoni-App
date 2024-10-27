@@ -1,6 +1,8 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // تأكد من إضافة هذه المكتبة للوصول إلى ملفات الترجمة
+import 'package:go_router/go_router.dart';
+import 'package:qanoni/core/utils/app_router.dart';
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
@@ -17,24 +19,33 @@ class _DailyContractInputFormState extends State<ContractInputFormDailyWork> {
   final _formKey = GlobalKey<FormState>();
 
   // Controllers for text fields
-  final TextEditingController firstPartyNameController = TextEditingController();
+  final TextEditingController firstPartyNameController =
+      TextEditingController();
   final TextEditingController firstPartyIdController = TextEditingController();
-  final TextEditingController firstPartyAddressController = TextEditingController();
-  final TextEditingController firstPartyPhoneController = TextEditingController();
-  final TextEditingController secondPartyNameController = TextEditingController();
+  final TextEditingController firstPartyAddressController =
+      TextEditingController();
+  final TextEditingController firstPartyPhoneController =
+      TextEditingController();
+  final TextEditingController secondPartyNameController =
+      TextEditingController();
   final TextEditingController secondPartyIdController = TextEditingController();
-  final TextEditingController secondPartyNationalityController = TextEditingController();
-  final TextEditingController secondPartyAddressController = TextEditingController();
-  final TextEditingController secondPartyPhoneController = TextEditingController();
+  final TextEditingController secondPartyNationalityController =
+      TextEditingController();
+  final TextEditingController secondPartyAddressController =
+      TextEditingController();
+  final TextEditingController secondPartyPhoneController =
+      TextEditingController();
   final TextEditingController jobTitleController = TextEditingController();
-  final TextEditingController contractStartDateController = TextEditingController();
+  final TextEditingController contractStartDateController =
+      TextEditingController();
   final TextEditingController dailyWageController = TextEditingController();
   final TextEditingController workingHoursController = TextEditingController();
   final TextEditingController breakDurationController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!; // للحصول على الكائن الخاص بالترجمة
+    final localizations =
+        AppLocalizations.of(context)!; // للحصول على الكائن الخاص بالترجمة
 
     return Scaffold(
       appBar: AppBar(
@@ -99,7 +110,8 @@ class _DailyContractInputFormState extends State<ContractInputFormDailyWork> {
               buildLabeledTextField(
                 label: localizations.secondPartyNationalityLabel,
                 controller: secondPartyNationalityController,
-                validatorMessage: localizations.secondPartyNationalityValidation,
+                validatorMessage:
+                    localizations.secondPartyNationalityValidation,
               ),
               const SizedBox(height: 16),
 
@@ -169,6 +181,7 @@ class _DailyContractInputFormState extends State<ContractInputFormDailyWork> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text(localizations.successMessage)),
                       );
+                      GoRouter.of(context).push(AppRouter.kSuccessView);
                     } else {
                       log(localizations.errorMessage);
                     }
