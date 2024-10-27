@@ -33,30 +33,30 @@ class _ForgetPasswordState extends State<ForgetPasswordWidgets> {
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(12.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   localizations.qanoni,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.w800,
                   ),
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 Text(
                   localizations.forgotPassword,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(
                   localizations.restEmail,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     color: QColors.darkGrey,
                   ),
@@ -109,7 +109,7 @@ class _ForgetPasswordState extends State<ForgetPasswordWidgets> {
                         children: [
                           Text(
                             localizations.byRequest,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.grey,
                               fontSize: 13,
                             ),
@@ -124,7 +124,7 @@ class _ForgetPasswordState extends State<ForgetPasswordWidgets> {
                                 },
                                 child: Text(
                                   localizations.loginPrivacyPolicy,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 14,
                                     color: QColors.secondary,
                                     decoration: TextDecoration.underline,
@@ -133,7 +133,7 @@ class _ForgetPasswordState extends State<ForgetPasswordWidgets> {
                               ),
                               Text(
                                 localizations.loginAndText,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 13,
                                 ),
@@ -144,7 +144,7 @@ class _ForgetPasswordState extends State<ForgetPasswordWidgets> {
                                 },
                                 child: Text(
                                   localizations.termsOfUs,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 14,
                                     color: QColors.secondary,
                                     decoration: TextDecoration.underline,

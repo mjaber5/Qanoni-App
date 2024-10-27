@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // استيراد AppLocalizations
 
 class ContractInputFormPublicServic extends StatefulWidget {
   const ContractInputFormPublicServic({super.key});
@@ -28,9 +29,11 @@ class _ServiceContractInputFormState
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('إدخال بيانات عقد خدمات عامة'),
+        title: Text(localizations.input_contract_data),
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -41,49 +44,49 @@ class _ServiceContractInputFormState
             children: [
               // First Party Name
               buildLabeledTextField(
-                label: 'اسم الطرف الأول',
+                label: localizations.first_party_name,
                 controller: firstPartyController,
-                validatorMessage: 'يرجى إدخال اسم الطرف الأول',
+                validatorMessage: localizations.enter_first_party_name,
               ),
               const SizedBox(height: 16),
 
               // Second Party Name
               buildLabeledTextField(
-                label: 'اسم الطرف الثاني',
+                label: localizations.second_party_name,
                 controller: secondPartyController,
-                validatorMessage: 'يرجى إدخال اسم الطرف الثاني',
+                validatorMessage: localizations.enter_second_party_name,
               ),
               const SizedBox(height: 16),
 
               // Service Description
               buildLabeledTextField(
-                label: 'وصف الخدمة',
+                label: localizations.service_description,
                 controller: serviceDescriptionController,
-                validatorMessage: 'يرجى إدخال وصف الخدمة',
+                validatorMessage: localizations.enter_service_description,
               ),
               const SizedBox(height: 16),
 
               // Contract Duration
               buildLabeledTextField(
-                label: 'مدة العقد',
+                label: localizations.contract_duration,
                 controller: contractDurationController,
-                validatorMessage: 'يرجى إدخال مدة العقد',
+                validatorMessage: localizations.enter_contract_duration,
               ),
               const SizedBox(height: 16),
 
               // Service Fee
               buildLabeledTextField(
-                label: 'المقابل المالي',
+                label: localizations.service_fee,
                 controller: serviceFeeController,
-                validatorMessage: 'يرجى إدخال المقابل المالي',
+                validatorMessage: localizations.enter_service_fee,
               ),
               const SizedBox(height: 16),
 
               // Start Date
               buildLabeledTextField(
-                label: 'تاريخ بدء العقد',
+                label: localizations.start_date,
                 controller: startDateController,
-                validatorMessage: 'يرجى إدخال تاريخ بدء العقد',
+                validatorMessage: localizations.enter_start_date,
               ),
               const SizedBox(height: 32),
 
@@ -93,21 +96,22 @@ class _ServiceContractInputFormState
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      log('تم إدخال البيانات بنجاح.');
+                      log(localizations.success_message);
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text('تم إدخال البيانات بنجاح')),
+                        SnackBar(
+                          content: Text(localizations.success_message),
+                        ),
                       );
                     } else {
-                      log('البيانات غير صحيحة. يرجى التحقق.');
+                      log(localizations.error_message);
                     }
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     backgroundColor: QColors.secondary,
                   ),
-                  child: const Text(
-                    "حفظ",
+                  child: Text(
+                    localizations.save,
                     style: Styles.textStyle18,
                   ),
                 ),

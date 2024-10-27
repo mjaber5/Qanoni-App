@@ -16,7 +16,7 @@ class LoginTextCondition extends StatelessWidget {
           children: [
              Text(
               localizations.byLogin,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.grey,
                 fontSize: 13,
               ),
@@ -29,7 +29,7 @@ class LoginTextCondition extends StatelessWidget {
                   onTap: () {},
                   child:  Text(
                    localizations.loginPrivacyPolicy,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14,
                       color: QColors.secondary,
                       decoration: TextDecoration.underline,
@@ -38,7 +38,7 @@ class LoginTextCondition extends StatelessWidget {
                 ),
                  Text(
                   localizations.loginAndText,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.grey,
                     fontSize: 13,
                   ),
@@ -46,7 +46,8 @@ class LoginTextCondition extends StatelessWidget {
                 GestureDetector(
                   onTap: () {},
                   child:  Text(
-           localizations.termsOfUs,         style: TextStyle(
+           localizations.termsOfUs,      
+              style: const TextStyle(
                       fontSize: 14,
                       color: QColors.secondary,
                       decoration: TextDecoration.underline,

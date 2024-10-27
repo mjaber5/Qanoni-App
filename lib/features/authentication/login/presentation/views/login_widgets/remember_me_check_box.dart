@@ -24,7 +24,7 @@ class LoginActionText extends StatelessWidget {
           ),
            Text(
            localizations.rememberMe,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -40,7 +40,7 @@ class LoginActionText extends StatelessWidget {
             },
             child:  Text(
              localizations.forgotPassword ,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 color: QColors.secondary,
               ),

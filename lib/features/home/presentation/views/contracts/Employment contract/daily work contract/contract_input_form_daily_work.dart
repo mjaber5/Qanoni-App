@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // تأكد من إضافة هذه المكتبة للوصول إلى ملفات الترجمة
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
@@ -16,40 +17,28 @@ class _DailyContractInputFormState extends State<ContractInputFormDailyWork> {
   final _formKey = GlobalKey<FormState>();
 
   // Controllers for text fields
-  final TextEditingController firstPartyNameController =
-      TextEditingController(); // اسم الطرف الأول
-  final TextEditingController firstPartyIdController =
-      TextEditingController(); // رقم هوية/السجل التجاري للطرف الأول
-  final TextEditingController firstPartyAddressController =
-      TextEditingController(); // عنوان الطرف الأول
-  final TextEditingController firstPartyPhoneController =
-      TextEditingController(); // هاتف الطرف الأول
-  final TextEditingController secondPartyNameController =
-      TextEditingController(); // اسم الطرف الثاني
-  final TextEditingController secondPartyIdController =
-      TextEditingController(); // رقم الهوية للطرف الثاني
-  final TextEditingController secondPartyNationalityController =
-      TextEditingController(); // جنسية الطرف الثاني
-  final TextEditingController secondPartyAddressController =
-      TextEditingController(); // عنوان الطرف الثاني
-  final TextEditingController secondPartyPhoneController =
-      TextEditingController(); // هاتف الطرف الثاني
-  final TextEditingController jobTitleController =
-      TextEditingController(); // الوظيفة
-  final TextEditingController contractStartDateController =
-      TextEditingController(); // تاريخ بدء العمل
-  final TextEditingController dailyWageController =
-      TextEditingController(); // الأجر اليومي
-  final TextEditingController workingHoursController =
-      TextEditingController(); // ساعات العمل
-  final TextEditingController breakDurationController =
-      TextEditingController(); // مدة الاستراحة
+  final TextEditingController firstPartyNameController = TextEditingController();
+  final TextEditingController firstPartyIdController = TextEditingController();
+  final TextEditingController firstPartyAddressController = TextEditingController();
+  final TextEditingController firstPartyPhoneController = TextEditingController();
+  final TextEditingController secondPartyNameController = TextEditingController();
+  final TextEditingController secondPartyIdController = TextEditingController();
+  final TextEditingController secondPartyNationalityController = TextEditingController();
+  final TextEditingController secondPartyAddressController = TextEditingController();
+  final TextEditingController secondPartyPhoneController = TextEditingController();
+  final TextEditingController jobTitleController = TextEditingController();
+  final TextEditingController contractStartDateController = TextEditingController();
+  final TextEditingController dailyWageController = TextEditingController();
+  final TextEditingController workingHoursController = TextEditingController();
+  final TextEditingController breakDurationController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!; // للحصول على الكائن الخاص بالترجمة
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('إدخال بيانات عقد عمل مياومة'),
+        title: Text(localizations.contractInputTitle),
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -60,113 +49,113 @@ class _DailyContractInputFormState extends State<ContractInputFormDailyWork> {
             children: [
               // First Party Name
               buildLabeledTextField(
-                label: 'اسم الطرف الأول (صاحب العمل)',
+                label: localizations.firstPartyNameLabel,
                 controller: firstPartyNameController,
-                validatorMessage: 'يرجى إدخال اسم الطرف الأول',
+                validatorMessage: localizations.firstPartyNameValidation,
               ),
               const SizedBox(height: 16),
 
               // First Party ID / Commercial Record
               buildLabeledTextField(
-                label: 'رقم هوية/السجل التجاري للطرف الأول',
+                label: localizations.firstPartyIdLabel,
                 controller: firstPartyIdController,
-                validatorMessage: 'يرجى إدخال رقم الهوية أو السجل التجاري',
+                validatorMessage: localizations.firstPartyIdValidation,
               ),
               const SizedBox(height: 16),
 
               // First Party Address
               buildLabeledTextField(
-                label: 'عنوان الطرف الأول',
+                label: localizations.firstPartyAddressLabel,
                 controller: firstPartyAddressController,
-                validatorMessage: 'يرجى إدخال عنوان الطرف الأول',
+                validatorMessage: localizations.firstPartyAddressValidation,
               ),
               const SizedBox(height: 16),
 
               // First Party Phone
               buildLabeledTextField(
-                label: 'هاتف الطرف الأول',
+                label: localizations.firstPartyPhoneLabel,
                 controller: firstPartyPhoneController,
-                validatorMessage: 'يرجى إدخال هاتف الطرف الأول',
+                validatorMessage: localizations.firstPartyPhoneValidation,
               ),
               const SizedBox(height: 16),
 
               // Second Party Name
               buildLabeledTextField(
-                label: 'اسم الطرف الثاني (العامل)',
+                label: localizations.secondPartyNameLabel,
                 controller: secondPartyNameController,
-                validatorMessage: 'يرجى إدخال اسم الطرف الثاني',
+                validatorMessage: localizations.secondPartyNameValidation,
               ),
               const SizedBox(height: 16),
 
               // Second Party ID
               buildLabeledTextField(
-                label: 'رقم الهوية للطرف الثاني',
+                label: localizations.secondPartyIdLabel,
                 controller: secondPartyIdController,
-                validatorMessage: 'يرجى إدخال رقم الهوية للطرف الثاني',
+                validatorMessage: localizations.secondPartyIdValidation,
               ),
               const SizedBox(height: 16),
 
               // Second Party Nationality
               buildLabeledTextField(
-                label: 'جنسية الطرف الثاني',
+                label: localizations.secondPartyNationalityLabel,
                 controller: secondPartyNationalityController,
-                validatorMessage: 'يرجى إدخال جنسية الطرف الثاني',
+                validatorMessage: localizations.secondPartyNationalityValidation,
               ),
               const SizedBox(height: 16),
 
               // Second Party Address
               buildLabeledTextField(
-                label: 'عنوان الطرف الثاني',
+                label: localizations.secondPartyAddressLabel,
                 controller: secondPartyAddressController,
-                validatorMessage: 'يرجى إدخال عنوان الطرف الثاني',
+                validatorMessage: localizations.secondPartyAddressValidation,
               ),
               const SizedBox(height: 16),
 
               // Second Party Phone
               buildLabeledTextField(
-                label: 'هاتف الطرف الثاني',
+                label: localizations.secondPartyPhoneLabel,
                 controller: secondPartyPhoneController,
-                validatorMessage: 'يرجى إدخال هاتف الطرف الثاني',
+                validatorMessage: localizations.secondPartyPhoneValidation,
               ),
               const SizedBox(height: 16),
 
               // Job Title
               buildLabeledTextField(
-                label: 'الوظيفة',
+                label: localizations.jobTitleLabel,
                 controller: jobTitleController,
-                validatorMessage: 'يرجى إدخال الوظيفة',
+                validatorMessage: localizations.jobTitleValidation,
               ),
               const SizedBox(height: 16),
 
               // Contract Start Date
               buildLabeledTextField(
-                label: 'تاريخ بدء العمل',
+                label: localizations.contractStartDateLabel,
                 controller: contractStartDateController,
-                validatorMessage: 'يرجى إدخال تاريخ بدء العمل',
+                validatorMessage: localizations.contractStartDateValidation,
               ),
               const SizedBox(height: 16),
 
               // Daily Wage
               buildLabeledTextField(
-                label: 'الأجر اليومي',
+                label: localizations.dailyWageLabel,
                 controller: dailyWageController,
-                validatorMessage: 'يرجى إدخال الأجر اليومي',
+                validatorMessage: localizations.dailyWageValidation,
               ),
               const SizedBox(height: 16),
 
               // Working Hours
               buildLabeledTextField(
-                label: 'ساعات العمل',
+                label: localizations.workingHoursLabel,
                 controller: workingHoursController,
-                validatorMessage: 'يرجى إدخال ساعات العمل',
+                validatorMessage: localizations.workingHoursValidation,
               ),
               const SizedBox(height: 16),
 
               // Break Duration
               buildLabeledTextField(
-                label: 'مدة الاستراحة',
+                label: localizations.breakDurationLabel,
                 controller: breakDurationController,
-                validatorMessage: 'يرجى إدخال مدة الاستراحة',
+                validatorMessage: localizations.breakDurationValidation,
               ),
               const SizedBox(height: 32),
 
@@ -176,21 +165,20 @@ class _DailyContractInputFormState extends State<ContractInputFormDailyWork> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      log('تم إدخال البيانات بنجاح.');
+                      log(localizations.successMessage);
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text('تم إدخال البيانات بنجاح')),
+                        SnackBar(content: Text(localizations.successMessage)),
                       );
                     } else {
-                      log('البيانات غير صحيحة. يرجى التحقق.');
+                      log(localizations.errorMessage);
                     }
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     backgroundColor: QColors.secondary,
                   ),
-                  child: const Text(
-                    "حفظ",
+                  child: Text(
+                    localizations.saveButton,
                     style: Styles.textStyle18,
                   ),
                 ),

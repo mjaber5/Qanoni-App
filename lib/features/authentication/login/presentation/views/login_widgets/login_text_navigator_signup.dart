@@ -35,7 +35,7 @@ class LoginTextNavigatorSignup extends StatelessWidget {
               },
               child:  Text(
                 localizations.createAccount
-,                style: TextStyle(
+,                style: const TextStyle(
                   color: QColors.secondary,
                 ),
               ),

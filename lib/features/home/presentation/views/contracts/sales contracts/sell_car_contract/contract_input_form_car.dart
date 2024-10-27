@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/text_strings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // تأكد من استيراد ملف localization
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
@@ -26,10 +26,8 @@ class _ContractInputFormCarSalesState extends State<ContractInputFormCarSales> {
   final TextEditingController carBrandController = TextEditingController();
   final TextEditingController carModelController = TextEditingController();
   final TextEditingController carYearController = TextEditingController();
-  final TextEditingController vinController =
-      TextEditingController(); // Vehicle Identification Number (VIN)
-  final TextEditingController mechanicalConditionController =
-      TextEditingController();
+  final TextEditingController vinController = TextEditingController(); // Vehicle Identification Number (VIN)
+  final TextEditingController mechanicalConditionController = TextEditingController();
   final TextEditingController ownershipController = TextEditingController();
   final TextEditingController sellingPriceController = TextEditingController();
   final TextEditingController paymentMethodController = TextEditingController();
@@ -39,7 +37,7 @@ class _ContractInputFormCarSalesState extends State<ContractInputFormCarSales> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(QTexts.appBarTitleCar),
+        title: Text(AppLocalizations.of(context)!.appBarTitleCar),
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -49,143 +47,127 @@ class _ContractInputFormCarSalesState extends State<ContractInputFormCarSales> {
           child: ListView(
             children: [
               // Seller Information Section
-              const Text(
-                QTexts.sellerInfo,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(
+                AppLocalizations.of(context)!.sellerInfo,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: QTexts.sellerName,
+                label: AppLocalizations.of(context)!.sellerName,
                 controller: sellerNameController,
-                validatorMessage: QTexts.sellerNameValidation,
+                validatorMessage: AppLocalizations.of(context)!.sellerNameValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label:  QTexts.sellerId,
+                label: AppLocalizations.of(context)!.sellerId,
                 controller: sellerIdController,
-                validatorMessage:  QTexts.sellerIdValidation,
+                validatorMessage: AppLocalizations.of(context)!.sellerIdValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.sellerAddress,
+                label: AppLocalizations.of(context)!.sellerAddress,
                 controller: sellerAddressController,
-                validatorMessage:  QTexts.sellerAddressValidation,
+                validatorMessage: AppLocalizations.of(context)!.sellerAddressValidation,
               ),
               const SizedBox(height: 32),
 
               // Buyer Information Section
-              const Text(
-                 QTexts.buyerInfo,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(
+                AppLocalizations.of(context)!.buyerInfo,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label:  QTexts.buyerName,
+                label: AppLocalizations.of(context)!.buyerName,
                 controller: buyerNameController,
-                validatorMessage: QTexts.buyerNameValidation,
+                validatorMessage: AppLocalizations.of(context)!.buyerNameValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.buyerId,
+                label: AppLocalizations.of(context)!.buyerId,
                 controller: buyerIdController,
-                validatorMessage: QTexts.buyerIdValidation,
+                validatorMessage: AppLocalizations.of(context)!.buyerIdValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.buyerAddress,
+                label: AppLocalizations.of(context)!.buyerAddress,
                 controller: buyerAddressController,
-                validatorMessage: QTexts.buyerAddressValidation,
+                validatorMessage: AppLocalizations.of(context)!.buyerAddressValidation,
               ),
               const SizedBox(height: 32),
 
               // Car Information Section
-              const Text(
-                QTexts.propertyInfoCar,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(
+                AppLocalizations.of(context)!.propertyInfoCar,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: QTexts.carBrand,
+                label: AppLocalizations.of(context)!.carBrand,
                 controller: carBrandController,
-                validatorMessage:QTexts.carBrandValidation ,
+                validatorMessage: AppLocalizations.of(context)!.carBrandValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.carModel,
+                label: AppLocalizations.of(context)!.carModel,
                 controller: carModelController,
-                validatorMessage: QTexts.carBrandValidation,
+                validatorMessage: AppLocalizations.of(context)!.carModelValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.carYear,
+                label: AppLocalizations.of(context)!.carYear,
                 controller: carYearController,
-                validatorMessage: QTexts.carYearValidation,
+                validatorMessage: AppLocalizations.of(context)!.carYearValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.vin,
+                label: AppLocalizations.of(context)!.vin,
                 controller: vinController,
-                validatorMessage: QTexts.carYearValidation,
+                validatorMessage: AppLocalizations.of(context)!.vinValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.mechanicalCondition,
+                label: AppLocalizations.of(context)!.mechanicalCondition,
                 controller: mechanicalConditionController,
-                validatorMessage: QTexts.mechanicalConditionValidation,
+                validatorMessage: AppLocalizations.of(context)!.mechanicalConditionValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.ownershipStatus,
+                label: AppLocalizations.of(context)!.ownershipStatus,
                 controller: ownershipController,
-                validatorMessage: QTexts.ownershipStatusValidation,
+                validatorMessage: AppLocalizations.of(context)!.ownershipStatusValidation,
               ),
               const SizedBox(height: 32),
 
               // Transaction Information Section
-              const Text(
-                QTexts.transactionInfo,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(
+                AppLocalizations.of(context)!.transactionInfo,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: QTexts.sellingPrice,
+                label: AppLocalizations.of(context)!.sellingPrice,
                 controller: sellingPriceController,
-                validatorMessage: QTexts.sellingPriceValidation,
+                validatorMessage: AppLocalizations.of(context)!.sellingPriceValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.paymentMethod,
+                label: AppLocalizations.of(context)!.paymentMethod,
                 controller: paymentMethodController,
-                validatorMessage:QTexts.paymentMethodValidation ,
+                validatorMessage: AppLocalizations.of(context)!.paymentMethodValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.saleDate,
+                label: AppLocalizations.of(context)!.saleDate,
                 controller: saleDateController,
-                validatorMessage: QTexts.saleDateValidation,
+                validatorMessage: AppLocalizations.of(context)!.saleDateValidation,
               ),
               const SizedBox(height: 32),
 
-              // Submit Button
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18),
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      log('Form is valid. Proceed with saving the contract.');
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text(QTexts.dateEnteredSuccessfuly)),
-                      );
-                    } else {
-                      log('Form is not valid. Show errors.');
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    backgroundColor: QColors.secondary,
-                  ),
-                  child: const Text(
-                    QTexts.saveButton,
-                    style: Styles.textStyle18,
-                  ),
-                ),
+              ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    // Handle form submission
+                    log('Form submitted successfully');
+                  }
+                },
+                child: Text(AppLocalizations.of(context)!.saveButton),
               ),
             ],
           ),
@@ -194,13 +176,12 @@ class _ContractInputFormCarSalesState extends State<ContractInputFormCarSales> {
     );
   }
 
-  // Helper function to build a labeled text field
   Widget buildLabeledTextField({
     required String label,
     required TextEditingController controller,
     required String validatorMessage,
   }) {
-    return Column(
+    return  Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(

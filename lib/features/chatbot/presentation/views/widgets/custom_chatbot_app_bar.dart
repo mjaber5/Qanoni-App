@@ -8,12 +8,12 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
     return  Padding(
-      padding: EdgeInsets.only(right: 24, left: 24, top: 40, bottom: 10),
+      padding: const EdgeInsets.only(right: 24, left: 24, top: 40, bottom: 10),
       child: Row(
         children: [
           Text(
             localizations.chatbotAppbarTitle,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,
             ),

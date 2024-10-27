@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
@@ -44,7 +45,7 @@ class _RecruitmentContractInputFormState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('إدخال بيانات عقد عمل للاستقدام'),
+        title: Text(AppLocalizations.of(context)!.contractInputFormTitle),
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -55,81 +56,81 @@ class _RecruitmentContractInputFormState
             children: [
               // First Party Name
               buildLabeledTextField(
-                label: 'اسم الطرف الأول',
+                label: AppLocalizations.of(context)!.firstPartyLabel,
                 controller: firstPartyController,
-                validatorMessage: 'يرجى إدخال اسم الطرف الأول',
+                validatorMessage: AppLocalizations.of(context)!.firstPartyValidator,
               ),
               const SizedBox(height: 16),
 
               // First Party ID
               buildLabeledTextField(
-                label: 'رقم هوية الطرف الأول',
+                label: AppLocalizations.of(context)!.firstPartyIdLabel,
                 controller: firstPartyIdController,
-                validatorMessage: 'يرجى إدخال رقم هوية الطرف الأول',
+                validatorMessage: AppLocalizations.of(context)!.firstPartyIdValidator,
               ),
               const SizedBox(height: 16),
 
               // First Party Nationality
               buildLabeledTextField(
-                label: 'جنسية الطرف الأول',
+                label: AppLocalizations.of(context)!.firstPartyNationalityLabel,
                 controller: nationalityController,
-                validatorMessage: 'يرجى إدخال جنسية الطرف الأول',
+                validatorMessage: AppLocalizations.of(context)!.firstPartyNationalityValidator,
               ),
               const SizedBox(height: 16),
 
               // Second Party Name
               buildLabeledTextField(
-                label: 'اسم الطرف الثاني',
+                label: AppLocalizations.of(context)!.secondPartyLabel,
                 controller: secondPartyController,
-                validatorMessage: 'يرجى إدخال اسم الطرف الثاني',
+                validatorMessage: AppLocalizations.of(context)!.secondPartyValidator,
               ),
               const SizedBox(height: 16),
 
               // Second Party Passport
               buildLabeledTextField(
-                label: 'رقم جواز سفر الطرف الثاني',
+                label: AppLocalizations.of(context)!.secondPartyPassportLabel,
                 controller: secondPartyPassportController,
-                validatorMessage: 'يرجى إدخال رقم جواز سفر الطرف الثاني',
+                validatorMessage: AppLocalizations.of(context)!.secondPartyPassportValidator,
               ),
               const SizedBox(height: 16),
 
               // Second Party Nationality
               buildLabeledTextField(
-                label: 'جنسية الطرف الثاني',
+                label: AppLocalizations.of(context)!.secondPartyNationalityLabel,
                 controller: secondPartyNationalityController,
-                validatorMessage: 'يرجى إدخال جنسية الطرف الثاني',
+                validatorMessage: AppLocalizations.of(context)!.secondPartyNationalityValidator,
               ),
               const SizedBox(height: 16),
 
               // Job Title
               buildLabeledTextField(
-                label: 'الوظيفة',
+                label: AppLocalizations.of(context)!.jobTitleLabel,
                 controller: jobTitleController,
-                validatorMessage: 'يرجى إدخال الوظيفة',
+                validatorMessage: AppLocalizations.of(context)!.jobTitleValidator,
               ),
               const SizedBox(height: 16),
 
               // Contract Duration
               buildLabeledTextField(
-                label: 'مدة العقد',
+                label: AppLocalizations.of(context)!.contractDurationLabel,
                 controller: contractDurationController,
-                validatorMessage: 'يرجى إدخال مدة العقد',
+                validatorMessage: AppLocalizations.of(context)!.contractDurationValidator,
               ),
               const SizedBox(height: 16),
 
               // Salary
               buildLabeledTextField(
-                label: 'الأجر',
+                label: AppLocalizations.of(context)!.salaryLabel,
                 controller: salaryController,
-                validatorMessage: 'يرجى إدخال الأجر',
+                validatorMessage: AppLocalizations.of(context)!.salaryValidator,
               ),
               const SizedBox(height: 16),
 
               // Start Date
               buildLabeledTextField(
-                label: 'تاريخ بدء العقد',
+                label: AppLocalizations.of(context)!.startDateLabel,
                 controller: startDateController,
-                validatorMessage: 'يرجى إدخال تاريخ بدء العقد',
+                validatorMessage: AppLocalizations.of(context)!.startDateValidator,
               ),
               const SizedBox(height: 32),
 
@@ -139,23 +140,19 @@ class _RecruitmentContractInputFormState
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      log('تم إدخال البيانات بنجاح.');
+                      log(AppLocalizations.of(context)!.dataEnteredSuccess);
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text('تم إدخال البيانات بنجاح')),
+                        SnackBar(content: Text(AppLocalizations.of(context)!.dataEnteredSuccess)),
                       );
                     } else {
-                      log('البيانات غير صحيحة. يرجى التحقق.');
+                      log(AppLocalizations.of(context)!.dataInvalid);
                     }
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     backgroundColor: QColors.secondary,
                   ),
-                  child: const Text(
-                    "حفظ",
-                    style: Styles.textStyle18,
-                  ),
+                  child: Text(AppLocalizations.of(context)!.submitButton, style: Styles.textStyle18),
                 ),
               ),
             ],

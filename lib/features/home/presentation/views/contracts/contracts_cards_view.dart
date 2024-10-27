@@ -79,8 +79,8 @@ class ContractsCardsView extends StatelessWidget {
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(15), // تعديل الزوايا
-          boxShadow: [
-            const BoxShadow(
+          boxShadow: const [
+            BoxShadow(
               color: Colors.black12,
               blurRadius: 10, // تصغير الظل
               offset: Offset(0, 4),

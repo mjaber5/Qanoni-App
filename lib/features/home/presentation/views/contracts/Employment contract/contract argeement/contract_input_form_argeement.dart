@@ -1,8 +1,10 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // تأكد من استيراد AppLocalizations
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
+import 'dart:developer';
+
 
 class ContractInputFormArgeement extends StatefulWidget {
   const ContractInputFormArgeement({super.key});
@@ -14,31 +16,22 @@ class ContractInputFormArgeement extends StatefulWidget {
 class _ContractInputFormState extends State<ContractInputFormArgeement> {
   final _formKey = GlobalKey<FormState>();
 
-  // Controllers for text fields
-  final TextEditingController projectNameController =
-      TextEditingController(); // اسم المشروع
-  final TextEditingController projectOwnerNameController =
-      TextEditingController(); // اسم صاحب المشروع
-  final TextEditingController projectOwnerIdController =
-      TextEditingController(); // رقم هوية صاحب المشروع
-  final TextEditingController contractorNameController =
-      TextEditingController(); // اسم المقاول
-  final TextEditingController contractorIdController =
-      TextEditingController(); // رقم هوية المقاول
-  final TextEditingController contractDurationController =
-      TextEditingController(); // مدة العقد
-  final TextEditingController contractValueController =
-      TextEditingController(); // قيمة العقد الإجمالية
-  final TextEditingController materialsProvidedController =
-      TextEditingController(); // المواد والمعدات
-  final TextEditingController startDateController =
-      TextEditingController(); // تاريخ بدء العقد
+  final TextEditingController projectNameController = TextEditingController();
+  final TextEditingController projectOwnerNameController = TextEditingController();
+  final TextEditingController projectOwnerIdController = TextEditingController();
+  final TextEditingController contractorNameController = TextEditingController();
+  final TextEditingController contractorIdController = TextEditingController();
+  final TextEditingController contractDurationController = TextEditingController();
+  final TextEditingController contractValueController = TextEditingController();
+  final TextEditingController materialsProvidedController = TextEditingController();
+  final TextEditingController startDateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('إدخال بيانات عقد مقاولات'),
+        title: Text(localizations.contractInputTitle),
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -47,101 +40,78 @@ class _ContractInputFormState extends State<ContractInputFormArgeement> {
           key: _formKey,
           child: ListView(
             children: [
-              // Project Name
               buildLabeledTextField(
-                label: 'اسم المشروع',
+                label: localizations.projectNameLabel,
                 controller: projectNameController,
-                validatorMessage: 'يرجى إدخال اسم المشروع',
+                validatorMessage: localizations.projectNameValidation,
               ),
               const SizedBox(height: 16),
-
-              // Project Owner Name
               buildLabeledTextField(
-                label: 'اسم صاحب المشروع',
+                label: localizations.projectOwnerNameLabel,
                 controller: projectOwnerNameController,
-                validatorMessage: 'يرجى إدخال اسم صاحب المشروع',
+                validatorMessage: localizations.projectOwnerNameValidation,
               ),
               const SizedBox(height: 16),
-
-              // Project Owner ID
               buildLabeledTextField(
-                label: 'رقم هوية صاحب المشروع',
+                label: localizations.projectOwnerIdLabel,
                 controller: projectOwnerIdController,
-                validatorMessage: 'يرجى إدخال رقم هوية صاحب المشروع',
+                validatorMessage: localizations.projectOwnerIdValidation,
               ),
               const SizedBox(height: 16),
-
-              // Contractor Name
               buildLabeledTextField(
-                label: 'اسم المقاول',
+                label: localizations.contractorNameLabel,
                 controller: contractorNameController,
-                validatorMessage: 'يرجى إدخال اسم المقاول',
+                validatorMessage: localizations.contractorNameValidation,
               ),
               const SizedBox(height: 16),
-
-              // Contractor ID
               buildLabeledTextField(
-                label: 'رقم هوية المقاول',
+                label: localizations.contractorIdLabel,
                 controller: contractorIdController,
-                validatorMessage: 'يرجى إدخال رقم هوية المقاول',
+                validatorMessage: localizations.contractorIdValidation,
               ),
               const SizedBox(height: 16),
-
-              // Contract Duration
               buildLabeledTextField(
-                label: 'مدة العقد',
+                label: localizations.contractDurationLabel,
                 controller: contractDurationController,
-                validatorMessage: 'يرجى إدخال مدة العقد',
+                validatorMessage: localizations.contractDurationValidation,
               ),
               const SizedBox(height: 16),
-
-              // Contract Value
               buildLabeledTextField(
-                label: 'قيمة العقد الإجمالية',
+                label: localizations.contractValueLabel,
                 controller: contractValueController,
-                validatorMessage: 'يرجى إدخال قيمة العقد',
+                validatorMessage: localizations.contractValueValidation,
               ),
               const SizedBox(height: 16),
-
-              // Materials and Equipment
               buildLabeledTextField(
-                label: 'المواد والمعدات',
+                label: localizations.materialsProvidedLabel,
                 controller: materialsProvidedController,
-                validatorMessage: 'يرجى إدخال المواد والمعدات اللازمة',
+                validatorMessage: localizations.materialsProvidedValidation,
               ),
               const SizedBox(height: 16),
-
-              // Contract Start Date
               buildLabeledTextField(
-                label: 'تاريخ بدء العقد',
+                label: localizations.startDateLabel,
                 controller: startDateController,
-                validatorMessage: 'يرجى إدخال تاريخ بدء العقد',
+                validatorMessage: localizations.startDateValidation,
               ),
               const SizedBox(height: 32),
-
-              // Submit Button
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      log('تم إدخال البيانات بنجاح.');
+                      log(localizations.successMessage);
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text('تم إدخال البيانات بنجاح')),
+                        SnackBar(content: Text(localizations.successMessage)),
                       );
                     } else {
-                      log('البيانات غير صحيحة. يرجى التحقق.');
+                      log(localizations.errorMessage);
                     }
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     backgroundColor: QColors.secondary,
                   ),
-                  child: const Text(
-                    "حفظ",
-                    style: Styles.textStyle18,
-                  ),
+                  child: Text(localizations.saveButton, style: Styles.textStyle18),
                 ),
               ),
             ],
@@ -151,7 +121,6 @@ class _ContractInputFormState extends State<ContractInputFormArgeement> {
     );
   }
 
-  // Helper function to build a labeled text field
   Widget buildLabeledTextField({
     required String label,
     required TextEditingController controller,
@@ -160,10 +129,7 @@ class _ContractInputFormState extends State<ContractInputFormArgeement> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: Styles.textStyle18.copyWith(color: QColors.secondary),
-        ),
+        Text(label, style: Styles.textStyle18.copyWith(color: QColors.secondary)),
         const SizedBox(height: 8),
         AppTextFormField(
           controller: controller,

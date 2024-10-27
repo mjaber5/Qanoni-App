@@ -17,7 +17,7 @@ class LoginLogoText extends StatelessWidget {
         children: [
            Text(
             localizations.qanoni,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 40,
               fontWeight: FontWeight.w800,
             ),
@@ -33,7 +33,7 @@ class LoginLogoText extends StatelessWidget {
           const SizedBox(height: 4),
            Text(
            localizations.makeYourServicesApp,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               color: QColors.darkGrey,
             ),

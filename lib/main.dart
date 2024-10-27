@@ -12,7 +12,7 @@ import 'simple_bloc_observer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+ 
   try {
     await Firebase.initializeApp();
   } catch (e) {

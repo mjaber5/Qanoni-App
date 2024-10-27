@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/text_strings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // تأكد من استيراد حزمة التعريب
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
@@ -33,7 +33,7 @@ class _ContractInputFormPropertyState extends State<ContractInputFormProperty> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(QTexts.appBarTitleProperty),
+        title: Text(AppLocalizations.of(context)!.appBarTitleProperty),
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -43,92 +43,92 @@ class _ContractInputFormPropertyState extends State<ContractInputFormProperty> {
           child: ListView(
             children: [
               // Section for seller information
-              const Text(
-                QTexts.sellerInfoProperty,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(
+                AppLocalizations.of(context)!.sellerInfoProperty,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: QTexts.sellerName,
+                label: AppLocalizations.of(context)!.sellerName,
                 controller: sellerNameController,
-                validatorMessage: QTexts.sellerNameValidation,
+                validatorMessage: AppLocalizations.of(context)!.sellerNameValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.sellerId,
+                label: AppLocalizations.of(context)!.sellerId,
                 controller: sellerIdController,
-                validatorMessage: QTexts.sellerIdValidation,
+                validatorMessage: AppLocalizations.of(context)!.sellerIdValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.sellerAddress,
+                label: AppLocalizations.of(context)!.sellerAddress,
                 controller: sellerAddressController,
-                validatorMessage: QTexts.sellerAddressValidation,
+                validatorMessage: AppLocalizations.of(context)!.sellerAddressValidation,
               ),
               const SizedBox(height: 32),
 
               // Buyer Information Section
-              const Text(
-                QTexts.buyerInfoProperty,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(
+                AppLocalizations.of(context)!.buyerInfoProperty,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: QTexts.buyerName,
+                label: AppLocalizations.of(context)!.buyerName,
                 controller: buyerNameController,
-                validatorMessage: QTexts.buyerNameValidation,
+                validatorMessage: AppLocalizations.of(context)!.buyerNameValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.buyerId,
+                label: AppLocalizations.of(context)!.buyerId,
                 controller: buyerIdController,
-                validatorMessage: QTexts.buyerIdValidation,
+                validatorMessage: AppLocalizations.of(context)!.buyerIdValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.buyerAddress,
+                label: AppLocalizations.of(context)!.buyerAddress,
                 controller: buyerAddressController,
-                validatorMessage: QTexts.buyerAddressValidation,
+                validatorMessage: AppLocalizations.of(context)!.buyerAddressValidation,
               ),
               const SizedBox(height: 32),
 
               // Property Information Section
-              const Text(
-                QTexts.propertyInfoProperty,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(
+                AppLocalizations.of(context)!.propertyInfoProperty,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: QTexts.propertyAddress,
+                label: AppLocalizations.of(context)!.propertyAddress,
                 controller: propertyAddressController,
-                validatorMessage: QTexts.propertyAddressValidation,
+                validatorMessage: AppLocalizations.of(context)!.propertyAddressValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.propertySize,
+                label: AppLocalizations.of(context)!.propertySize,
                 controller: propertySizeController,
-                validatorMessage: QTexts.propertySizeValidation,
+                validatorMessage: AppLocalizations.of(context)!.propertySizeValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.propertyPrice,
+                label: AppLocalizations.of(context)!.propertyPrice,
                 controller: propertyPriceController,
-                validatorMessage: QTexts.propertyPriceValidation,
+                validatorMessage: AppLocalizations.of(context)!.propertyPriceValidation,
               ),
               const SizedBox(height: 32),
 
               // Transaction Information Section
-              const Text(
-                QTexts.transactionInfoProperty,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(
+                AppLocalizations.of(context)!.transactionInfoProperty,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: QTexts.paymentMethod,
+                label: AppLocalizations.of(context)!.paymentMethod,
                 controller: paymentMethodController,
-                validatorMessage: QTexts.paymentMethodValidation,
+                validatorMessage: AppLocalizations.of(context)!.paymentMethodValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.saleDate,
+                label: AppLocalizations.of(context)!.saleDate,
                 controller: saleDateController,
-                validatorMessage: QTexts.saleDateValidation,
+                validatorMessage: AppLocalizations.of(context)!.saleDateValidation,
               ),
               const SizedBox(height: 32),
 
@@ -139,8 +139,9 @@ class _ContractInputFormPropertyState extends State<ContractInputFormProperty> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text(QTexts.dateEnteredSuccessfuly)),
+                        SnackBar(
+                          content: Text(AppLocalizations.of(context)!.dateEnteredSuccessfully),
+                        ),
                       );
                     }
                   },
@@ -148,8 +149,8 @@ class _ContractInputFormPropertyState extends State<ContractInputFormProperty> {
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     backgroundColor: QColors.secondary,
                   ),
-                  child: const Text(
-                    QTexts.saveButton,
+                  child: Text(
+                    AppLocalizations.of(context)!.saveButton,
                     style: Styles.textStyle18,
                   ),
                 ),

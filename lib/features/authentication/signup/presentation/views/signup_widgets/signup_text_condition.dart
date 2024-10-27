@@ -17,7 +17,7 @@ class SignupTextCondition extends StatelessWidget {
           children: [
              Text(
               localizations.byLogin,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.grey,
                 fontSize: 13,
               ),
@@ -30,7 +30,7 @@ class SignupTextCondition extends StatelessWidget {
                   onTap: () {},
                   child:  Text(
                     localizations.loginPrivacyPolicy,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14,
                       color: QColors.secondary,
                       decoration: TextDecoration.underline,
@@ -39,7 +39,7 @@ class SignupTextCondition extends StatelessWidget {
                 ),
                  Text(
                   localizations.loginAndText,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.grey,
                     fontSize: 13,
                   ),
@@ -48,7 +48,7 @@ class SignupTextCondition extends StatelessWidget {
                   onTap: () {},
                   child:  Text(
                    localizations.termsOfUs,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14,
                       color: QColors.secondary,
                       decoration: TextDecoration.underline,

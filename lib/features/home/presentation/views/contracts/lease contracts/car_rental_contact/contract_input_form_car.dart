@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // تأكد من إضافة مكتبة الوكاليزيشن
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/styles.dart';
 import 'package:qanoni/core/widgets/app_text_form_field.dart';
@@ -43,7 +44,7 @@ class _ContractInputFormState extends State<ContractInputFormCar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Enter Car Rental Contract Information'),
+        title: Text(AppLocalizations.of(context)!.contractInputTitle),
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -54,93 +55,93 @@ class _ContractInputFormState extends State<ContractInputFormCar> {
             children: [
               // Landlord Name
               buildLabeledTextField(
-                label: 'Landlord Name',
+                label: AppLocalizations.of(context)!.landlordName,
                 controller: landlordNameController,
-                validatorMessage: 'Please enter the landlord\'s name',
+                validatorMessage: AppLocalizations.of(context)!.landlordNameValidator,
               ),
               const SizedBox(height: 16),
 
               // Landlord ID
               buildLabeledTextField(
-                label: 'Landlord ID',
+                label: AppLocalizations.of(context)!.landlordId,
                 controller: landlordIdController,
-                validatorMessage: 'Please enter the landlord\'s ID number',
+                validatorMessage: AppLocalizations.of(context)!.landlordIdValidator,
               ),
               const SizedBox(height: 16),
 
               // Tenant Name
               buildLabeledTextField(
-                label: 'Tenant Name',
+                label: AppLocalizations.of(context)!.tenantName,
                 controller: tenantNameController,
-                validatorMessage: 'Please enter the tenant\'s name',
+                validatorMessage: AppLocalizations.of(context)!.tenantNameValidator,
               ),
               const SizedBox(height: 16),
 
               // Tenant ID
               buildLabeledTextField(
-                label: 'Tenant ID',
+                label: AppLocalizations.of(context)!.tenantId,
                 controller: tenantIdController,
-                validatorMessage: 'Please enter the tenant\'s ID number',
+                validatorMessage: AppLocalizations.of(context)!.tenantIdValidator,
               ),
               const SizedBox(height: 16),
 
               // Car Type
               buildLabeledTextField(
-                label: 'Car Type',
+                label: AppLocalizations.of(context)!.carType,
                 controller: carTypeController,
-                validatorMessage: 'Please enter the car type',
+                validatorMessage: AppLocalizations.of(context)!.carTypeValidator,
               ),
               const SizedBox(height: 16),
 
               // Car Model
               buildLabeledTextField(
-                label: 'Car Model',
+                label: AppLocalizations.of(context)!.carModel,
                 controller: carModelController,
-                validatorMessage: 'Please enter the car model',
+                validatorMessage: AppLocalizations.of(context)!.carModelValidator,
               ),
               const SizedBox(height: 16),
 
               // Car Color
               buildLabeledTextField(
-                label: 'Car Color',
+                label: AppLocalizations.of(context)!.carColor,
                 controller: carColorController,
-                validatorMessage: 'Please enter the car color',
+                validatorMessage: AppLocalizations.of(context)!.carColorValidator,
               ),
               const SizedBox(height: 16),
 
               // Engine Capacity
               buildLabeledTextField(
-                label: 'Engine Capacity',
+                label: AppLocalizations.of(context)!.engineCapacity,
                 controller: engineCapacityController,
-                validatorMessage: 'Please enter the engine capacity',
+                validatorMessage: AppLocalizations.of(context)!.engineCapacityValidator,
               ),
               const SizedBox(height: 16),
 
               // Rent Amount
               buildLabeledTextField(
-                label: 'Rent Amount',
+                label: AppLocalizations.of(context)!.rentAmount,
                 controller: rentAmountController,
-                validatorMessage: 'Please enter the rent amount',
+                validatorMessage: AppLocalizations.of(context)!.rentAmountValidator,
               ),
               const SizedBox(height: 16),
 
               // Contract Start Date
               buildLabeledTextField(
-                label: 'Contract Start Date',
+                label: AppLocalizations.of(context)!.contractStartDate,
                 controller: startDateController,
-                validatorMessage: 'Please enter the contract start date',
+                validatorMessage: AppLocalizations.of(context)!.contractStartDateValidator,
               ),
               const SizedBox(height: 16),
 
               // Contract Duration
               buildLabeledTextField(
-                label: 'Contract Duration',
+                label: AppLocalizations.of(context)!.contractDuration,
                 controller: contractDurationController,
-                validatorMessage: 'Please enter the contract duration',
+                validatorMessage: AppLocalizations.of(context)!.contractDurationValidator,
               ),
               const SizedBox(height: 32),
 
-              // Submit Bu,tton
+              // Submit Button
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: ElevatedButton(
@@ -148,8 +149,7 @@ class _ContractInputFormState extends State<ContractInputFormCar> {
                     if (_formKey.currentState!.validate()) {
                       log('Form is valid. Proceed with saving the contract.');
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text('Data entered successfully')),
+                        const SnackBar(content: Text('Data entered successfully')),
                       );
                     } else {
                       log('Form is not valid. Show errors.');
@@ -159,8 +159,8 @@ class _ContractInputFormState extends State<ContractInputFormCar> {
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     backgroundColor: QColors.secondary,
                   ),
-                  child: const Text(
-                    "Save",
+                  child: Text(
+                    AppLocalizations.of(context)!.saveButton,
                     style: Styles.textStyle18,
                   ),
                 ),

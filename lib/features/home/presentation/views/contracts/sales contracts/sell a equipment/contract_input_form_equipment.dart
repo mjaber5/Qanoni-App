@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/text_strings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import localization package
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
@@ -15,6 +15,8 @@ class ContractInputFormEquipmentt extends StatefulWidget {
 class _ContractInputFormEquipmentState
     extends State<ContractInputFormEquipmentt> {
   final _formKey = GlobalKey<FormState>();
+
+  // Controllers for form fields
   final TextEditingController vendorNameController = TextEditingController();
   final TextEditingController vendorAddressController = TextEditingController();
   final TextEditingController purchaserNameController = TextEditingController();
@@ -34,7 +36,7 @@ class _ContractInputFormEquipmentState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(QTexts.appBarTitleEquipment),
+        title: Text(AppLocalizations.of(context)!.appBarTitleEquipment), // Use localization here
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -43,101 +45,133 @@ class _ContractInputFormEquipmentState
           key: _formKey,
           child: ListView(
             children: [
-              const Text(
-                QTexts.partiesInfo,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              buildLabeledTextField(
-                label: QTexts.vendorName,
-                controller: vendorNameController,
-                validatorMessage: QTexts.vendorNameValidation,
-              ),
-              const SizedBox(height: 16),
-              buildLabeledTextField(
-                label: QTexts.vendorAddress,
-                controller: vendorAddressController,
-                validatorMessage: QTexts.vendorAddressValidation,
-              ),
-              const SizedBox(height: 16),
-              buildLabeledTextField(
-                label: QTexts.purchaserName,
-                controller: purchaserNameController,
-                validatorMessage: QTexts.purchaserNameValidation,
-              ),
-              const SizedBox(height: 16),
-              buildLabeledTextField(
-                label: QTexts.purchaserAddress,
-                controller: purchaserAddressController,
-                validatorMessage: QTexts.purchaserAddressValidation,
-              ),
+              buildPartiesInfoSection(),
               const SizedBox(height: 32),
-              const Text(
-                QTexts.equipmentDetails,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              buildLabeledTextField(
-                label: QTexts.equipmentType,
-                controller: equipmentTypeController,
-                validatorMessage: QTexts.equipmentTypeValidation,
-              ),
-              const SizedBox(height: 16),
-              buildLabeledTextField(
-                label: QTexts.equipmentModel,
-                controller: equipmentModelController,
-                validatorMessage: QTexts.equipmentModelValidation,
-              ),
-              const SizedBox(height: 16),
-              buildLabeledTextField(
-                label: QTexts.equipmentSerialNumber,
-                controller: equipmentSerialNumberController,
-                validatorMessage: QTexts.equipmentSerialNumberValidation,
-              ),
-              const SizedBox(height: 16),
-              buildLabeledTextField(
-                label: QTexts.equipmentCondition,
-                controller: equipmentConditionController,
-                validatorMessage: QTexts.equipmentConditionValidation,
-              ),
+              buildEquipmentDetailsSection(),
               const SizedBox(height: 32),
-              const Text(
-                QTexts.saleDetails,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              buildLabeledTextField(
-                label: QTexts.price,
-                controller: priceController,
-                validatorMessage: QTexts.priceValidation,
-              ),
-              const SizedBox(height: 16),
-              buildLabeledTextField(
-                label: QTexts.saleDate,
-                controller: saleDateController,
-                validatorMessage: QTexts.saleDateValidation,
-              ),
+              buildSaleDetailsSection(),
               const SizedBox(height: 32),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18),
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text(QTexts.dateEnteredSuccessfuly)),
-                      );
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    backgroundColor: QColors.secondary,
-                  ),
-                  child: const Text(
-                    QTexts.saveButton,
-                    style: Styles.textStyle18,
-                  ),
-                ),
-              ),
+              buildSubmitButton(),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildPartiesInfoSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          AppLocalizations.of(context)!.partiesInfo, // Use localization here
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        buildLabeledTextField(
+          label: AppLocalizations.of(context)!.vendorName, // Use localization here
+          controller: vendorNameController,
+          validatorMessage: AppLocalizations.of(context)!.vendorNameValidation, // Use localization here
+        ),
+        const SizedBox(height: 16),
+        buildLabeledTextField(
+          label: AppLocalizations.of(context)!.vendorAddress, // Use localization here
+          controller: vendorAddressController,
+          validatorMessage: AppLocalizations.of(context)!.vendorAddressValidation, // Use localization here
+        ),
+        const SizedBox(height: 16),
+        buildLabeledTextField(
+          label: AppLocalizations.of(context)!.purchaserName, // Use localization here
+          controller: purchaserNameController,
+          validatorMessage: AppLocalizations.of(context)!.purchaserNameValidation, // Use localization here
+        ),
+        const SizedBox(height: 16),
+        buildLabeledTextField(
+          label: AppLocalizations.of(context)!.purchaserAddress, // Use localization here
+          controller: purchaserAddressController,
+          validatorMessage: AppLocalizations.of(context)!.purchaserAddressValidation, // Use localization here
+        ),
+      ],
+    );
+  }
+
+  Widget buildEquipmentDetailsSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          AppLocalizations.of(context)!.equipmentDetails, // Use localization here
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        buildLabeledTextField(
+          label: AppLocalizations.of(context)!.equipmentType, // Use localization here
+          controller: equipmentTypeController,
+          validatorMessage: AppLocalizations.of(context)!.equipmentTypeValidation, // Use localization here
+        ),
+        const SizedBox(height: 16),
+        buildLabeledTextField(
+          label: AppLocalizations.of(context)!.equipmentModel, // Use localization here
+          controller: equipmentModelController,
+          validatorMessage: AppLocalizations.of(context)!.equipmentModelValidation, // Use localization here
+        ),
+        const SizedBox(height: 16),
+        buildLabeledTextField(
+          label: AppLocalizations.of(context)!.equipmentSerialNumber, // Use localization here
+          controller: equipmentSerialNumberController,
+          validatorMessage: AppLocalizations.of(context)!.equipmentSerialNumberValidation, // Use localization here
+        ),
+        const SizedBox(height: 16),
+        buildLabeledTextField(
+          label: AppLocalizations.of(context)!.equipmentCondition, // Use localization here
+          controller: equipmentConditionController,
+          validatorMessage: AppLocalizations.of(context)!.equipmentConditionValidation, // Use localization here
+        ),
+      ],
+    );
+  }
+
+  Widget buildSaleDetailsSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          AppLocalizations.of(context)!.saleDetails, // Use localization here
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        buildLabeledTextField(
+          label: AppLocalizations.of(context)!.price, // Use localization here
+          controller: priceController,
+          validatorMessage: AppLocalizations.of(context)!.priceValidation, // Use localization here
+        ),
+        const SizedBox(height: 16),
+        buildLabeledTextField(
+          label: AppLocalizations.of(context)!.saleDate, // Use localization here
+          controller: saleDateController,
+          validatorMessage: AppLocalizations.of(context)!.saleDateValidation, // Use localization here
+        ),
+      ],
+    );
+  }
+
+  Widget buildSubmitButton() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 18),
+      child: ElevatedButton(
+        onPressed: () {
+          if (_formKey.currentState!.validate()) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(AppLocalizations.of(context)!.dateEnteredSuccessfully), // Use localization here
+              ),
+            );
+          }
+        },
+        style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(vertical: 15),
+          backgroundColor: QColors.secondary,
+        ),
+        child: Text(
+          AppLocalizations.of(context)!.saveButton, // Use localization here
+          style: Styles.textStyle18,
         ),
       ),
     );

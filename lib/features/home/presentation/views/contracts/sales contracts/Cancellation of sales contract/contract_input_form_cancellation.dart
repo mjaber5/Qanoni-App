@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/text_strings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import localization package
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
@@ -36,7 +36,7 @@ class _ContractInputFormEquipmentState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(QTexts.appBarTitleEquipment),
+        title: Text(AppLocalizations.of(context)!.appBarTitleEquipment), // Use localization here
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -63,32 +63,32 @@ class _ContractInputFormEquipmentState
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          QTexts.partiesInfo,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        Text(
+          AppLocalizations.of(context)!.partiesInfo, // Use localization here
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         buildLabeledTextField(
-          label: QTexts.vendorName,
+          label: AppLocalizations.of(context)!.vendorName, // Use localization here
           controller: vendorNameController,
-          validatorMessage: QTexts.vendorNameValidation,
+          validatorMessage: AppLocalizations.of(context)!.vendorNameValidation, // Use localization here
         ),
         const SizedBox(height: 16),
         buildLabeledTextField(
-          label: QTexts.vendorAddress,
+          label: AppLocalizations.of(context)!.vendorAddress, // Use localization here
           controller: vendorAddressController,
-          validatorMessage: QTexts.vendorAddressValidation,
+          validatorMessage: AppLocalizations.of(context)!.vendorAddressValidation, // Use localization here
         ),
         const SizedBox(height: 16),
         buildLabeledTextField(
-          label: QTexts.purchaserName,
+          label: AppLocalizations.of(context)!.purchaserName, // Use localization here
           controller: purchaserNameController,
-          validatorMessage: QTexts.purchaserNameValidation,
+          validatorMessage: AppLocalizations.of(context)!.purchaserNameValidation, // Use localization here
         ),
         const SizedBox(height: 16),
         buildLabeledTextField(
-          label: QTexts.purchaserAddress,
+          label: AppLocalizations.of(context)!.purchaserAddress, // Use localization here
           controller: purchaserAddressController,
-          validatorMessage: QTexts.purchaserAddressValidation,
+          validatorMessage: AppLocalizations.of(context)!.purchaserAddressValidation, // Use localization here
         ),
       ],
     );
@@ -98,32 +98,32 @@ class _ContractInputFormEquipmentState
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          QTexts.equipmentDetails,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        Text(
+          AppLocalizations.of(context)!.equipmentDetails, // Use localization here
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         buildLabeledTextField(
-          label: QTexts.equipmentType,
+          label: AppLocalizations.of(context)!.equipmentType, // Use localization here
           controller: equipmentTypeController,
-          validatorMessage: QTexts.equipmentTypeValidation,
+          validatorMessage: AppLocalizations.of(context)!.equipmentTypeValidation, // Use localization here
         ),
         const SizedBox(height: 16),
         buildLabeledTextField(
-          label: QTexts.equipmentModel,
+          label: AppLocalizations.of(context)!.equipmentModel, // Use localization here
           controller: equipmentModelController,
-          validatorMessage: QTexts.equipmentModelValidation,
+          validatorMessage: AppLocalizations.of(context)!.equipmentModelValidation, // Use localization here
         ),
         const SizedBox(height: 16),
         buildLabeledTextField(
-          label: QTexts.equipmentSerialNumber,
+          label: AppLocalizations.of(context)!.equipmentSerialNumber, // Use localization here
           controller: equipmentSerialNumberController,
-          validatorMessage: QTexts.equipmentSerialNumberValidation,
+          validatorMessage: AppLocalizations.of(context)!.equipmentSerialNumberValidation, // Use localization here
         ),
         const SizedBox(height: 16),
         buildLabeledTextField(
-          label: QTexts.equipmentCondition,
+          label: AppLocalizations.of(context)!.equipmentCondition, // Use localization here
           controller: equipmentConditionController,
-          validatorMessage: QTexts.equipmentConditionValidation,
+          validatorMessage: AppLocalizations.of(context)!.equipmentConditionValidation, // Use localization here
         ),
       ],
     );
@@ -133,20 +133,20 @@ class _ContractInputFormEquipmentState
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          QTexts.saleDetails,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        Text(
+          AppLocalizations.of(context)!.saleDetails, // Use localization here
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         buildLabeledTextField(
-          label: QTexts.price,
+          label: AppLocalizations.of(context)!.price, // Use localization here
           controller: priceController,
-          validatorMessage: QTexts.priceValidation,
+          validatorMessage: AppLocalizations.of(context)!.priceValidation, // Use localization here
         ),
         const SizedBox(height: 16),
         buildLabeledTextField(
-          label: QTexts.saleDate,
+          label: AppLocalizations.of(context)!.saleDate, // Use localization here
           controller: saleDateController,
-          validatorMessage: QTexts.saleDateValidation,
+          validatorMessage: AppLocalizations.of(context)!.saleDateValidation, // Use localization here
         ),
       ],
     );
@@ -159,8 +159,9 @@ class _ContractInputFormEquipmentState
         onPressed: () {
           if (_formKey.currentState!.validate()) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                  content: Text(QTexts.dateEnteredSuccessfuly)),
+              SnackBar(
+                content: Text(AppLocalizations.of(context)!.dateEnteredSuccessfully), // Use localization here
+              ),
             );
           }
         },
@@ -168,8 +169,8 @@ class _ContractInputFormEquipmentState
           padding: const EdgeInsets.symmetric(vertical: 15),
           backgroundColor: QColors.secondary,
         ),
-        child: const Text(
-          QTexts.saveButton,
+        child: Text(
+          AppLocalizations.of(context)!.saveButton, // Use localization here
           style: Styles.textStyle18,
         ),
       ),

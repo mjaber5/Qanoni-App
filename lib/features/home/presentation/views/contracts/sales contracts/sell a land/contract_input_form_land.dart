@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../../../../core/utils/constants/colors.dart';
-import '../../../../../../../core/utils/constants/text_strings.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
 
@@ -9,10 +9,10 @@ class ContractInputFormLand extends StatefulWidget {
 
   @override
   State<ContractInputFormLand> createState() =>
-      _ContractInputFormPropertyState();
+      _ContractInputFormLandState();
 }
 
-class _ContractInputFormPropertyState extends State<ContractInputFormLand> {
+class _ContractInputFormLandState extends State<ContractInputFormLand> {
   final _formKey = GlobalKey<FormState>();
 
   // Controllers for form fields
@@ -35,7 +35,7 @@ class _ContractInputFormPropertyState extends State<ContractInputFormLand> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(QTexts.landSaleContractInfoAppBar),
+        title: Text(AppLocalizations.of(context)!.landSaleContractInfoAppBar),
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -44,101 +44,101 @@ class _ContractInputFormPropertyState extends State<ContractInputFormLand> {
           key: _formKey,
           child: ListView(
             children: [
-              // 1. Date
+              // 1. تاريخ
               buildLabeledTextField(
-                label: QTexts.dateLabel,
+                label: AppLocalizations.of(context)!.dateLabel,
                 controller: dateController,
-                validatorMessage: QTexts.validatoreMessageEnterDate,
+                validatorMessage: AppLocalizations.of(context)!.validatoreMessageEnterDate,
               ),
               const SizedBox(height: 16),
 
-              // 2. Seller and Buyer Information
-              const Text(
-                QTexts.paritesInformation,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              // 2. معلومات البائع والمشتري
+              Text(
+                AppLocalizations.of(context)!.paritesInformation,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: QTexts.sellerName,
+                label: AppLocalizations.of(context)!.sellerName,
                 controller: sellerNameController,
-                validatorMessage: QTexts.sellerNameValidatoreMessage,
+                validatorMessage: AppLocalizations.of(context)!.sellerNameValidatoreMessage,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.sellerAddress,
+                label: AppLocalizations.of(context)!.sellerAddress,
                 controller: sellerAddressController,
-                validatorMessage: QTexts.sellerAddressValidatoreMessage,
+                validatorMessage: AppLocalizations.of(context)!.sellerAddressValidatoreMessage,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.buyerName,
+                label: AppLocalizations.of(context)!.buyerName,
                 controller: buyerNameController,
-                validatorMessage: QTexts.buyerNameValidatorMessage,
+                validatorMessage: AppLocalizations.of(context)!.buyerNameValidatorMessage,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.buyerAddress,
+                label: AppLocalizations.of(context)!.buyerAddress,
                 controller: buyerAddressController,
-                validatorMessage: QTexts.buyerAddressValidatorMessage,
+                validatorMessage: AppLocalizations.of(context)!.buyerAddressValidatorMessage,
               ),
               const SizedBox(height: 32),
 
-              // 3. Property Details
-              const Text(
-                QTexts.propertyDetails,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              // 3. تفاصيل العقار
+              Text(
+                AppLocalizations.of(context)!.propertyDetails,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: QTexts.propertyType,
+                label: AppLocalizations.of(context)!.propertyType,
                 controller: propertyTypeController,
-                validatorMessage: QTexts.propertyTypeValidatorMessage,
+                validatorMessage: AppLocalizations.of(context)!.propertyTypeValidatorMessage,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.propertyNumber,
+                label: AppLocalizations.of(context)!.propertyNumber,
                 controller: propertyNumberController,
-                validatorMessage: QTexts.propertyNumberValidatorMessage,
+                validatorMessage: AppLocalizations.of(context)!.propertyNumberValidatorMessage,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.parcelNumber,
+                label: AppLocalizations.of(context)!.parcelNumber,
                 controller: landParcelNumberController,
-                validatorMessage: QTexts.parcelNumberValidatorMessage,
+                validatorMessage: AppLocalizations.of(context)!.parcelNumberValidatorMessage,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.landArea,
+                label: AppLocalizations.of(context)!.landArea,
                 controller: landAreaController,
-                validatorMessage: QTexts.landAreaValidatorMessage,
+                validatorMessage: AppLocalizations.of(context)!.landAreaValidatorMessage,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.apartmentNumber,
+                label: AppLocalizations.of(context)!.apartmentNumber,
                 controller: apartmentNumberController,
-                validatorMessage: QTexts.apartmentNumberValidatorMessage,
+                validatorMessage: AppLocalizations.of(context)!.apartmentNumberValidatorMessage,
               ),
               const SizedBox(height: 32),
 
-              // 4. Property Price
-              const Text(
-                QTexts.propertyPrice,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              // 4. سعر العقار
+              Text(
+                AppLocalizations.of(context)!.propertyPrice,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: QTexts.amountLabel,
+                label: AppLocalizations.of(context)!.amountLabel,
                 controller: priceController,
-                validatorMessage: QTexts.amountLabelValidatorMessage,
+                validatorMessage: AppLocalizations.of(context)!.amountLabelValidatorMessage,
               ),
               const SizedBox(height: 32),
 
-              // Submit Button
+              // زر الإرسال
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(QTexts.dateEnteredSuccessfuly),
+                        SnackBar(
+                          content: Text(AppLocalizations.of(context)!.dateEnteredSuccessfuly),
                         ),
                       );
                     }
@@ -147,8 +147,8 @@ class _ContractInputFormPropertyState extends State<ContractInputFormLand> {
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     backgroundColor: QColors.secondary,
                   ),
-                  child: const Text(
-                    QTexts.saveButton,
+                  child: Text(
+                    AppLocalizations.of(context)!.saveButton,
                     style: Styles.textStyle18,
                   ),
                 ),
@@ -160,7 +160,7 @@ class _ContractInputFormPropertyState extends State<ContractInputFormLand> {
     );
   }
 
-  // Helper function to build a labeled text field
+  // دالة مساعدة لبناء حقل نصي مع تسمية
   Widget buildLabeledTextField({
     required String label,
     required TextEditingController controller,

@@ -110,8 +110,8 @@ class EmploymentContractCard extends StatelessWidget {
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(15), // Rounded corners
-          boxShadow: [
-            const BoxShadow(
+          boxShadow: const [
+            BoxShadow(
               color: Colors.black12,
               blurRadius: 10,
               offset: Offset(0, 4),

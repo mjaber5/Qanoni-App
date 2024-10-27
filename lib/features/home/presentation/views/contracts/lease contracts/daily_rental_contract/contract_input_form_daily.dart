@@ -3,33 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/core/utils/styles.dart';
 import 'package:qanoni/core/widgets/app_text_form_field.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // استيراد مكتبة الترجمة
 
 class ContractInputFormDaily extends StatefulWidget {
   const ContractInputFormDaily({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _DailyRentalContractFormState createState() => _DailyRentalContractFormState();
 }
 
 class _DailyRentalContractFormState extends State<ContractInputFormDaily> {
   final _formKey = GlobalKey<FormState>();
 
-  // Controllers for text fields
-  final TextEditingController landlordNameController = TextEditingController(); // Landlord Name
-  final TextEditingController landlordAddressController = TextEditingController(); // Landlord Address
-  final TextEditingController tenantNameController = TextEditingController(); // Tenant Name
-  final TextEditingController tenantAddressController = TextEditingController(); // Tenant Address
-  final TextEditingController propertyLocationController = TextEditingController(); // Property Location
-  final TextEditingController rentValueController = TextEditingController(); // Rent Value (daily)
-  final TextEditingController startDateController = TextEditingController(); // Contract Start Date
-  final TextEditingController endDateController = TextEditingController(); // Contract End Date
+  final TextEditingController landlordNameController = TextEditingController(); 
+  final TextEditingController landlordAddressController = TextEditingController(); 
+  final TextEditingController tenantNameController = TextEditingController(); 
+  final TextEditingController tenantAddressController = TextEditingController(); 
+  final TextEditingController propertyLocationController = TextEditingController(); 
+  final TextEditingController rentValueController = TextEditingController(); 
+  final TextEditingController startDateController = TextEditingController(); 
+  final TextEditingController endDateController = TextEditingController(); 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Enter Daily Rental Contract Information'),
+        title: Text(AppLocalizations.of(context)!.contractInputTitle), // استخدام السلسلة المترجمة
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -38,71 +37,62 @@ class _DailyRentalContractFormState extends State<ContractInputFormDaily> {
           key: _formKey,
           child: ListView(
             children: [
-              // Landlord Name
               buildLabeledTextField(
-                label: 'Landlord Name',
+                label: AppLocalizations.of(context)!.landlordName,
                 controller: landlordNameController,
-                validatorMessage: 'Please enter the landlord\'s name',
+                validatorMessage: AppLocalizations.of(context)!.landlordNameValidator,
               ),
               const SizedBox(height: 16),
 
-              // Landlord Address
               buildLabeledTextField(
-                label: 'Landlord Address',
+                label: AppLocalizations.of(context)!.landlordAddress,
                 controller: landlordAddressController,
-                validatorMessage: 'Please enter the landlord\'s address',
+                validatorMessage: AppLocalizations.of(context)!.landlordAddressValidator,
               ),
               const SizedBox(height: 16),
 
-              // Tenant Name
               buildLabeledTextField(
-                label: 'Tenant Name',
+                label: AppLocalizations.of(context)!.tenantName,
                 controller: tenantNameController,
-                validatorMessage: 'Please enter the tenant\'s name',
+                validatorMessage: AppLocalizations.of(context)!.tenantNameValidator,
               ),
               const SizedBox(height: 16),
 
-              // Tenant Address
               buildLabeledTextField(
-                label: 'Tenant Address',
+                label: AppLocalizations.of(context)!.tenantAddress,
                 controller: tenantAddressController,
-                validatorMessage: 'Please enter the tenant\'s address',
+                validatorMessage: AppLocalizations.of(context)!.tenantAddressValidator,
               ),
               const SizedBox(height: 16),
 
-              // Property Location
               buildLabeledTextField(
-                label: 'Property Location',
+                label: AppLocalizations.of(context)!.propertyLocation,
                 controller: propertyLocationController,
-                validatorMessage: 'Please enter the property location',
+                validatorMessage: AppLocalizations.of(context)!.propertyLocationValidator,
               ),
               const SizedBox(height: 16),
 
-              // Rent Value (daily)
               buildLabeledTextField(
-                label: 'Daily Rent Value',
+                label: AppLocalizations.of(context)!.dailyRentValue,
                 controller: rentValueController,
-                validatorMessage: 'Please enter the daily rent value',
+                validatorMessage: AppLocalizations.of(context)!.dailyRentValueValidator,
               ),
               const SizedBox(height: 16),
 
-              // Contract Start Date
               buildLabeledTextField(
-                label: 'Contract Start Date',
+                label: AppLocalizations.of(context)!.contractStartDate,
                 controller: startDateController,
-                validatorMessage: 'Please enter the contract start date',
+                validatorMessage: AppLocalizations.of(context)!.contractStartDateValidator,
               ),
               const SizedBox(height: 16),
 
-              // Contract End Date
               buildLabeledTextField(
-                label: 'Contract End Date',
+                label: AppLocalizations.of(context)!.contractEndDate,
                 controller: endDateController,
-                validatorMessage: 'Please enter the contract end date',
+                validatorMessage: AppLocalizations.of(context)!.contractEndDateValidator,
               ),
               const SizedBox(height: 32),
 
-              // Submit Button
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: ElevatedButton(
@@ -110,7 +100,7 @@ class _DailyRentalContractFormState extends State<ContractInputFormDaily> {
                     if (_formKey.currentState!.validate()) {
                       log('Form is valid. Proceed with saving the contract.');
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Data entered successfully')),
+                        const SnackBar(content: Text('تم إدخال البيانات بنجاح')),
                       );
                     } else {
                       log('Form is not valid. Show errors.');
@@ -120,8 +110,8 @@ class _DailyRentalContractFormState extends State<ContractInputFormDaily> {
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     backgroundColor: QColors.secondary,
                   ),
-                  child: const Text(
-                    "Save",
+                  child: Text(
+                    AppLocalizations.of(context)!.saveButton, // استخدام السلسلة المترجمة
                     style: Styles.textStyle18,
                   ),
                 ),
@@ -133,7 +123,6 @@ class _DailyRentalContractFormState extends State<ContractInputFormDaily> {
     );
   }
 
-  // Helper function to build a labeled text field
   Widget buildLabeledTextField({
     required String label,
     required TextEditingController controller,

@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import localization package
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
@@ -11,8 +12,6 @@ class ContractInputFormCancellation extends StatefulWidget {
   State<ContractInputFormCancellation> createState() =>
       _LeaseCancellationFormState();
 }
-
-// done
 
 class _LeaseCancellationFormState extends State<ContractInputFormCancellation> {
   final _formKey = GlobalKey<FormState>();
@@ -33,7 +32,7 @@ class _LeaseCancellationFormState extends State<ContractInputFormCancellation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lease Cancellation Form'),
+        title: Text(AppLocalizations.of(context)!.leaseCancellationTitle), // Use localization here
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -44,41 +43,41 @@ class _LeaseCancellationFormState extends State<ContractInputFormCancellation> {
             children: [
               // Landlord Name
               buildLabeledTextField(
-                label: 'Landlord Name',
+                label: AppLocalizations.of(context)!.landlordName,
                 controller: landlordNameController,
-                validatorMessage: 'Please enter the landlord\'s name',
+                validatorMessage: AppLocalizations.of(context)!.landlordNameValidator,
               ),
               const SizedBox(height: 16),
 
               // Tenant Name
               buildLabeledTextField(
-                label: 'Tenant Name',
+                label: AppLocalizations.of(context)!.tenantName,
                 controller: tenantNameController,
-                validatorMessage: 'Please enter the tenant\'s name',
+                validatorMessage: AppLocalizations.of(context)!.tenantNameValidator,
               ),
               const SizedBox(height: 16),
 
               // Contract Start Date
               buildLabeledTextField(
-                label: 'Contract Start Date',
+                label: AppLocalizations.of(context)!.contractStartDate,
                 controller: contractStartDateController,
-                validatorMessage: 'Please enter the contract start date',
+                validatorMessage: AppLocalizations.of(context)!.contractStartDateValidator,
               ),
               const SizedBox(height: 16),
 
               // Contract End Date
               buildLabeledTextField(
-                label: 'Contract End Date',
+                label: AppLocalizations.of(context)!.contractEndDate,
                 controller: contractEndDateController,
-                validatorMessage: 'Please enter the contract end date',
+                validatorMessage: AppLocalizations.of(context)!.contractEndDateValidator,
               ),
               const SizedBox(height: 16),
 
               // Reason for Cancellation
               buildLabeledTextField(
-                label: 'Reason for Cancellation',
+                label: AppLocalizations.of(context)!.cancellationReason,
                 controller: cancellationReasonController,
-                validatorMessage: 'Please enter a reason for cancellation',
+                validatorMessage: AppLocalizations.of(context)!.cancellationReasonValidator,
               ),
               const SizedBox(height: 32),
 
@@ -90,8 +89,8 @@ class _LeaseCancellationFormState extends State<ContractInputFormCancellation> {
                     if (_formKey.currentState!.validate()) {
                       log('Form is valid. Proceed with contract cancellation.');
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text('Form submitted successfully')),
+                        SnackBar(
+                            content: Text(AppLocalizations.of(context)!.formSubmittedSuccess)),
                       );
                     } else {
                       log('Form is not valid. Show errors.');
@@ -101,8 +100,8 @@ class _LeaseCancellationFormState extends State<ContractInputFormCancellation> {
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     backgroundColor: QColors.secondary,
                   ),
-                  child: const Text(
-                    "Submit",
+                  child: Text(
+                    AppLocalizations.of(context)!.submitButton, // Use localization here
                     style: Styles.textStyle18,
                   ),
                 ),
