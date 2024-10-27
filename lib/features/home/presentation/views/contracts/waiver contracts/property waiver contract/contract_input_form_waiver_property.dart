@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // استيراد الترجمة المحلية
+import 'package:go_router/go_router.dart';
+import 'package:qanoni/core/utils/app_router.dart';
 
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
@@ -49,96 +51,113 @@ class _ContractInputFormWaiverPropertyState
             children: [
               Text(
                 AppLocalizations.of(context)!.sellerInfo,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.sellerName,
                 controller: sellerNameController,
-                validatorMessage: AppLocalizations.of(context)!.sellerNameValidation,
+                validatorMessage:
+                    AppLocalizations.of(context)!.sellerNameValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.sellerId,
                 controller: sellerIdController,
-                validatorMessage: AppLocalizations.of(context)!.sellerIdValidation,
+                validatorMessage:
+                    AppLocalizations.of(context)!.sellerIdValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.sellerAddress,
                 controller: sellerAddressController,
-                validatorMessage: AppLocalizations.of(context)!.sellerAddressValidation,
+                validatorMessage:
+                    AppLocalizations.of(context)!.sellerAddressValidation,
               ),
               const SizedBox(height: 32),
               Text(
                 AppLocalizations.of(context)!.buyerInfo,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.buyerName,
                 controller: buyerNameController,
-                validatorMessage: AppLocalizations.of(context)!.buyerNameValidation,
+                validatorMessage:
+                    AppLocalizations.of(context)!.buyerNameValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.buyerId,
                 controller: buyerIdController,
-                validatorMessage: AppLocalizations.of(context)!.buyerIdValidation,
+                validatorMessage:
+                    AppLocalizations.of(context)!.buyerIdValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.buyerAddress,
                 controller: buyerAddressController,
-                validatorMessage: AppLocalizations.of(context)!.buyerAddressValidation,
+                validatorMessage:
+                    AppLocalizations.of(context)!.buyerAddressValidation,
               ),
               const SizedBox(height: 32),
               Text(
                 AppLocalizations.of(context)!.propertyInfo,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.propertyType,
                 controller: propertyTypeController,
-                validatorMessage: AppLocalizations.of(context)!.propertyTypeValidation,
+                validatorMessage:
+                    AppLocalizations.of(context)!.propertyTypeValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.propertyDetails,
                 controller: propertyDetailsController,
-                validatorMessage: AppLocalizations.of(context)!.propertyDetailsValidation,
+                validatorMessage:
+                    AppLocalizations.of(context)!.propertyDetailsValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.waiverReason,
                 controller: waiverReasonController,
-                validatorMessage: AppLocalizations.of(context)!.waiverReasonValidation,
+                validatorMessage:
+                    AppLocalizations.of(context)!.waiverReasonValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.ownershipStatus,
                 controller: ownershipController,
-                validatorMessage: AppLocalizations.of(context)!.ownershipStatusValidation,
+                validatorMessage:
+                    AppLocalizations.of(context)!.ownershipStatusValidation,
               ),
               const SizedBox(height: 32),
               Text(
                 AppLocalizations.of(context)!.transactionInfo,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.waiverPrice,
                 controller: waiverPriceController,
-                validatorMessage: AppLocalizations.of(context)!.waiverPriceValidation,
+                validatorMessage:
+                    AppLocalizations.of(context)!.waiverPriceValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.paymentMethod,
                 controller: paymentMethodController,
-                validatorMessage: AppLocalizations.of(context)!.paymentMethodValidation,
+                validatorMessage:
+                    AppLocalizations.of(context)!.paymentMethodValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.waiverDate,
                 controller: waiverDateController,
-                validatorMessage: AppLocalizations.of(context)!.waiverDateValidation,
+                validatorMessage:
+                    AppLocalizations.of(context)!.waiverDateValidation,
               ),
               const SizedBox(height: 32),
               Padding(
@@ -149,8 +168,10 @@ class _ContractInputFormWaiverPropertyState
                       log('Form is valid. Proceed with saving the contract.');
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                            content: Text(AppLocalizations.of(context)!.dataEnteredSuccessfully)),
+                            content: Text(AppLocalizations.of(context)!
+                                .dataEnteredSuccessfully)),
                       );
+                      GoRouter.of(context).push(AppRouter.kSuccessView);
                     } else {
                       log('Form is not valid. Show errors.');
                     }

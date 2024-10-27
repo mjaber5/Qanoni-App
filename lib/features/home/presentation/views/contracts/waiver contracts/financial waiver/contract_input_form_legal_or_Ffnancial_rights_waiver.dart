@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
+import 'package:qanoni/core/utils/app_router.dart';
 
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
@@ -19,12 +21,17 @@ class _ContractInputFormWaiverLegalFinancialArabicState
     extends State<ContractInputFormWaiverLegalFinancialArabic> {
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController rightsHolderNameController = TextEditingController();
-  final TextEditingController rightsHolderIdController = TextEditingController();
-  final TextEditingController rightsHolderAddressController = TextEditingController();
-  final TextEditingController transfereeNameController = TextEditingController();
+  final TextEditingController rightsHolderNameController =
+      TextEditingController();
+  final TextEditingController rightsHolderIdController =
+      TextEditingController();
+  final TextEditingController rightsHolderAddressController =
+      TextEditingController();
+  final TextEditingController transfereeNameController =
+      TextEditingController();
   final TextEditingController transfereeIdController = TextEditingController();
-  final TextEditingController transfereeAddressController = TextEditingController();
+  final TextEditingController transfereeAddressController =
+      TextEditingController();
   final TextEditingController rightsTypeController = TextEditingController();
   final TextEditingController rightsDetailsController = TextEditingController();
   final TextEditingController waiverReasonController = TextEditingController();
@@ -49,7 +56,8 @@ class _ContractInputFormWaiverLegalFinancialArabicState
             children: [
               Text(
                 localizations.rightsHolderInfo,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
                 label: localizations.rightsHolderName,
@@ -71,7 +79,8 @@ class _ContractInputFormWaiverLegalFinancialArabicState
               const SizedBox(height: 32),
               Text(
                 localizations.transfereeInfo,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
                 label: localizations.transfereeName,
@@ -93,7 +102,8 @@ class _ContractInputFormWaiverLegalFinancialArabicState
               const SizedBox(height: 32),
               Text(
                 localizations.rightsInfo,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
                 label: localizations.rightsType,
@@ -115,7 +125,8 @@ class _ContractInputFormWaiverLegalFinancialArabicState
               const SizedBox(height: 32),
               Text(
                 localizations.transactionInfo,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
                 label: localizations.waiverPrice,
@@ -146,6 +157,7 @@ class _ContractInputFormWaiverLegalFinancialArabicState
                           content: Text(localizations.dataEnteredSuccessfully),
                         ),
                       );
+                      GoRouter.of(context).push(AppRouter.kSuccessView);
                     } else {
                       log('النموذج غير صالح. إظهار الأخطاء.');
                     }

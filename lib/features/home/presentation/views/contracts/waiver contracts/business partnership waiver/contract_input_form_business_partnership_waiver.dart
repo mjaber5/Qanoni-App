@@ -1,5 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:qanoni/core/utils/app_router.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
@@ -48,7 +50,8 @@ class _ContractInputFormWaiverBusinessPartnershipArabicState
             children: [
               Text(
                 localizations.sellerInfo,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
                 label: localizations.sellerName,
@@ -70,7 +73,8 @@ class _ContractInputFormWaiverBusinessPartnershipArabicState
               const SizedBox(height: 32),
               Text(
                 localizations.buyerInfo,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
                 label: localizations.buyerName,
@@ -92,7 +96,8 @@ class _ContractInputFormWaiverBusinessPartnershipArabicState
               const SizedBox(height: 32),
               Text(
                 localizations.businessDetails,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
                 label: localizations.businessType,
@@ -114,7 +119,8 @@ class _ContractInputFormWaiverBusinessPartnershipArabicState
               const SizedBox(height: 32),
               Text(
                 localizations.transactionDetails,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
                 label: localizations.waiverPrice,
@@ -142,8 +148,10 @@ class _ContractInputFormWaiverBusinessPartnershipArabicState
                       log('النموذج صالح. حفظ البيانات.');
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                            content: Text(localizations.dataEnteredSuccessfully)),
+                            content:
+                                Text(localizations.dataEnteredSuccessfully)),
                       );
+                      GoRouter.of(context).push(AppRouter.kSuccessView);
                     } else {
                       log('النموذج غير صالح. إظهار الأخطاء.');
                     }

@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
+import 'package:qanoni/core/utils/app_router.dart';
 
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
@@ -52,7 +54,8 @@ class _ContractInputFormWaiverIntellectualState
             children: [
               Text(
                 localizations.rightsHolderInfo,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
                 label: localizations.rightsHolderName,
@@ -74,7 +77,8 @@ class _ContractInputFormWaiverIntellectualState
               const SizedBox(height: 32),
               Text(
                 localizations.transfereeInfo,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
                 label: localizations.transfereeName,
@@ -96,7 +100,8 @@ class _ContractInputFormWaiverIntellectualState
               const SizedBox(height: 32),
               Text(
                 localizations.rightsInfo,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
                 label: localizations.rightsType,
@@ -118,7 +123,8 @@ class _ContractInputFormWaiverIntellectualState
               const SizedBox(height: 32),
               Text(
                 localizations.transactionInfo,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
                 label: localizations.waiverPrice,
@@ -145,8 +151,11 @@ class _ContractInputFormWaiverIntellectualState
                     if (_formKey.currentState!.validate()) {
                       log('Valid form. Saving data.');
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(localizations.dataEnteredSuccessfully)),
+                        SnackBar(
+                            content:
+                                Text(localizations.dataEnteredSuccessfully)),
                       );
+                      GoRouter.of(context).push(AppRouter.kSuccessView);
                     } else {
                       log('Invalid form. Showing errors.');
                     }
