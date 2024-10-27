@@ -1,9 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // استيراد الترجمة المحلية
 
 import '../../../../../../../core/utils/constants/colors.dart';
-import '../../../../../../../core/utils/constants/text_strings.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
 
@@ -38,7 +38,7 @@ class _ContractInputFormWaiverPropertyState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(QTexts.appBarTitleWaiverProperty),
+        title: Text(AppLocalizations.of(context)!.appBarTitleWaiverProperty),
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -47,98 +47,98 @@ class _ContractInputFormWaiverPropertyState
           key: _formKey,
           child: ListView(
             children: [
-              const Text(
-                QTexts.sellerInfo,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(
+                AppLocalizations.of(context)!.sellerInfo,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: QTexts.sellerName,
+                label: AppLocalizations.of(context)!.sellerName,
                 controller: sellerNameController,
-                validatorMessage: QTexts.sellerNameValidation,
+                validatorMessage: AppLocalizations.of(context)!.sellerNameValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.sellerId,
+                label: AppLocalizations.of(context)!.sellerId,
                 controller: sellerIdController,
-                validatorMessage: QTexts.sellerIdValidation,
+                validatorMessage: AppLocalizations.of(context)!.sellerIdValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.sellerAddress,
+                label: AppLocalizations.of(context)!.sellerAddress,
                 controller: sellerAddressController,
-                validatorMessage: QTexts.sellerAddressValidation,
+                validatorMessage: AppLocalizations.of(context)!.sellerAddressValidation,
               ),
               const SizedBox(height: 32),
-              const Text(
-                QTexts.buyerInfo,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(
+                AppLocalizations.of(context)!.buyerInfo,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: QTexts.buyerName,
+                label: AppLocalizations.of(context)!.buyerName,
                 controller: buyerNameController,
-                validatorMessage: QTexts.buyerNameValidation,
+                validatorMessage: AppLocalizations.of(context)!.buyerNameValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.buyerId,
+                label: AppLocalizations.of(context)!.buyerId,
                 controller: buyerIdController,
-                validatorMessage: QTexts.buyerIdValidation,
+                validatorMessage: AppLocalizations.of(context)!.buyerIdValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.buyerAddress,
+                label: AppLocalizations.of(context)!.buyerAddress,
                 controller: buyerAddressController,
-                validatorMessage: QTexts.buyerAddressValidation,
+                validatorMessage: AppLocalizations.of(context)!.buyerAddressValidation,
               ),
               const SizedBox(height: 32),
-              const Text(
-                QTexts.propertyInfo,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(
+                AppLocalizations.of(context)!.propertyInfo,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: QTexts.propertyType,
+                label: AppLocalizations.of(context)!.propertyType,
                 controller: propertyTypeController,
-                validatorMessage: QTexts.propertyTypeValidation,
+                validatorMessage: AppLocalizations.of(context)!.propertyTypeValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.propertyDetails,
+                label: AppLocalizations.of(context)!.propertyDetails,
                 controller: propertyDetailsController,
-                validatorMessage: QTexts.propertyDetailsValidation,
+                validatorMessage: AppLocalizations.of(context)!.propertyDetailsValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.waiverReason,
+                label: AppLocalizations.of(context)!.waiverReason,
                 controller: waiverReasonController,
-                validatorMessage: QTexts.waiverReasonValidation,
+                validatorMessage: AppLocalizations.of(context)!.waiverReasonValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.ownershipStatus,
+                label: AppLocalizations.of(context)!.ownershipStatus,
                 controller: ownershipController,
-                validatorMessage: QTexts.ownershipStatusValidation,
+                validatorMessage: AppLocalizations.of(context)!.ownershipStatusValidation,
               ),
               const SizedBox(height: 32),
-              const Text(
-                QTexts.transactionInfo,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(
+                AppLocalizations.of(context)!.transactionInfo,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: QTexts.waiverPrice,
+                label: AppLocalizations.of(context)!.waiverPrice,
                 controller: waiverPriceController,
-                validatorMessage: QTexts.waiverPriceValidation,
+                validatorMessage: AppLocalizations.of(context)!.waiverPriceValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.paymentMethod,
+                label: AppLocalizations.of(context)!.paymentMethod,
                 controller: paymentMethodController,
-                validatorMessage: QTexts.paymentMethodValidation,
+                validatorMessage: AppLocalizations.of(context)!.paymentMethodValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.waiverDate,
+                label: AppLocalizations.of(context)!.waiverDate,
                 controller: waiverDateController,
-                validatorMessage: QTexts.waiverDateValidation,
+                validatorMessage: AppLocalizations.of(context)!.waiverDateValidation,
               ),
               const SizedBox(height: 32),
               Padding(
@@ -148,8 +148,8 @@ class _ContractInputFormWaiverPropertyState
                     if (_formKey.currentState!.validate()) {
                       log('Form is valid. Proceed with saving the contract.');
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text(QTexts.dataEnteredSuccessfully)),
+                        SnackBar(
+                            content: Text(AppLocalizations.of(context)!.dataEnteredSuccessfully)),
                       );
                     } else {
                       log('Form is not valid. Show errors.');
@@ -159,8 +159,8 @@ class _ContractInputFormWaiverPropertyState
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     backgroundColor: QColors.secondary,
                   ),
-                  child: const Text(
-                    QTexts.saveButton,
+                  child: Text(
+                    AppLocalizations.of(context)!.saveButton,
                     style: Styles.textStyle18,
                   ),
                 ),

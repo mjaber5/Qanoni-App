@@ -1,9 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../../../core/utils/constants/colors.dart';
-import '../../../../../../../core/utils/constants/text_strings.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
 
@@ -19,17 +19,12 @@ class _ContractInputFormWaiverLegalFinancialArabicState
     extends State<ContractInputFormWaiverLegalFinancialArabic> {
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController rightsHolderNameController =
-      TextEditingController();
-  final TextEditingController rightsHolderIdController =
-      TextEditingController();
-  final TextEditingController rightsHolderAddressController =
-      TextEditingController();
-  final TextEditingController transfereeNameController =
-      TextEditingController();
+  final TextEditingController rightsHolderNameController = TextEditingController();
+  final TextEditingController rightsHolderIdController = TextEditingController();
+  final TextEditingController rightsHolderAddressController = TextEditingController();
+  final TextEditingController transfereeNameController = TextEditingController();
   final TextEditingController transfereeIdController = TextEditingController();
-  final TextEditingController transfereeAddressController =
-      TextEditingController();
+  final TextEditingController transfereeAddressController = TextEditingController();
   final TextEditingController rightsTypeController = TextEditingController();
   final TextEditingController rightsDetailsController = TextEditingController();
   final TextEditingController waiverReasonController = TextEditingController();
@@ -39,9 +34,11 @@ class _ContractInputFormWaiverLegalFinancialArabicState
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text(QTexts.appBarTitleWaiverLegalFinancial),
+        title: Text(localizations.appBarTitleWaiverLegalFinancial),
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -50,92 +47,92 @@ class _ContractInputFormWaiverLegalFinancialArabicState
           key: _formKey,
           child: ListView(
             children: [
-              const Text(
-                QTexts.rightsHolderInfo,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(
+                localizations.rightsHolderInfo,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: QTexts.rightsHolderName,
+                label: localizations.rightsHolderName,
                 controller: rightsHolderNameController,
-                validatorMessage: QTexts.rightsHolderNameValidation,
+                validatorMessage: localizations.rightsHolderNameValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.rightsHolderId,
+                label: localizations.rightsHolderId,
                 controller: rightsHolderIdController,
-                validatorMessage: QTexts.rightsHolderIdValidation,
+                validatorMessage: localizations.rightsHolderIdValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.rightsHolderAddress,
+                label: localizations.rightsHolderAddress,
                 controller: rightsHolderAddressController,
-                validatorMessage: QTexts.rightsHolderAddressValidation,
+                validatorMessage: localizations.rightsHolderAddressValidation,
               ),
               const SizedBox(height: 32),
-              const Text(
-                QTexts.transfereeInfo,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(
+                localizations.transfereeInfo,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: QTexts.transfereeName,
+                label: localizations.transfereeName,
                 controller: transfereeNameController,
-                validatorMessage: QTexts.transfereeNameValidation,
+                validatorMessage: localizations.transfereeNameValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.transfereeId,
+                label: localizations.transfereeId,
                 controller: transfereeIdController,
-                validatorMessage: QTexts.transfereeIdValidation,
+                validatorMessage: localizations.transfereeIdValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.transfereeAddress,
+                label: localizations.transfereeAddress,
                 controller: transfereeAddressController,
-                validatorMessage: QTexts.transfereeAddressValidation,
+                validatorMessage: localizations.transfereeAddressValidation,
               ),
               const SizedBox(height: 32),
-              const Text(
-                QTexts.rightsInfo,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(
+                localizations.rightsInfo,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: QTexts.rightsType,
+                label: localizations.rightsType,
                 controller: rightsTypeController,
-                validatorMessage: QTexts.rightsTypeValidation,
+                validatorMessage: localizations.rightsTypeValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.rightsDetails,
+                label: localizations.rightsDetails,
                 controller: rightsDetailsController,
-                validatorMessage: QTexts.rightsDetailsValidation,
+                validatorMessage: localizations.rightsDetailsValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.waiverReason,
+                label: localizations.waiverReason,
                 controller: waiverReasonController,
-                validatorMessage: QTexts.waiverReasonValidation,
+                validatorMessage: localizations.waiverReasonValidation,
               ),
               const SizedBox(height: 32),
-              const Text(
-                QTexts.transactionInfo,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(
+                localizations.transactionInfo,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
-                label: QTexts.waiverPrice,
+                label: localizations.waiverPrice,
                 controller: waiverPriceController,
-                validatorMessage: QTexts.waiverPriceValidation,
+                validatorMessage: localizations.waiverPriceValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.paymentMethod,
+                label: localizations.paymentMethod,
                 controller: paymentMethodController,
-                validatorMessage: QTexts.paymentMethodValidation,
+                validatorMessage: localizations.paymentMethodValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
-                label: QTexts.waiverDate,
+                label: localizations.waiverDate,
                 controller: waiverDateController,
-                validatorMessage: QTexts.waiverDateValidation,
+                validatorMessage: localizations.waiverDateValidation,
               ),
               const SizedBox(height: 32),
               Padding(
@@ -145,8 +142,9 @@ class _ContractInputFormWaiverLegalFinancialArabicState
                     if (_formKey.currentState!.validate()) {
                       log('النموذج صالح. حفظ البيانات.');
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text(QTexts.dataEnteredSuccessfully)),
+                        SnackBar(
+                          content: Text(localizations.dataEnteredSuccessfully),
+                        ),
                       );
                     } else {
                       log('النموذج غير صالح. إظهار الأخطاء.');
@@ -156,8 +154,8 @@ class _ContractInputFormWaiverLegalFinancialArabicState
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     backgroundColor: QColors.secondary,
                   ),
-                  child: const Text(
-                    QTexts.saveButton,
+                  child: Text(
+                    localizations.saveButton,
                     style: Styles.textStyle18,
                   ),
                 ),
