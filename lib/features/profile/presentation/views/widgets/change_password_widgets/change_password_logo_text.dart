@@ -13,11 +13,10 @@ class ChangePasswordText extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          
           const SizedBox(height: 12),
-           Text(
-           localizations.updateYourCredentials,
-            style: TextStyle(
+          Text(
+            localizations.updateYourCredentials,
+            style: const TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.w600,
             ),

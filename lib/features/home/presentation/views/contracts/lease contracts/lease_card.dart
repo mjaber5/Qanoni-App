@@ -81,7 +81,8 @@ class LeaseContractsCards extends StatelessWidget {
     );
   }
 
-  Widget buildLeaseCard(BuildContext context, String title, IconData icon, Widget page) {
+  Widget buildLeaseCard(
+      BuildContext context, String title, IconData icon, Widget page) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -103,8 +104,8 @@ class LeaseContractsCards extends StatelessWidget {
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(15),
-          boxShadow: [
-            const BoxShadow(
+          boxShadow: const [
+            BoxShadow(
               color: Colors.black12,
               blurRadius: 10,
               offset: Offset(0, 4),

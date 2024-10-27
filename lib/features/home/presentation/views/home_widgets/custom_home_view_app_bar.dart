@@ -12,9 +12,9 @@ class CustomAppBar extends StatelessWidget {
       padding: const EdgeInsets.only(right: 24, left: 24, top: 40, bottom: 10),
       child: Row(
         children: [
-           Text(
-           localizations.qanoni,
-            style: TextStyle(
+          Text(
+            localizations.qanoni,
+            style: const TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,
             ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../../../core/utils/constants/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class ButtonHomeView extends StatelessWidget {
   const ButtonHomeView({super.key});
 
@@ -13,7 +12,8 @@ class ButtonHomeView extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       child: Container(
         width: MediaQuery.of(context).size.width * 0.8,
-        height: MediaQuery.of(context).size.height * 0.35, // Slightly increased height
+        height: MediaQuery.of(context).size.height *
+            0.35, // Slightly increased height
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30), // Rounded corners
           gradient: const LinearGradient(
@@ -34,18 +34,18 @@ class ButtonHomeView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Logo with text "Qanoni"
-               Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.assignment, // Changed icon to represent contracts
                     color: Colors.white,
                     size: 80, // Icon size
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Text(
                     localizations.qanoni,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 48, // Font size
                       fontWeight: FontWeight.bold,
@@ -62,12 +62,12 @@ class ButtonHomeView extends StatelessWidget {
               ),
               const SizedBox(height: 15),
               // Brief Description
-               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Text(
-localizations.descAppContenar,
+                  localizations.descAppContenar,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white70,
                     fontSize: 20, // Font size
                   ),
@@ -75,7 +75,7 @@ localizations.descAppContenar,
               ),
               const SizedBox(height: 20),
               // Action Button (optional)
-              // 
+              //
               const SizedBox(height: 15),
               // Additional Decorative Element (optional)
               Container(

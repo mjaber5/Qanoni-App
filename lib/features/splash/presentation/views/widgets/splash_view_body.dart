@@ -54,6 +54,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
           Future.delayed(
             const Duration(seconds: 2),
             () {
+              // ignore: use_build_context_synchronously
               GoRouter.of(context).pushReplacement(AppRouter.kLayout);
             },
           );
@@ -61,6 +62,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
           Future.delayed(
             const Duration(seconds: 2),
             () {
+              // ignore: use_build_context_synchronously
               GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
             },
           );

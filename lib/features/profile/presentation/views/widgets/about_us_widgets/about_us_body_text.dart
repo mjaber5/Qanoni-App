@@ -7,13 +7,13 @@ class AboutUsBodyText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    return  Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
       child: Column(
         children: [
           Text(
             localizations.aboutUsBodyText,
-            style: TextStyle(fontSize: 16),
+            style: const TextStyle(fontSize: 16),
           ),
         ],
       ),

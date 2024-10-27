@@ -15,9 +15,9 @@ class ChangePasswordTextCondition extends StatelessWidget {
           crossAxisAlignment:
               CrossAxisAlignment.center, // Aligns text to the left
           children: [
-             Text(localizations.byChanePassword
-             ,
-              style: TextStyle(
+            Text(
+              localizations.byChanePassword,
+              style: const TextStyle(
                 color: Colors.grey,
                 fontSize: 13,
               ),
@@ -30,26 +30,27 @@ class ChangePasswordTextCondition extends StatelessWidget {
                   onTap: () {
                     // Handle Privacy Policy tap
                   },
-                  child:  Text(
-              localizations.loginPrivacyPolicy,
-                    style: TextStyle(
+                  child: Text(
+                    localizations.loginPrivacyPolicy,
+                    style: const TextStyle(
                       fontSize: 14,
                       color: QColors.secondary,
                       decoration: TextDecoration.underline,
                     ),
                   ),
                 ),
-                 Text(localizations.loginAndText,
-                  style: TextStyle(
+                Text(
+                  localizations.loginAndText,
+                  style: const TextStyle(
                     color: Colors.grey,
                     fontSize: 13,
                   ),
                 ),
                 GestureDetector(
                   onTap: () {},
-                  child:  Text(
+                  child: Text(
                     localizations.termsOfUs,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14,
                       color: QColors.secondary,
                       decoration: TextDecoration.underline,

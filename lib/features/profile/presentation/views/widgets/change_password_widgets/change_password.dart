@@ -130,6 +130,7 @@ class _ChangePasswordState extends State<ChangePassword> {
               _currentPasswordController.text,
               _newPasswordController.text,
             );
+            // ignore: use_build_context_synchronously
             context.go(AppRouter.kSettingsView);
           }
         },

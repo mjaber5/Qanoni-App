@@ -7,8 +7,8 @@ class PrivacyPolicyDetailsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    return  Padding(
-      padding: EdgeInsets.symmetric(horizontal: 14, vertical: 24),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 24),
       child: Column(
         children: [
           Text(

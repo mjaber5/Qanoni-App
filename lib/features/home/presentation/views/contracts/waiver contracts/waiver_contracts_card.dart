@@ -87,7 +87,8 @@ class WaiverContractsCard extends StatelessWidget {
     );
   }
 
-  Widget buildWaiverCard(BuildContext context, String label, IconData icon, Widget page) {
+  Widget buildWaiverCard(
+      BuildContext context, String label, IconData icon, Widget page) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -109,8 +110,8 @@ class WaiverContractsCard extends StatelessWidget {
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(15),
-          boxShadow: [
-            const BoxShadow(
+          boxShadow: const [
+            BoxShadow(
               color: Colors.black12,
               blurRadius: 10,
               offset: Offset(0, 4),

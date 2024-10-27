@@ -9,7 +9,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'cancellation of sales contract/cancellation_aceept.dart';
 import 'sell a land/sell_land_acept.dart';
 
-
 class SalesContractsCard extends StatelessWidget {
   const SalesContractsCard({super.key});
 
@@ -89,7 +88,8 @@ class SalesContractsCard extends StatelessWidget {
     );
   }
 
-  Widget buildSaleCard(BuildContext context, String label, IconData icon, Widget page) {
+  Widget buildSaleCard(
+      BuildContext context, String label, IconData icon, Widget page) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -111,8 +111,8 @@ class SalesContractsCard extends StatelessWidget {
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(15),
-          boxShadow: [
-            const BoxShadow(
+          boxShadow: const [
+            BoxShadow(
               color: Colors.black12,
               blurRadius: 10,
               offset: Offset(0, 4),
