@@ -10,6 +10,9 @@ class LoginActionText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
+
+    final isArabic = Directionality.of(context) == TextDirection.rtl;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
       child: Row(
@@ -27,7 +30,7 @@ class LoginActionText extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(width: 35),
+          SizedBox(width: isArabic ? 115 : 30),
           TextButton(
             onPressed: () {
               Navigator.push(

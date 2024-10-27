@@ -18,11 +18,11 @@ class ContractsCardsView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(height: 15),
             Text(
               localizations.chooseYourContract,
               style: const TextStyle(
-                color: Colors.white,
-                fontSize: 20, // تصغير حجم الخط
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -33,7 +33,7 @@ class ContractsCardsView extends StatelessWidget {
               localizations.leaseContracts,
               Iconsax.document,
             ),
-            const SizedBox(height: 12), // تصغير الفجوة بين العناصر
+            const SizedBox(height: 12),
             contractsCardsContainer(
               context,
               AppRouter.kWaiverContractsCard,
@@ -68,9 +68,8 @@ class ContractsCardsView extends StatelessWidget {
       },
       child: Container(
         width: MediaQuery.of(context).size.width * 0.9,
-        height:
-            MediaQuery.of(context).size.height * 0.15, // تصغير ارتفاع الحاوية
-        padding: const EdgeInsets.all(16), // تصغير المساحة الداخلية
+        height: MediaQuery.of(context).size.height * 0.15,
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -80,11 +79,11 @@ class ContractsCardsView extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          borderRadius: BorderRadius.circular(15), // تعديل الزوايا
+          borderRadius: BorderRadius.circular(15),
           boxShadow: const [
             BoxShadow(
               color: Colors.black12,
-              blurRadius: 10, // تصغير الظل
+              blurRadius: 10,
               offset: Offset(0, 4),
             ),
           ],
@@ -92,24 +91,22 @@ class ContractsCardsView extends StatelessWidget {
         child: Row(
           children: [
             CircleAvatar(
-              radius: 25, // تصغير الدائرة
+              radius: 25,
               backgroundColor: Colors.white,
-              child: Icon(icon,
-                  size: 28, color: QColors.secondary), // تصغير الأيقونة
+              child: Icon(icon, size: 28, color: QColors.secondary),
             ),
-            const SizedBox(width: 16), // تصغير الفجوة بين الأيقونة والنص
+            const SizedBox(width: 16),
             Expanded(
               child: Text(
                 textTitle,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 18, // تصغير حجم الخط
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            const Icon(Icons.arrow_forward_ios,
-                color: Colors.white, size: 22), // تصغير الأيقونة
+            const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 22),
           ],
         ),
       ),

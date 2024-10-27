@@ -44,7 +44,7 @@ class _SettingsChangeTheme extends State<SettingsChangeTheme> {
                 Switch(
                   trackColor: WidgetStateProperty.all(QColors.grey),
                   activeColor: QColors.secondary,
-                  value: themeState.themeMode == ThemeMode.light,
+                  value: themeState.themeMode == ThemeMode.dark,
                   onChanged: (themeChange) {
                     context.read<ThemeCubit>().toggleTheme();
                   },

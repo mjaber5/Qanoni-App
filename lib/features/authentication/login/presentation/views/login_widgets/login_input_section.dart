@@ -75,10 +75,10 @@ class _LoginInputsSectionState extends State<LoginInputsSection> {
                   prefixIcon: Image.asset(
                     'assets/icons/email.png',
                     scale: 20,
-                    color: QColors.white,
+                    color: QColors.darkGrey,
                   ),
                   hintText: localizations.email,
-                  hintStyle: const TextStyle(color: QColors.white),
+                  hintStyle: const TextStyle(color: QColors.darkGrey),
                   validator: (value) {
                     if (value == null ||
                         value.isEmpty ||
@@ -97,10 +97,10 @@ class _LoginInputsSectionState extends State<LoginInputsSection> {
                   prefixIcon: Image.asset(
                     'assets/icons/password-icon.png',
                     scale: 20,
-                    color: QColors.white,
+                    color: QColors.darkGrey,
                   ),
                   hintText: localizations.password,
-                  hintStyle: const TextStyle(color: QColors.white),
+                  hintStyle: const TextStyle(color: QColors.darkGrey),
                   isObscureText: isObscureText,
                   suffixIcon: GestureDetector(
                     onTap: () {
@@ -109,7 +109,7 @@ class _LoginInputsSectionState extends State<LoginInputsSection> {
                       });
                     },
                     child: Icon(
-                      color: QColors.white,
+                      color: QColors.darkGrey,
                       isObscureText ? Icons.visibility_off : Icons.visibility,
                     ),
                   ),

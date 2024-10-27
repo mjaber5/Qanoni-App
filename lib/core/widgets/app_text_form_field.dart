@@ -37,6 +37,7 @@ class AppTextFormField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
+        fillColor: Colors.transparent,
         prefixIcon: prefixIcon,
         isDense: false,
         contentPadding: contentPadding ??

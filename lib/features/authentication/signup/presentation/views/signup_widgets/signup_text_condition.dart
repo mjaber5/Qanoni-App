@@ -37,7 +37,7 @@ class SignupTextCondition extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  localizations.loginAndText,
+                  ' ${localizations.loginAndText} ',
                   style: const TextStyle(
                     color: Colors.grey,
                     fontSize: 13,
