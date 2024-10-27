@@ -11,7 +11,6 @@ class SuccessButton extends StatelessWidget {
       children: [
         SizedBox(
           width: 250,
-          height: 50,
           child: ElevatedButton(
             onPressed: () async {
               final simplePdfFile = await SimplePdfApi.generateSimpleTextPdf(
@@ -20,16 +19,6 @@ class SuccessButton extends StatelessWidget {
               );
               SaveAndOpenDoucment.openPdf(simplePdfFile);
             },
-            style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all(Colors.green),
-              shape: WidgetStateProperty.all(
-                const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(16),
-                  ),
-                ),
-              ),
-            ),
             child: const Text(
               'Continue',
               style: TextStyle(

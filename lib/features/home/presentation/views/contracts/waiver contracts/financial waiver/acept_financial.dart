@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/waiver%20contracts/financial%20waiver/contract_input_form_legal_or_Ffnancial_rights_waiver.dart';
+import 'package:qanoni/features/home/presentation/views/contracts/waiver%20contracts/financial%20waiver/contract_input_form_legal_or_financial_rights_waiver.dart';
 
 import '../../../../../../../core/utils/constants/colors.dart';
 
