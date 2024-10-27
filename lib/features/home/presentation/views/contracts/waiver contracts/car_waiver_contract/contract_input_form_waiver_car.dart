@@ -1,9 +1,11 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:qanoni/core/utils/constants/text_strings.dart'; // تأكد من أن لديك ملف النصوص الصحيح
+
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
-import 'package:qanoni/core/utils/constants/text_strings.dart'; // تأكد من أن لديك ملف النصوص الصحيح
 
 class ContractInputFormWaiverCar extends StatefulWidget {
   const ContractInputFormWaiverCar({super.key});
@@ -145,7 +147,8 @@ class _ContractInputFormWaiverCarState
                     if (_formKey.currentState!.validate()) {
                       log('النموذج صالح. حفظ البيانات.');
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text(QTexts.dataEnteredSuccessfully)),
+                        const SnackBar(
+                            content: Text(QTexts.dataEnteredSuccessfully)),
                       );
                     } else {
                       log('النموذج غير صالح. إظهار الأخطاء.');

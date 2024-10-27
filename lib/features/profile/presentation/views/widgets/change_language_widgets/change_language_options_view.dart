@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:qanoni/features/languages/view_model/app_langauge_cubit/app_language_cubit.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../../../../../../core/utils/constants/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../../../core/utils/constants/colors.dart';
+import '../../../../../languages/view_model/app_langauge_cubit/app_language_cubit.dart';
 
 enum SingingCharacter { english, arabic }
 
@@ -49,7 +49,7 @@ class _OptionsLanguageState extends State<OptionsLanguage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ListTile(
-            title:  Text(localizations.changeLanguageArabicOption),
+            title: Text(localizations.changeLanguageArabicOption),
             leading: Radio<SingingCharacter>(
               fillColor: WidgetStateProperty.all(QColors.secondary),
               value: SingingCharacter.arabic,
@@ -69,7 +69,7 @@ class _OptionsLanguageState extends State<OptionsLanguage> {
             endIndent: 32,
           ),
           ListTile(
-            title:  Text(localizations.changeLanguageEnglishOption),
+            title: Text(localizations.changeLanguageEnglishOption),
             leading: Radio<SingingCharacter>(
               fillColor: WidgetStateProperty.all(QColors.secondary),
               value: SingingCharacter.english,

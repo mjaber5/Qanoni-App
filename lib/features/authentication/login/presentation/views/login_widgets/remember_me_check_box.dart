@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-
-import 'forget_password_widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../../../core/utils/constants/colors.dart';
+import 'forget_password_widgets.dart';
 
 class LoginActionText extends StatelessWidget {
   const LoginActionText({super.key});
@@ -22,8 +21,8 @@ class LoginActionText extends StatelessWidget {
             checkColor: QColors.white,
             fillColor: WidgetStateProperty.all(QColors.secondary),
           ),
-           Text(
-           localizations.rememberMe,
+          Text(
+            localizations.rememberMe,
             style: const TextStyle(
               fontWeight: FontWeight.w500,
             ),
@@ -38,8 +37,8 @@ class LoginActionText extends StatelessWidget {
                 ),
               );
             },
-            child:  Text(
-             localizations.forgotPassword ,
+            child: Text(
+              localizations.forgotPassword,
               style: const TextStyle(
                 fontSize: 14,
                 color: QColors.secondary,

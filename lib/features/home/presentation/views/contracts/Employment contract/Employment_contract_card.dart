@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../../core/utils/constants/colors.dart';
+import 'contract argeement/acept_argeement.dart';
 import 'daily work contract/acept_daily_work.dart';
 import 'ministery work model/acept_ministery_work.dart';
 import 'public services contract/acept_public_servic.dart';
-import 'contract argeement/acept_argeement.dart';
 import 'work import contract/acept_work_import.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EmploymentContractCard extends StatelessWidget {
   const EmploymentContractCard({super.key});
@@ -48,7 +49,8 @@ class EmploymentContractCard extends StatelessWidget {
                 // Public Services Contract
                 buildEmploymentCard(
                   context,
-                  localizations.public_services_contract, // Public Services Contract
+                  localizations
+                      .public_services_contract, // Public Services Contract
                   Icons.miscellaneous_services,
                   const AceptPublicServic(),
                 ),
@@ -88,7 +90,8 @@ class EmploymentContractCard extends StatelessWidget {
     );
   }
 
-  Widget buildEmploymentCard(BuildContext context, String title, IconData icon, Widget page) {
+  Widget buildEmploymentCard(
+      BuildContext context, String title, IconData icon, Widget page) {
     return GestureDetector(
       onTap: () {
         Navigator.push(

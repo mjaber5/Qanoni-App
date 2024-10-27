@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // تأكد من استيراد حزمة التعريب
+
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
@@ -45,90 +46,105 @@ class _ContractInputFormPropertyState extends State<ContractInputFormProperty> {
               // Section for seller information
               Text(
                 AppLocalizations.of(context)!.sellerInfoProperty,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.sellerName,
                 controller: sellerNameController,
-                validatorMessage: AppLocalizations.of(context)!.sellerNameValidation,
+                validatorMessage:
+                    AppLocalizations.of(context)!.sellerNameValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.sellerId,
                 controller: sellerIdController,
-                validatorMessage: AppLocalizations.of(context)!.sellerIdValidation,
+                validatorMessage:
+                    AppLocalizations.of(context)!.sellerIdValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.sellerAddress,
                 controller: sellerAddressController,
-                validatorMessage: AppLocalizations.of(context)!.sellerAddressValidation,
+                validatorMessage:
+                    AppLocalizations.of(context)!.sellerAddressValidation,
               ),
               const SizedBox(height: 32),
 
               // Buyer Information Section
               Text(
                 AppLocalizations.of(context)!.buyerInfoProperty,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.buyerName,
                 controller: buyerNameController,
-                validatorMessage: AppLocalizations.of(context)!.buyerNameValidation,
+                validatorMessage:
+                    AppLocalizations.of(context)!.buyerNameValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.buyerId,
                 controller: buyerIdController,
-                validatorMessage: AppLocalizations.of(context)!.buyerIdValidation,
+                validatorMessage:
+                    AppLocalizations.of(context)!.buyerIdValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.buyerAddress,
                 controller: buyerAddressController,
-                validatorMessage: AppLocalizations.of(context)!.buyerAddressValidation,
+                validatorMessage:
+                    AppLocalizations.of(context)!.buyerAddressValidation,
               ),
               const SizedBox(height: 32),
 
               // Property Information Section
               Text(
                 AppLocalizations.of(context)!.propertyInfoProperty,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.propertyAddress,
                 controller: propertyAddressController,
-                validatorMessage: AppLocalizations.of(context)!.propertyAddressValidation,
+                validatorMessage:
+                    AppLocalizations.of(context)!.propertyAddressValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.propertySize,
                 controller: propertySizeController,
-                validatorMessage: AppLocalizations.of(context)!.propertySizeValidation,
+                validatorMessage:
+                    AppLocalizations.of(context)!.propertySizeValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.propertyPrice,
                 controller: propertyPriceController,
-                validatorMessage: AppLocalizations.of(context)!.propertyPriceValidation,
+                validatorMessage:
+                    AppLocalizations.of(context)!.propertyPriceValidation,
               ),
               const SizedBox(height: 32),
 
               // Transaction Information Section
               Text(
                 AppLocalizations.of(context)!.transactionInfoProperty,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.paymentMethod,
                 controller: paymentMethodController,
-                validatorMessage: AppLocalizations.of(context)!.paymentMethodValidation,
+                validatorMessage:
+                    AppLocalizations.of(context)!.paymentMethodValidation,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.saleDate,
                 controller: saleDateController,
-                validatorMessage: AppLocalizations.of(context)!.saleDateValidation,
+                validatorMessage:
+                    AppLocalizations.of(context)!.saleDateValidation,
               ),
               const SizedBox(height: 32),
 
@@ -140,7 +156,8 @@ class _ContractInputFormPropertyState extends State<ContractInputFormProperty> {
                     if (_formKey.currentState!.validate()) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(AppLocalizations.of(context)!.dateEnteredSuccessfully),
+                          content: Text(AppLocalizations.of(context)!
+                              .dateEnteredSuccessfully),
                         ),
                       );
                     }

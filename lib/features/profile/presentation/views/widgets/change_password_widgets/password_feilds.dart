@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/widgets/app_text_form_field.dart';
+import '../../../../../../core/widgets/app_text_form_field.dart';
 
 class PasswordFeild extends StatelessWidget {
   const PasswordFeild({

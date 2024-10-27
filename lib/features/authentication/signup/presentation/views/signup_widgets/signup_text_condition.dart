@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
+import '../../../../../../core/utils/constants/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignupTextCondition extends StatelessWidget {
   const SignupTextCondition({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +14,7 @@ class SignupTextCondition extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-             Text(
+            Text(
               localizations.byLogin,
               style: const TextStyle(
                 color: Colors.grey,
@@ -28,7 +27,7 @@ class SignupTextCondition extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {},
-                  child:  Text(
+                  child: Text(
                     localizations.loginPrivacyPolicy,
                     style: const TextStyle(
                       fontSize: 14,
@@ -37,7 +36,7 @@ class SignupTextCondition extends StatelessWidget {
                     ),
                   ),
                 ),
-                 Text(
+                Text(
                   localizations.loginAndText,
                   style: const TextStyle(
                     color: Colors.grey,
@@ -46,8 +45,8 @@ class SignupTextCondition extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {},
-                  child:  Text(
-                   localizations.termsOfUs,
+                  child: Text(
+                    localizations.termsOfUs,
                     style: const TextStyle(
                       fontSize: 14,
                       color: QColors.secondary,

@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
+import '../../../../../core/utils/constants/colors.dart';
 
 class CustomView extends StatelessWidget {
   const CustomView({super.key});

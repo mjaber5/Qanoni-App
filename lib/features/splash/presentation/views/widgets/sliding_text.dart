@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../core/utils/constants/text_strings.dart';
 
 class SlidingText extends StatelessWidget {

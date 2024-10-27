@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../../../../core/utils/constants/colors.dart';
 
+import '../../../../../../../core/utils/constants/colors.dart';
 import 'contract_input_form_mininstery_work.dart';
 
 class AceptMinisteryWork extends StatefulWidget {

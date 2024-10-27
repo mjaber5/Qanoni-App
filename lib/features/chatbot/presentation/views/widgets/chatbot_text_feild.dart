@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/utils/constants/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../../core/utils/constants/colors.dart';
 
 class ChatbotTextField extends StatelessWidget {
   final TextEditingController chatbotMessageController;

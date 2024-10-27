@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:iconsax/iconsax.dart';
+
 import '../../../../../../core/utils/constants/colors.dart';
 import '../waiver contracts/car_waiver_contract/acept_car_waiver.dart';
 import '../waiver contracts/property waiver contract/acept_property.dart';
 import 'business partnership waiver/acept_business_partnership_waiver.dart';
-import 'intellectual waiver contract/acept_intellectual.dart';
 import 'financial waiver/acept_financial.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'intellectual waiver contract/acept_intellectual.dart';
 
 class WaiverContractsCard extends StatelessWidget {
   const WaiverContractsCard({super.key});

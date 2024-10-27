@@ -1,10 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // تأكد من استيراد AppLocalizations
+
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
-import 'dart:developer';
-
 
 class ContractInputFormArgeement extends StatefulWidget {
   const ContractInputFormArgeement({super.key});
@@ -17,13 +18,18 @@ class _ContractInputFormState extends State<ContractInputFormArgeement> {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController projectNameController = TextEditingController();
-  final TextEditingController projectOwnerNameController = TextEditingController();
-  final TextEditingController projectOwnerIdController = TextEditingController();
-  final TextEditingController contractorNameController = TextEditingController();
+  final TextEditingController projectOwnerNameController =
+      TextEditingController();
+  final TextEditingController projectOwnerIdController =
+      TextEditingController();
+  final TextEditingController contractorNameController =
+      TextEditingController();
   final TextEditingController contractorIdController = TextEditingController();
-  final TextEditingController contractDurationController = TextEditingController();
+  final TextEditingController contractDurationController =
+      TextEditingController();
   final TextEditingController contractValueController = TextEditingController();
-  final TextEditingController materialsProvidedController = TextEditingController();
+  final TextEditingController materialsProvidedController =
+      TextEditingController();
   final TextEditingController startDateController = TextEditingController();
 
   @override
@@ -111,7 +117,8 @@ class _ContractInputFormState extends State<ContractInputFormArgeement> {
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     backgroundColor: QColors.secondary,
                   ),
-                  child: Text(localizations.saveButton, style: Styles.textStyle18),
+                  child:
+                      Text(localizations.saveButton, style: Styles.textStyle18),
                 ),
               ),
             ],
@@ -129,7 +136,8 @@ class _ContractInputFormState extends State<ContractInputFormArgeement> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: Styles.textStyle18.copyWith(color: QColors.secondary)),
+        Text(label,
+            style: Styles.textStyle18.copyWith(color: QColors.secondary)),
         const SizedBox(height: 8),
         AppTextFormField(
           controller: controller,

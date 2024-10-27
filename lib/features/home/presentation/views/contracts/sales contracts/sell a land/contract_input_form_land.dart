@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
@@ -8,8 +9,7 @@ class ContractInputFormLand extends StatefulWidget {
   const ContractInputFormLand({super.key});
 
   @override
-  State<ContractInputFormLand> createState() =>
-      _ContractInputFormLandState();
+  State<ContractInputFormLand> createState() => _ContractInputFormLandState();
 }
 
 class _ContractInputFormLandState extends State<ContractInputFormLand> {
@@ -48,85 +48,99 @@ class _ContractInputFormLandState extends State<ContractInputFormLand> {
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.dateLabel,
                 controller: dateController,
-                validatorMessage: AppLocalizations.of(context)!.validatoreMessageEnterDate,
+                validatorMessage:
+                    AppLocalizations.of(context)!.validatoreMessageEnterDate,
               ),
               const SizedBox(height: 16),
 
               // 2. معلومات البائع والمشتري
               Text(
                 AppLocalizations.of(context)!.paritesInformation,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.sellerName,
                 controller: sellerNameController,
-                validatorMessage: AppLocalizations.of(context)!.sellerNameValidatoreMessage,
+                validatorMessage:
+                    AppLocalizations.of(context)!.sellerNameValidatoreMessage,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.sellerAddress,
                 controller: sellerAddressController,
-                validatorMessage: AppLocalizations.of(context)!.sellerAddressValidatoreMessage,
+                validatorMessage: AppLocalizations.of(context)!
+                    .sellerAddressValidatoreMessage,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.buyerName,
                 controller: buyerNameController,
-                validatorMessage: AppLocalizations.of(context)!.buyerNameValidatorMessage,
+                validatorMessage:
+                    AppLocalizations.of(context)!.buyerNameValidatorMessage,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.buyerAddress,
                 controller: buyerAddressController,
-                validatorMessage: AppLocalizations.of(context)!.buyerAddressValidatorMessage,
+                validatorMessage:
+                    AppLocalizations.of(context)!.buyerAddressValidatorMessage,
               ),
               const SizedBox(height: 32),
 
               // 3. تفاصيل العقار
               Text(
                 AppLocalizations.of(context)!.propertyDetails,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.propertyType,
                 controller: propertyTypeController,
-                validatorMessage: AppLocalizations.of(context)!.propertyTypeValidatorMessage,
+                validatorMessage:
+                    AppLocalizations.of(context)!.propertyTypeValidatorMessage,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.propertyNumber,
                 controller: propertyNumberController,
-                validatorMessage: AppLocalizations.of(context)!.propertyNumberValidatorMessage,
+                validatorMessage: AppLocalizations.of(context)!
+                    .propertyNumberValidatorMessage,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.parcelNumber,
                 controller: landParcelNumberController,
-                validatorMessage: AppLocalizations.of(context)!.parcelNumberValidatorMessage,
+                validatorMessage:
+                    AppLocalizations.of(context)!.parcelNumberValidatorMessage,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.landArea,
                 controller: landAreaController,
-                validatorMessage: AppLocalizations.of(context)!.landAreaValidatorMessage,
+                validatorMessage:
+                    AppLocalizations.of(context)!.landAreaValidatorMessage,
               ),
               const SizedBox(height: 16),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.apartmentNumber,
                 controller: apartmentNumberController,
-                validatorMessage: AppLocalizations.of(context)!.apartmentNumberValidatorMessage,
+                validatorMessage: AppLocalizations.of(context)!
+                    .apartmentNumberValidatorMessage,
               ),
               const SizedBox(height: 32),
 
               // 4. سعر العقار
               Text(
                 AppLocalizations.of(context)!.propertyPrice,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.amountLabel,
                 controller: priceController,
-                validatorMessage: AppLocalizations.of(context)!.amountLabelValidatorMessage,
+                validatorMessage:
+                    AppLocalizations.of(context)!.amountLabelValidatorMessage,
               ),
               const SizedBox(height: 32),
 
@@ -138,7 +152,8 @@ class _ContractInputFormLandState extends State<ContractInputFormLand> {
                     if (_formKey.currentState!.validate()) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(AppLocalizations.of(context)!.dateEnteredSuccessfuly),
+                          content: Text(AppLocalizations.of(context)!
+                              .dateEnteredSuccessfuly),
                         ),
                       );
                     }

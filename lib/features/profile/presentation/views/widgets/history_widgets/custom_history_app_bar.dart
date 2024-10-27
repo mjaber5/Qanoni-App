@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import '../../../../../../core/utils/styles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../../../core/utils/styles.dart';
 
 class CustomHistoryAppBar extends StatelessWidget {
   const CustomHistoryAppBar({super.key});

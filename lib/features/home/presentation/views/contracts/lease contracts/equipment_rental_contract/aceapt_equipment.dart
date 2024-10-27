@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/lease%20contracts/daily_rental_contract/contract_input_form_daily.dart';
+import '../../lease%20contracts/daily_rental_contract/contract_input_form_daily.dart';
 import '../../../../../../../core/utils/constants/colors.dart';
 
 class AceaptEquipment extends StatefulWidget {

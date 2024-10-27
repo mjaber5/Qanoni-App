@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iconsax/iconsax.dart';
+
 import '../../../../../core/utils/app_router.dart';
 import '../../../../../core/utils/constants/colors.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ContractsCardsView extends StatelessWidget {
   const ContractsCardsView({super.key});
@@ -17,11 +18,11 @@ class ContractsCardsView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             Text(
-            localizations.chooseYourContract  ,
+            Text(
+              localizations.chooseYourContract,
               style: const TextStyle(
                 color: Colors.white,
-                fontSize: 20,  // تصغير حجم الخط
+                fontSize: 20, // تصغير حجم الخط
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -32,7 +33,7 @@ class ContractsCardsView extends StatelessWidget {
               localizations.leaseContracts,
               Iconsax.document,
             ),
-            const SizedBox(height: 12),  // تصغير الفجوة بين العناصر
+            const SizedBox(height: 12), // تصغير الفجوة بين العناصر
             contractsCardsContainer(
               context,
               AppRouter.kWaiverContractsCard,
@@ -43,7 +44,7 @@ class ContractsCardsView extends StatelessWidget {
             contractsCardsContainer(
               context,
               AppRouter.kSalesContractsCard,
-             localizations.sellCardAppBar,
+              localizations.sellCardAppBar,
               Iconsax.money,
             ),
             const SizedBox(height: 12),
@@ -67,7 +68,8 @@ class ContractsCardsView extends StatelessWidget {
       },
       child: Container(
         width: MediaQuery.of(context).size.width * 0.9,
-        height: MediaQuery.of(context).size.height * 0.15, // تصغير ارتفاع الحاوية
+        height:
+            MediaQuery.of(context).size.height * 0.15, // تصغير ارتفاع الحاوية
         padding: const EdgeInsets.all(16), // تصغير المساحة الداخلية
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -92,7 +94,8 @@ class ContractsCardsView extends StatelessWidget {
             CircleAvatar(
               radius: 25, // تصغير الدائرة
               backgroundColor: Colors.white,
-              child: Icon(icon, size: 28, color: QColors.secondary), // تصغير الأيقونة
+              child: Icon(icon,
+                  size: 28, color: QColors.secondary), // تصغير الأيقونة
             ),
             const SizedBox(width: 16), // تصغير الفجوة بين الأيقونة والنص
             Expanded(
@@ -105,7 +108,8 @@ class ContractsCardsView extends StatelessWidget {
                 ),
               ),
             ),
-            const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 22), // تصغير الأيقونة
+            const Icon(Icons.arrow_forward_ios,
+                color: Colors.white, size: 22), // تصغير الأيقونة
           ],
         ),
       ),

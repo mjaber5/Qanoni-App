@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:qanoni/core/utils/app_router.dart';
-import 'package:qanoni/features/profile/presentation/views/widgets/change_password_widgets/label_feild.dart';
-import 'package:qanoni/features/profile/presentation/views/widgets/change_password_widgets/password_feilds.dart';
+import '../../../../../../core/utils/app_router.dart';
+import 'label_feild.dart';
+import 'password_feilds.dart';
 import 'package:toasty_box/toast_enums.dart';
 import 'package:toasty_box/toast_service.dart';
 

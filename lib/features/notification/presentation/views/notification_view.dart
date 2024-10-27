@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'widgets/notification_view_body.dart';
 
 class NotificationView extends StatelessWidget {

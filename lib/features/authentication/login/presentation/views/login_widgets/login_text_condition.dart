@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
+import '../../../../../../core/utils/constants/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginTextCondition extends StatelessWidget {
@@ -14,7 +14,7 @@ class LoginTextCondition extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-             Text(
+            Text(
               localizations.byLogin,
               style: const TextStyle(
                 color: Colors.grey,
@@ -27,8 +27,8 @@ class LoginTextCondition extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {},
-                  child:  Text(
-                   localizations.loginPrivacyPolicy,
+                  child: Text(
+                    localizations.loginPrivacyPolicy,
                     style: const TextStyle(
                       fontSize: 14,
                       color: QColors.secondary,
@@ -36,7 +36,7 @@ class LoginTextCondition extends StatelessWidget {
                     ),
                   ),
                 ),
-                 Text(
+                Text(
                   localizations.loginAndText,
                   style: const TextStyle(
                     color: Colors.grey,
@@ -45,9 +45,9 @@ class LoginTextCondition extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {},
-                  child:  Text(
-           localizations.termsOfUs,      
-              style: const TextStyle(
+                  child: Text(
+                    localizations.termsOfUs,
+                    style: const TextStyle(
                       fontSize: 14,
                       color: QColors.secondary,
                       decoration: TextDecoration.underline,
@@ -56,8 +56,6 @@ class LoginTextCondition extends StatelessWidget {
                 ),
               ],
             ),
-
-            
           ],
         ),
       ),

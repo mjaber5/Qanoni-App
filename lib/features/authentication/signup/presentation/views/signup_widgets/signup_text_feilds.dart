@@ -2,17 +2,17 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:toasty_box/toast_enums.dart';
+import 'package:toasty_box/toast_service.dart';
+import 'package:user_repository/user_reposetory.dart';
+
 import '../../../../../../core/utils/app_router.dart';
 import '../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../core/utils/helpers/app_regex.dart';
 import '../../../../../../core/widgets/app_text_form_field.dart';
 import '../../view_model/sign_up_bloc/sign_up_bloc.dart';
-import 'package:toasty_box/toast_enums.dart';
-import 'package:toasty_box/toast_service.dart';
-import 'package:user_repository/user_reposetory.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignupTextFeilds extends StatefulWidget {
   const SignupTextFeilds({super.key});

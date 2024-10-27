@@ -1,11 +1,12 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:user_repository/user_reposetory.dart';
+
 import 'custom_label_text_field_profile_view.dart';
 import 'custom_text_feild_profile_view.dart';
 import 'profile_date_picker.dart';
-import 'package:user_repository/user_reposetory.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileUserInformationEditingField extends StatefulWidget {
   const ProfileUserInformationEditingField({super.key});
@@ -64,7 +65,7 @@ class _ProfileUserInformationEditingFieldState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           LabelTextFieldProfileView(text: '${localizations.birthday} :'),
+          LabelTextFieldProfileView(text: '${localizations.birthday} :'),
           const SizedBox(height: 8),
           CustomTextFieldProfileView(
               controller: birthdayController,
@@ -77,7 +78,7 @@ class _ProfileUserInformationEditingFieldState
               ),
               inputType: TextInputType.datetime),
           const SizedBox(height: 18),
-           LabelTextFieldProfileView(text: '${localizations.phone} :'),
+          LabelTextFieldProfileView(text: '${localizations.phone} :'),
           const SizedBox(height: 8),
           CustomTextFieldProfileView(
               controller: phoneController,
@@ -90,7 +91,7 @@ class _ProfileUserInformationEditingFieldState
               ),
               inputType: TextInputType.number),
           const SizedBox(height: 18),
-           LabelTextFieldProfileView(text: '${localizations.email} :'),
+          LabelTextFieldProfileView(text: '${localizations.email} :'),
           const SizedBox(height: 8),
           CustomTextFieldProfileView(
             controller: emailController,

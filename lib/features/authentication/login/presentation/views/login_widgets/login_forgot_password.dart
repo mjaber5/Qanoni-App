@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../../../../core/utils/constants/colors.dart';
-import '../../../../../../core/utils/styles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../../../core/utils/constants/colors.dart';
+import '../../../../../../core/utils/styles.dart';
 
 class LoginTextForgotPassword extends StatelessWidget {
   const LoginTextForgotPassword({super.key});
@@ -17,9 +17,7 @@ class LoginTextForgotPassword extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           TextButton(
-            onPressed: () {
-              
-            },
+            onPressed: () {},
             child: Text(
               localizations.loginForgotPassword,
               style: Styles.textStyle14.copyWith(

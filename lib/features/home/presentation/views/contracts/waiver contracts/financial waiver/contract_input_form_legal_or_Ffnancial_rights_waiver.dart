@@ -1,5 +1,7 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
+
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/constants/text_strings.dart';
 import '../../../../../../../core/utils/styles.dart';
@@ -143,7 +145,8 @@ class _ContractInputFormWaiverLegalFinancialArabicState
                     if (_formKey.currentState!.validate()) {
                       log('النموذج صالح. حفظ البيانات.');
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text(QTexts.dataEnteredSuccessfully)),
+                        const SnackBar(
+                            content: Text(QTexts.dataEnteredSuccessfully)),
                       );
                     } else {
                       log('النموذج غير صالح. إظهار الأخطاء.');

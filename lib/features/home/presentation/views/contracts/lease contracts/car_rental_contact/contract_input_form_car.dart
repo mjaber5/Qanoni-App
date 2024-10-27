@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // تأكد من إضافة مكتبة الوكاليزيشن
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/core/utils/styles.dart';
-import 'package:qanoni/core/widgets/app_text_form_field.dart';
+import '../../../../../../../core/utils/constants/colors.dart';
+import '../../../../../../../core/utils/styles.dart';
+import '../../../../../../../core/widgets/app_text_form_field.dart';
 
 class ContractInputFormCar extends StatefulWidget {
   const ContractInputFormCar({super.key});
@@ -57,7 +57,8 @@ class _ContractInputFormState extends State<ContractInputFormCar> {
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.landlordName,
                 controller: landlordNameController,
-                validatorMessage: AppLocalizations.of(context)!.landlordNameValidator,
+                validatorMessage:
+                    AppLocalizations.of(context)!.landlordNameValidator,
               ),
               const SizedBox(height: 16),
 
@@ -65,7 +66,8 @@ class _ContractInputFormState extends State<ContractInputFormCar> {
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.landlordId,
                 controller: landlordIdController,
-                validatorMessage: AppLocalizations.of(context)!.landlordIdValidator,
+                validatorMessage:
+                    AppLocalizations.of(context)!.landlordIdValidator,
               ),
               const SizedBox(height: 16),
 
@@ -73,7 +75,8 @@ class _ContractInputFormState extends State<ContractInputFormCar> {
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.tenantName,
                 controller: tenantNameController,
-                validatorMessage: AppLocalizations.of(context)!.tenantNameValidator,
+                validatorMessage:
+                    AppLocalizations.of(context)!.tenantNameValidator,
               ),
               const SizedBox(height: 16),
 
@@ -81,7 +84,8 @@ class _ContractInputFormState extends State<ContractInputFormCar> {
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.tenantId,
                 controller: tenantIdController,
-                validatorMessage: AppLocalizations.of(context)!.tenantIdValidator,
+                validatorMessage:
+                    AppLocalizations.of(context)!.tenantIdValidator,
               ),
               const SizedBox(height: 16),
 
@@ -89,7 +93,8 @@ class _ContractInputFormState extends State<ContractInputFormCar> {
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.carType,
                 controller: carTypeController,
-                validatorMessage: AppLocalizations.of(context)!.carTypeValidator,
+                validatorMessage:
+                    AppLocalizations.of(context)!.carTypeValidator,
               ),
               const SizedBox(height: 16),
 
@@ -97,7 +102,8 @@ class _ContractInputFormState extends State<ContractInputFormCar> {
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.carModel,
                 controller: carModelController,
-                validatorMessage: AppLocalizations.of(context)!.carModelValidator,
+                validatorMessage:
+                    AppLocalizations.of(context)!.carModelValidator,
               ),
               const SizedBox(height: 16),
 
@@ -105,7 +111,8 @@ class _ContractInputFormState extends State<ContractInputFormCar> {
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.carColor,
                 controller: carColorController,
-                validatorMessage: AppLocalizations.of(context)!.carColorValidator,
+                validatorMessage:
+                    AppLocalizations.of(context)!.carColorValidator,
               ),
               const SizedBox(height: 16),
 
@@ -113,7 +120,8 @@ class _ContractInputFormState extends State<ContractInputFormCar> {
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.engineCapacity,
                 controller: engineCapacityController,
-                validatorMessage: AppLocalizations.of(context)!.engineCapacityValidator,
+                validatorMessage:
+                    AppLocalizations.of(context)!.engineCapacityValidator,
               ),
               const SizedBox(height: 16),
 
@@ -121,7 +129,8 @@ class _ContractInputFormState extends State<ContractInputFormCar> {
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.rentAmount,
                 controller: rentAmountController,
-                validatorMessage: AppLocalizations.of(context)!.rentAmountValidator,
+                validatorMessage:
+                    AppLocalizations.of(context)!.rentAmountValidator,
               ),
               const SizedBox(height: 16),
 
@@ -129,7 +138,8 @@ class _ContractInputFormState extends State<ContractInputFormCar> {
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.contractStartDate,
                 controller: startDateController,
-                validatorMessage: AppLocalizations.of(context)!.contractStartDateValidator,
+                validatorMessage:
+                    AppLocalizations.of(context)!.contractStartDateValidator,
               ),
               const SizedBox(height: 16),
 
@@ -137,7 +147,8 @@ class _ContractInputFormState extends State<ContractInputFormCar> {
               buildLabeledTextField(
                 label: AppLocalizations.of(context)!.contractDuration,
                 controller: contractDurationController,
-                validatorMessage: AppLocalizations.of(context)!.contractDurationValidator,
+                validatorMessage:
+                    AppLocalizations.of(context)!.contractDurationValidator,
               ),
               const SizedBox(height: 32),
 
@@ -149,7 +160,8 @@ class _ContractInputFormState extends State<ContractInputFormCar> {
                     if (_formKey.currentState!.validate()) {
                       log('Form is valid. Proceed with saving the contract.');
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Data entered successfully')),
+                        const SnackBar(
+                            content: Text('Data entered successfully')),
                       );
                     } else {
                       log('Form is not valid. Show errors.');

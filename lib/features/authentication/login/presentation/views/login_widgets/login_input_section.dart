@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/authentication/login/presentation/views/login_widgets/login_button.dart';
-import 'package:qanoni/features/authentication/login/presentation/views/login_widgets/remember_me_check_box.dart';
+import '../../../../../../core/utils/constants/colors.dart';
+import 'login_button.dart';
+import 'remember_me_check_box.dart';
 import '../../../../../../core/utils/app_router.dart';
 import '../../../../../../core/utils/helpers/app_regex.dart';
 import '../../../../../../core/widgets/app_text_form_field.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell%20a%20equipment/equipment_acepet.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell%20a%20property/aceprt_property.dart';
-import 'package:qanoni/features/home/presentation/views/contracts/sales%20contracts/sell_car_contract/sales_car_acept.dart';
+import '../sales%20contracts/sell%20a%20equipment/equipment_acepet.dart';
+import '../sales%20contracts/sell%20a%20property/aceprt_property.dart';
+import '../sales%20contracts/sell_car_contract/sales_car_acept.dart';
 import '../../../../../../core/utils/constants/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

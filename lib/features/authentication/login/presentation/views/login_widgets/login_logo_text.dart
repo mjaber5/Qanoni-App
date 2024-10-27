@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
+import '../../../../../../core/utils/constants/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginLogoText extends StatelessWidget {
@@ -15,7 +15,7 @@ class LoginLogoText extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           Text(
+          Text(
             localizations.qanoni,
             style: const TextStyle(
               fontSize: 40,
@@ -31,8 +31,8 @@ class LoginLogoText extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 4),
-           Text(
-           localizations.makeYourServicesApp,
+          Text(
+            localizations.makeYourServicesApp,
             style: const TextStyle(
               fontSize: 16,
               color: QColors.darkGrey,

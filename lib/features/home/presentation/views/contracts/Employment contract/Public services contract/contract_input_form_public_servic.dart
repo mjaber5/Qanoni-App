@@ -1,9 +1,11 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // استيراد AppLocalizations
+
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // استيراد AppLocalizations
 
 class ContractInputFormPublicServic extends StatefulWidget {
   const ContractInputFormPublicServic({super.key});

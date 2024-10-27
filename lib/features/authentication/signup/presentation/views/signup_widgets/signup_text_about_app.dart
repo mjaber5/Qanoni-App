@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../core/utils/styles.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignupTextAboutApp extends StatelessWidget {
   const SignupTextAboutApp({super.key});
@@ -14,7 +15,7 @@ class SignupTextAboutApp extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-         localizations.signupAboutAppp,
+          localizations.signupAboutAppp,
           style: Styles.textStyle16.copyWith(
             color: QColors.darkGrey,
           ),

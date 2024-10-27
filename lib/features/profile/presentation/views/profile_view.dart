@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'widgets/profile_widgets/profile_view_body.dart';
 
 class ProfileView extends StatelessWidget {

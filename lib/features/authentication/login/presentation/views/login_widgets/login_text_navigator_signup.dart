@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../../../../../core/utils/app_router.dart';
 import '../../../../../../core/utils/constants/colors.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginTextNavigatorSignup extends StatelessWidget {
   const LoginTextNavigatorSignup({super.key});
@@ -33,9 +34,9 @@ class LoginTextNavigatorSignup extends StatelessWidget {
               onPressed: () {
                 GoRouter.of(context).push(AppRouter.kSignupView);
               },
-              child:  Text(
-                localizations.createAccount
-,                style: const TextStyle(
+              child: Text(
+                localizations.createAccount,
+                style: const TextStyle(
                   color: QColors.secondary,
                 ),
               ),

@@ -1,5 +1,7 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
+
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/constants/text_strings.dart';
 import '../../../../../../../core/utils/styles.dart';
@@ -141,7 +143,8 @@ class _ContractInputFormWaiverIntellectualState
                     if (_formKey.currentState!.validate()) {
                       log('Valid form. Saving data.');
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text(QTexts.dataEnteredSuccessfully)),
+                        const SnackBar(
+                            content: Text(QTexts.dataEnteredSuccessfully)),
                       );
                     } else {
                       log('Invalid form. Showing errors.');

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../../core/utils/styles.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginTextAboutApp extends StatelessWidget {
   const LoginTextAboutApp({super.key});

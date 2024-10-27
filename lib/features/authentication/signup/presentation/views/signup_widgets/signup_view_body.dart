@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qanoni/features/authentication/signup/presentation/views/signup_widgets/signup_text_about_app.dart';
+import 'signup_text_about_app.dart';
 
 import 'signup_logo_text.dart';
 import 'signup_text_condition.dart';

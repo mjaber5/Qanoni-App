@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:iconsax/iconsax.dart';
+
 import '../../../../../../core/utils/constants/colors.dart';
 import '../lease contracts/car_rental_contact/acept_car.dart';
 import '../lease contracts/daily_rental_contract/aceapt_daily.dart';
 import '../lease contracts/equipment_rental_contract/aceapt_equipment.dart';
 import '../lease contracts/house_rental_contact/aceapt_house.dart';
 import '../lease contracts/rental_contract_cancellation/aceapt_cancellation.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LeaseContractsCards extends StatelessWidget {
   const LeaseContractsCards({super.key});

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'login_input_section.dart';
 import 'login_logo_text.dart';
 import 'login_text_condition.dart';
-import 'login_input_section.dart';
 import 'login_text_navigator_signup.dart';
 
 class LoginViewBody extends StatelessWidget {

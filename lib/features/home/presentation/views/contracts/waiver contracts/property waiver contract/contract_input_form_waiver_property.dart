@@ -1,5 +1,7 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
+
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/constants/text_strings.dart';
 import '../../../../../../../core/utils/styles.dart';
@@ -67,7 +69,6 @@ class _ContractInputFormWaiverPropertyState
                 validatorMessage: QTexts.sellerAddressValidation,
               ),
               const SizedBox(height: 32),
-
               const Text(
                 QTexts.buyerInfo,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -90,7 +91,6 @@ class _ContractInputFormWaiverPropertyState
                 validatorMessage: QTexts.buyerAddressValidation,
               ),
               const SizedBox(height: 32),
-
               const Text(
                 QTexts.propertyInfo,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -119,7 +119,6 @@ class _ContractInputFormWaiverPropertyState
                 validatorMessage: QTexts.ownershipStatusValidation,
               ),
               const SizedBox(height: 32),
-
               const Text(
                 QTexts.transactionInfo,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -142,7 +141,6 @@ class _ContractInputFormWaiverPropertyState
                 validatorMessage: QTexts.waiverDateValidation,
               ),
               const SizedBox(height: 32),
-
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: ElevatedButton(

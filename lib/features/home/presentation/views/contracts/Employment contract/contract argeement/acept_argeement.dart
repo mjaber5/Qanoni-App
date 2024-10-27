@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../../../../core/utils/constants/colors.dart';
 
+import '../../../../../../../core/utils/constants/colors.dart';
 import 'contract_input_form_argeement.dart';
 
 class AceptArgeement extends StatefulWidget {

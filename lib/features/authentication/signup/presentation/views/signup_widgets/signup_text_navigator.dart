@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../../../../../core/utils/app_router.dart';
 import '../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../core/utils/styles.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignupTextNavigator extends StatelessWidget {
   const SignupTextNavigator({super.key});

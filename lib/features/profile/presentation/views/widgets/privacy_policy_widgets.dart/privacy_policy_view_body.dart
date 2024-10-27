@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'cutsom_privacy_policy_app_bar.dart';
 import 'privacy_policy_details_body.dart';
 

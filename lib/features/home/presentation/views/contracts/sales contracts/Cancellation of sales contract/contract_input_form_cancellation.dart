@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import localization package
+
 import '../../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../../core/utils/styles.dart';
 import '../../../../../../../core/widgets/app_text_form_field.dart';
@@ -36,7 +37,8 @@ class _ContractInputFormEquipmentState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.appBarTitleEquipment), // Use localization here
+        title: Text(AppLocalizations.of(context)!
+            .appBarTitleEquipment), // Use localization here
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -68,27 +70,35 @@ class _ContractInputFormEquipmentState
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         buildLabeledTextField(
-          label: AppLocalizations.of(context)!.vendorName, // Use localization here
+          label:
+              AppLocalizations.of(context)!.vendorName, // Use localization here
           controller: vendorNameController,
-          validatorMessage: AppLocalizations.of(context)!.vendorNameValidation, // Use localization here
+          validatorMessage: AppLocalizations.of(context)!
+              .vendorNameValidation, // Use localization here
         ),
         const SizedBox(height: 16),
         buildLabeledTextField(
-          label: AppLocalizations.of(context)!.vendorAddress, // Use localization here
+          label: AppLocalizations.of(context)!
+              .vendorAddress, // Use localization here
           controller: vendorAddressController,
-          validatorMessage: AppLocalizations.of(context)!.vendorAddressValidation, // Use localization here
+          validatorMessage: AppLocalizations.of(context)!
+              .vendorAddressValidation, // Use localization here
         ),
         const SizedBox(height: 16),
         buildLabeledTextField(
-          label: AppLocalizations.of(context)!.purchaserName, // Use localization here
+          label: AppLocalizations.of(context)!
+              .purchaserName, // Use localization here
           controller: purchaserNameController,
-          validatorMessage: AppLocalizations.of(context)!.purchaserNameValidation, // Use localization here
+          validatorMessage: AppLocalizations.of(context)!
+              .purchaserNameValidation, // Use localization here
         ),
         const SizedBox(height: 16),
         buildLabeledTextField(
-          label: AppLocalizations.of(context)!.purchaserAddress, // Use localization here
+          label: AppLocalizations.of(context)!
+              .purchaserAddress, // Use localization here
           controller: purchaserAddressController,
-          validatorMessage: AppLocalizations.of(context)!.purchaserAddressValidation, // Use localization here
+          validatorMessage: AppLocalizations.of(context)!
+              .purchaserAddressValidation, // Use localization here
         ),
       ],
     );
@@ -99,31 +109,40 @@ class _ContractInputFormEquipmentState
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppLocalizations.of(context)!.equipmentDetails, // Use localization here
+          AppLocalizations.of(context)!
+              .equipmentDetails, // Use localization here
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         buildLabeledTextField(
-          label: AppLocalizations.of(context)!.equipmentType, // Use localization here
+          label: AppLocalizations.of(context)!
+              .equipmentType, // Use localization here
           controller: equipmentTypeController,
-          validatorMessage: AppLocalizations.of(context)!.equipmentTypeValidation, // Use localization here
+          validatorMessage: AppLocalizations.of(context)!
+              .equipmentTypeValidation, // Use localization here
         ),
         const SizedBox(height: 16),
         buildLabeledTextField(
-          label: AppLocalizations.of(context)!.equipmentModel, // Use localization here
+          label: AppLocalizations.of(context)!
+              .equipmentModel, // Use localization here
           controller: equipmentModelController,
-          validatorMessage: AppLocalizations.of(context)!.equipmentModelValidation, // Use localization here
+          validatorMessage: AppLocalizations.of(context)!
+              .equipmentModelValidation, // Use localization here
         ),
         const SizedBox(height: 16),
         buildLabeledTextField(
-          label: AppLocalizations.of(context)!.equipmentSerialNumber, // Use localization here
+          label: AppLocalizations.of(context)!
+              .equipmentSerialNumber, // Use localization here
           controller: equipmentSerialNumberController,
-          validatorMessage: AppLocalizations.of(context)!.equipmentSerialNumberValidation, // Use localization here
+          validatorMessage: AppLocalizations.of(context)!
+              .equipmentSerialNumberValidation, // Use localization here
         ),
         const SizedBox(height: 16),
         buildLabeledTextField(
-          label: AppLocalizations.of(context)!.equipmentCondition, // Use localization here
+          label: AppLocalizations.of(context)!
+              .equipmentCondition, // Use localization here
           controller: equipmentConditionController,
-          validatorMessage: AppLocalizations.of(context)!.equipmentConditionValidation, // Use localization here
+          validatorMessage: AppLocalizations.of(context)!
+              .equipmentConditionValidation, // Use localization here
         ),
       ],
     );
@@ -140,13 +159,16 @@ class _ContractInputFormEquipmentState
         buildLabeledTextField(
           label: AppLocalizations.of(context)!.price, // Use localization here
           controller: priceController,
-          validatorMessage: AppLocalizations.of(context)!.priceValidation, // Use localization here
+          validatorMessage: AppLocalizations.of(context)!
+              .priceValidation, // Use localization here
         ),
         const SizedBox(height: 16),
         buildLabeledTextField(
-          label: AppLocalizations.of(context)!.saleDate, // Use localization here
+          label:
+              AppLocalizations.of(context)!.saleDate, // Use localization here
           controller: saleDateController,
-          validatorMessage: AppLocalizations.of(context)!.saleDateValidation, // Use localization here
+          validatorMessage: AppLocalizations.of(context)!
+              .saleDateValidation, // Use localization here
         ),
       ],
     );
@@ -160,7 +182,8 @@ class _ContractInputFormEquipmentState
           if (_formKey.currentState!.validate()) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(AppLocalizations.of(context)!.dateEnteredSuccessfully), // Use localization here
+                content: Text(AppLocalizations.of(context)!
+                    .dateEnteredSuccessfully), // Use localization here
               ),
             );
           }

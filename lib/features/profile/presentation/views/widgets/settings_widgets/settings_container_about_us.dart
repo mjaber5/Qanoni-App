@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:qanoni/core/utils/theme/custom_themes/text_theme.dart';
-import 'package:qanoni/features/theme/presentation/view_model/cubit/change_theme_cubit.dart';
+import '../../../../../../core/utils/theme/custom_themes/text_theme.dart';
+import '../../../../../theme/presentation/view_model/cubit/change_theme_cubit.dart';
 import '../../../../../../core/utils/app_router.dart';
 import '../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../core/utils/constants/sizes.dart';
@@ -42,7 +42,7 @@ class SettingsContainerAboutUs extends StatelessWidget {
                   Icons.info,
                 ),
                 title: Text(
-                 localizations.about,
+                  localizations.about,
                   style: textTheme.headlineSmall,
                 ),
                 trailing: const Icon(

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:user_repository/user_reposetory.dart';
+
 import '../../../../../../core/utils/constants/colors.dart';
 import '../../../../../../core/utils/constants/image_strings.dart';
 import '../../../../../../core/utils/constants/text_strings.dart';
 import '../../../../../../core/utils/styles.dart';
-import 'package:user_repository/user_reposetory.dart';
 
 class ProfileUserInformationCard extends StatefulWidget {
   const ProfileUserInformationCard({super.key});

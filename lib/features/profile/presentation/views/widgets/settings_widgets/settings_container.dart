@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/utils/constants/colors.dart';
-
 import 'account_information_settings.dart';
-
 import 'change_language_settings.dart';
 import 'change_password_settings.dart';
 import 'history_settings.dart';

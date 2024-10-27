@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/utils/styles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../../core/utils/styles.dart';
 
 class AppbarNotification extends StatelessWidget {
   const AppbarNotification({super.key});
