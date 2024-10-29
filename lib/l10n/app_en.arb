@@ -190,6 +190,18 @@
   "waiverContractsTitle": "Waiver Contracts",
 "sellCardAppBar": "Sales Contracts",
 "employmentContract": "Employment Contract",
+ "property_condition_1": "The property must be in good condition.",
+  "property_condition_2": "The buyer must be financially qualified.",
+  "property_condition_3": "The property transfer must comply with local laws.",
+  "property_condition_4": "All documents must be verified before signing.",
+  "property_condition_5": "Any liens or debts must be cleared before transfer.",
+  "property_condition_6": "The buyer has the right to inspect the property.",
+  "property_condition_7": "The seller guarantees clear title to the property.",
+  "equipment_terms": "Equipment Purchase Contract Terms:\n1. The property must be in good condition.\n2. The buyer must be financially qualified.\n3. The transfer of ownership must comply with local laws.\n4. All documents must be verified before signing.\n5. Any liens or debts must be settled before transfer.\n6. The buyer has the right to inspect the property.\n7. The seller guarantees clear ownership rights to the property.",
+    "terms_title": "Contract Terms",
+      "terms_header": "Terms and Conditions",
+
+
  "leaseContracts": "Lease Contracts",
   "chooseYourContract": "Choose Your Contract",
   "descAppContenar": "An innovative platform for creating and managing electronic contracts with ease.",
@@ -412,7 +424,7 @@
     "houseRentContract": "House Rental Contract Terms:\n1. The tenant must pay the rent on time.\n2. The landlord must provide the property in good condition.\n3. No alterations to the property are allowed without the landlord's approval.\n4. The landlord must be notified of any damages that occur to the property.\n5. The tenant must comply with local laws.",
 "acceptTermsTitle": "Acceptance of Terms",
   "cancellationTerms": "By proceeding with the contract cancellation, you agree to the following terms:\n\n1. The landlord and tenant must both consent to the cancellation.\n\n2. Any outstanding payments must be settled before cancellation is finalized.\n\n3. The property must be returned in its original condition, as per the contract.\n\n4. Both parties will waive any future claims related to the contract after cancellation.\n\n5. A formal notice period of 30 days is required before the contract can be considered void.\n\nPlease review these terms carefully before proceeding.",
-  
+
 
 "terms_textdaily": "Terms:\n1. Full compliance with the contract provisions.\n2. Payment of the agreed amount.\n3. The right to terminate the contract under specified conditions.",
 "accept_terms": "Accept Terms and Conditions",

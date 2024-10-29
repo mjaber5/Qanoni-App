@@ -42,7 +42,7 @@ class SalesContractsCard extends StatelessWidget {
                 context,
                 localizations.sellCardCar,
                 Iconsax.car5,
-                const SalesCarAccept(),
+                const SalesCarAcept(),
               ),
               const SizedBox(height: 12),
 
