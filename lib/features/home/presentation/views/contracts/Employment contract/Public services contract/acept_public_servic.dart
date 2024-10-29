@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../../../../core/utils/constants/colors.dart';
 import 'contract_input_form_public_servic.dart';
 
@@ -7,64 +7,94 @@ class AceptPublicServic extends StatefulWidget {
   const AceptPublicServic({super.key});
 
   @override
-  State<AceptPublicServic> createState() => _AceaptPageState();
+  State<AceptPublicServic> createState() => _AceptPublicServicState();
 }
 
-class _AceaptPageState extends State<AceptPublicServic> {
-  bool _agreed = false; // Declare _agreed here
+class _AceptPublicServicState extends State<AceptPublicServic> {
+  bool _agreed = false;
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(
+          localizations.accept_terms,
+          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: isDarkMode ? QColors.darkerGrey : QColors.secondary,
+        elevation: 0,
+      ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Column(
+              children: [
+                const SizedBox(height: 10),
+                Text(
+                  localizations.read_terms,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: isDarkMode ? Colors.white70 : Colors.black87,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+
+            // Contract terms container
             Expanded(
               child: SingleChildScrollView(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: QColors.darkerGrey.withOpacity(0.5),
-                    borderRadius: const BorderRadius.all(Radius.circular(12)),
+                    color: isDarkMode ? QColors.darkerGrey : Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: isDarkMode ? Colors.white54 : Colors.grey.withOpacity(0.5),
+                      width: 1.5,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: isDarkMode
+                            ? Colors.black.withOpacity(0.4)
+                            : Colors.grey.withOpacity(0.3),
+                        blurRadius: 10,
+                        offset: const Offset(0, 5),
+                      ),
+                    ],
                   ),
-                  child: const Text(
-                    '''[الشروط 
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text(
+                    '''
+                    ${localizations.terms_intro}
 
+                    1. ${localizations.terms_privacy}
+                    2. ${localizations.terms_responsibility}
+                    3. ${localizations.terms_payment}
+                    4. ${localizations.terms_cancellation}
+                    5. ${localizations.terms_disputes}
 
-                    Acept Public Servic
-                      
-                      
-                      
-                      
-                      
-                                                                                                                      j
-                      
-                      
-                      
-                      
-                      
-                                                                                                                      j
-                      
-                      
-                      
-                      
-                      
-                      
-                                                                                          j
-                      
-                      
-                      
-                      
-                      
-                      j                                                                                          ]''',
-                    style: TextStyle(fontSize: 16.0),
+                    ${localizations.terms_conclusion}
+                    ''',
+                    style: const TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w500,
+                      height: 1.5,
+                    ),
+                    textAlign: TextAlign.justify,
                   ),
                 ),
               ),
             ),
             const SizedBox(height: 20),
+
+            // Agreement checkbox and button
             Row(
               children: [
                 Checkbox(
@@ -77,9 +107,15 @@ class _AceaptPageState extends State<AceptPublicServic> {
                   },
                   activeColor: QColors.secondary,
                 ),
-                const Expanded(
+                Expanded(
                   child: Text(
-                      'I have read and agree with the above terms and conditions'),
+                    localizations.agree_text,
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w600,
+                      color: isDarkMode ? Colors.white70 : Colors.black87,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -90,20 +126,27 @@ class _AceaptPageState extends State<AceptPublicServic> {
                   child: ElevatedButton(
                     onPressed: _agreed
                         ? () {
-                            // navigate
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ContractInputFormPublicServic()));
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ContractInputFormPublicServic(),
+                              ),
+                            );
                           }
                         : null,
-                    style: ButtonStyle(
-                        backgroundColor:
-                            WidgetStateProperty.all(QColors.secondary)),
-                    child: const Text(
-                      'Start',
-                      style: TextStyle(color: Colors.white),
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      backgroundColor: _agreed ? QColors.secondary : Colors.grey[400],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Text(
+                      localizations.start_button,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -112,6 +155,7 @@ class _AceaptPageState extends State<AceptPublicServic> {
           ],
         ),
       ),
+      backgroundColor: isDarkMode ? Colors.black : Colors.white,
     );
   }
 }
