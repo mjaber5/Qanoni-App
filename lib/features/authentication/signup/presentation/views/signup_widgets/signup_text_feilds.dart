@@ -35,6 +35,7 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  TextEditingController idNumberController = TextEditingController();
 
   @override
   void initState() {
@@ -115,6 +116,27 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a valid name';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 20),
+              AppTextFormField(
+                controller: idNumberController,
+                prefixIcon: Image.asset(
+                  'assets/icons/id-card.png',
+                  scale: 20,
+                  color: QColors.darkerGrey,
+                ),
+                hintText: localizations.id,
+                hintStyle: const TextStyle(color: QColors.darkGrey),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a valid id number';
+                  }
+                  if (value.length != 10 ||
+                      !RegExp(r'^\d{10}$').hasMatch(value)) {
+                    return 'ID number must be exactly 10 digits';
                   }
                   return null;
                 },
@@ -202,6 +224,7 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                         email: emailController.text,
                         userName: nameController.text,
                         phone: phoneController.text,
+                        idNumber: idNumberController.text,
                       );
                       setState(() {
                         context.read<SignUpBloc>().add(
