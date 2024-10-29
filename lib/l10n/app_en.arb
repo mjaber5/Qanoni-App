@@ -408,6 +408,12 @@
   "terms_text": "1. The contractor must comply with all terms and conditions mentioned in this contract.\n2. The project owner is obligated to pay the agreed-upon amount on the specified dates.\n3. Both parties have the right to terminate the contract according to specified conditions in case of non-compliance.\n4. The contractor is committed to providing all necessary materials to complete the project.\n5. The contractor assumes full responsibility for any damages or losses resulting from negligence.\n6. The contractor must submit regular progress reports.\n7. Both parties agree to maintain confidentiality regarding contract-related information.",
   "agree_text": "I have read and agree to the above terms and conditions",
   "start_button": "Start",
+  "acceptHouseTitle": "Accept Rental Contract",
+    "houseRentContract": "House Rental Contract Terms:\n1. The tenant must pay the rent on time.\n2. The landlord must provide the property in good condition.\n3. No alterations to the property are allowed without the landlord's approval.\n4. The landlord must be notified of any damages that occur to the property.\n5. The tenant must comply with local laws.",
+"acceptTermsTitle": "Acceptance of Terms",
+  "cancellationTerms": "By proceeding with the contract cancellation, you agree to the following terms:\n\n1. The landlord and tenant must both consent to the cancellation.\n\n2. Any outstanding payments must be settled before cancellation is finalized.\n\n3. The property must be returned in its original condition, as per the contract.\n\n4. Both parties will waive any future claims related to the contract after cancellation.\n\n5. A formal notice period of 30 days is required before the contract can be considered void.\n\nPlease review these terms carefully before proceeding.",
+  
+
 "terms_textdaily": "Terms:\n1. Full compliance with the contract provisions.\n2. Payment of the agreed amount.\n3. The right to terminate the contract under specified conditions.",
 "accept_terms": "Accept Terms and Conditions",
   "terms_intro": "Please read the terms and conditions below carefully before proceeding.",
@@ -425,6 +431,18 @@
   "terms_performance": "The second party is expected to perform tasks...",
   "terms_disputes": "Any disputes arising during the contract period...",
   "terms_agreement": "By proceeding, I acknowledge that I have read...",
+  "condition_1": "The renter must provide a valid ID before receiving the car.",
+  "condition_2": "The renter must pay the insurance amount before receiving the car.",
+  "condition_3": "The renter is responsible for any damage or loss that occurs to the car during the rental period.",
+  "condition_4": "The renter must adhere to the agreed rental schedule.",
+  "condition_5": "The car must not be used for any illegal activities.",
+  "condition_6": "The car must be returned on time and in good condition.",
+    "app_bar_title": "Agree to Terms",
+
+    "terms_and_conditions1": "[Terms and Conditions \n\n 1. The tenant must pay the rent on time.\n 2. The tenant is responsible for maintaining the used equipment.\n 3. The tenant may not use the equipment for unauthorized purposes.\n 4. The owner has the right to cancel the contract if the tenant does not comply with the terms.\n 5. The tenant must return the equipment in good condition after the contract ends.\n ]",
+
+  "condition_7": "In case of violating any of the mentioned terms, the owner has the right to cancel the contract.",
+  "terms_title": "Terms and Conditions",
 "terms_and_conditions": "By using this contract form, both parties agree to the following terms and conditions:\n1. The First Party (Employer) and Second Party (Employee) agree to respect the contractual obligations established in this agreement.\n2. Both parties shall provide accurate and complete information, including but not limited to identification, nationality, and address details.\n3. The Employee agrees to fulfill the role described by the Job Title with the duties as assigned by the Employer.\n4. The employment period shall extend for the Contract Duration as specified. Any changes to this duration require mutual agreement and formal documentation.\n5. The Salary, as specified, shall be compensated according to the agreed-upon payment schedule.\n6. Both parties shall adhere to the local labor laws and any other relevant regulations governing the employment relationship.\n7. Any dispute arising from this agreement shall first be resolved through negotiation and mutual agreement. If a resolution is not reached, legal measures may be pursued as per applicable law.\n8. This contract shall be terminated if either party violates any of the agreed terms, subject to the applicable labor laws.\n\nBy signing this contract, both parties confirm that they have read, understood, and agreed to all terms and conditions listed above.",
 
   "ministry_work_model": "Ministry Work Model",
