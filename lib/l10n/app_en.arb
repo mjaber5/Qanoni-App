@@ -200,7 +200,10 @@
   "equipment_terms": "Equipment Purchase Contract Terms:\n1. The property must be in good condition.\n2. The buyer must be financially qualified.\n3. The transfer of ownership must comply with local laws.\n4. All documents must be verified before signing.\n5. Any liens or debts must be settled before transfer.\n6. The buyer has the right to inspect the property.\n7. The seller guarantees clear ownership rights to the property.",
     "terms_title": "Contract Terms",
       "terms_header": "Terms and Conditions",
-
+  "business_partnership_waiver_terms": "Terms for Business Partnership Waiver:\n\n1. Both parties must fully disclose all financial statements and liabilities.\n2. The seller guarantees no pending legal disputes that may affect the partnership's value.\n3. The buyer has the right to inspect partnership records before agreement.\n4. All relevant taxes must be settled before the waiver.\n5. Both parties agree to comply with all local business transfer regulations.\n6. Both parties agree to maintain confidentiality regarding the waiver details.\n7. The buyer understands the responsibility of any future financial obligations of the partnership.\n8. Any misrepresentation by either party may lead to legal action and potential voiding of the contract.",
+  "carWaiverTerms": "1. Both parties must fully disclose all financial statements and liabilities.\n2. The seller guarantees no pending legal disputes that may affect the partnership's value.\n3. The buyer has the right to inspect partnership records before agreement.\n4. All relevant taxes must be settled before the waiver.\n5. Both parties agree to comply with all local business transfer regulations.\n6. Both parties agree to maintain confidentiality regarding the waiver details.\n7. The buyer understands the responsibility of any future financial obligations of the partnership.\n8. Any misrepresentation by either party may lead to legal action and potential voiding of the contract.",
+  "agreeToTerms": "I have read and agree with the above terms and conditions",
+  "start": "Start",
 
  "leaseContracts": "Lease Contracts",
   "chooseYourContract": "Choose Your Contract",
