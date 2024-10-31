@@ -90,6 +90,7 @@ class Qanoni extends StatelessWidget {
 
   Widget _loadingWidget() {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(
           child: CircularProgressIndicator(
@@ -115,38 +116,40 @@ class Qanoni extends StatelessWidget {
             ),
           ),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/images/no_internet.png',
-              color: QColors.error,
-              height: 100,
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 20, bottom: 10),
-              child: const Text(
-                'No Internet connection',
-                style: TextStyle(fontSize: 22),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/images/no_internet.png',
+                color: QColors.error,
+                height: 100,
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: Text('Check your connection, then refresh the page.'),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: WidgetStateProperty.all(QColors.white),
-                foregroundColor: WidgetStateProperty.all(QColors.black),
+              Container(
+                margin: const EdgeInsets.only(top: 20, bottom: 10),
+                child: const Text(
+                  'No Internet connection',
+                  style: TextStyle(fontSize: 22),
+                ),
               ),
-              onPressed: () async {
-                var result = await Connectivity().checkConnectivity();
-                log("Connectivity check: $result");
-              },
-              child: const Text('Refresh'),
-            ),
-          ],
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Text('Check your connection, then refresh the page.'),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all(QColors.white),
+                  foregroundColor: WidgetStateProperty.all(QColors.black),
+                ),
+                onPressed: () async {
+                  var result = await Connectivity().checkConnectivity();
+                  log("Connectivity check: $result");
+                },
+                child: const Text('Refresh'),
+              ),
+            ],
+          ),
         ),
       ),
     );
