@@ -204,6 +204,10 @@
   "carWaiverTerms": "1. Both parties must fully disclose all financial statements and liabilities.\n2. The seller guarantees no pending legal disputes that may affect the partnership's value.\n3. The buyer has the right to inspect partnership records before agreement.\n4. All relevant taxes must be settled before the waiver.\n5. Both parties agree to comply with all local business transfer regulations.\n6. Both parties agree to maintain confidentiality regarding the waiver details.\n7. The buyer understands the responsibility of any future financial obligations of the partnership.\n8. Any misrepresentation by either party may lead to legal action and potential voiding of the contract.",
   "agreeToTerms": "I have read and agree with the above terms and conditions",
   "start": "Start",
+  "nationalID": "Please enter a valid ID number",
+    "intellectual_waiver_terms": "Intellectual Waiver Terms",
+
+  "intellectual_waiver_terms_text": "Confidentiality obligations \n\n1- Data security compliance \n\n1 - Ownership acknowledgment\n\n1 - Non-disclosure agreements \n\n1- Limits on liability for damages",
 
  "leaseContracts": "Lease Contracts",
   "chooseYourContract": "Choose Your Contract",
@@ -671,6 +675,6 @@
   "saleDate": "Sale Date",
   "saleDateValidation": "Please enter the sale date",
   "saveButton": "Save",
-  "aboutUsBodyText":"The Qanoni App aims to digitize and simplify the management of contracts such as rentalagreements, sales contracts, and concessions by transforming user inputs into electronic contracts. These contracts will be based on predefined templates for each contract type.\n"
-
+  "aboutUsBodyText":"The Qanoni App aims to digitize and simplify the management of contracts such as rentalagreements, sales contracts, and concessions by transforming user inputs into electronic contracts. These contracts will be based on predefined templates for each contract type.\n",
+  "nationalID": "National ID"
 }

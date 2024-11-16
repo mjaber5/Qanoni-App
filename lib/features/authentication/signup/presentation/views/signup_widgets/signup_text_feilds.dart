@@ -128,7 +128,7 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                   scale: 20,
                   color: QColors.darkerGrey,
                 ),
-                hintText: localizations.id,
+                hintText: localizations.nationalID,
                 hintStyle: const TextStyle(color: QColors.darkGrey),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -149,7 +149,7 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                   scale: 20,
                   color: QColors.darkerGrey,
                 ),
-                hintText: localizations.phone,
+                hintText: '07XXXXXXXX',
                 hintStyle: const TextStyle(color: QColors.darkGrey),
                 validator: (value) {
                   if (value == null ||

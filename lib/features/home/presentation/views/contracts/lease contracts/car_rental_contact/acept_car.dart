@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import the localization file
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../../../../core/utils/constants/colors.dart';
 import 'contract_input_form_car.dart';
 
@@ -24,7 +24,7 @@ class _AceaptPageState extends State<AceptCar> {
           localizations.terms_title,
           style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
-        backgroundColor: isDarkMode ? QColors.darkerGrey : QColors.secondary,
+        backgroundColor: QColors.secondary,
         elevation: 0,
       ),
       body: Padding(
@@ -47,22 +47,25 @@ class _AceaptPageState extends State<AceptCar> {
               ],
             ),
             const SizedBox(height: 20),
-
-            // Contract terms container
             Expanded(
               child: SingleChildScrollView(
                 child: Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: isDarkMode
-                          ? [QColors.darkerGrey.withOpacity(0.8), QColors.darkerGrey.withOpacity(0.6)]
+                          ? [
+                              QColors.darkerGrey.withOpacity(0.8),
+                              QColors.darkerGrey.withOpacity(0.6)
+                            ]
                           : [Colors.white, Colors.grey[200]!],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: isDarkMode ? Colors.white54 : Colors.grey.withOpacity(0.5),
+                      color: isDarkMode
+                          ? Colors.white54
+                          : Colors.grey.withOpacity(0.5),
                       width: 1.5,
                     ),
                     boxShadow: [
@@ -79,8 +82,6 @@ class _AceaptPageState extends State<AceptCar> {
                     padding: const EdgeInsets.all(20.0),
                     child: Text(
                       '''
-                      ${localizations.terms_intro}
-
  1. ${localizations.condition_1}
  2. ${localizations.condition_2}
  3. ${localizations.condition_3}
@@ -95,7 +96,6 @@ class _AceaptPageState extends State<AceptCar> {
                         fontSize: 18.0,
                         fontWeight: FontWeight.w500,
                         height: 1.5,
-                        color: Colors.black87,
                       ),
                       textAlign: TextAlign.justify,
                     ),
@@ -104,8 +104,6 @@ class _AceaptPageState extends State<AceptCar> {
               ),
             ),
             const SizedBox(height: 20),
-
-            // Agreement checkbox and button
             Row(
               children: [
                 Checkbox(
@@ -140,14 +138,16 @@ class _AceaptPageState extends State<AceptCar> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const ContractInputFormCar(),
+                                builder: (context) =>
+                                    const ContractInputFormCar(),
                               ),
                             );
                           }
                         : null,
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 15),
-                      backgroundColor: _agreed ? QColors.secondary : Colors.grey[400],
+                      backgroundColor:
+                          _agreed ? QColors.secondary : Colors.grey[400],
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),

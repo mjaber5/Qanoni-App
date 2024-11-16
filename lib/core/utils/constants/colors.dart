@@ -5,7 +5,7 @@ class QColors {
 
   //  App Basic Colors
   static const Color primary = Color.fromARGB(255, 12, 12, 12);
-  static const Color secondary = Color.fromARGB(255, 90, 129, 90);
+  static const Color secondary = Color.fromARGB(255, 41, 180, 114);
 
   //  Text Colors
   static const Color textPrimary = Color(0xFF333333);
