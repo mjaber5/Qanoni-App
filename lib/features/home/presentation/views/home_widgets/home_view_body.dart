@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../contracts/contracts_cards_view.dart';
+// import '../contracts/contracts_cards_view.dart';
 import 'button_head_home.dart';
 import 'custom_home_view_app_bar.dart';
+import 'new_btn_home.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -24,7 +25,10 @@ class HomeViewBody extends StatelessWidget {
               delegate: SliverChildListDelegate(
                 [
                   const ButtonHomeView(),
-                  const ContractsCardsView(),
+                  // const ContractsCardsView(),
+                 const SizedBox(height: 100),
+
+                  const NewBtnHome()
                 ],
               ),
             ),

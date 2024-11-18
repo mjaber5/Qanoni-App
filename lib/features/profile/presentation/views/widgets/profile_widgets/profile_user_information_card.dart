@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:gap/gap.dart';
 import 'package:user_repository/user_reposetory.dart';
 
 import '../../../../../../core/utils/constants/colors.dart';
@@ -20,6 +22,7 @@ class _ProfileUserInformationCardState
   late final FirebaseUserRepo _userRepo;
   String? _userName;
   String? _idNumber;
+  String? _userIduse;
   bool _isLoading = true;
   bool _hasError = false;
 
@@ -41,12 +44,14 @@ class _ProfileUserInformationCardState
           setState(() {
             _userName = userDoc.data()?['userName'] ?? 'Unknown';
             _idNumber = userDoc.data()?['idNumber'] ?? 'UnKnown';
+            _userIduse= userDoc.data()?['userIduse'] ??'UnKnown';
             _isLoading = false;
           });
         } else {
           setState(() {
             _userName = 'Unknown User';
             _idNumber = 'UnKnown User';
+            _userIduse='UnKnown User';
             _isLoading = false;
           });
         }
@@ -54,6 +59,7 @@ class _ProfileUserInformationCardState
         setState(() {
           _userName = 'No User Logged In';
           _idNumber = 'No User Logged In';
+          _userIduse ='No User Logged In';
           _isLoading = false;
         });
       }
@@ -64,6 +70,7 @@ class _ProfileUserInformationCardState
       });
     }
   }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -112,6 +119,25 @@ class _ProfileUserInformationCardState
                       overflow: TextOverflow.ellipsis,
                       style: Styles.textStyle16,
                     ),
+                                            const Gap(10),
+
+                    Row(
+                      children: [
+                        Text(
+                          'ID : $_userIduse',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: Styles.textStyle16,
+                        ),
+                        const Gap(10),
+                       InkWell(
+                        onTap: (){
+                          
+                         _copyToClipboard('$_userIduse',context);
+                        },
+                        child: const Icon(Icons.copy,size: 20,))
+                      ],
+                    ),
                   ],
                 ),
               ),
@@ -119,6 +145,14 @@ class _ProfileUserInformationCardState
           ),
         ),
       ),
+    );
+  }
+  // دالة لنسخ النص إلى الحافظة
+  void _copyToClipboard(String text, BuildContext context) {
+    Clipboard.setData(ClipboardData(text: text));
+    // يمكنك إضافة رسالة تأكيد بعد النسخ مثل SnackBar
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('ID copied to clipboard')),
     );
   }
 }

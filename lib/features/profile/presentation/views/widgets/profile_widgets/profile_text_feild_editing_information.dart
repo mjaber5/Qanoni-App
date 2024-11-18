@@ -6,7 +6,6 @@ import 'package:user_repository/user_reposetory.dart';
 
 import 'custom_label_text_field_profile_view.dart';
 import 'custom_text_feild_profile_view.dart';
-import 'profile_date_picker.dart';
 
 class ProfileUserInformationEditingField extends StatefulWidget {
   const ProfileUserInformationEditingField({super.key});
@@ -21,7 +20,6 @@ class _ProfileUserInformationEditingFieldState
   late final FirebaseUserRepo _userRepo;
   String? _email;
   String? _phone;
-  TextEditingController birthdayController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController emailController = TextEditingController();
 
@@ -65,19 +63,7 @@ class _ProfileUserInformationEditingFieldState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          LabelTextFieldProfileView(text: '${localizations.birthday} :'),
-          const SizedBox(height: 8),
-          CustomTextFieldProfileView(
-              controller: birthdayController,
-              hintText: localizations.profileBirthdayHintText,
-              prefixIcon: IconButton(
-                icon: const Icon(Icons.date_range),
-                onPressed: () {
-                  showDialogDatePicker(context, birthdayController);
-                },
-              ),
-              inputType: TextInputType.datetime),
-          const SizedBox(height: 18),
+          const SizedBox(height: 12),
           LabelTextFieldProfileView(text: '${localizations.phone} :'),
           const SizedBox(height: 8),
           CustomTextFieldProfileView(
@@ -106,30 +92,6 @@ class _ProfileUserInformationEditingFieldState
           ),
         ],
       ),
-    );
-  }
-
-  Future<dynamic> showDialogDatePicker(
-      BuildContext context, TextEditingController birthdayController) {
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),
-            child: SizedBox(
-              height: 500,
-              width: 400,
-              child: ProfileDatePicker(
-                controller: birthdayController,
-              ),
-            ),
-          ),
-        );
-      },
     );
   }
 }
