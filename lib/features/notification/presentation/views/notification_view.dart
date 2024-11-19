@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'widgets/notification_view_body.dart';
+import 'widgets/notification_tab_bar.dart';
 
 class NotificationView extends StatelessWidget {
   const NotificationView({super.key});
@@ -8,7 +8,7 @@ class NotificationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: NotificationViewBody(),
+      body: NotificationTabBar(),
     );
   }
 }
