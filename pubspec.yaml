@@ -64,6 +64,7 @@ dependencies:
 
   user_repository:
     path: packages/user_repository
+  flutter_svg: ^2.0.16
 
 dev_dependencies:
   flutter_test:
