@@ -2,16 +2,17 @@ import 'dart:developer';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:user_repository/user_reposetory.dart';
+
+import 'core/utils/app_router.dart';
 import 'core/utils/constants/colors.dart';
 import 'core/utils/theme/theme.dart';
-import 'features/languages/view_model/app_langauge_cubit/app_language_cubit.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'core/utils/app_router.dart';
 import 'features/authentication/auth_blocs/authentication_bloc/authentication_bloc.dart';
-import 'package:user_repository/user_reposetory.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'features/languages/view_model/app_langauge_cubit/app_language_cubit.dart';
 import 'features/theme/presentation/view_model/cubit/change_theme_cubit.dart';
 import 'features/theme/presentation/view_model/cubit/change_theme_state.dart';
 

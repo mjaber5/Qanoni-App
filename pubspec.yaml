@@ -56,13 +56,14 @@ dependencies:
   toasty_box: ^1.0.4
   shared_preferences: ^2.3.2
   dio: ^5.7.0
-  connectivity_plus: ^6.1.0
-
-  user_repository:
-    path: packages/user_repository
   pdf: ^3.11.1
   path_provider: ^2.1.4
   open_file: ^3.5.9
+  connectivity_plus: ^6.1.0
+
+
+  user_repository:
+    path: packages/user_repository
 
 dev_dependencies:
   flutter_test:
