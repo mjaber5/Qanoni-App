@@ -3,15 +3,14 @@ import 'package:go_router/go_router.dart';
 import 'package:qanoni/core/utils/app_router.dart';
 import '../../../../../core/utils/constants/colors.dart';
 
-class WaiverContractDialog extends StatelessWidget {
-  const WaiverContractDialog({super.key});
+class WaiverContractBottomSheet extends StatelessWidget {
+  const WaiverContractBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      content: Column(
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           const Text(
@@ -43,7 +42,7 @@ class WaiverContractDialog extends StatelessWidget {
                     backgroundColor: QColors.secondary,
                   ),
                   onPressed: () {
-                    showIdDialog(context, "Seller"); // Show seller ID dialog
+                    showIdBottomSheet(context, "Seller"); // Show seller ID bottom sheet
                   },
                   child: const Text("Buyer"),
                 ),
@@ -59,7 +58,7 @@ class WaiverContractDialog extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 15),
                   ),
                   onPressed: () {
-                    showIdDialog(context, "Buyer"); // Show buyer ID dialog
+                    showIdBottomSheet(context, "Buyer"); // Show buyer ID bottom sheet
                   },
                   child: const Text("Seller"),
                 ),
@@ -72,24 +71,29 @@ class WaiverContractDialog extends StatelessWidget {
   }
 }
 
-void showWaiverContractDialog(BuildContext context) {
-  showDialog(
+void showWaiverContractBottomSheet(BuildContext context) {
+  showModalBottomSheet(
     context: context,
-    builder: (BuildContext context) => const WaiverContractDialog(),
+    builder: (BuildContext context) => const WaiverContractBottomSheet(),
   );
 }
 
-void showIdDialog(BuildContext context, String userType) {
+void showIdBottomSheet(BuildContext context, String userType) {
   final TextEditingController idController = TextEditingController();
 
-  showDialog(
+  showModalBottomSheet(
     context: context,
     builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text("Enter $userType ID"), // Dynamically change dialog title
-        content: Column(
+      return Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Text(
+              "Enter $userType ID", // Dynamically change bottom sheet title
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 20),
             TextFormField(
               controller: idController,
               keyboardType: TextInputType.number,
@@ -103,27 +107,30 @@ void showIdDialog(BuildContext context, String userType) {
                 fillColor: Colors.grey[200],
               ),
             ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context); // Close the bottom sheet
+                  },
+                  child: const Text("Cancel"),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    final enteredId = idController.text.trim();
+                    if (enteredId.isNotEmpty) {
+                      GoRouter.of(context).pushReplacement(AppRouter.kCreateContract);
+                      Navigator.pop(context, enteredId); // Close the bottom sheet and return the ID
+                    }
+                  },
+                  child: const Text("Confirm"),
+                ),
+              ],
+            ),
           ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context); // Close the dialog
-            },
-            child: const Text("Cancel"),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              final enteredId = idController.text.trim();
-              if (enteredId.isNotEmpty) {
-                GoRouter.of(context).pushReplacement(AppRouter.kCreateContract);
-                Navigator.pop(
-                    context, enteredId); // Close the dialog and return the ID
-              }
-            },
-            child: const Text("Confirm"),
-          ),
-        ],
       );
     },
   );
