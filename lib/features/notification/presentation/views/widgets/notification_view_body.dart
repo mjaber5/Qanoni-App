@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:qanoni/features/notification/presentation/views/widgets/custom_notification_app_bar.dart';
 
-import 'custom_notification_app_bar.dart';
-import 'widget/screnhome.dart';
+import 'notification_content.dart';
 
 class NotificationViewBody extends StatelessWidget {
   const NotificationViewBody({
@@ -13,8 +13,13 @@ class NotificationViewBody extends StatelessWidget {
     return const Column(
       children: [
         AppbarNotification(),
-         Screnhome()     
-         ],
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 4.0),
+            child: NotificationContent(),
+          ),
+        ),
+      ],
     );
   }
 }
