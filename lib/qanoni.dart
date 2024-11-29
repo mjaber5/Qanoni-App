@@ -27,15 +27,19 @@ class Qanoni extends StatelessWidget {
     return StreamBuilder<List<ConnectivityResult>>(
       stream: Connectivity().onConnectivityChanged,
       builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return _loadingWidget();
+        }
+
         if (snapshot.hasError) {
           log("Connectivity error: ${snapshot.error}");
           return _noInternetWidget();
         }
 
         if (snapshot.hasData) {
-          bool isConnected = snapshot.data
-                  ?.any((result) => result != ConnectivityResult.none) ??
-              false;
+          // Check if any of the connectivity results is not 'none'
+          bool isConnected =
+              snapshot.data!.any((result) => result != ConnectivityResult.none);
           return isConnected ? buildMainApp(context) : _noInternetWidget();
         }
 
@@ -73,13 +77,11 @@ class Qanoni extends StatelessWidget {
                   GlobalCupertinoLocalizations.delegate,
                 ],
                 localeResolutionCallback: (deviceLocale, supportedLocales) {
-                  for (var locale in supportedLocales) {
-                    if (deviceLocale != null &&
-                        deviceLocale.languageCode == locale.languageCode) {
-                      return deviceLocale;
-                    }
-                  }
-                  return supportedLocales.first;
+                  return supportedLocales.firstWhere(
+                    (locale) =>
+                        locale.languageCode == deviceLocale?.languageCode,
+                    orElse: () => supportedLocales.first,
+                  );
                 },
               );
             },
@@ -126,16 +128,15 @@ class Qanoni extends StatelessWidget {
                 color: QColors.error,
                 height: 100,
               ),
-              Container(
-                margin: const EdgeInsets.only(top: 20, bottom: 10),
-                child: const Text(
-                  'No Internet connection',
-                  style: TextStyle(fontSize: 22),
-                ),
+              const SizedBox(height: 20),
+              const Text(
+                'No Internet connection',
+                style: TextStyle(fontSize: 22),
               ),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0),
-                child: Text('Check your connection, then refresh the page.'),
+                child: Text(
+                    'Please check your internet connection and try again.'),
               ),
               const SizedBox(height: 20),
               ElevatedButton(
@@ -144,7 +145,7 @@ class Qanoni extends StatelessWidget {
                   foregroundColor: WidgetStateProperty.all(QColors.black),
                 ),
                 onPressed: () async {
-                  var result = await Connectivity().checkConnectivity();
+                  final result = await Connectivity().checkConnectivity();
                   log("Connectivity check: $result");
                 },
                 child: const Text('Refresh'),
