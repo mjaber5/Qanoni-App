@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'custom_notification_app_bar.dart';
-import 'notification_tab_bar.dart';
+import 'widget/screnhome.dart';
 
 class NotificationViewBody extends StatelessWidget {
   const NotificationViewBody({
@@ -13,7 +13,8 @@ class NotificationViewBody extends StatelessWidget {
     return const Column(
       children: [
         AppbarNotification(),
-        NotificationTabBar()      ],
+         Screnhome()     
+         ],
     );
   }
 }
