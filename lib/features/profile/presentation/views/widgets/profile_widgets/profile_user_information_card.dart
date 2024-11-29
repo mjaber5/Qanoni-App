@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:gap/gap.dart';
+import 'package:qanoni/features/profile/presentation/view_model/my_cache_manager.dart';
 import 'package:user_repository/user_reposetory.dart';
 
 import '../../../../../../core/utils/constants/colors.dart';
@@ -25,6 +29,8 @@ class _ProfileUserInformationCardState
   bool _isLoading = true;
   bool _hasError = false;
 
+  static const String _cacheKey = "userProfileInfo";
+
   @override
   void initState() {
     super.initState();
@@ -34,40 +40,70 @@ class _ProfileUserInformationCardState
 
   Future<void> _loadUserInformation() async {
     try {
-      final currentUser = _userRepo.firebaseAuth.currentUser;
-      if (currentUser != null) {
-        final userDoc =
-            await _userRepo.usersCollection.doc(currentUser.uid).get();
+      // Use the custom CacheManager
+      final cacheManager = MyCacheManager();
+      final cachedFile = await cacheManager.getFileFromCache(_cacheKey);
 
-        if (userDoc.exists) {
-          setState(() {
-            _userName = userDoc.data()?['userName'] ?? 'Unknown';
-            _idNumber = userDoc.data()?['idNumber'] ?? 'UnKnown';
-            _userIduse = userDoc.data()?['userIduse'] ?? 'UnKnown';
-            _isLoading = false;
-          });
-        } else {
-          setState(() {
-            _userName = 'Unknown User';
-            _idNumber = 'UnKnown User';
-            _userIduse = 'UnKnown User';
-            _isLoading = false;
-          });
-        }
+      if (cachedFile != null) {
+        // Load from cache
+        final cachedData = await cachedFile.file.readAsString();
+        final userData = Map<String, dynamic>.from(json.decode(cachedData));
+        _updateStateWithUserData(userData);
       } else {
-        setState(() {
-          _userName = 'No User Logged In';
-          _idNumber = 'No User Logged In';
-          _userIduse = 'No User Logged In';
-          _isLoading = false;
-        });
+        // Load from Firebase
+        final currentUser = _userRepo.firebaseAuth.currentUser;
+        if (currentUser != null) {
+          final userDoc =
+              await _userRepo.usersCollection.doc(currentUser.uid).get();
+
+          if (userDoc.exists) {
+            final userData = userDoc.data()!;
+            await _cacheUserData(userData, cacheManager);
+            _updateStateWithUserData(userData);
+          } else {
+            _setErrorState();
+          }
+        } else {
+          _setNoUserState();
+        }
       }
     } catch (error) {
-      setState(() {
-        _hasError = true;
-        _isLoading = false;
-      });
+      _setErrorState();
     }
+  }
+
+  Future<void> _cacheUserData(
+      Map<String, dynamic> userData, CacheManager cacheManager) async {
+    final jsonData = json.encode(userData);
+    await cacheManager.putFile(
+      _cacheKey,
+      Uint8List.fromList(jsonData.codeUnits),
+    );
+  }
+
+  void _updateStateWithUserData(Map<String, dynamic> userData) {
+    setState(() {
+      _userName = userData['userName'] ?? 'Unknown';
+      _idNumber = userData['idNumber'] ?? 'Unknown';
+      _userIduse = userData['userIduse'] ?? 'Unknown';
+      _isLoading = false;
+    });
+  }
+
+  void _setErrorState() {
+    setState(() {
+      _hasError = true;
+      _isLoading = false;
+    });
+  }
+
+  void _setNoUserState() {
+    setState(() {
+      _userName = 'No User Logged In';
+      _idNumber = 'No User Logged In';
+      _userIduse = 'No User Logged In';
+      _isLoading = false;
+    });
   }
 
   @override
