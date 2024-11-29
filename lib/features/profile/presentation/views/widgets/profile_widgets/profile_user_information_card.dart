@@ -12,8 +12,7 @@ class ProfileUserInformationCard extends StatefulWidget {
   const ProfileUserInformationCard({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _ProfileUserInformationCardState createState() =>
+  State<ProfileUserInformationCard> createState() =>
       _ProfileUserInformationCardState();
 }
 
@@ -44,14 +43,14 @@ class _ProfileUserInformationCardState
           setState(() {
             _userName = userDoc.data()?['userName'] ?? 'Unknown';
             _idNumber = userDoc.data()?['idNumber'] ?? 'UnKnown';
-            _userIduse= userDoc.data()?['userIduse'] ??'UnKnown';
+            _userIduse = userDoc.data()?['userIduse'] ?? 'UnKnown';
             _isLoading = false;
           });
         } else {
           setState(() {
             _userName = 'Unknown User';
             _idNumber = 'UnKnown User';
-            _userIduse='UnKnown User';
+            _userIduse = 'UnKnown User';
             _isLoading = false;
           });
         }
@@ -59,7 +58,7 @@ class _ProfileUserInformationCardState
         setState(() {
           _userName = 'No User Logged In';
           _idNumber = 'No User Logged In';
-          _userIduse ='No User Logged In';
+          _userIduse = 'No User Logged In';
           _isLoading = false;
         });
       }
@@ -70,7 +69,6 @@ class _ProfileUserInformationCardState
       });
     }
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -119,8 +117,7 @@ class _ProfileUserInformationCardState
                       overflow: TextOverflow.ellipsis,
                       style: Styles.textStyle16,
                     ),
-                                            const Gap(10),
-
+                    const Gap(10),
                     Row(
                       children: [
                         Text(
@@ -130,12 +127,14 @@ class _ProfileUserInformationCardState
                           style: Styles.textStyle16,
                         ),
                         const Gap(10),
-                       InkWell(
-                        onTap: (){
-                          
-                         _copyToClipboard('$_userIduse',context);
-                        },
-                        child: const Icon(Icons.copy,size: 20,))
+                        InkWell(
+                            onTap: () {
+                              _copyToClipboard('$_userIduse', context);
+                            },
+                            child: const Icon(
+                              Icons.copy,
+                              size: 20,
+                            ))
                       ],
                     ),
                   ],
@@ -147,10 +146,9 @@ class _ProfileUserInformationCardState
       ),
     );
   }
-  // دالة لنسخ النص إلى الحافظة
+
   void _copyToClipboard(String text, BuildContext context) {
     Clipboard.setData(ClipboardData(text: text));
-    // يمكنك إضافة رسالة تأكيد بعد النسخ مثل SnackBar
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('ID copied to clipboard')),
     );

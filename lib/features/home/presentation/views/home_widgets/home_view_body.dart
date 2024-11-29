@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-// import '../contracts/contracts_cards_view.dart';
+import 'package:qanoni/core/widgets/app_custom_app_bar.dart';
+import 'package:qanoni/features/home/presentation/views/home_widgets/hi_user_text.dart';
 import 'button_head_home.dart';
-import 'custom_home_view_app_bar.dart';
 import 'new_btn_home.dart';
 
 class HomeViewBody extends StatelessWidget {
@@ -10,12 +10,9 @@ class HomeViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(80.0),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.0),
-          child: CustomAppBar(),
-        ),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(70.0),
+        child: buildCustomAppBar(),
       ),
       body: CustomScrollView(
         slivers: [
@@ -24,10 +21,9 @@ class HomeViewBody extends StatelessWidget {
             sliver: SliverList(
               delegate: SliverChildListDelegate(
                 [
+                  const HiUserText(),
                   const ButtonHomeView(),
-                  // const ContractsCardsView(),
-                 const SizedBox(height: 100),
-
+                  const SizedBox(height: 100),
                   const NewBtnHome()
                 ],
               ),

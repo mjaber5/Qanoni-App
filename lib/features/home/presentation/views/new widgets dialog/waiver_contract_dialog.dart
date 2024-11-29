@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:qanoni/core/utils/app_router.dart';
 import '../../../../../core/utils/constants/colors.dart';
 
 class WaiverContractDialog extends StatelessWidget {
@@ -114,7 +116,9 @@ void showIdDialog(BuildContext context, String userType) {
             onPressed: () {
               final enteredId = idController.text.trim();
               if (enteredId.isNotEmpty) {
-                Navigator.pop(context, enteredId); // Close the dialog and return the ID
+                GoRouter.of(context).pushReplacement(AppRouter.kCreateContract);
+                Navigator.pop(
+                    context, enteredId); // Close the dialog and return the ID
               }
             },
             child: const Text("Confirm"),
