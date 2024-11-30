@@ -10,27 +10,29 @@ class ProfileViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
+    return  SingleChildScrollView(
       child: Column(
         children: [
-          AppbarProfilState(),
-          ProfileUserInformationCard(),
+          const AppbarProfilState(),
+          const ProfileUserInformationCard(),
           DefaultTabController(
             length: 3,
             child: Column(
               children: [
                 TabBar(
-                  tabs: [
+                  tabs: const [
                     Tab(text: "My property"),
                     Tab(text: "My Info"),
                     Tab(text: "My contracts"),
                   ],
-                  labelColor: Colors.black,
+                  labelColor:Theme.of(context).brightness == Brightness.dark
+                    ? Colors.white
+                    : Colors.black,
                   unselectedLabelColor: Colors.grey,
                   indicatorColor: QColors.secondary,
                 ),
                 // محتوى كل تبويب
-                SizedBox(
+                const SizedBox(
                   height: 300, // تحديد ارتفاع للمحتوى
                   child: TabBarView(
                     children: [

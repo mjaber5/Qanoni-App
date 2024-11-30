@@ -30,7 +30,9 @@ class NotificationContentState extends State<NotificationContent> {
           decoration: BoxDecoration(
             color: selectedItem == label ? QColors.secondary : Colors.transparent,
             border: Border.all(
-              color: selectedItem == label ? Colors.transparent : Colors.green,
+              color: selectedItem == label ? QColors.secondary : Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white
+                        : Colors.black,
               width: selectedItem == label ? 2.0 : 1.0,
             ),
             borderRadius: BorderRadius.circular(12),
