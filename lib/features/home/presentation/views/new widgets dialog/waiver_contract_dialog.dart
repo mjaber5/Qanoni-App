@@ -53,16 +53,16 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
       const Text(
         "Who are you?",
         style: TextStyle(
-          color: Colors.black,
+          // color: Colors.black,
           fontSize: 26,
           fontWeight: FontWeight.bold,
-          shadows: [
-            Shadow(
-              color: Colors.grey,
-              blurRadius: 5,
-              offset: Offset(2, 2),
-            ),
-          ],
+          // shadows: [
+          //   Shadow(
+          //     color: Colors.grey,
+          //     blurRadius: 5,
+          //     offset: Offset(2, 2),
+          //   ),
+          // ],
         ),
         textAlign: TextAlign.center,
       ),
@@ -97,7 +97,6 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w500,
-            color: Colors.black54,
           ),
         ),
         // زر البائع
@@ -137,7 +136,6 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
         style: const TextStyle(
           fontSize: 22,
           fontWeight: FontWeight.bold,
-          color: Colors.black87,
         ),
       ),
       const SizedBox(height: 10),
@@ -158,7 +156,7 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
             ),
           ),
           filled: true,
-          fillColor: Colors.grey[200],
+          // fillColor: Colors.grey[200],
           prefixIcon: const Icon(
             Icons.person,
             color: QColors.secondary,

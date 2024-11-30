@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qanoni/core/utils/constants/colors.dart';
 
 import 'all.dart';
 import 'done.dart';
@@ -27,9 +28,9 @@ class NotificationContentState extends State<NotificationContent> {
         padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 4.0),
         child: Container(
           decoration: BoxDecoration(
-            color: selectedItem == label ? Colors.green : Colors.white,
+            color: selectedItem == label ? QColors.secondary : Colors.transparent,
             border: Border.all(
-              color: selectedItem == label ? Colors.green : Colors.black,
+              color: selectedItem == label ? Colors.transparent : Colors.green,
               width: selectedItem == label ? 2.0 : 1.0,
             ),
             borderRadius: BorderRadius.circular(12),
@@ -39,7 +40,11 @@ class NotificationContentState extends State<NotificationContent> {
             child: Text(
               label,
               style: TextStyle(
-                color: selectedItem == label ? Colors.white : Colors.black,
+                color: selectedItem == label
+                    ? Colors.white
+                    : Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white
+                        : Colors.black,  // Set text color based on the theme
               ),
             ),
           ),
