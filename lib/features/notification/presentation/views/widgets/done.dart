@@ -15,6 +15,9 @@ class Done extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               border: Border.all(
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.white
+                    : Colors.black,
                 width: 0.15,
                 style: BorderStyle.solid,
               ),
