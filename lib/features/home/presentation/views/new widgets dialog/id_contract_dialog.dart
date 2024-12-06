@@ -66,7 +66,8 @@ class IdContractDialog extends StatelessWidget {
                 onPressed: () {
                   final enteredId = idController.text.trim();
                   if (enteredId.isNotEmpty) {
-                    Navigator.pop(context, enteredId); // Close dialog and return ID
+                    Navigator.pop(
+                        context, enteredId); // Close dialog and return ID
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("ID cannot be empty")),

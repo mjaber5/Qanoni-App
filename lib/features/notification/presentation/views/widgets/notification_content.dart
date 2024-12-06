@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
+import 'package:qanoni/features/home/data/contract_status/contract_status_cubit.dart';
 
 import 'all.dart';
 import 'done.dart';
@@ -28,11 +30,14 @@ class NotificationContentState extends State<NotificationContent> {
         padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 4.0),
         child: Container(
           decoration: BoxDecoration(
-            color: selectedItem == label ? QColors.secondary : Colors.transparent,
+            color:
+                selectedItem == label ? QColors.secondary : Colors.transparent,
             border: Border.all(
-              color: selectedItem == label ? QColors.secondary : Theme.of(context).brightness == Brightness.dark
-                        ? Colors.white
-                        : Colors.black,
+              color: selectedItem == label
+                  ? QColors.secondary
+                  : Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white
+                      : Colors.black,
               width: selectedItem == label ? 2.0 : 1.0,
             ),
             borderRadius: BorderRadius.circular(12),
@@ -46,7 +51,7 @@ class NotificationContentState extends State<NotificationContent> {
                     ? Colors.white
                     : Theme.of(context).brightness == Brightness.dark
                         ? Colors.white
-                        : Colors.black,  // Set text color based on the theme
+                        : Colors.black,
               ),
             ),
           ),
@@ -70,7 +75,6 @@ class NotificationContentState extends State<NotificationContent> {
           ],
         ),
         const SizedBox(height: 20),
-        // Wrapping PageView with Expanded
         Expanded(
           child: PageView(
             controller: _pageController,
@@ -85,10 +89,21 @@ class NotificationContentState extends State<NotificationContent> {
                 }
               });
             },
-            children: const [
-              All(),
-              Request(),
-              Done(),
+            children: [
+              const All(),
+              // Using BlocBuilder to listen for the enteredUserId from ContractCubit
+              BlocBuilder<ContractCubit, ContractStatusState>(
+                builder: (context, state) {
+                  // Get the enteredUserId from the cubit
+                  String enteredUserId =
+                      context.read<ContractCubit>().getEnteredUserId();
+                  return Request(
+                    enteredUserId: enteredUserId,
+                    contractId: '',
+                  );
+                },
+              ),
+              const Done(),
             ],
           ),
         ),

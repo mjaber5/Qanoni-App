@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 class Done extends StatelessWidget {
   const Done({super.key});
 
-  // دالة لإنشاء قائمة الإشعارات بناءً على النوع
   Widget buildNotificationList(String type) {
     return ListView.builder(
       padding: const EdgeInsets.all(16),
-      itemCount: 3, // عدد الإشعارات الخاصة بـ "Done"
+      itemCount: 3,
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.only(bottom: 16),
@@ -27,7 +26,7 @@ class Done extends StatelessWidget {
               children: [
                 const CircleAvatar(
                   radius: 30,
-                  backgroundColor: Colors.green, // تعديل اللون حسب التصميم
+                  backgroundColor: Colors.green,
                   child: Icon(Icons.check_circle, color: Colors.white),
                 ),
                 const SizedBox(width: 16),
@@ -68,9 +67,8 @@ class Done extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        
         Expanded(
-          child: buildNotificationList("Done"), // تمرير النوع كـ "Done"
+          child: buildNotificationList("Done"),
         ),
       ],
     );

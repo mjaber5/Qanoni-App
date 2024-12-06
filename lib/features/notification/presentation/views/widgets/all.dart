@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 class All extends StatelessWidget {
   const All({super.key});
 
-  // دالة لإنشاء قائمة الإشعارات بناءً على النوع
   Widget buildNotificationList(String type) {
     return ListView.builder(
       padding: const EdgeInsets.all(16),
-      itemCount: 3, // عدد الإشعارات الخاصة بـ "All"
+      itemCount: 3,
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.only(bottom: 16),
@@ -27,7 +26,7 @@ class All extends StatelessWidget {
               children: [
                 const CircleAvatar(
                   radius: 30,
-                  backgroundColor: Colors.green, // تعديل اللون حسب التصميم
+                  backgroundColor: Colors.green,
                   child: Icon(Icons.notifications, color: Colors.white),
                 ),
                 const SizedBox(width: 16),
@@ -68,9 +67,8 @@ class All extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // عرض قائمة الإشعارات
         Expanded(
-          child: buildNotificationList("All"), // تمرير النوع كـ "All"
+          child: buildNotificationList("All"),
         ),
       ],
     );
