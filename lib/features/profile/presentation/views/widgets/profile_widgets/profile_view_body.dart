@@ -10,45 +10,42 @@ class ProfileViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  SingleChildScrollView(
-      child: Column(
-        children: [
-          const AppbarProfilState(),
-          const ProfileUserInformationCard(),
-          DefaultTabController(
-            length: 3,
-            child: Column(
-              children: [
-                TabBar(
-                  tabs: const [
-                    Tab(text: "My property"),
-                    Tab(text: "My Info"),
-                    Tab(text: "My contracts"),
-                  ],
-                  labelColor:Theme.of(context).brightness == Brightness.dark
+    return Column(
+      children: [
+        const AppbarProfilState(),
+        const ProfileUserInformationCard(),
+        DefaultTabController(
+          length: 3,
+          initialIndex: 1,
+          child: Column(
+            children: [
+              TabBar(
+                isScrollable: true,
+                tabs: const [
+                  Tab(text: "My property"),
+                  Tab(text: "My information"),
+                  Tab(text: "My contracts"),
+                ],
+                labelColor: Theme.of(context).brightness == Brightness.dark
                     ? Colors.white
                     : Colors.black,
-                  unselectedLabelColor: Colors.grey,
-                  indicatorColor: QColors.secondary,
+                unselectedLabelColor: Colors.grey,
+                indicatorColor: QColors.secondary,
+              ),
+              const SizedBox(
+                height: 300,
+                child: TabBarView(
+                  children: [
+                    Center(child: Text("Content for Tab 1")),
+                    ProfileUserInformationEditingField(),
+                    Center(child: Text("Content for Tab 3")),
+                  ],
                 ),
-                // محتوى كل تبويب
-                const SizedBox(
-                  height: 300, // تحديد ارتفاع للمحتوى
-                  child: TabBarView(
-                    children: [
-                      
-                      Center(child: Text("Content for Tab 2")),
-                      ProfileUserInformationEditingField(),
-
-                      Center(child: Text("Content for Tab 3")),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

@@ -7,7 +7,7 @@ class ButtonHomeView extends StatefulWidget {
   const ButtonHomeView({super.key});
 
   @override
-  _ButtonHomeViewState createState() => _ButtonHomeViewState();
+  State<ButtonHomeView> createState() => _ButtonHomeViewState();
 }
 
 class _ButtonHomeViewState extends State<ButtonHomeView> {
@@ -69,7 +69,9 @@ class _ButtonHomeViewState extends State<ButtonHomeView> {
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
                     margin: const EdgeInsets.symmetric(horizontal: 5),
-                    width: _currentPage == 0 ? 10 : 20,  // Change width based on the active page
+                    width: _currentPage == 0
+                        ? 10
+                        : 20, // Change width based on the active page
                     height: 10,
                     decoration: BoxDecoration(
                       color: _currentPage == 0 ? Colors.white : Colors.white54,
@@ -79,7 +81,9 @@ class _ButtonHomeViewState extends State<ButtonHomeView> {
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
                     margin: const EdgeInsets.symmetric(horizontal: 5),
-                    width: _currentPage == 1 ? 10 : 20,  // Change width based on the active page
+                    width: _currentPage == 1
+                        ? 10
+                        : 20, // Change width based on the active page
                     height: 10,
                     decoration: BoxDecoration(
                       color: _currentPage == 1 ? Colors.white : Colors.white54,
