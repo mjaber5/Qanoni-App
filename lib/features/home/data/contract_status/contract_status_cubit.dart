@@ -10,13 +10,15 @@ class ContractCubit extends Cubit<ContractStatusState> {
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  String enteredUserId = '';
+
+  String enteredUserId = ''; // For tracking the entered user ID
+  String contractId = ''; // For storing the contract ID after creation
 
   /// Create a new contract and set its initial status to "pending"
   Future<void> createContract({
     required String otherUserId,
     required String userType,
-    required currentUser,
+    Map<String, dynamic>? currentUser,
   }) async {
     emit(ContractLoading());
     try {
@@ -39,6 +41,7 @@ class ContractCubit extends Cubit<ContractStatusState> {
         return;
       }
 
+      // Create contract data
       final contractData = {
         'sellerId': currentUser.uid,
         'buyerId': otherUserId,
@@ -50,9 +53,10 @@ class ContractCubit extends Cubit<ContractStatusState> {
         'timestamp': FieldValue.serverTimestamp(),
       };
 
+      // Add the contract to Firestore and get the contract ID
       final contractRef =
           await _firestore.collection('contracts').add(contractData);
-      String contractId = contractRef.id;
+      contractId = contractRef.id; // Store the contract ID after creation
 
       emit(ContractSuccess(
           'Contract request sent successfully! Contract ID: $contractId'));
@@ -127,5 +131,10 @@ class ContractCubit extends Cubit<ContractStatusState> {
   /// Get the entered user ID
   String getEnteredUserId() {
     return enteredUserId;
+  }
+
+  /// Get the contract ID
+  String getContractId() {
+    return contractId;
   }
 }

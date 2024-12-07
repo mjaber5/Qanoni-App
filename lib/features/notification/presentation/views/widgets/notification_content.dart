@@ -91,15 +91,17 @@ class NotificationContentState extends State<NotificationContent> {
             },
             children: [
               const All(),
-              // Using BlocBuilder to listen for the enteredUserId from ContractCubit
+              // Using BlocBuilder to listen for the enteredUserId and contractId from ContractCubit
               BlocBuilder<ContractCubit, ContractStatusState>(
                 builder: (context, state) {
-                  // Get the enteredUserId from the cubit
+                  // Get the enteredUserId and contractId from the cubit
                   String enteredUserId =
                       context.read<ContractCubit>().getEnteredUserId();
+                  String contractId =
+                      context.read<ContractCubit>().getContractId();
                   return Request(
                     enteredUserId: enteredUserId,
-                    contractId: '',
+                    contractId: contractId, // Pass contractId here
                   );
                 },
               ),
