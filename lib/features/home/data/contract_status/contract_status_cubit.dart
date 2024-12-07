@@ -10,9 +10,9 @@ class ContractCubit extends Cubit<ContractStatusState> {
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  String enteredUserId = ''; // This stores the entered user ID
+  String enteredUserId = '';
 
-  // Method to create a contract
+  /// Create a new contract and set its initial status to "pending"
   Future<void> createContract({
     required String otherUserId,
     required String userType,
@@ -26,7 +26,6 @@ class ContractCubit extends Cubit<ContractStatusState> {
         return;
       }
 
-      // Fetch current user's data from Firestore
       final currentUserDoc =
           await _firestore.collection('users').doc(currentUser.uid).get();
       if (!currentUserDoc.exists) {
@@ -40,11 +39,10 @@ class ContractCubit extends Cubit<ContractStatusState> {
         return;
       }
 
-      // Prepare the contract data to save in Firestore
       final contractData = {
         'sellerId': currentUser.uid,
         'buyerId': otherUserId,
-        'status': 'pending',
+        'status': 'pending', // Initial status
         'email': currentUserData['email'],
         'userName': currentUserData['userName'],
         'phone': currentUserData['phone'],
@@ -52,57 +50,81 @@ class ContractCubit extends Cubit<ContractStatusState> {
         'timestamp': FieldValue.serverTimestamp(),
       };
 
-      // Save contract to Firestore
-      await _firestore.collection('contracts').add(contractData);
+      final contractRef =
+          await _firestore.collection('contracts').add(contractData);
+      String contractId = contractRef.id;
 
-      emit(const ContractSuccess('Contract request sent successfully!'));
+      emit(ContractSuccess(
+          'Contract request sent successfully! Contract ID: $contractId'));
     } catch (e) {
       emit(ContractError('Failed to create contract: ${e.toString()}'));
     }
   }
 
-  // Method to respond to a contract (approve/reject)
+  /// Change the contract's status to "in-progress" when an agent views it
+  Future<void> setInProgress({required String contractId}) async {
+    emit(ContractLoading());
+    try {
+      await _firestore.collection('contracts').doc(contractId).update({
+        'status': 'in-progress',
+      });
+      emit(const ContractUpdated('in-progress'));
+    } catch (e) {
+      emit(ContractError(
+          'Failed to update status to in-progress: ${e.toString()}'));
+    }
+  }
+
+  /// Respond to the contract: Approve or Reject
   Future<void> respondToContract({
     required String contractId,
-    required String response,
+    required String response, // Accepts "approved" or "rejected"
   }) async {
     emit(ContractLoading());
     try {
       await _firestore.collection('contracts').doc(contractId).update({
         'status': response,
       });
-
       emit(ContractUpdated(response));
     } catch (e) {
       emit(ContractError('Failed to respond to contract: ${e.toString()}'));
     }
   }
 
-  // Method to fetch contracts for a specific user
+  /// Fetch contracts with the given status for a specific user
   Future<List<Map<String, dynamic>>> fetchContractsForUser({
     required String userId,
+    String? status, // Optional status filter
   }) async {
     try {
-      final querySnapshot = await _firestore
+      Query query = _firestore
           .collection('contracts')
-          .where('buyerId', isEqualTo: userId)
-          .where('status', isEqualTo: 'pending')
-          .get();
+          .where('buyerId', isEqualTo: userId);
+      if (status != null) {
+        query = query.where('status', isEqualTo: status);
+      }
 
-      return querySnapshot.docs.map((doc) => doc.data()).toList();
+      final querySnapshot = await query.get();
+
+      return querySnapshot.docs.map((doc) {
+        return {
+          'contractId': doc.id,
+          ...doc.data() as Map<String, dynamic>,
+        };
+      }).toList();
     } catch (e) {
       emit(ContractError('Failed to fetch contracts: ${e.toString()}'));
       return [];
     }
   }
 
-  // Method to set the entered user ID and emit the updated state
+  /// Set the entered user ID
   void setUserId(String userId) {
     enteredUserId = userId;
-    emit(ContractUserIdUpdated(userId)); // Emit a state with updated user ID
+    emit(ContractUserIdUpdated(userId));
   }
 
-  // Method to get the entered user ID
+  /// Get the entered user ID
   String getEnteredUserId() {
     return enteredUserId;
   }

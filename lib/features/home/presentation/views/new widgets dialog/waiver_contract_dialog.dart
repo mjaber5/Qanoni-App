@@ -1,10 +1,15 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:qanoni/core/utils/app_router.dart';
+
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/features/home/data/contract_status/contract_status_cubit.dart';
-import 'package:user_repository/user_reposetory.dart'; // Import your FirebaseUserRepo
+import 'package:user_repository/user_reposetory.dart';
 
 class WaiverContractBottomSheet extends StatefulWidget {
   const WaiverContractBottomSheet({super.key});
@@ -15,78 +20,83 @@ class WaiverContractBottomSheet extends StatefulWidget {
 }
 
 class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
-  final TextEditingController idController = TextEditingController();
-  final FocusNode idFocusNode = FocusNode();
-  final FirebaseUserRepo _userRepo = FirebaseUserRepo();
-  bool isTextFieldFocused = false;
-  String? selectedUserType;
+  final TextEditingController _idController = TextEditingController();
+  final FocusNode _idFocusNode = FocusNode();
+  final FirebaseUserRepo _userRepo = FirebaseUserRepo(); // Firebase repository
+  bool _isTextFieldFocused = false;
+  String? _selectedUserType;
 
   @override
   void initState() {
     super.initState();
-    idFocusNode.addListener(() {
+    _idFocusNode.addListener(() {
       setState(() {
-        isTextFieldFocused = idFocusNode.hasFocus;
+        _isTextFieldFocused = _idFocusNode.hasFocus;
       });
     });
   }
 
   @override
   void dispose() {
-    idFocusNode.dispose();
-    idController.dispose();
+    _idFocusNode.dispose();
+    _idController.dispose();
     super.dispose();
   }
 
   Future<void> _confirmIdInput(BuildContext context) async {
-    final enteredId = idController.text.trim();
+    final userIduseInput = _idController.text.trim();
 
-    if (enteredId.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Please enter a valid ID."),
-          backgroundColor: Colors.red,
-        ),
-      );
+    if (userIduseInput.isEmpty) {
+      _showSnackBar(context, "Please enter a valid ID.", Colors.red);
       return;
     }
 
     try {
-      // Fetch the current user
       final currentUser = _userRepo.firebaseAuth.currentUser;
 
       if (currentUser == null) {
+        log('No user is logged in.');
         throw Exception("No user is logged in.");
       }
 
-      // Fetch current user data from Firestore using FirebaseUserRepo
       final currentUserDoc =
           await _userRepo.usersCollection.doc(currentUser.uid).get();
 
       if (!currentUserDoc.exists) {
+        log('Current user data not found.');
         throw Exception("Current user data not found.");
       }
 
-      // Extract the data from Firestore as a map
-      final currentUserData = currentUserDoc.data();
+      final querySnapshot = await _userRepo.usersCollection
+          .where('userIduse', isEqualTo: userIduseInput)
+          .limit(1)
+          .get();
 
-      // Call the Cubit method to create the contract with all required arguments
+      if (querySnapshot.docs.isEmpty) {
+        log("User with userIduse $userIduseInput does not exist.");
+        _showSnackBar(context, "User with ID $userIduseInput does not exist.",
+            Colors.red);
+        return;
+      }
+
       context.read<ContractCubit>().createContract(
-            currentUser: currentUserData, // Pass the Firestore user data
-            otherUserId: enteredId, // Pass the entered ID
-            userType:
-                selectedUserType!, // Pass the selected user type (Buyer/Seller)
+            currentUser: currentUserDoc.data(),
+            otherUserId: userIduseInput,
+            userType: _selectedUserType!,
           );
-
-      Navigator.pop(context);
     } catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Error: ${error.toString()}"),
-          backgroundColor: Colors.red,
-        ),
-      );
+      log('Error validating userIduse: $error');
+      _showSnackBar(context, "Error: ${error.toString()}", Colors.red);
     }
+  }
+
+  void _showSnackBar(BuildContext context, String message, Color color) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: color,
+      ),
+    );
   }
 
   @override
@@ -96,7 +106,7 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
         left: 20.0,
         right: 20.0,
         top: 10.0,
-        bottom: isTextFieldFocused
+        bottom: _isTextFieldFocused
             ? MediaQuery.of(context).viewInsets.bottom
             : 10.0,
       ),
@@ -104,20 +114,19 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
         child: BlocConsumer<ContractCubit, ContractStatusState>(
           listener: (context, state) {
             if (state is ContractSuccess) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.message)),
-              );
+              _showSnackBar(context, state.message, Colors.green);
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                GoRouter.of(context).push(AppRouter.kCreateContract);
+              });
             } else if (state is ContractError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.error)),
-              );
+              _showSnackBar(context, state.error, Colors.red);
             }
           },
           builder: (context, state) {
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                if (selectedUserType == null)
+                if (_selectedUserType == null)
                   const Text(
                     "Who are you?",
                     style: TextStyle(
@@ -127,143 +136,132 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
                     textAlign: TextAlign.center,
                   ),
                 const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 15, horizontal: 25),
-                        backgroundColor: selectedUserType == "Buyer"
-                            ? QColors.secondary
-                            : Colors.grey,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        elevation: 5,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          selectedUserType = "Buyer";
-                        });
-                      },
-                      child: const Text(
-                        "Buyer",
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                    const Text(
-                      "or",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 15, horizontal: 25),
-                        backgroundColor: selectedUserType == "Seller"
-                            ? QColors.secondary
-                            : Colors.grey,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        elevation: 5,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          selectedUserType = "Seller";
-                        });
-                      },
-                      child: const Text(
-                        "Seller",
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                  ],
-                ),
+                _buildUserTypeSelection(),
                 const SizedBox(height: 20),
-                if (selectedUserType != null) ...[
-                  const Divider(
-                    thickness: 1,
-                    color: Colors.grey,
-                  ),
+                if (_selectedUserType != null) ...[
+                  const Divider(thickness: 1, color: Colors.grey),
                   const SizedBox(height: 20),
                   Text(
-                    "Enter ${selectedUserType == "Buyer" ? "Seller" : "Buyer"} ID",
+                    "Enter ${_selectedUserType == "Buyer" ? "Seller" : "Buyer"} ID",
                     style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 10),
-                  TextFormField(
-                    controller: idController,
-                    focusNode: idFocusNode,
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      hintText: "Enter $selectedUserType ID",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: const BorderSide(
-                          color: QColors.secondary,
-                          width: 2.0,
-                        ),
-                      ),
-                      filled: true,
-                      prefixIcon: const Icon(
-                        Icons.person,
-                        color: QColors.secondary,
-                      ),
-                    ),
-                  ),
+                  _buildIdTextField(),
                   const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            selectedUserType = null;
-                            idController.clear();
-                          });
-                        },
-                        child: const Text(
-                          "Cancel",
-                          style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20),
-                          backgroundColor: QColors.secondary,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          elevation: 3,
-                        ),
-                        onPressed: () => _confirmIdInput(context),
-                        child: const Text(
-                          "Confirm",
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ),
-                    ],
-                  ),
+                  _buildActionButtons(context),
                 ],
               ],
             );
           },
         ),
       ),
+    );
+  }
+
+  Widget _buildUserTypeSelection() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        _buildUserTypeButton("Buyer"),
+        const Text(
+          "or",
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        _buildUserTypeButton("Seller"),
+      ],
+    );
+  }
+
+  Widget _buildUserTypeButton(String userType) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
+        backgroundColor:
+            _selectedUserType == userType ? QColors.secondary : Colors.grey,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        elevation: 5,
+      ),
+      onPressed: () {
+        setState(() {
+          _selectedUserType = userType;
+        });
+      },
+      child: Text(
+        userType,
+        style: const TextStyle(fontSize: 18),
+      ),
+    );
+  }
+
+  Widget _buildIdTextField() {
+    return TextFormField(
+      controller: _idController,
+      focusNode: _idFocusNode,
+      keyboardType: TextInputType.text,
+      decoration: InputDecoration(
+        hintText: "Enter $_selectedUserType ID",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(
+            color: QColors.secondary,
+            width: 2.0,
+          ),
+        ),
+        filled: true,
+        prefixIcon: const Icon(
+          Icons.person,
+          color: QColors.secondary,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildActionButtons(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        TextButton(
+          onPressed: () {
+            setState(() {
+              _selectedUserType = null;
+              _idController.clear();
+            });
+          },
+          child: const Text(
+            "Cancel",
+            style: TextStyle(
+              color: Colors.red,
+              fontSize: 16,
+            ),
+          ),
+        ),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            backgroundColor: QColors.secondary,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            elevation: 3,
+          ),
+          onPressed: () => _confirmIdInput(context),
+          child: const Text(
+            "Confirm",
+            style: TextStyle(fontSize: 16),
+          ),
+        ),
+      ],
     );
   }
 }

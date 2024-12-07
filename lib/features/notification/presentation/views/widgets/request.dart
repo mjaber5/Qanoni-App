@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class Request extends StatelessWidget {
@@ -86,7 +88,7 @@ class Request extends StatelessWidget {
                       ElevatedButton(
                         onPressed: () {
                           // Approve logic
-                          print('Approve contract $contractId');
+                          log('Approve contract $contractId');
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
@@ -97,7 +99,7 @@ class Request extends StatelessWidget {
                       ElevatedButton(
                         onPressed: () {
                           // Reject logic
-                          print('Reject contract $contractId');
+                          log('Reject contract $contractId');
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.red,

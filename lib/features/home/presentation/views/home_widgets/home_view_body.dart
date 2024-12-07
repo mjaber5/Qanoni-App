@@ -27,7 +27,7 @@ class HomeViewBody extends StatelessWidget {
                   const SizedBox(height: 100),
                   const NewBtnHome(),
                   const SizedBox(height: 10),
-                  const DraftContract()
+                  const DraftContract(),
                 ],
               ),
             ),
