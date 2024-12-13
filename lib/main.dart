@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qanoni/features/home/data/contract_status/contract_status_cubit.dart';
@@ -11,8 +14,14 @@ import 'features/theme/presentation/view_model/cubit/change_theme_cubit.dart';
 import 'qanoni.dart';
 import 'simple_bloc_observer.dart';
 
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  log('Handling a background message: ${message.notification?.title}');
+  // Handle background message here
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   try {
     await Firebase.initializeApp();

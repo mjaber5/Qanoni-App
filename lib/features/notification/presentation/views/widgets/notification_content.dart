@@ -1,5 +1,8 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/features/home/data/contract_status/contract_status_cubit.dart';
 
@@ -17,6 +20,82 @@ class NotificationContent extends StatefulWidget {
 class NotificationContentState extends State<NotificationContent> {
   String selectedItem = "All";
   final PageController _pageController = PageController();
+
+  // Firebase Messaging instance
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+
+  // Local Notifications plugin
+  final FlutterLocalNotificationsPlugin _localNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeNotifications();
+  }
+
+  Future<void> _initializeNotifications() async {
+    // Request permission for notifications
+    await _firebaseMessaging.requestPermission(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+
+    // Initialize local notifications
+    const initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+    const initializationSettingsDarwin = DarwinInitializationSettings();
+    const initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsDarwin,
+    );
+    await _localNotificationsPlugin.initialize(initializationSettings);
+
+    // Listen to foreground messages
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      log('Foreground message received: ${message.notification?.title}');
+      _showNotification(message.notification);
+    });
+
+    // Handle notification when app is opened via notification
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      _handleNotificationClick(message.data);
+    });
+
+    // Get the FCM token for this device
+    String? token = await _firebaseMessaging.getToken();
+    debugPrint("FCM Token: $token");
+  }
+
+  void _showNotification(RemoteNotification? notification) {
+    if (notification == null) return;
+
+    const androidDetails = AndroidNotificationDetails(
+      'high_importance_channel', // Channel ID
+      'High Importance Notifications',
+      channelDescription: 'This channel is used for important notifications.',
+      importance: Importance.high,
+      priority: Priority.high,
+    );
+    const notificationDetails = NotificationDetails(android: androidDetails);
+
+    _localNotificationsPlugin.show(
+      notification.hashCode,
+      notification.title,
+      notification.body,
+      notificationDetails,
+    );
+  }
+
+  void _handleNotificationClick(Map<String, dynamic> data) {
+    // Handle notification click logic, e.g., navigate to a specific screen
+    if (data['type'] == 'request') {
+      _pageController.jumpToPage(1); // Jump to "Request" tab
+    } else if (data['type'] == 'done') {
+      _pageController.jumpToPage(2); // Jump to "Done" tab
+    }
+  }
 
   Widget buildTab(String label, int index) {
     return InkWell(
@@ -91,17 +170,15 @@ class NotificationContentState extends State<NotificationContent> {
             },
             children: [
               const All(),
-              // Using BlocBuilder to listen for the enteredUserId and contractId from ContractCubit
               BlocBuilder<ContractCubit, ContractStatusState>(
                 builder: (context, state) {
-                  // Get the enteredUserId and contractId from the cubit
                   String enteredUserId =
                       context.read<ContractCubit>().getEnteredUserId();
                   String contractId =
                       context.read<ContractCubit>().getContractId();
                   return Request(
                     enteredUserId: enteredUserId,
-                    contractId: contractId, // Pass contractId here
+                    contractId: contractId,
                   );
                 },
               ),
