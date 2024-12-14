@@ -2,6 +2,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
+import '../../../../home/presentation/views/widget/seller_cuntract.dart';
+import '../../../../home/presentation/views/widget/buyer_cuntract.dart';
+
 class Request extends StatefulWidget {
   final String enteredUserId;
   final String contractId;
@@ -21,6 +24,9 @@ class _RequestState extends State<Request> {
   late FirebaseMessaging _firebaseMessaging;
   bool _isMounted = true; // To track if the widget is still mounted
 
+  String sellerId = "seller123"; // Example seller ID, replace with actual logic
+  String buyerId = "buyer456"; // Example buyer ID, replace with actual logic
+
   @override
   void initState() {
     super.initState();
@@ -32,45 +38,37 @@ class _RequestState extends State<Request> {
   }
 
   void _initializeFirebaseMessaging() async {
-    // Request permission for notifications
     await _firebaseMessaging.requestPermission(
       alert: true,
       badge: true,
       sound: true,
     );
 
-    // Listen for messages when the app is in the foreground
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       log('Foreground message received: ${message.notification?.title}');
       _showInAppNotification(message.notification);
       _handleIncomingMessage(message.notification);
     });
 
-    // Handle messages when the app is opened via notification click
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       log('Notification clicked: ${message.notification?.title}');
       _handleIncomingMessage(message.notification);
     });
 
-    // Handle messages when the app is in the background or terminated
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-    // Log FCM token (useful for debugging)
     String? token = await _firebaseMessaging.getToken();
     log('FCM Token: $token');
   }
 
-  // Handles background messages
   static Future<void> _firebaseMessagingBackgroundHandler(
       RemoteMessage message) async {
     log('Handling a background message: ${message.notification?.title}');
   }
 
-  // Handles incoming messages
   void _handleIncomingMessage(RemoteNotification? notification) {
     if (notification == null) return;
 
-    // Ensure we only update the widget if it is mounted
     if (!_isMounted) return;
 
     setState(() {
@@ -81,7 +79,6 @@ class _RequestState extends State<Request> {
     });
   }
 
-  // Show an in-app notification (SnackBar)
   void _showInAppNotification(RemoteNotification? notification) {
     if (notification == null) return;
 
@@ -95,7 +92,6 @@ class _RequestState extends State<Request> {
       action: SnackBarAction(
         label: 'View',
         onPressed: () {
-          // Optional: Navigate to a specific screen
           _handleIncomingMessage(notification);
         },
       ),
@@ -104,12 +100,10 @@ class _RequestState extends State<Request> {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
-  // Simulate sending a notification to a user (no backend, mock logic)
   void _simulateSendNotificationToUser(String userId, String contractId) {
     Future.delayed(const Duration(seconds: 2), () {
       if (!_isMounted) return;
 
-      // Simulate receiving a notification
       setState(() {
         _notifications.add({
           'title': 'New Contract Created',
@@ -122,7 +116,6 @@ class _RequestState extends State<Request> {
     });
   }
 
-  // Builds the list of notifications
   Widget buildNotificationList(BuildContext context) {
     if (_notifications.isEmpty) {
       return Center(
@@ -222,8 +215,25 @@ class _RequestState extends State<Request> {
                     const SizedBox(width: 10),
                     ElevatedButton(
                       onPressed: () {
-                        log('Approve notification at index $index');
-                        // Add approval logic here
+                        log('Approve contract ${widget.contractId}');
+                        if (widget.enteredUserId == sellerId) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const BuyerCuntract()),
+                          );
+                        } else if (widget.enteredUserId == buyerId) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SellerCuntract()),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Unable to determine contract type.')),
+                          );
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
@@ -250,7 +260,7 @@ class _RequestState extends State<Request> {
 
   @override
   void dispose() {
-    _isMounted = false; // Mark as unmounted
+    _isMounted = false;
     super.dispose();
   }
 

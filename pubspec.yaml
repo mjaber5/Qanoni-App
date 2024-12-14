@@ -68,6 +68,8 @@ dependencies:
   user_repository:
     path: packages/user_repository
   firebase_messaging: ^15.1.6
+  google_ml_kit: ^0.19.0
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:

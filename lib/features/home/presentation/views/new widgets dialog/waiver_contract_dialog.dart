@@ -11,6 +11,9 @@ import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/features/home/data/contract_status/contract_status_cubit.dart';
 import 'package:user_repository/user_reposetory.dart';
 
+import '../widget/buyer_cuntract.dart';
+import '../widget/seller_cuntract.dart';
+
 class WaiverContractBottomSheet extends StatefulWidget {
   const WaiverContractBottomSheet({super.key});
 
@@ -256,12 +259,34 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
             ),
             elevation: 3,
           ),
-          onPressed: () => _confirmIdInput(context),
-          child: const Text(
-            "Confirm",
-            style: TextStyle(fontSize: 16),
-          ),
-        ),
+          onPressed: () {
+    // استدعاء الدالة دائمًا
+    _confirmIdInput(context);
+
+    // التحقق من القيمة المحددة
+    if (_selectedUserType == 'Buyer') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const BuyerCuntract()),
+      );
+    } else if (_selectedUserType == 'Seller') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => SellerCuntract()),
+      );
+    } else {
+      // رسالة في حال عدم اختيار نوع العقد
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('يرجى اختيار نوع العقد أولاً')),
+      );
+    }
+  },
+  child: const Text(
+    "Confirm",
+    style: TextStyle(fontSize: 16),
+  ),
+),
+
       ],
     );
   }
