@@ -207,7 +207,8 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
       focusNode: _idFocusNode,
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
-        hintText: "Enter $_selectedUserType ID",
+        hintText:
+            "Enter ${_selectedUserType == "Buyer" ? "Seller" : "Buyer"} ID",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
         ),
