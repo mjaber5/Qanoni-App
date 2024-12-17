@@ -2,24 +2,33 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:qanoni/features/home/presentation/views/widget_form_input/view_car_info.dart';
 
-class IDScanner extends StatefulWidget {
+class SellerContract extends StatefulWidget {
+  const SellerContract({super.key});
+
   @override
-  _IDScannerScreenState createState() => _IDScannerScreenState();
+  State<SellerContract> createState() => _SellerScannerScreenState();
 }
 
-class _IDScannerScreenState extends State<IDScanner> {
+class _SellerScannerScreenState extends State<SellerContract> {
   final ImagePicker _picker = ImagePicker();
   XFile? _frontImageFile;
   XFile? _backImageFile;
 
   // Text Controllers for extracted data
-  final TextEditingController fullNameController = TextEditingController();
-  final TextEditingController birthDateController = TextEditingController();
-  final TextEditingController nationalIDController = TextEditingController();
-  final TextEditingController registryNumberController = TextEditingController();
-  final TextEditingController registryPlaceController = TextEditingController();
-  final TextEditingController expiryDateController = TextEditingController();
+  final TextEditingController sellerFullNameController =
+      TextEditingController();
+  final TextEditingController sellerBirthDateController =
+      TextEditingController();
+  final TextEditingController sellerNationalIDController =
+      TextEditingController();
+  final TextEditingController sellerRegistryNumberController =
+      TextEditingController();
+  final TextEditingController sellerRegistryPlaceController =
+      TextEditingController();
+  final TextEditingController sellerExpiryDateController =
+      TextEditingController();
 
   // Process the image with ML Kit Text Recognition
   Future<void> processImage(File imageFile, {bool isFront = true}) async {
@@ -45,14 +54,14 @@ class _IDScannerScreenState extends State<IDScanner> {
     }
   }
 
-  // Extract data from the front side
+  // Extract data from the front side (Seller's details)
   void extractFrontData(String recognizedText) {
     // Extract Full Name (Arabic names, assuming 4 words minimum)
     final fullNameRegex = RegExp(r'([ء-ي]+(?:\s[ء-ي]+){1,3})');
     final fullNameMatch = fullNameRegex.firstMatch(recognizedText);
     if (fullNameMatch != null) {
       setState(() {
-        fullNameController.text = fullNameMatch.group(0)!.trim();
+        sellerFullNameController.text = fullNameMatch.group(0)!.trim();
       });
     }
 
@@ -61,7 +70,7 @@ class _IDScannerScreenState extends State<IDScanner> {
     final birthDateMatch = birthDateRegex.firstMatch(recognizedText);
     if (birthDateMatch != null) {
       setState(() {
-        birthDateController.text = birthDateMatch.group(0)!;
+        sellerBirthDateController.text = birthDateMatch.group(0)!;
       });
     }
 
@@ -70,19 +79,19 @@ class _IDScannerScreenState extends State<IDScanner> {
     final nationalIDMatch = nationalIDRegex.firstMatch(recognizedText);
     if (nationalIDMatch != null) {
       setState(() {
-        nationalIDController.text = nationalIDMatch.group(0)!;
+        sellerNationalIDController.text = nationalIDMatch.group(0)!;
       });
     }
   }
 
-  // Extract data from the back side
+  // Extract data from the back side (Seller's registry information)
   void extractBackData(String recognizedText) {
     // Extract Registry Number (Format: AAAAA/BBBB)
     final registryNumberRegex = RegExp(r'\b\d{1,5}/\d{1,5}\b');
     final registryNumberMatch = registryNumberRegex.firstMatch(recognizedText);
     if (registryNumberMatch != null) {
       setState(() {
-        registryNumberController.text = registryNumberMatch.group(0)!;
+        sellerRegistryNumberController.text = registryNumberMatch.group(0)!;
       });
     }
 
@@ -91,7 +100,8 @@ class _IDScannerScreenState extends State<IDScanner> {
     final registryPlaceMatch = registryPlaceRegex.firstMatch(recognizedText);
     if (registryPlaceMatch != null) {
       setState(() {
-        registryPlaceController.text = registryPlaceMatch.group(1)!.trim();
+        sellerRegistryPlaceController.text =
+            registryPlaceMatch.group(1)!.trim();
       });
     }
 
@@ -100,7 +110,7 @@ class _IDScannerScreenState extends State<IDScanner> {
     final expiryDateMatch = expiryDateRegex.firstMatch(recognizedText);
     if (expiryDateMatch != null) {
       setState(() {
-        expiryDateController.text = expiryDateMatch.group(0)!;
+        sellerExpiryDateController.text = expiryDateMatch.group(0)!;
       });
     }
   }
@@ -126,7 +136,7 @@ class _IDScannerScreenState extends State<IDScanner> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Jordanian ID Scanner'),
+        title: const Text('Seller Information Scanner'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -162,52 +172,58 @@ class _IDScannerScreenState extends State<IDScanner> {
               ),
               const SizedBox(height: 16),
               TextField(
-                controller: fullNameController,
+                controller: sellerFullNameController,
                 decoration: const InputDecoration(
-                  labelText: 'Full Name',
+                  labelText: 'Seller Full Name',
                   border: OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 16),
               TextField(
-                controller: birthDateController,
+                controller: sellerBirthDateController,
                 decoration: const InputDecoration(
-                  labelText: 'Birth Date',
+                  labelText: 'Seller Birth Date',
                   border: OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 16),
               TextField(
-                controller: nationalIDController,
+                controller: sellerNationalIDController,
                 decoration: const InputDecoration(
-                  labelText: 'National ID',
+                  labelText: 'Seller National ID',
                   border: OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 16),
               TextField(
-                controller: registryNumberController,
+                controller: sellerRegistryNumberController,
                 decoration: const InputDecoration(
-                  labelText: 'Registry Number',
+                  labelText: 'Seller Registry Number',
                   border: OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 16),
               TextField(
-                controller: registryPlaceController,
+                controller: sellerRegistryPlaceController,
                 decoration: const InputDecoration(
-                  labelText: 'Registry Place',
+                  labelText: 'Seller Registry Place',
                   border: OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 16),
               TextField(
-                controller: expiryDateController,
+                controller: sellerExpiryDateController,
                 decoration: const InputDecoration(
-                  labelText: 'Expiry Date',
+                  labelText: 'Seller Expiry Date',
                   border: OutlineInputBorder(),
                 ),
               ),
+              ElevatedButton(onPressed: (){
+                Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const ViewCarInfo()), 
+    );
+              }, child: const Text('Next Step'))
             ],
           ),
         ),
@@ -218,12 +234,12 @@ class _IDScannerScreenState extends State<IDScanner> {
   @override
   void dispose() {
     // Dispose the text controllers to avoid memory leaks
-    fullNameController.dispose();
-    birthDateController.dispose();
-    nationalIDController.dispose();
-    registryNumberController.dispose();
-    registryPlaceController.dispose();
-    expiryDateController.dispose();
+    sellerFullNameController.dispose();
+    sellerBirthDateController.dispose();
+    sellerNationalIDController.dispose();
+    sellerRegistryNumberController.dispose();
+    sellerRegistryPlaceController.dispose();
+    sellerExpiryDateController.dispose();
     super.dispose();
   }
 }

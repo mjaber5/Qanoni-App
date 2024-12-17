@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 
-class CarContract extends StatefulWidget {
-  const CarContract({super.key});
+import 'contract_info.dart';
+
+class CarInfo extends StatefulWidget {
+  const CarInfo({super.key});
 
   @override
-  State<CarContract> createState() => _CarContractState();
+  State<CarInfo> createState() => _CarContractState();
 }
 
-class _CarContractState extends State<CarContract> {
+class _CarContractState extends State<CarInfo> {
   final ImagePicker _picker = ImagePicker();
   XFile? _frontImageFile;
   XFile? _backImageFile;
@@ -184,6 +186,12 @@ class _CarContractState extends State<CarContract> {
               _buildTextField('Car Registration Number', carRegistrationNumberController),
               _buildTextField('Insurance Expiry Date', insuranceExpiryDateController),
               _buildTextField('Car Condition', carConditionController),
+              ElevatedButton(onPressed: (){
+                Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const ContractInfoForm()), 
+    );
+              }, child: const Text('Next Step'))
             ],
           ),
         ),
@@ -198,7 +206,7 @@ class _CarContractState extends State<CarContract> {
         controller: controller,
         decoration: InputDecoration(
           labelText: label,
-          border: OutlineInputBorder(),
+          border: const OutlineInputBorder(),
         ),
       ),
     );

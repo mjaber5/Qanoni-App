@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'car_info.dart';
+
 class BuyerContract extends StatefulWidget {
   const BuyerContract({super.key});
 
@@ -173,6 +175,17 @@ class _BuyerContractState extends State<BuyerContract> {
               _buildTextField(
                   'Buyer Registry Place', buyerRegistryPlaceController),
               _buildTextField('Buyer Expiry Date', buyerExpiryDateController),
+
+              ElevatedButton(onPressed: (){
+                Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const CarInfo()), 
+    );
+              
+
+
+
+              }, child: const Text('Next Step'))
             ],
           ),
         ),
