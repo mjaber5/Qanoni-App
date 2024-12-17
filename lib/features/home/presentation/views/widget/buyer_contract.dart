@@ -1,27 +1,33 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 
-class BuyerCuntract extends StatefulWidget {
-  const BuyerCuntract({super.key});
+class BuyerContract extends StatefulWidget {
+  const BuyerContract({super.key});
 
   @override
-  State<BuyerCuntract> createState() => _BuyerContractState();
+  State<BuyerContract> createState() => _BuyerContractState();
 }
 
-class _BuyerContractState extends State<BuyerCuntract> {
+class _BuyerContractState extends State<BuyerContract> {
   final ImagePicker _picker = ImagePicker();
   XFile? _frontImageFile;
   XFile? _backImageFile;
 
   // Text Controllers for extracted data
   final TextEditingController buyerFullNameController = TextEditingController();
-  final TextEditingController buyerBirthDateController = TextEditingController();
-  final TextEditingController buyerNationalIDController = TextEditingController();
-  final TextEditingController buyerRegistryNumberController = TextEditingController();
-  final TextEditingController buyerRegistryPlaceController = TextEditingController();
-  final TextEditingController buyerExpiryDateController = TextEditingController();
+  final TextEditingController buyerBirthDateController =
+      TextEditingController();
+  final TextEditingController buyerNationalIDController =
+      TextEditingController();
+  final TextEditingController buyerRegistryNumberController =
+      TextEditingController();
+  final TextEditingController buyerRegistryPlaceController =
+      TextEditingController();
+  final TextEditingController buyerExpiryDateController =
+      TextEditingController();
 
   // Process the image with ML Kit Text Recognition
   Future<void> processImage(File imageFile, {bool isFront = true}) async {
@@ -29,7 +35,8 @@ class _BuyerContractState extends State<BuyerCuntract> {
     final textRecognizer = TextRecognizer();
 
     try {
-      final RecognizedText recognizedText = await textRecognizer.processImage(inputImage);
+      final RecognizedText recognizedText =
+          await textRecognizer.processImage(inputImage);
 
       if (isFront) {
         extractFrontData(recognizedText.text);
@@ -37,7 +44,7 @@ class _BuyerContractState extends State<BuyerCuntract> {
         extractBackData(recognizedText.text);
       }
     } catch (e) {
-      print('Error processing image: $e');
+      log('Error processing image: $e');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Failed to process image')),
       );
@@ -161,8 +168,10 @@ class _BuyerContractState extends State<BuyerCuntract> {
               _buildTextField('Buyer Full Name', buyerFullNameController),
               _buildTextField('Buyer Birth Date', buyerBirthDateController),
               _buildTextField('Buyer National ID', buyerNationalIDController),
-              _buildTextField('Buyer Registry Number', buyerRegistryNumberController),
-              _buildTextField('Buyer Registry Place', buyerRegistryPlaceController),
+              _buildTextField(
+                  'Buyer Registry Number', buyerRegistryNumberController),
+              _buildTextField(
+                  'Buyer Registry Place', buyerRegistryPlaceController),
               _buildTextField('Buyer Expiry Date', buyerExpiryDateController),
             ],
           ),
@@ -178,7 +187,7 @@ class _BuyerContractState extends State<BuyerCuntract> {
         controller: controller,
         decoration: InputDecoration(
           labelText: label,
-          border: OutlineInputBorder(),
+          border: const OutlineInputBorder(),
         ),
       ),
     );

@@ -14,7 +14,7 @@ class LoginActionText extends StatelessWidget {
     final isArabic = Directionality.of(context) == TextDirection.rtl;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

@@ -23,7 +23,6 @@ class _HiUserTextState extends State<HiUserText> {
   Future<void> _loadAndUpdateUserName() async {
     final prefs = await SharedPreferences.getInstance();
 
-    // Load cached name first
     final cachedName = prefs.getString('cachedFirstName');
     if (cachedName != null) {
       setState(() {
@@ -31,12 +30,11 @@ class _HiUserTextState extends State<HiUserText> {
       });
     }
 
-    // Fetch the latest name from Firestore
     await _updateUserName();
   }
 
   Future<void> _updateUserName() async {
-    if (isUpdating) return; // Prevent concurrent updates
+    if (isUpdating) return;
     isUpdating = true;
 
     final user = FirebaseAuth.instance.currentUser;
@@ -51,11 +49,9 @@ class _HiUserTextState extends State<HiUserText> {
         final fullName = userData['userName'] ?? 'Unknown User';
         final firstName = fullName.split(' ').first;
 
-        // Update the cache
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('cachedFirstName', firstName);
 
-        // Update the state
         setState(() {
           cachedFirstName = firstName;
         });
@@ -76,7 +72,7 @@ class _HiUserTextState extends State<HiUserText> {
   @override
   Widget build(BuildContext context) {
     if (cachedFirstName == null) {
-      return const CircularProgressIndicator();
+      return const Center(child: CircularProgressIndicator());
     }
 
     return Padding(

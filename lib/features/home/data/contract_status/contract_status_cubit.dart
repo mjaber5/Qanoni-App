@@ -128,6 +128,30 @@ class ContractCubit extends Cubit<ContractStatusState> {
     emit(ContractUserIdUpdated(userId));
   }
 
+  /// Get both sellerId and buyerId from the contract data
+  Future<Map<String, String>> getBuyerAndSellerIds() async {
+    try {
+      // Fetch contract document by contractId
+      final contractDoc =
+          await _firestore.collection('contracts').doc(contractId).get();
+      if (contractDoc.exists) {
+        final contractData = contractDoc.data() as Map<String, dynamic>;
+        // Return both buyerId and sellerId in a map
+        return {
+          'sellerId': contractData['sellerId'] ?? '',
+          'buyerId': contractData['buyerId'] ?? '',
+        };
+      } else {
+        emit(const ContractError('Contract not found.'));
+        return {'sellerId': '', 'buyerId': ''};
+      }
+    } catch (e) {
+      emit(ContractError(
+          'Failed to fetch sellerId and buyerId: ${e.toString()}'));
+      return {'sellerId': '', 'buyerId': ''};
+    }
+  }
+
   /// Get the entered user ID
   String getEnteredUserId() {
     return enteredUserId;

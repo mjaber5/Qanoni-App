@@ -2,6 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qanoni/features/home/presentation/views/create_contract_view.dart';
 import 'package:qanoni/features/home/presentation/views/success_view.dart';
+import 'package:qanoni/features/home/presentation/views/widget/buyer_contract.dart';
+import 'package:qanoni/features/home/presentation/views/widget/seller_cuntract.dart';
 import '../../features/profile/presentation/views/change_password_view.dart';
 import 'constants/aceapt_page.dart';
 import '../../features/authentication/auth_blocs/authentication_bloc/authentication_bloc.dart';
@@ -52,6 +54,8 @@ abstract class AppRouter {
   static const kChangePasswordView = '/changePasswordView';
   static const kSuccessView = '/successView';
   static const kCreateContract = '/createContractView';
+  static const kBuyerContract = '/buyerContract';
+  static const kSellerContract = '/sellerContract';
 
   static final router = GoRouter(
     routes: [
@@ -164,6 +168,14 @@ abstract class AppRouter {
         path: kCreateContract,
         builder: (context, state) => const CreateContractView(),
       ),
+      GoRoute(
+        path: kBuyerContract,
+        builder: (context, state) => const BuyerContract(),
+      ),
+      GoRoute(
+        path: kSellerContract,
+        builder: (context, state) => const SellerContract(),
+      )
     ],
   );
 }

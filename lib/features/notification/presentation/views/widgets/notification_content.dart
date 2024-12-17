@@ -176,9 +176,31 @@ class NotificationContentState extends State<NotificationContent> {
                       context.read<ContractCubit>().getEnteredUserId();
                   String contractId =
                       context.read<ContractCubit>().getContractId();
-                  return Request(
-                    enteredUserId: enteredUserId,
-                    contractId: contractId,
+                  return FutureBuilder<Map<String, String>>(
+                    future:
+                        context.read<ContractCubit>().getBuyerAndSellerIds(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      } else if (snapshot.hasData) {
+                        String buyerId = snapshot.data!['buyerId']!;
+                        String sellerId = snapshot.data!['sellerId']!;
+
+                        // Return the Request widget with buyerId and sellerId
+                        return Request(
+                          enteredUserId: enteredUserId,
+                          contractId: contractId,
+                          buyerId: buyerId,
+                          sellerId: sellerId,
+                        );
+                      } else {
+                        return const Text('No data available');
+                      }
+                    },
                   );
                 },
               ),

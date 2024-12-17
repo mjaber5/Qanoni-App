@@ -1,18 +1,21 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-
-import '../../../../home/presentation/views/widget/seller_cuntract.dart';
-import '../../../../home/presentation/views/widget/buyer_cuntract.dart';
+import 'package:go_router/go_router.dart';
+import 'package:qanoni/core/utils/app_router.dart';
 
 class Request extends StatefulWidget {
   final String enteredUserId;
   final String contractId;
+  final String buyerId;
+  final String sellerId;
 
   const Request({
     super.key,
     required this.enteredUserId,
     required this.contractId,
+    required this.buyerId,
+    required this.sellerId,
   });
 
   @override
@@ -22,10 +25,9 @@ class Request extends StatefulWidget {
 class _RequestState extends State<Request> {
   final List<Map<String, String>> _notifications = [];
   late FirebaseMessaging _firebaseMessaging;
-  bool _isMounted = true; // To track if the widget is still mounted
+  bool _isMounted = true;
 
-  String sellerId = "seller123"; // Example seller ID, replace with actual logic
-  String buyerId = "buyer456"; // Example buyer ID, replace with actual logic
+  // Example seller and buyer IDs
 
   @override
   void initState() {
@@ -68,7 +70,6 @@ class _RequestState extends State<Request> {
 
   void _handleIncomingMessage(RemoteNotification? notification) {
     if (notification == null) return;
-
     if (!_isMounted) return;
 
     setState(() {
@@ -81,7 +82,6 @@ class _RequestState extends State<Request> {
 
   void _showInAppNotification(RemoteNotification? notification) {
     if (notification == null) return;
-
     if (!_isMounted) return;
 
     final snackBar = SnackBar(
@@ -215,23 +215,23 @@ class _RequestState extends State<Request> {
                     const SizedBox(width: 10),
                     ElevatedButton(
                       onPressed: () {
-                        log('Approve contract ${widget.contractId}');
-                        if (widget.enteredUserId == sellerId) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const BuyerCuntract()),
-                          );
-                        } else if (widget.enteredUserId == buyerId) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SellerCuntract()),
-                          );
+                        log('Approve contract for User ID: ${widget.enteredUserId}');
+                        log('Comparing: Seller ID: ${widget.sellerId}, Buyer ID: ${widget.buyerId}');
+
+                        if (widget.enteredUserId == widget.sellerId) {
+                          log('Navigating to Buyer Contract Screen');
+                          GoRouter.of(context).push(AppRouter.kBuyerContract);
+                        } else if (widget.enteredUserId == widget.buyerId) {
+                          log('Navigating to Seller Contract Screen');
+                          GoRouter.of(context).push(AppRouter.kSellerContract);
                         } else {
+                          log('Unable to determine contract type.');
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text('Unable to determine contract type.')),
+                            SnackBar(
+                              content: Text(
+                                'Unable to determine contract type for User ID: ${widget.enteredUserId}',
+                              ),
+                            ),
                           );
                         }
                       },

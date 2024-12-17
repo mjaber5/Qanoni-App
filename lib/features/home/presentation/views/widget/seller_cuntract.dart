@@ -3,23 +3,31 @@ import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 
-class SellerCuntract extends StatefulWidget {
+class SellerContract extends StatefulWidget {
+  const SellerContract({super.key});
+
   @override
-  _SellerScannerScreenState createState() => _SellerScannerScreenState();
+  State<SellerContract> createState() => _SellerScannerScreenState();
 }
 
-class _SellerScannerScreenState extends State<SellerCuntract> {
+class _SellerScannerScreenState extends State<SellerContract> {
   final ImagePicker _picker = ImagePicker();
   XFile? _frontImageFile;
   XFile? _backImageFile;
 
   // Text Controllers for extracted data
-  final TextEditingController sellerFullNameController = TextEditingController();
-  final TextEditingController sellerBirthDateController = TextEditingController();
-  final TextEditingController sellerNationalIDController = TextEditingController();
-  final TextEditingController sellerRegistryNumberController = TextEditingController();
-  final TextEditingController sellerRegistryPlaceController = TextEditingController();
-  final TextEditingController sellerExpiryDateController = TextEditingController();
+  final TextEditingController sellerFullNameController =
+      TextEditingController();
+  final TextEditingController sellerBirthDateController =
+      TextEditingController();
+  final TextEditingController sellerNationalIDController =
+      TextEditingController();
+  final TextEditingController sellerRegistryNumberController =
+      TextEditingController();
+  final TextEditingController sellerRegistryPlaceController =
+      TextEditingController();
+  final TextEditingController sellerExpiryDateController =
+      TextEditingController();
 
   // Process the image with ML Kit Text Recognition
   Future<void> processImage(File imageFile, {bool isFront = true}) async {
@@ -91,7 +99,8 @@ class _SellerScannerScreenState extends State<SellerCuntract> {
     final registryPlaceMatch = registryPlaceRegex.firstMatch(recognizedText);
     if (registryPlaceMatch != null) {
       setState(() {
-        sellerRegistryPlaceController.text = registryPlaceMatch.group(1)!.trim();
+        sellerRegistryPlaceController.text =
+            registryPlaceMatch.group(1)!.trim();
       });
     }
 

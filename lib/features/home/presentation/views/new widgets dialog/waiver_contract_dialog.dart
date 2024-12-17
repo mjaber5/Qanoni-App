@@ -4,15 +4,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:qanoni/core/utils/app_router.dart';
 
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/features/home/data/contract_status/contract_status_cubit.dart';
+import 'package:qanoni/features/home/presentation/views/widget/buyer_contract.dart';
+import 'package:qanoni/features/home/presentation/views/widget/seller_cuntract.dart';
 import 'package:user_repository/user_reposetory.dart';
-
-import '../widget/buyer_cuntract.dart';
-import '../widget/seller_cuntract.dart';
 
 class WaiverContractBottomSheet extends StatefulWidget {
   const WaiverContractBottomSheet({super.key});
@@ -118,9 +115,7 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
           listener: (context, state) {
             if (state is ContractSuccess) {
               _showSnackBar(context, state.message, Colors.green);
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                GoRouter.of(context).push(AppRouter.kCreateContract);
-              });
+              WidgetsBinding.instance.addPostFrameCallback((_) {});
             } else if (state is ContractError) {
               _showSnackBar(context, state.error, Colors.red);
             }
@@ -260,33 +255,32 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
             elevation: 3,
           ),
           onPressed: () {
-    // استدعاء الدالة دائمًا
-    _confirmIdInput(context);
+            // استدعاء الدالة دائمًا
+            _confirmIdInput(context);
 
-    // التحقق من القيمة المحددة
-    if (_selectedUserType == 'Buyer') {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const BuyerCuntract()),
-      );
-    } else if (_selectedUserType == 'Seller') {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => SellerCuntract()),
-      );
-    } else {
-      // رسالة في حال عدم اختيار نوع العقد
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('يرجى اختيار نوع العقد أولاً')),
-      );
-    }
-  },
-  child: const Text(
-    "Confirm",
-    style: TextStyle(fontSize: 16),
-  ),
-),
-
+            // التحقق من القيمة المحددة
+            if (_selectedUserType == 'Buyer') {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const BuyerContract()),
+              );
+            } else if (_selectedUserType == 'Seller') {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SellerContract()),
+              );
+            } else {
+              // رسالة في حال عدم اختيار نوع العقد
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('يرجى اختيار نوع العقد أولاً')),
+              );
+            }
+          },
+          child: const Text(
+            "Confirm",
+            style: TextStyle(fontSize: 16),
+          ),
+        ),
       ],
     );
   }
