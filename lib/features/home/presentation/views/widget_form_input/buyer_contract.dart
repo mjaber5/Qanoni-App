@@ -155,6 +155,43 @@ class _BuyerContractState extends State<BuyerContract> {
         );
   }
 
+  // Validate and submit the form
+  void validateAndSubmit() {
+    if (buyerFullNameController.text.isEmpty ||
+        buyerBirthDateController.text.isEmpty ||
+        buyerNationalIDController.text.isEmpty ||
+        buyerRegistryNumberController.text.isEmpty ||
+        buyerRegistryPlaceController.text.isEmpty ||
+        buyerExpiryDateController.text.isEmpty) {
+      _showValidationDialog();
+    } else {
+      submitBuyerContract();
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const CarInfo()),
+      );
+    }
+  }
+
+  // Show validation error dialog
+  void _showValidationDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Validation Error'),
+        content: const Text('Please fill in all required fields.'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('OK',style: TextStyle(color: QColors.secondary),),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -201,17 +238,10 @@ class _BuyerContractState extends State<BuyerContract> {
               _buildTextField('Buyer Expiry Date', buyerExpiryDateController),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  submitBuyerContract(); // Submit data to the ContractCubit
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const CarInfo()),
-                  );
-                },
+                onPressed: validateAndSubmit, // Use the validation method
                 style: ElevatedButton.styleFrom(
                   backgroundColor: QColors.secondary,
-                  minimumSize:
-                      const Size(double.infinity, 50), // Full width button
+                  minimumSize: const Size(double.infinity, 50), // Full width button
                 ),
                 child: const Text('Next Step'),
               ),
@@ -233,7 +263,6 @@ class _BuyerContractState extends State<BuyerContract> {
           focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: QColors.secondary, width: 2.0),
           ),
-          labelStyle: const TextStyle(color: QColors.white),
         ),
       ),
     );
@@ -259,17 +288,5 @@ class _BuyerContractState extends State<BuyerContract> {
         ),
       ],
     );
-  }
-
-  @override
-  void dispose() {
-    // Dispose the text controllers to avoid memory leaks
-    buyerFullNameController.dispose();
-    buyerBirthDateController.dispose();
-    buyerNationalIDController.dispose();
-    buyerRegistryNumberController.dispose();
-    buyerRegistryPlaceController.dispose();
-    buyerExpiryDateController.dispose();
-    super.dispose();
   }
 }

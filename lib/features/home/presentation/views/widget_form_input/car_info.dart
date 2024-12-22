@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../../core/utils/constants/colors.dart';
 import 'contract_info.dart';
 
 class CarInfo extends StatefulWidget {
@@ -149,32 +150,26 @@ class _CarContractState extends State<CarInfo> {
           child: Column(
             children: [
               // Front and Back Image Picker Section
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
+             Card(
+                elevation: 5,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      _frontImageFile != null
-                          ? Image.file(File(_frontImageFile!.path), width: 150)
-                          : const Text('Front Side'),
-                      ElevatedButton(
-                        onPressed: () => pickImage(isFront: true),
-                        child: const Text('Capture Front'),
+                      _buildImageSection(
+                        imageFile: _frontImageFile,
+                        label: 'Front Side',
+                        isFront: true,
+                      ),
+                      _buildImageSection(
+                        imageFile: _backImageFile,
+                        label: 'Back Side',
+                        isFront: false,
                       ),
                     ],
                   ),
-                  Column(
-                    children: [
-                      _backImageFile != null
-                          ? Image.file(File(_backImageFile!.path), width: 150)
-                          : const Text('Back Side'),
-                      ElevatedButton(
-                        onPressed: () => pickImage(isFront: false),
-                        child: const Text('Capture Back'),
-                      ),
-                    ],
-                  ),
-                ],
+                ),
               ),
               const SizedBox(height: 16),
               // Text fields for extracted data
@@ -186,12 +181,23 @@ class _CarContractState extends State<CarInfo> {
               _buildTextField('Car Registration Number', carRegistrationNumberController),
               _buildTextField('Insurance Expiry Date', insuranceExpiryDateController),
               _buildTextField('Car Condition', carConditionController),
-              ElevatedButton(onPressed: (){
-                Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const ContractInfoForm()), 
-    );
-              }, child: const Text('Next Step'))
+                            const SizedBox(height: 20),
+
+              ElevatedButton(
+                onPressed: () {
+                  // submitBuyerContract(); // Submit data to the ContractCubit
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ContractInfoForm()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: QColors.secondary,
+                  minimumSize:
+                      const Size(double.infinity, 50), // Full width button
+                ),
+                child: const Text('Next Step'),
+              ),
             ],
           ),
         ),
@@ -211,6 +217,28 @@ class _CarContractState extends State<CarInfo> {
       ),
     );
   }
+  Widget _buildImageSection({
+    XFile? imageFile,
+    required String label,
+    required bool isFront,
+  }) {
+    return Column(
+      children: [
+        imageFile != null
+            ? Image.file(File(imageFile.path),
+                width: 150, height: 200, fit: BoxFit.cover)
+            : Text(label,
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        IconButton(
+          onPressed: () => pickImage(isFront: isFront),
+          icon:
+              const Icon(Icons.camera_alt, color: QColors.secondary, size: 40),
+        ),
+      ],
+    );
+  }
+
 
   @override
   void dispose() {

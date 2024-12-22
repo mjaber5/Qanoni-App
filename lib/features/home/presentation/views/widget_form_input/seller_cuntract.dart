@@ -244,7 +244,6 @@ class _SellerContractState extends State<SellerContract> {
           focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: QColors.secondary, width: 2.0),
           ),
-          labelStyle: const TextStyle(color: QColors.white),
         ),
         validator: (value) {
           if (value == null || value.isEmpty) {

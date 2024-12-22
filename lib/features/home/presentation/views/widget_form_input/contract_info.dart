@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../core/utils/constants/colors.dart';
+
 class ContractInfoForm extends StatefulWidget {
   const ContractInfoForm({super.key});
 
@@ -11,38 +13,62 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
   final TextEditingController contractDateController = TextEditingController();
   final TextEditingController contractPlaceController = TextEditingController();
   final TextEditingController saleAmountController = TextEditingController();
-  final TextEditingController paymentMethodController = TextEditingController();
   final TextEditingController ownershipTransferController = TextEditingController();
   final TextEditingController additionalTermsController = TextEditingController();
+  
+  // متغيرات لحفظ حالة مربع الاختيار
+  bool ownershipTransferChecked = false;
+
+  // قائمة طرق الدفع
+  String? selectedPaymentMethod;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('بيانات العقد'),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Text fields for contract data
               _buildTextField('تاريخ العقد', contractDateController),
               _buildTextField('مكان توقيع العقد', contractPlaceController),
               _buildTextField('قيمة البيع', saleAmountController),
-              _buildTextField('طريقة الدفع', paymentMethodController),
-              _buildTextField('التزام الطرفين بنقل الملكية قانونياً', ownershipTransferController),
+              
+              // Spinner for payment method
+              _buildPaymentMethodDropdown(),
+              
+              // Checkbox for ownership transfer
+              _buildOwnershipTransferCheckbox(),
+              
               _buildTextField('شروط إضافية', additionalTermsController),
               const SizedBox(height: 20),
+              
               // Save Button
-              ElevatedButton(
-                onPressed: () {
-                  // هنا يمكنك إضافة الكود لمعالجة البيانات المدخلة، مثل حفظ البيانات
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('تم حفظ بيانات العقد')),
-                  );
-                },
-                child: const Text('حفظ البيانات'),
+              Center(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  onPressed: () {
+                    // هنا يمكنك إضافة الكود لمعالجة البيانات المدخلة، مثل حفظ البيانات
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('تم حفظ بيانات العقد')),
+                    );
+                  },
+                  child: const Text(
+                    'حفظ البيانات',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                ),
               ),
             ],
           ),
@@ -53,13 +79,71 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
 
   Widget _buildTextField(String label, TextEditingController controller) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      padding: const EdgeInsets.symmetric(vertical: 12.0),
       child: TextField(
         controller: controller,
         decoration: InputDecoration(
           labelText: label,
-          border: OutlineInputBorder(),
+          labelStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.black54),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: const BorderSide(color: QColors.secondary),
+          ),
+          contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 12.0),
         ),
+        style: const TextStyle(fontSize: 16),
+      ),
+    );
+  }
+
+  Widget _buildPaymentMethodDropdown() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12.0),
+      child: DropdownButtonFormField<String>(
+        value: selectedPaymentMethod,
+        decoration: const InputDecoration(
+          labelText: 'طريقة الدفع',
+          labelStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.black54),
+          border: OutlineInputBorder(
+            // borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(color: QColors.secondary),
+          ),
+        ),
+        items: [
+          'نقداً',
+          'تحويل بنكي',
+          'بطاقة ائتمان',
+          'دفع عبر الإنترنت',
+        ].map((method) {
+          return DropdownMenuItem<String>(
+            value: method,
+            child: Text(method),
+          );
+        }).toList(),
+        onChanged: (value) {
+          setState(() {
+            selectedPaymentMethod = value;
+          });
+        },
+      ),
+    );
+  }
+
+  Widget _buildOwnershipTransferCheckbox() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12.0),
+      child: Row(
+        children: [
+          Checkbox(
+            value: ownershipTransferChecked,
+            onChanged: (bool? value) {
+              setState(() {
+                ownershipTransferChecked = value ?? false;
+              });
+            },
+          ),
+          const Expanded(child: Text('التزام الطرفين بنقل الملكية قانونياً')),
+        ],
       ),
     );
   }
@@ -70,8 +154,6 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
     contractDateController.dispose();
     contractPlaceController.dispose();
     saleAmountController.dispose();
-    paymentMethodController.dispose();
-    ownershipTransferController.dispose();
     additionalTermsController.dispose();
     super.dispose();
   }
