@@ -18,6 +18,8 @@ class ContractCubit extends Cubit<ContractStatusState> {
   Future<void> createContract({
     required String otherUserId,
     required String userType,
+    required Map<String, dynamic> buyerData,
+    required Map<String, dynamic> sellerData,
     Map<String, dynamic>? currentUser,
   }) async {
     emit(ContractLoading());
@@ -46,6 +48,8 @@ class ContractCubit extends Cubit<ContractStatusState> {
         'sellerId': currentUser.uid,
         'buyerId': otherUserId,
         'status': 'pending', // Initial status
+        'buyerData': buyerData, // Passing buyer data
+        'sellerData': sellerData, // Passing seller data
         'email': currentUserData['email'],
         'userName': currentUserData['userName'],
         'phone': currentUserData['phone'],

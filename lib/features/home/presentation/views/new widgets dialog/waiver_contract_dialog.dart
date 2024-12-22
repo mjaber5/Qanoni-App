@@ -1,14 +1,11 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/features/home/data/contract_status/contract_status_cubit.dart';
 import 'package:qanoni/features/home/presentation/views/widget_form_input/buyer_contract.dart';
 import 'package:qanoni/features/home/presentation/views/widget_form_input/seller_cuntract.dart';
+
 import 'package:user_repository/user_reposetory.dart';
 
 class WaiverContractBottomSheet extends StatefulWidget {
@@ -22,7 +19,7 @@ class WaiverContractBottomSheet extends StatefulWidget {
 class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
   final TextEditingController _idController = TextEditingController();
   final FocusNode _idFocusNode = FocusNode();
-  final FirebaseUserRepo _userRepo = FirebaseUserRepo(); // Firebase repository
+  final FirebaseUserRepo _userRepo = FirebaseUserRepo();
   bool _isTextFieldFocused = false;
   String? _selectedUserType;
 
@@ -53,18 +50,18 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
 
     try {
       final currentUser = _userRepo.firebaseAuth.currentUser;
-
       if (currentUser == null) {
         log('No user is logged in.');
-        throw Exception("No user is logged in.");
+        _showSnackBar(context, "No user is logged in.", Colors.red);
+        return;
       }
 
       final currentUserDoc =
           await _userRepo.usersCollection.doc(currentUser.uid).get();
-
       if (!currentUserDoc.exists) {
         log('Current user data not found.');
-        throw Exception("Current user data not found.");
+        _showSnackBar(context, "Current user data not found.", Colors.red);
+        return;
       }
 
       final querySnapshot = await _userRepo.usersCollection
@@ -79,10 +76,22 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
         return;
       }
 
+      final otherUserDoc = querySnapshot.docs.first.data();
+      Map<String, dynamic> buyerData = {};
+      Map<String, dynamic> sellerData = {};
+
+      if (_selectedUserType == "Buyer") {
+        buyerData = otherUserDoc;
+      } else if (_selectedUserType == "Seller") {
+        sellerData = otherUserDoc;
+      }
+
       context.read<ContractCubit>().createContract(
             currentUser: currentUserDoc.data(),
             otherUserId: userIduseInput,
             userType: _selectedUserType!,
+            buyerData: buyerData,
+            sellerData: sellerData,
           );
     } catch (error) {
       log('Error validating userIduse: $error');
@@ -186,6 +195,7 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
           borderRadius: BorderRadius.circular(15),
         ),
         elevation: 5,
+        shadowColor: Colors.black45, // Adding shadow for depth
       ),
       onPressed: () {
         setState(() {
@@ -253,27 +263,29 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
               borderRadius: BorderRadius.circular(12),
             ),
             elevation: 3,
+            shadowColor: Colors.black45,
           ),
           onPressed: () {
-            // استدعاء الدالة دائمًا
-            _confirmIdInput(context);
-
-            // التحقق من القيمة المحددة
-            if (_selectedUserType == 'Buyer') {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const BuyerContract()),
-              );
-            } else if (_selectedUserType == 'Seller') {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SellerContract()),
+            if (_selectedUserType == null) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Please select a contract type')),
               );
             } else {
-              // رسالة في حال عدم اختيار نوع العقد
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('يرجى اختيار نوع العقد أولاً')),
-              );
+              _confirmIdInput(context);
+
+              if (_selectedUserType == 'Buyer') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const BuyerContract()),
+                );
+              } else if (_selectedUserType == 'Seller') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SellerContract()),
+                );
+              }
             }
           },
           child: const Text(

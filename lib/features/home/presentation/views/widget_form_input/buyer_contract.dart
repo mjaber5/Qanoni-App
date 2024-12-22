@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qanoni/core/utils/constants/colors.dart';
+import 'package:qanoni/features/home/data/contract_status/contract_status_cubit.dart';
 import 'car_info.dart';
 
 class BuyerContract extends StatefulWidget {
@@ -126,11 +128,39 @@ class _BuyerContractState extends State<BuyerContract> {
     }
   }
 
+  // Submit the buyer's contract and move it to Firebase
+  void submitBuyerContract() {
+    final buyerData = {
+      'fullName': buyerFullNameController.text,
+      'birthDate': buyerBirthDateController.text,
+      'nationalID': buyerNationalIDController.text,
+      'registryNumber': buyerRegistryNumberController.text,
+      'registryPlace': buyerRegistryPlaceController.text,
+      'expiryDate': buyerExpiryDateController.text,
+    };
+
+    final sellerData = {
+      // You need to populate this with seller data, maybe passed from another screen or session
+      'fullName': 'Seller Name',
+      'nationalID': 'Seller National ID',
+      'phone': 'Seller Phone',
+    };
+
+    // Call the ContractCubit to create the contract with both buyer and seller data
+    context.read<ContractCubit>().createContract(
+          otherUserId: 'sellerId', // Replace with actual seller ID
+          userType: 'buyer', // Set the user type as needed
+          buyerData: buyerData,
+          sellerData: sellerData,
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Buyer Information Scanner'),
+        backgroundColor: QColors.secondary, // Better color contrast
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -138,32 +168,26 @@ class _BuyerContractState extends State<BuyerContract> {
           child: Column(
             children: [
               // Front and Back Image Picker Section
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
+              Card(
+                elevation: 5,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      _frontImageFile != null
-                          ? Image.file(File(_frontImageFile!.path), width: 150)
-                          : const Text('Front Side'),
-                      ElevatedButton(
-                        onPressed: () => pickImage(isFront: true),
-                        child: const Text('Capture Front'),
+                      _buildImageSection(
+                        imageFile: _frontImageFile,
+                        label: 'Front Side',
+                        isFront: true,
+                      ),
+                      _buildImageSection(
+                        imageFile: _backImageFile,
+                        label: 'Back Side',
+                        isFront: false,
                       ),
                     ],
                   ),
-                  Column(
-                    children: [
-                      _backImageFile != null
-                          ? Image.file(File(_backImageFile!.path), width: 150)
-                          : const Text('Back Side'),
-                      ElevatedButton(
-                        onPressed: () => pickImage(isFront: false),
-                        child: const Text('Capture Back'),
-                      ),
-                    ],
-                  ),
-                ],
+                ),
               ),
               const SizedBox(height: 16),
               // Text fields for extracted data
@@ -175,17 +199,22 @@ class _BuyerContractState extends State<BuyerContract> {
               _buildTextField(
                   'Buyer Registry Place', buyerRegistryPlaceController),
               _buildTextField('Buyer Expiry Date', buyerExpiryDateController),
-
-              ElevatedButton(onPressed: (){
-                Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const CarInfo()), 
-    );
-              
-
-
-
-              }, child: const Text('Next Step'))
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  submitBuyerContract(); // Submit data to the ContractCubit
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const CarInfo()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: QColors.secondary,
+                  minimumSize:
+                      const Size(double.infinity, 50), // Full width button
+                ),
+                child: const Text('Next Step'),
+              ),
             ],
           ),
         ),
@@ -201,8 +230,34 @@ class _BuyerContractState extends State<BuyerContract> {
         decoration: InputDecoration(
           labelText: label,
           border: const OutlineInputBorder(),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: QColors.secondary, width: 2.0),
+          ),
+          labelStyle: const TextStyle(color: QColors.white),
         ),
       ),
+    );
+  }
+
+  Widget _buildImageSection({
+    XFile? imageFile,
+    required String label,
+    required bool isFront,
+  }) {
+    return Column(
+      children: [
+        imageFile != null
+            ? Image.file(File(imageFile.path),
+                width: 150, height: 200, fit: BoxFit.cover)
+            : Text(label,
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        IconButton(
+          onPressed: () => pickImage(isFront: isFront),
+          icon:
+              const Icon(Icons.camera_alt, color: QColors.secondary, size: 40),
+        ),
+      ],
     );
   }
 

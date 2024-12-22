@@ -1,17 +1,19 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/features/home/presentation/views/widget_form_input/view_car_info.dart';
 
 class SellerContract extends StatefulWidget {
   const SellerContract({super.key});
 
   @override
-  State<SellerContract> createState() => _SellerScannerScreenState();
+  State<SellerContract> createState() => _SellerContractState();
 }
 
-class _SellerScannerScreenState extends State<SellerContract> {
+class _SellerContractState extends State<SellerContract> {
   final ImagePicker _picker = ImagePicker();
   XFile? _frontImageFile;
   XFile? _backImageFile;
@@ -30,8 +32,10 @@ class _SellerScannerScreenState extends State<SellerContract> {
   final TextEditingController sellerExpiryDateController =
       TextEditingController();
 
+  final _formKey = GlobalKey<FormState>(); // Form validation key
+
   // Process the image with ML Kit Text Recognition
-  Future<void> processImage(File imageFile, {bool isFront = true}) async {
+  Future<void> processImage(File imageFile, {required bool isFront}) async {
     final inputImage = InputImage.fromFile(imageFile);
     final textRecognizer = TextRecognizer();
 
@@ -45,10 +49,9 @@ class _SellerScannerScreenState extends State<SellerContract> {
         extractBackData(recognizedText.text);
       }
     } catch (e) {
-      print('Error processing image: $e');
+      log('Error processing image: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Failed to process image')),
-      );
+          const SnackBar(content: Text('Failed to process image')));
     } finally {
       textRecognizer.close();
     }
@@ -56,7 +59,6 @@ class _SellerScannerScreenState extends State<SellerContract> {
 
   // Extract data from the front side (Seller's details)
   void extractFrontData(String recognizedText) {
-    // Extract Full Name (Arabic names, assuming 4 words minimum)
     final fullNameRegex = RegExp(r'([ء-ي]+(?:\s[ء-ي]+){1,3})');
     final fullNameMatch = fullNameRegex.firstMatch(recognizedText);
     if (fullNameMatch != null) {
@@ -65,7 +67,6 @@ class _SellerScannerScreenState extends State<SellerContract> {
       });
     }
 
-    // Extract Birth Date (Format: DD/MM/YYYY or similar)
     final birthDateRegex = RegExp(r'\b\d{2}/\d{2}/\d{4}\b');
     final birthDateMatch = birthDateRegex.firstMatch(recognizedText);
     if (birthDateMatch != null) {
@@ -74,7 +75,6 @@ class _SellerScannerScreenState extends State<SellerContract> {
       });
     }
 
-    // Extract National ID (Assuming it's a 10-digit number)
     final nationalIDRegex = RegExp(r'\b\d{10}\b');
     final nationalIDMatch = nationalIDRegex.firstMatch(recognizedText);
     if (nationalIDMatch != null) {
@@ -86,7 +86,6 @@ class _SellerScannerScreenState extends State<SellerContract> {
 
   // Extract data from the back side (Seller's registry information)
   void extractBackData(String recognizedText) {
-    // Extract Registry Number (Format: AAAAA/BBBB)
     final registryNumberRegex = RegExp(r'\b\d{1,5}/\d{1,5}\b');
     final registryNumberMatch = registryNumberRegex.firstMatch(recognizedText);
     if (registryNumberMatch != null) {
@@ -95,7 +94,6 @@ class _SellerScannerScreenState extends State<SellerContract> {
       });
     }
 
-    // Extract Registry Place (Arabic text, assuming keyword "مكان القيد")
     final registryPlaceRegex = RegExp(r'مكان القيد[:\s]*([\u0621-\u064A\s]+)');
     final registryPlaceMatch = registryPlaceRegex.firstMatch(recognizedText);
     if (registryPlaceMatch != null) {
@@ -105,7 +103,6 @@ class _SellerScannerScreenState extends State<SellerContract> {
       });
     }
 
-    // Extract Expiry Date (Format: DD/MM/YYYY)
     final expiryDateRegex = RegExp(r'\b\d{2}/\d{2}/\d{4}\b');
     final expiryDateMatch = expiryDateRegex.firstMatch(recognizedText);
     if (expiryDateMatch != null) {
@@ -127,8 +124,17 @@ class _SellerScannerScreenState extends State<SellerContract> {
         }
       });
 
-      // Process the selected image
       processImage(File(pickedFile.path), isFront: isFront);
+    }
+  }
+
+  // Validate form and navigate to next screen
+  void _submitForm() {
+    if (_formKey.currentState!.validate()) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const ViewCarInfo()),
+      );
     }
   }
 
@@ -137,103 +143,121 @@ class _SellerScannerScreenState extends State<SellerContract> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Seller Information Scanner'),
+        backgroundColor: QColors.secondary,
+        elevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    children: [
-                      _frontImageFile != null
-                          ? Image.file(File(_frontImageFile!.path), width: 150)
-                          : const Text('Front Side'),
-                      ElevatedButton(
-                        onPressed: () => pickImage(isFront: true),
-                        child: const Text('Capture Front'),
-                      ),
-                    ],
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Front and Back Image Picker Section
+                Card(
+                  elevation: 5,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        _buildImageSection(
+                          imageFile: _frontImageFile,
+                          label: 'Front Side',
+                          isFront: true,
+                        ),
+                        _buildImageSection(
+                          imageFile: _backImageFile,
+                          label: 'Back Side',
+                          isFront: false,
+                        ),
+                      ],
+                    ),
                   ),
-                  Column(
-                    children: [
-                      _backImageFile != null
-                          ? Image.file(File(_backImageFile!.path), width: 150)
-                          : const Text('Back Side'),
-                      ElevatedButton(
-                        onPressed: () => pickImage(isFront: false),
-                        child: const Text('Capture Back'),
-                      ),
-                    ],
+                ),
+                const SizedBox(height: 16),
+                // Text fields for extracted data
+                _buildTextField('Seller Full Name', sellerFullNameController),
+                _buildTextField('Seller Birth Date', sellerBirthDateController),
+                _buildTextField(
+                    'Seller National ID', sellerNationalIDController),
+                _buildTextField(
+                    'Seller Registry Number', sellerRegistryNumberController),
+                _buildTextField(
+                    'Seller Registry Place', sellerRegistryPlaceController),
+                _buildTextField(
+                    'Seller Expiry Date', sellerExpiryDateController),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: _submitForm,
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(double.infinity, 50),
+                    backgroundColor: QColors.secondary,
+                    textStyle: const TextStyle(fontSize: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: sellerFullNameController,
-                decoration: const InputDecoration(
-                  labelText: 'Seller Full Name',
-                  border: OutlineInputBorder(),
+                  child: const Text('Next Step'),
                 ),
-              ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: sellerBirthDateController,
-                decoration: const InputDecoration(
-                  labelText: 'Seller Birth Date',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: sellerNationalIDController,
-                decoration: const InputDecoration(
-                  labelText: 'Seller National ID',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: sellerRegistryNumberController,
-                decoration: const InputDecoration(
-                  labelText: 'Seller Registry Number',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: sellerRegistryPlaceController,
-                decoration: const InputDecoration(
-                  labelText: 'Seller Registry Place',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: sellerExpiryDateController,
-                decoration: const InputDecoration(
-                  labelText: 'Seller Expiry Date',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              ElevatedButton(onPressed: (){
-                Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const ViewCarInfo()), 
-    );
-              }, child: const Text('Next Step'))
-            ],
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
+  // Reusable Image Section widget
+  Widget _buildImageSection({
+    XFile? imageFile,
+    required String label,
+    required bool isFront,
+  }) {
+    return Column(
+      children: [
+        imageFile != null
+            ? Image.file(File(imageFile.path),
+                width: 150, height: 200, fit: BoxFit.cover)
+            : Text(label,
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        IconButton(
+          onPressed: () => pickImage(isFront: isFront),
+          icon:
+              const Icon(Icons.camera_alt, color: QColors.secondary, size: 40),
+        ),
+      ],
+    );
+  }
+
+  // Reusable TextField widget
+  Widget _buildTextField(String label, TextEditingController controller) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: TextFormField(
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: label,
+          border: const OutlineInputBorder(),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: QColors.secondary, width: 2.0),
+          ),
+          labelStyle: const TextStyle(color: QColors.white),
+        ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter $label';
+          }
+          return null;
+        },
+      ),
+    );
+  }
+
   @override
   void dispose() {
-    // Dispose the text controllers to avoid memory leaks
     sellerFullNameController.dispose();
     sellerBirthDateController.dispose();
     sellerNationalIDController.dispose();
