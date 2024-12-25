@@ -15,12 +15,12 @@ class ChatbotMessagesListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: DashChat(
-        currentUser: ChatUser(id: '1', firstName: 'Lawyer AI'),
+        currentUser: ChatUser(id: '1', firstName: 'Useredit'),
         typingUsers: typingUsers, // هنا تم تمرير قائمة الـ typingUsers
-        // messageOptions: MessageOptions(
-        //   currentUserContainerColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
-        //   currentUserTextColor: Colors.white,
-        // ),
+        messageOptions: MessageOptions(
+          currentUserContainerColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+          currentUserTextColor: Colors.white,
+        ),
         messages: _messages.map((message) {
           return ChatMessage(
             text: message['text'],
