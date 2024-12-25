@@ -1,46 +1,37 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../core/utils/constants/colors.dart';
+import 'package:dash_chat_2/dash_chat_2.dart';
 
 class ChatbotMessagesListView extends StatelessWidget {
   final List<Map<String, dynamic>> _messages;
+  final List<ChatUser> typingUsers;
 
   const ChatbotMessagesListView({
     super.key,
     required List<Map<String, dynamic>> messages,
+    required this.typingUsers, // إضافة الـ typingUsers
   }) : _messages = messages;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: ListView.builder(
-        reverse: true,
-        itemCount: _messages.length,
-        itemBuilder: (context, index) {
-          final message = _messages[index];
-          final isUserMessage = message['isUserMessage'] as bool;
-
-          return Align(
-            alignment:
-                isUserMessage ? Alignment.centerRight : Alignment.centerLeft,
-            child: Container(
-              padding: const EdgeInsets.all(12.0),
-              margin:
-                  const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-              decoration: BoxDecoration(
-                color: isUserMessage
-                    ? QColors.secondary
-                    : QColors.darkerGrey.withOpacity(0.7),
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: Text(
-                message['text'] as String,
-                style: TextStyle(
-                  color: isUserMessage ? Colors.white : QColors.grey,
-                ),
-              ),
-            ),
+      child: DashChat(
+        currentUser: ChatUser(id: '1', firstName: 'User'),
+        typingUsers: typingUsers, // هنا تم تمرير قائمة الـ typingUsers
+        messageOptions: MessageOptions(
+          currentUserContainerColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+          currentUserTextColor: Colors.white,
+        ),
+        messages: _messages.map((message) {
+          return ChatMessage(
+            text: message['text'],
+            user: message['isUserMessage'] 
+              ? ChatUser(id: '1', firstName: 'User') 
+              : ChatUser(id: 'bot', firstName: 'ChatBot'),
+            createdAt: DateTime.now(),
           );
+        }).toList(),
+        onSend: (ChatMessage m) {
+          // Handle message send action here
         },
       ),
     );
