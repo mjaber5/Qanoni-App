@@ -28,7 +28,12 @@ class ChatbotTextField extends StatelessWidget {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: const BorderSide(color: QColors.secondary),
+                  
                 ),
+                 focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: const BorderSide(color: QColors.secondary),
+    ),
               ),
             ),
           ),

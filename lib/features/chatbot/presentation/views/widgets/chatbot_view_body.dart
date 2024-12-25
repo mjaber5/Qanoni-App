@@ -82,7 +82,7 @@ class ChatbotViewBodyState extends State<ChatbotViewBody> {
       _controller.clear();
 
       // إضافة المستخدم إلى قائمة الذين يكتبون
-      _typing.add(ChatUser(id: '1', firstName: 'User'));
+      _typing.add(ChatUser(id: '1', firstName: 'Lawyer AI'));
 
       _fetchBotResponse(text);
     }
