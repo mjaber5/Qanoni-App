@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/presentation/views/widget_form_input/view_car_info.dart';
+
+import 'car_info.dart';
 
 class SellerContract extends StatefulWidget {
   const SellerContract({super.key});
@@ -133,7 +134,7 @@ class _SellerContractState extends State<SellerContract> {
     if (_formKey.currentState!.validate()) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const ViewCarInfo()),
+        MaterialPageRoute(builder: (context) => const CarInfo()),
       );
     }
   }

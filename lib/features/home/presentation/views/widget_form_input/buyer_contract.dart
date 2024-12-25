@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/features/home/data/contract_status/contract_status_cubit.dart';
-import 'car_info.dart';
+import 'package:qanoni/features/home/presentation/views/widget_form_input/view_car_info.dart';
 
 class BuyerContract extends StatefulWidget {
   const BuyerContract({super.key});
@@ -49,6 +49,7 @@ class _BuyerContractState extends State<BuyerContract> {
       }
     } catch (e) {
       log('Error processing image: $e');
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Failed to process image')),
       );
@@ -168,7 +169,7 @@ class _BuyerContractState extends State<BuyerContract> {
       submitBuyerContract();
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const CarInfo()),
+        MaterialPageRoute(builder: (context) => const ViewCarInfo()),
       );
     }
   }
