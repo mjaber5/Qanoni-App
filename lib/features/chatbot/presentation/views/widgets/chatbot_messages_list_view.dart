@@ -26,7 +26,7 @@ class ChatbotMessagesListView extends StatelessWidget {
             text: message['text'],
             user: message['isUserMessage'] 
               ? ChatUser(id: '1', firstName: 'User') 
-              : ChatUser(id: 'bot', firstName: 'ChatBot'),
+              : ChatUser(id: 'bot', firstName: 'Lawyer'),
             createdAt: DateTime.now(),
           );
         }).toList(),

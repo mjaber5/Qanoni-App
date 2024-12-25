@@ -4,10 +4,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:retry/retry.dart';
+import 'package:provider/provider.dart'; // إضافة المكتبة الخاصة بـ Provider
+import 'chat_provider.dart';
 import 'chatbot_messages_list_view.dart';
 import 'chatbot_text_feild.dart';
 import 'custom_chatbot_app_bar.dart';
-import 'package:dash_chat_2/dash_chat_2.dart'; // إضافة المكتبة الخاصة بالـ DashChat
+import 'package:dash_chat_2/dash_chat_2.dart';
 
 class ChatbotViewBody extends StatefulWidget {
   const ChatbotViewBody({super.key});
@@ -17,9 +19,8 @@ class ChatbotViewBody extends StatefulWidget {
 }
 
 class ChatbotViewBodyState extends State<ChatbotViewBody> {
-  final List<Map<String, dynamic>> _messages = [];
   final TextEditingController _controller = TextEditingController();
-  final List<ChatUser> _typing = []; // تعريف قائمة الـ _typing
+  final List<ChatUser> _typing = [];
 
   final String apiUrl =
       "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyClGN75ksKSYqzfo8S9ypmygky5dZ86tm4";
@@ -54,11 +55,12 @@ class ChatbotViewBodyState extends State<ChatbotViewBody> {
         final result = jsonDecode(response.body);
         final botResponse = result['candidates'][0]['content']['parts'][0]['text'];
 
-        setState(() {
-          _messages.insert(0, {'text': botResponse, 'isUserMessage': false});
-          // بعد أن يقوم البوت بالرد، يتم إزالة المستخدمين الذين في حالة الكتابة
-          _typing.clear();
+        // إضافة الرد من البوت إلى الرسائل
+        context.read<ChatProvider>().addMessage({
+          'text': botResponse,
+          'isUserMessage': false,
         });
+        _typing.clear();
       } else {
         log('Error: ${response.statusCode}');
       }
@@ -72,15 +74,25 @@ class ChatbotViewBodyState extends State<ChatbotViewBody> {
   void _handleSend() {
     final text = _controller.text.trim();
     if (text.isNotEmpty) {
-      setState(() {
-        _messages.insert(0, {'text': text, 'isUserMessage': true});
-        _controller.clear();
-        // إضافة المستخدم (المستخدم الذي يكتب) إلى الـ _typing
-        _typing.add(ChatUser(id: '1', firstName: 'User'));
+      // إضافة الرسالة من المستخدم إلى الرسائل
+      context.read<ChatProvider>().addMessage({
+        'text': text,
+        'isUserMessage': true,
       });
+      _controller.clear();
+
+      // إضافة المستخدم إلى قائمة الذين يكتبون
+      _typing.add(ChatUser(id: '1', firstName: 'User'));
 
       _fetchBotResponse(text);
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // تحميل الرسائل عند بدء التطبيق
+    context.read<ChatProvider>().loadMessages();
   }
 
   @override
@@ -88,9 +100,13 @@ class ChatbotViewBodyState extends State<ChatbotViewBody> {
     return Column(
       children: [
         const CustomAppBar(),
-        ChatbotMessagesListView(
-          messages: _messages,
-          typingUsers: _typing, // تم تمرير قائمة الـ _typing هنا
+        Consumer<ChatProvider>(
+          builder: (context, provider, child) {
+            return ChatbotMessagesListView(
+              messages: provider.messages,
+              typingUsers: _typing,
+            );
+          },
         ),
         ChatbotTextField(
           chatbotMessageController: _controller,
