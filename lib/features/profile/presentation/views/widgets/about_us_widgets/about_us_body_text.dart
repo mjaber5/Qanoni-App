@@ -13,7 +13,7 @@ class AboutUsBodyText extends StatelessWidget {
         children: [
           Text(
             localizations.aboutUsBodyText,
-            style: const TextStyle(fontSize: 16),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           ),
         ],
       ),
