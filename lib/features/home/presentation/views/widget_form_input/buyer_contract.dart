@@ -5,7 +5,7 @@ import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/data/contract_status/contract_status_cubit.dart';
+import 'package:qanoni/features/home/presentation/view_model/contract_status/contract_status_cubit.dart';
 import 'package:qanoni/features/home/presentation/views/widget_form_input/view_car_info.dart';
 
 class BuyerContract extends StatefulWidget {
@@ -186,7 +186,10 @@ class _BuyerContractState extends State<BuyerContract> {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: const Text('OK',style: TextStyle(color: QColors.secondary),),
+            child: const Text(
+              'OK',
+              style: TextStyle(color: QColors.secondary),
+            ),
           ),
         ],
       ),
@@ -242,7 +245,8 @@ class _BuyerContractState extends State<BuyerContract> {
                 onPressed: validateAndSubmit, // Use the validation method
                 style: ElevatedButton.styleFrom(
                   backgroundColor: QColors.secondary,
-                  minimumSize: const Size(double.infinity, 50), // Full width button
+                  minimumSize:
+                      const Size(double.infinity, 50), // Full width button
                 ),
                 child: const Text('Next Step'),
               ),

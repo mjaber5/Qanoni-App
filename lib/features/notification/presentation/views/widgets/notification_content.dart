@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/data/contract_status/contract_status_cubit.dart';
+import 'package:qanoni/features/home/presentation/view_model/contract_status/contract_status_cubit.dart';
 
 import 'all.dart';
 import 'done.dart';

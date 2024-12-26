@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
@@ -13,195 +11,158 @@ class ContractCubit extends Cubit<ContractStatusState> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  String _enteredUserId = '';
-  String _contractId = '';
+  String enteredUserId = ''; // For tracking the entered user ID
+  String contractId = ''; // For storing the contract ID after creation
 
-  /// Create a new contract
+  /// Create a new contract and set its initial status to "pending"
   Future<void> createContract({
-    required Map<String, String> buyerInfo,
-    required Map<String, String> sellerInfo,
-    required Map<String, String> carInfo,
-    required Map<String, String> signatures,
+    required String otherUserId,
+    required String userType,
+    required Map<String, dynamic> buyerData,
+    required Map<String, dynamic> sellerData,
+    Map<String, dynamic>? currentUser,
   }) async {
-    if ([buyerInfo, sellerInfo, carInfo, signatures]
-        .any((map) => map.isEmpty)) {
-      _emitError('Invalid input: Missing data.');
-      return;
-    }
-
     emit(ContractLoading());
     try {
-      final currentUser = _firebaseAuth.currentUser;
+      final User? currentUser = _firebaseAuth.currentUser;
       if (currentUser == null) {
-        _emitError('User not logged in.');
+        emit(const ContractError('User not logged in.'));
         return;
       }
 
-      // Generate a unique contract ID
-      final contractId = _firestore.collection('contracts').doc().id;
+      final currentUserDoc =
+          await _firestore.collection('users').doc(currentUser.uid).get();
+      if (!currentUserDoc.exists) {
+        emit(const ContractError('User data not found.'));
+        return;
+      }
 
-      // Contract data
+      final currentUserData = currentUserDoc.data();
+      if (currentUserData == null) {
+        emit(const ContractError('Invalid user data.'));
+        return;
+      }
+
+      // Create contract data
       final contractData = {
-        'buyerInfo': buyerInfo,
-        'sellerInfo': sellerInfo,
-        'carInfo': carInfo,
-        'signatures': signatures,
-        'createdAt': FieldValue.serverTimestamp(),
-        'updatedAt': FieldValue.serverTimestamp(),
-        'userId': currentUser.uid,
+        'sellerId': currentUser.uid,
+        'buyerId': otherUserId,
+        'status': 'pending', // Initial status
+        'buyerData': buyerData, // Passing buyer data
+        'sellerData': sellerData, // Passing seller data
+        'email': currentUserData['email'],
+        'userName': currentUserData['userName'],
+        'phone': currentUserData['phone'],
+        'idNumber': currentUserData['idNumber'],
+        'timestamp': FieldValue.serverTimestamp(),
       };
 
-      // Save contract to Firestore
-      await _firestore
-          .collection('contracts')
-          .doc(contractId)
-          .set(contractData);
-      _contractId = contractId;
+      // Add the contract to Firestore and get the contract ID
+      final contractRef =
+          await _firestore.collection('contracts').add(contractData);
+      contractId = contractRef.id; // Store the contract ID after creation
 
       emit(ContractSuccess(
-          'Contract created successfully! Contract ID: $contractId'));
-      log('Contract created successfully: $contractId');
+          'Contract request sent successfully! Contract ID: $contractId'));
     } catch (e) {
-      _emitError('Failed to create contract: $e');
+      emit(ContractError('Failed to create contract: ${e.toString()}'));
     }
   }
 
-  /// Save seller information
-  Future<void> saveSeller({
-    required String fullName,
-    required String birthDate,
-    required String nationalID,
-    required String registryNumber,
-    required String registryPlace,
-    required String expiryDate,
-  }) async {
-    if ([
-      fullName,
-      birthDate,
-      nationalID,
-      registryNumber,
-      registryPlace,
-      expiryDate
-    ].any((field) => field.isEmpty)) {
-      _emitError('Invalid input: Missing seller data.');
-      return;
-    }
-
-    if (_contractId.isEmpty) {
-      _emitError('No active contract to save seller information.');
-      return;
-    }
-
-    emit(ContractLoading());
-    try {
-      final sellerInfo = {
-        'fullName': fullName,
-        'birthDate': birthDate,
-        'nationalID': nationalID,
-        'registryNumber': registryNumber,
-        'registryPlace': registryPlace,
-        'expiryDate': expiryDate,
-      };
-
-      await _firestore.collection('contracts').doc(_contractId).update({
-        'sellerInfo': sellerInfo,
-        'updatedAt': FieldValue.serverTimestamp(),
-      });
-
-      emit(const ContractUpdated('Seller information saved successfully.'));
-      log('Seller information saved for contract: $_contractId');
-    } catch (e) {
-      _emitError('Failed to save seller information: $e');
-    }
-  }
-
-  /// Update specific fields in the contract
-  Future<void> _updateContractField({
-    required String contractId,
-    required String fieldKey,
-    required Map<String, String> data,
-    required String successMessage,
-    required String errorMessage,
-  }) async {
-    if (contractId.isEmpty || data.isEmpty) {
-      _emitError('Invalid input: Contract ID or $fieldKey data is empty.');
-      return;
-    }
-
+  /// Change the contract's status to "in-progress" when an agent views it
+  Future<void> setInProgress({required String contractId}) async {
     emit(ContractLoading());
     try {
       await _firestore.collection('contracts').doc(contractId).update({
-        fieldKey: data,
-        'updatedAt': FieldValue.serverTimestamp(),
+        'status': 'in-progress',
       });
-
-      emit(ContractUpdated(successMessage));
-      log(successMessage);
+      emit(const ContractUpdated('in-progress'));
     } catch (e) {
-      _emitError('$errorMessage: $e');
+      emit(ContractError(
+          'Failed to update status to in-progress: ${e.toString()}'));
     }
   }
 
-  /// Update buyer information
-  Future<void> updateBuyerInfo({
+  /// Respond to the contract: Approve or Reject
+  Future<void> respondToContract({
     required String contractId,
-    required Map<String, String> buyerInfo,
+    required String response, // Accepts "approved" or "rejected"
   }) async {
-    await _updateContractField(
-      contractId: contractId,
-      fieldKey: 'buyerInfo',
-      data: buyerInfo,
-      successMessage: 'Buyer information updated successfully.',
-      errorMessage: 'Failed to update buyer information',
-    );
+    emit(ContractLoading());
+    try {
+      await _firestore.collection('contracts').doc(contractId).update({
+        'status': response,
+      });
+      emit(ContractUpdated(response));
+    } catch (e) {
+      emit(ContractError('Failed to respond to contract: ${e.toString()}'));
+    }
   }
 
-  /// Update car information
-  Future<void> updateCarInfo({
-    required String contractId,
-    required Map<String, String> carInfo,
+  /// Fetch contracts with the given status for a specific user
+  Future<List<Map<String, dynamic>>> fetchContractsForUser({
+    required String userId,
+    String? status, // Optional status filter
   }) async {
-    await _updateContractField(
-      contractId: contractId,
-      fieldKey: 'carInfo',
-      data: carInfo,
-      successMessage: 'Car information updated successfully.',
-      errorMessage: 'Failed to update car information',
-    );
-  }
+    try {
+      Query query = _firestore
+          .collection('contracts')
+          .where('buyerId', isEqualTo: userId);
+      if (status != null) {
+        query = query.where('status', isEqualTo: status);
+      }
 
-  /// Update signatures
-  Future<void> updateSignatures({
-    required String contractId,
-    required Map<String, String> signatures,
-  }) async {
-    await _updateContractField(
-      contractId: contractId,
-      fieldKey: 'signatures',
-      data: signatures,
-      successMessage: 'Signatures updated successfully.',
-      errorMessage: 'Failed to update signatures',
-    );
+      final querySnapshot = await query.get();
+
+      return querySnapshot.docs.map((doc) {
+        return {
+          'contractId': doc.id,
+          ...doc.data() as Map<String, dynamic>,
+        };
+      }).toList();
+    } catch (e) {
+      emit(ContractError('Failed to fetch contracts: ${e.toString()}'));
+      return [];
+    }
   }
 
   /// Set the entered user ID
-  void setUserIduse(String userIduse) {
-    if (userIduse.isEmpty) {
-      _emitError('Entered user Iduse is empty.');
-      return;
-    }
-
-    _enteredUserId = userIduse;
-    emit(ContractUserIdUpdated(userIduse));
+  void setUserId(String userId) {
+    enteredUserId = userId;
+    emit(ContractUserIdUpdated(userId));
   }
 
-  /// Getters
-  String getEnteredUserIduse() => _enteredUserId;
-  String getContractId() => _contractId;
+  /// Get both sellerId and buyerId from the contract data
+  Future<Map<String, String>> getBuyerAndSellerIds() async {
+    try {
+      // Fetch contract document by contractId
+      final contractDoc =
+          await _firestore.collection('contracts').doc(contractId).get();
+      if (contractDoc.exists) {
+        final contractData = contractDoc.data() as Map<String, dynamic>;
+        // Return both buyerId and sellerId in a map
+        return {
+          'sellerId': contractData['sellerId'] ?? '',
+          'buyerId': contractData['buyerId'] ?? '',
+        };
+      } else {
+        emit(const ContractError('Contract not found.'));
+        return {'sellerId': '', 'buyerId': ''};
+      }
+    } catch (e) {
+      emit(ContractError(
+          'Failed to fetch sellerId and buyerId: ${e.toString()}'));
+      return {'sellerId': '', 'buyerId': ''};
+    }
+  }
 
-  /// Emit an error state with a message
-  void _emitError(String message) {
-    emit(ContractError(message));
-    log('Error: $message');
+  /// Get the entered user ID
+  String getEnteredUserId() {
+    return enteredUserId;
+  }
+
+  /// Get the contract ID
+  String getContractId() {
+    return contractId;
   }
 }

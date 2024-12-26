@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/data/contract_status/contract_status_cubit.dart';
+import 'package:qanoni/features/home/presentation/view_model/contract_status/contract_status_cubit.dart';
 import 'package:qanoni/features/home/presentation/views/widget_form_input/buyer_contract.dart';
 import 'package:qanoni/features/home/presentation/views/widget_form_input/seller_cuntract.dart';
 

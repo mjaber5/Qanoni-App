@@ -6,7 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:qanoni/features/home/data/contract_status/contract_status_cubit.dart';
+import 'package:qanoni/features/home/presentation/view_model/contract_status/contract_status_cubit.dart';
 import 'core/errors/failures.dart';
 import 'package:user_repository/user_reposetory.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -37,20 +37,20 @@ void main() async {
 
   final prefs = await SharedPreferences.getInstance();
 
-  runApp(
-    MultiBlocProvider(
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider(
+        create: (_) => ThemeCubit(prefs),
+      ),
+      BlocProvider(
+        create: (_) => ContractCubit(),
+      ),
+    ],
+    child: MultiProvider(
       providers: [
-        BlocProvider(
-          create: (_) => ThemeCubit(prefs),
-        ),
-        BlocProvider(
-          create: (_) => ContractCubit(),
-        ),
+        ChangeNotifierProvider(
+            create: (_) => ChatProvider()), // إضافة ChatProvider هنا
       ],
-      child: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => ChatProvider()),  // إضافة ChatProvider هنا
-        ],
       child: RepositoryProvider(
         create: (_) => FirebaseUserRepo(),
         child: Qanoni(
