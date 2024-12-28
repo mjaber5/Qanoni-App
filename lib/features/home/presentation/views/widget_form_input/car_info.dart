@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:qanoni/features/home/data/contract_repo.dart';
 
 import '../../../../../core/utils/constants/colors.dart';
 import 'contract_info.dart';
@@ -19,13 +20,16 @@ class _CarContractState extends State<CarInfo> {
   XFile? _backImageFile;
 
   // Text Controllers for extracted data
-  final TextEditingController carPlateNumberController = TextEditingController();
+  final TextEditingController carPlateNumberController =
+      TextEditingController();
   final TextEditingController vinNumberController = TextEditingController();
   final TextEditingController engineNumberController = TextEditingController();
   final TextEditingController carModelController = TextEditingController();
   final TextEditingController carColorController = TextEditingController();
-  final TextEditingController carRegistrationNumberController = TextEditingController();
-  final TextEditingController insuranceExpiryDateController = TextEditingController();
+  final TextEditingController carRegistrationNumberController =
+      TextEditingController();
+  final TextEditingController insuranceExpiryDateController =
+      TextEditingController();
   final TextEditingController carConditionController = TextEditingController();
 
   // Process the image with ML Kit Text Recognition
@@ -34,7 +38,8 @@ class _CarContractState extends State<CarInfo> {
     final textRecognizer = TextRecognizer();
 
     try {
-      final RecognizedText recognizedText = await textRecognizer.processImage(inputImage);
+      final RecognizedText recognizedText =
+          await textRecognizer.processImage(inputImage);
 
       if (isFront) {
         extractFrontData(recognizedText.text);
@@ -97,15 +102,18 @@ class _CarContractState extends State<CarInfo> {
   // Extract data from the back side (Car registration and condition)
   void extractBackData(String recognizedText) {
     final registrationNumberRegex = RegExp(r'\b\d{1,5}/\d{1,5}\b');
-    final registrationNumberMatch = registrationNumberRegex.firstMatch(recognizedText);
+    final registrationNumberMatch =
+        registrationNumberRegex.firstMatch(recognizedText);
     if (registrationNumberMatch != null) {
       setState(() {
-        carRegistrationNumberController.text = registrationNumberMatch.group(0)!;
+        carRegistrationNumberController.text =
+            registrationNumberMatch.group(0)!;
       });
     }
 
     final insuranceExpiryDateRegex = RegExp(r'\b\d{2}/\d{2}/\d{4}\b');
-    final insuranceExpiryDateMatch = insuranceExpiryDateRegex.firstMatch(recognizedText);
+    final insuranceExpiryDateMatch =
+        insuranceExpiryDateRegex.firstMatch(recognizedText);
     if (insuranceExpiryDateMatch != null) {
       setState(() {
         insuranceExpiryDateController.text = insuranceExpiryDateMatch.group(0)!;
@@ -138,6 +146,21 @@ class _CarContractState extends State<CarInfo> {
     }
   }
 
+  void submitCarInfoContract() {
+    final contractRepo = ContractRepo();
+    final carInfo = contractRepo.createCarInfoForm(
+      carPlateNumber: carPlateNumberController.text,
+      vinNumber: vinNumberController.text,
+      engineNumber: engineNumberController.text,
+      carModel: carModelController.text,
+      carColor: carColorController.text,
+      carRegistrationNumber: carRegistrationNumberController.text,
+      insuranceExpiryDate: insuranceExpiryDateController.text,
+      carCondition: carConditionController.text,
+    );
+    contractRepo.saveContract(carInfo: carInfo);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,7 +173,7 @@ class _CarContractState extends State<CarInfo> {
           child: Column(
             children: [
               // Front and Back Image Picker Section
-             Card(
+              Card(
                 elevation: 5,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -178,17 +201,20 @@ class _CarContractState extends State<CarInfo> {
               _buildTextField('Engine Number', engineNumberController),
               _buildTextField('Car Model', carModelController),
               _buildTextField('Car Color', carColorController),
-              _buildTextField('Car Registration Number', carRegistrationNumberController),
-              _buildTextField('Insurance Expiry Date', insuranceExpiryDateController),
+              _buildTextField(
+                  'Car Registration Number', carRegistrationNumberController),
+              _buildTextField(
+                  'Insurance Expiry Date', insuranceExpiryDateController),
               _buildTextField('Car Condition', carConditionController),
-                            const SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               ElevatedButton(
                 onPressed: () {
-                  // submitBuyerContract(); // Submit data to the ContractCubit
+                  submitCarInfoContract(); // Submit data to the ContractCubit
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const ContractInfoForm()),
+                    MaterialPageRoute(
+                        builder: (context) => const ContractInfoForm()),
                   );
                 },
                 style: ElevatedButton.styleFrom(
@@ -217,6 +243,7 @@ class _CarContractState extends State<CarInfo> {
       ),
     );
   }
+
   Widget _buildImageSection({
     XFile? imageFile,
     required String label,
@@ -238,7 +265,6 @@ class _CarContractState extends State<CarInfo> {
       ],
     );
   }
-
 
   @override
   void dispose() {

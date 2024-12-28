@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:qanoni/features/home/data/contract_repo.dart';
 import 'package:qanoni/features/home/presentation/view_model/contract_status/contract_status_cubit.dart';
 import 'core/errors/failures.dart';
 import 'package:user_repository/user_reposetory.dart';
@@ -36,6 +37,7 @@ void main() async {
   Bloc.observer = SimpleBlocObserver();
 
   final prefs = await SharedPreferences.getInstance();
+  ContractRepo contractRepo = ContractRepo();
 
   runApp(MultiBlocProvider(
     providers: [
@@ -43,7 +45,7 @@ void main() async {
         create: (_) => ThemeCubit(prefs),
       ),
       BlocProvider(
-        create: (_) => ContractCubit(),
+        create: (_) => ContractCubit(contractRepo),
       ),
     ],
     child: MultiProvider(

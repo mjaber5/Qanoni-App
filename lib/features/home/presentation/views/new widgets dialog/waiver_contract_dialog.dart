@@ -76,23 +76,10 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
         return;
       }
 
-      final otherUserDoc = querySnapshot.docs.first.data();
-      Map<String, dynamic> buyerData = {};
-      Map<String, dynamic> sellerData = {};
+      querySnapshot.docs.first.data();
 
       if (_selectedUserType == "Buyer") {
-        buyerData = otherUserDoc;
-      } else if (_selectedUserType == "Seller") {
-        sellerData = otherUserDoc;
-      }
-
-      context.read<ContractCubit>().createContract(
-            currentUser: currentUserDoc.data(),
-            otherUserId: userIduseInput,
-            userType: _selectedUserType!,
-            buyerData: buyerData,
-            sellerData: sellerData,
-          );
+      } else if (_selectedUserType == "Seller") {}
     } catch (error) {
       log('Error validating userIduse: $error');
       _showSnackBar(context, "Error: ${error.toString()}", Colors.red);

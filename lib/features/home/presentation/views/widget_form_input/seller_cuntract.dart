@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
+import 'package:qanoni/features/home/data/contract_repo.dart';
 
 import 'car_info.dart';
 
@@ -132,11 +133,27 @@ class _SellerContractState extends State<SellerContract> {
   // Validate form and navigate to next screen
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
+      submitSellerContract();
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const CarInfo()),
       );
     }
+  }
+
+  void submitSellerContract() {
+    final contractRepo = ContractRepo();
+    final sellerData = contractRepo.createSeller(
+      fullName: sellerFullNameController.text,
+      birthDate: sellerBirthDateController.text,
+      nationalID: sellerNationalIDController.text,
+      registryNumber: sellerRegistryNumberController.text,
+      registryPlace: sellerRegistryPlaceController.text,
+      expiryDate: sellerExpiryDateController.text,
+    );
+    contractRepo.saveContract(
+      seller: sellerData,
+    );
   }
 
   @override
