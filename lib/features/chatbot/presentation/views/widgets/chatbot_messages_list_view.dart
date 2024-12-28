@@ -33,7 +33,7 @@ class ChatbotMessagesListView extends StatelessWidget {
         onSend: (ChatMessage m) {
           // Handle message send action here
         },
-        readOnly: true, // تعطيل وإخفاء حقل الإدخال
+        readOnly: true,
       ),
     );
   }
