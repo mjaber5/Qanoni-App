@@ -177,8 +177,9 @@ class NotificationContentState extends State<NotificationContent> {
                   String contractId =
                       context.read<ContractCubit>().getContractId();
                   return FutureBuilder<Map<String, String>>(
-                    future:
-                        context.read<ContractCubit>().getBuyerAndSellerIds(),
+                    future: context
+                        .read<ContractCubit>()
+                        .getBuyerAndSellerIds(contractId),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(

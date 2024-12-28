@@ -3,9 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/presentation/view_model/contract_status/contract_status_cubit.dart';
+import 'package:qanoni/features/home/data/contract_repo.dart';
 import 'package:qanoni/features/home/presentation/views/widget_form_input/view_car_info.dart';
 
 class BuyerContract extends StatefulWidget {
@@ -129,31 +128,20 @@ class _BuyerContractState extends State<BuyerContract> {
     }
   }
 
-  // Submit the buyer's contract and move it to Firebase
+  // Submit the buyer's contract via Cubit
   void submitBuyerContract() {
-    final buyerData = {
-      'fullName': buyerFullNameController.text,
-      'birthDate': buyerBirthDateController.text,
-      'nationalID': buyerNationalIDController.text,
-      'registryNumber': buyerRegistryNumberController.text,
-      'registryPlace': buyerRegistryPlaceController.text,
-      'expiryDate': buyerExpiryDateController.text,
-    };
-
-    final sellerData = {
-      // You need to populate this with seller data, maybe passed from another screen or session
-      'fullName': 'Seller Name',
-      'nationalID': 'Seller National ID',
-      'phone': 'Seller Phone',
-    };
-
-    // Call the ContractCubit to create the contract with both buyer and seller data
-    context.read<ContractCubit>().createContract(
-          otherUserId: 'sellerId', // Replace with actual seller ID
-          userType: 'buyer', // Set the user type as needed
-          buyerData: buyerData,
-          sellerData: sellerData,
-        );
+    final contractRepo = ContractRepo();
+    final buyerData = contractRepo.createBuyer(
+      fullName: buyerFullNameController.text,
+      birthDate: buyerBirthDateController.text,
+      nationalID: buyerNationalIDController.text,
+      registryNumber: buyerRegistryNumberController.text,
+      registryPlace: buyerRegistryPlaceController.text,
+      expiryDate: buyerExpiryDateController.text,
+    );
+    contractRepo.saveContract(
+      buyer: buyerData,
+    );
   }
 
   // Validate and submit the form
