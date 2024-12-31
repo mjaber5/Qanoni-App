@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:qanoni/features/home/presentation/views/create_contract_view.dart';
 import 'package:qanoni/features/home/presentation/views/success_view.dart';
 import 'package:qanoni/features/home/presentation/views/widget_form_input/buyer_contract.dart';
+import 'package:qanoni/features/home/presentation/views/widget_form_input/car_info.dart';
+import 'package:qanoni/features/home/presentation/views/widget_form_input/contract_info.dart';
 import 'package:qanoni/features/home/presentation/views/widget_form_input/seller_cuntract.dart';
 import '../../features/profile/presentation/views/change_password_view.dart';
 import 'constants/aceapt_page.dart';
@@ -56,6 +58,8 @@ abstract class AppRouter {
   static const kCreateContract = '/createContractView';
   static const kBuyerContract = '/buyerContract';
   static const kSellerContract = '/sellerContract';
+  static const kCarInformation = '/carInformation';
+  static const kContractInformationForm = '/contractInformationForm';
 
   static final router = GoRouter(
     routes: [
@@ -175,7 +179,15 @@ abstract class AppRouter {
       GoRoute(
         path: kSellerContract,
         builder: (context, state) => const SellerContract(),
-      )
+      ),
+      GoRoute(
+        path: kCarInformation,
+        builder: (context, state) => const CarInfo(),
+      ),
+      GoRoute(
+        path: kContractInformationForm,
+        builder: (context, state) => const ContractInfoForm(),
+      ),
     ],
   );
 }

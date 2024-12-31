@@ -75,6 +75,7 @@ dependencies:
   flutter_tts: ^4.2.1
   speech_to_text: ^7.0.0
   dash_chat_2: ^0.0.21
+  signature: ^5.5.0
 
 dev_dependencies:
   flutter_test:

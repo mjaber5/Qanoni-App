@@ -1,6 +1,10 @@
+import 'dart:developer';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:qanoni/features/home/data/contract_repo.dart';
-
+import 'package:qanoni/features/home/data/model/contract_information_data.dart';
+import 'package:signature/signature.dart';
 import '../../../../../core/utils/constants/colors.dart';
 
 class ContractInfoForm extends StatefulWidget {
@@ -11,40 +15,145 @@ class ContractInfoForm extends StatefulWidget {
 }
 
 class _ContractInfoFormState extends State<ContractInfoForm> {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final TextEditingController contractDateController = TextEditingController();
-  final TextEditingController contractPlaceController = TextEditingController();
   final TextEditingController saleAmountController = TextEditingController();
-  final TextEditingController ownershipTransferController =
-      TextEditingController();
   final TextEditingController additionalTermsController =
       TextEditingController();
 
-  // متغيرات لحفظ حالة مربع الاختيار
+  final SignatureController _signatureController = SignatureController(
+    penStrokeWidth: 5,
+    penColor: Colors.black,
+    exportBackgroundColor: Colors.white,
+  );
+
+  // Variables to save checkbox state
   bool ownershipTransferChecked = false;
 
-  // قائمة طرق الدفع
+  // Payment methods dropdown list
   String? selectedPaymentMethod;
 
-  void submitContractInfo() {
-    final contractRepo = ContractRepo();
-    final contractInfo = contractRepo.createContractInfo(
-      contractDate: contractDateController.text,
-      contractPlace: contractPlaceController.text,
-      saleAmount: saleAmountController.text,
-      paymentMethod: selectedPaymentMethod ?? 'online',
-      ownershipTransfer: ownershipTransferChecked,
-      additionalTerms: additionalTermsController.text,
-    );
+  String? _signatureUrl;
 
-    contractRepo.saveContract(contractInfo: contractInfo);
+  @override
+  void initState() {
+    super.initState();
+    // Set the current date and time on the contractDateController
+    final now = DateTime.now();
+    final formattedDate = DateFormat('dd/MM/yyyy hh:mm a').format(now);
+    contractDateController.text = formattedDate;
+  }
+
+  Future<void> _captureSignature(BuildContext context) async {
+    await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Sign the Contract'),
+        content: SizedBox(
+          height: 300,
+          width: 300,
+          child: Signature(
+            controller: _signatureController,
+            backgroundColor: Colors.grey[200]!,
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              _signatureController.clear();
+              Navigator.of(context).pop();
+            },
+            child: const Text('Clear'),
+          ),
+          TextButton(
+            onPressed: () async {
+              if (_signatureController.isNotEmpty) {
+                final signature = await _signatureController.toPngBytes();
+                if (signature != null) {
+                  // Save signature locally or upload to Firebase
+                  setState(() {
+                    _signatureUrl =
+                        'User Signature Captured'; // Placeholder for signature URL
+                  });
+                }
+              }
+              Navigator.of(context).pop();
+            },
+            child: const Text('Save'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Method to submit contract info
+  Future<void> submitContractInfo() async {
+    try {
+      final currentUser = _firebaseAuth.currentUser;
+      if (currentUser == null) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('User not logged in.')),
+        );
+        return;
+      }
+
+      final contractRepo = ContractRepo();
+
+      final contractInfo = ContractInfo(
+        contractDate: contractDateController.text,
+        contractPlace: _signatureUrl ?? 'No Signature',
+        saleAmount: saleAmountController.text,
+        paymentMethod: selectedPaymentMethod ?? 'online',
+        ownershipTransfer: ownershipTransferChecked,
+        additionalTerms: additionalTermsController.text,
+      );
+
+      await contractRepo.saveContract(
+        contractInfo: contractInfo,
+        buyer: null, // Provide buyer data if available
+        seller: null, // Provide seller data if available
+        carInfo: null, // Provide car info if available
+        creatorId: currentUser.uid,
+      );
+
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Contract data saved successfully!')),
+      );
+    } catch (e) {
+      log('Error saving contract data: $e');
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error saving contract data: $e')),
+      );
+    }
+  }
+
+  // Validate the inputs
+  bool _validateInputs() {
+    if (contractDateController.text.isEmpty ||
+        _signatureUrl == null ||
+        saleAmountController.text.isEmpty ||
+        selectedPaymentMethod == null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Please fill in all required fields.')),
+        );
+      });
+      return false;
+    }
+    return true;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('بيانات العقد'),
+        title: const Text('Contract Information'),
         centerTitle: true,
+        backgroundColor: QColors.secondary,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -53,17 +162,26 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Text fields for contract data
-              _buildTextField('تاريخ العقد', contractDateController),
-              _buildTextField('مكان توقيع العقد', contractPlaceController),
-              _buildTextField('قيمة البيع', saleAmountController),
+              _buildTextField('Contract Date', contractDateController,
+                  enabled: false),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12.0),
+                child: Center(
+                  child: ElevatedButton(
+                    onPressed: () => _captureSignature(context),
+                    child: const Text('Capture Signature'),
+                  ),
+                ),
+              ),
+              _buildTextField('Sale Amount', saleAmountController),
 
-              // Spinner for payment method
+              // Dropdown for payment method
               _buildPaymentMethodDropdown(),
 
               // Checkbox for ownership transfer
               _buildOwnershipTransferCheckbox(),
 
-              _buildTextField('شروط إضافية', additionalTermsController),
+              _buildTextField('Additional Terms', additionalTermsController),
               const SizedBox(height: 20),
 
               // Save Button
@@ -77,14 +195,12 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
                     ),
                   ),
                   onPressed: () {
-                    submitContractInfo();
-                    // هنا يمكنك إضافة الكود لمعالجة البيانات المدخلة، مثل حفظ البيانات
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('تم حفظ بيانات العقد')),
-                    );
+                    if (_validateInputs()) {
+                      submitContractInfo();
+                    }
                   },
                   child: const Text(
-                    'حفظ البيانات',
+                    'Save Data',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -96,15 +212,18 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
     );
   }
 
-  Widget _buildTextField(String label, TextEditingController controller) {
+  Widget _buildTextField(String label, TextEditingController controller,
+      {bool enabled = true, VoidCallback? onTap}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0),
       child: TextField(
         controller: controller,
+        enabled: enabled,
+        onTap: onTap,
         decoration: InputDecoration(
           labelText: label,
-          labelStyle: const TextStyle(
-              fontSize: 16, fontWeight: FontWeight.w500, color: Colors.black54),
+          labelStyle:
+              const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
             borderSide: const BorderSide(color: QColors.secondary),
@@ -123,19 +242,17 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
       child: DropdownButtonFormField<String>(
         value: selectedPaymentMethod,
         decoration: const InputDecoration(
-          labelText: 'طريقة الدفع',
-          labelStyle: TextStyle(
-              fontSize: 16, fontWeight: FontWeight.w500, color: Colors.black54),
+          labelText: 'Payment Method',
+          labelStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           border: OutlineInputBorder(
-            // borderRadius: BorderRadius.circular(15),
             borderSide: BorderSide(color: QColors.secondary),
           ),
         ),
         items: [
-          'نقداً',
-          'تحويل بنكي',
-          'بطاقة ائتمان',
-          'دفع عبر الإنترنت',
+          'Cash',
+          'Bank Transfer',
+          'Credit Card',
+          'Online Payment',
         ].map((method) {
           return DropdownMenuItem<String>(
             value: method,
@@ -164,7 +281,7 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
               });
             },
           ),
-          const Expanded(child: Text('التزام الطرفين بنقل الملكية قانونياً')),
+          const Expanded(child: Text('Legal ownership transfer commitment')),
         ],
       ),
     );
@@ -172,11 +289,11 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
 
   @override
   void dispose() {
-    // Dispose the text controllers to avoid memory leaks
+    // Dispose the text controllers and signature controller to avoid memory leaks
     contractDateController.dispose();
-    contractPlaceController.dispose();
     saleAmountController.dispose();
     additionalTermsController.dispose();
+    _signatureController.dispose();
     super.dispose();
   }
 }

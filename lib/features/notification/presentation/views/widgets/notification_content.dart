@@ -77,6 +77,7 @@ class NotificationContentState extends State<NotificationContent> {
       channelDescription: 'This channel is used for important notifications.',
       importance: Importance.high,
       priority: Priority.high,
+      sound: RawResourceAndroidNotificationSound('notification_sound'),
     );
     const notificationDetails = NotificationDetails(android: androidDetails);
 
@@ -89,11 +90,10 @@ class NotificationContentState extends State<NotificationContent> {
   }
 
   void _handleNotificationClick(Map<String, dynamic> data) {
-    // Handle notification click logic, e.g., navigate to a specific screen
     if (data['type'] == 'request') {
-      _pageController.jumpToPage(1); // Jump to "Request" tab
+      _pageController.jumpToPage(1);
     } else if (data['type'] == 'done') {
-      _pageController.jumpToPage(2); // Jump to "Done" tab
+      _pageController.jumpToPage(2);
     }
   }
 
@@ -172,14 +172,10 @@ class NotificationContentState extends State<NotificationContent> {
               const All(),
               BlocBuilder<ContractCubit, ContractStatusState>(
                 builder: (context, state) {
-                  String enteredUserId =
-                      context.read<ContractCubit>().getEnteredUserId();
-                  String contractId =
-                      context.read<ContractCubit>().getContractId();
+                  final contractCubit = context.read<ContractCubit>();
+                  final contractId = contractCubit.getContractId();
                   return FutureBuilder<Map<String, String>>(
-                    future: context
-                        .read<ContractCubit>()
-                        .getBuyerAndSellerIds(contractId),
+                    future: contractCubit.getBuyerAndSellerIds(contractId),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(
@@ -188,12 +184,11 @@ class NotificationContentState extends State<NotificationContent> {
                       } else if (snapshot.hasError) {
                         return Text('Error: ${snapshot.error}');
                       } else if (snapshot.hasData) {
-                        String buyerId = snapshot.data!['buyerId']!;
-                        String sellerId = snapshot.data!['sellerId']!;
+                        final buyerId = snapshot.data!['buyerId']!;
+                        final sellerId = snapshot.data!['sellerId']!;
 
-                        // Return the Request widget with buyerId and sellerId
                         return Request(
-                          enteredUserId: enteredUserId,
+                          enteredUserId: contractCubit.getEnteredUserId(),
                           contractId: contractId,
                           buyerId: buyerId,
                           sellerId: sellerId,

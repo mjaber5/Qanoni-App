@@ -5,7 +5,8 @@ import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/features/home/data/contract_repo.dart';
-import 'package:qanoni/features/home/presentation/views/widget_form_input/view_car_info.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:qanoni/features/home/data/model/buyer_data.dart';
 
 class BuyerContract extends StatefulWidget {
   const BuyerContract({super.key});
@@ -32,6 +33,9 @@ class _BuyerContractState extends State<BuyerContract> {
   final TextEditingController buyerExpiryDateController =
       TextEditingController();
 
+  // Firebase Auth instance
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
   // Process the image with ML Kit Text Recognition
   Future<void> processImage(File imageFile, {bool isFront = true}) async {
     final inputImage = InputImage.fromFile(imageFile);
@@ -48,7 +52,7 @@ class _BuyerContractState extends State<BuyerContract> {
       }
     } catch (e) {
       log('Error processing image: $e');
-      // ignore: use_build_context_synchronously
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Failed to process image')),
       );
@@ -128,20 +132,45 @@ class _BuyerContractState extends State<BuyerContract> {
     }
   }
 
-  // Submit the buyer's contract via Cubit
-  void submitBuyerContract() {
-    final contractRepo = ContractRepo();
-    final buyerData = contractRepo.createBuyer(
-      fullName: buyerFullNameController.text,
-      birthDate: buyerBirthDateController.text,
-      nationalID: buyerNationalIDController.text,
-      registryNumber: buyerRegistryNumberController.text,
-      registryPlace: buyerRegistryPlaceController.text,
-      expiryDate: buyerExpiryDateController.text,
-    );
-    contractRepo.saveContract(
-      buyer: buyerData,
-    );
+  // Submit the buyer's data to Firestore
+  Future<void> submitBuyerData() async {
+    try {
+      final currentUser = _firebaseAuth.currentUser;
+      if (currentUser == null) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('User not logged in.')),
+        );
+        return;
+      }
+
+      final contractRepo = ContractRepo();
+
+      final buyer = Buyer(
+        fullName: buyerFullNameController.text,
+        birthDate: buyerBirthDateController.text,
+        nationalID: buyerNationalIDController.text,
+        registryNumber: buyerRegistryNumberController.text,
+        registryPlace: buyerRegistryPlaceController.text,
+        expiryDate: buyerExpiryDateController.text,
+      );
+
+      await contractRepo.saveContract(
+        buyer: buyer,
+        creatorId: currentUser.uid,
+      );
+
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Buyer data saved successfully!')),
+      );
+    } catch (e) {
+      log('Error saving buyer data: $e');
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error saving buyer data: $e')),
+      );
+    }
   }
 
   // Validate and submit the form
@@ -154,11 +183,7 @@ class _BuyerContractState extends State<BuyerContract> {
         buyerExpiryDateController.text.isEmpty) {
       _showValidationDialog();
     } else {
-      submitBuyerContract();
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const ViewCarInfo()),
-      );
+      submitBuyerData();
     }
   }
 
@@ -236,7 +261,7 @@ class _BuyerContractState extends State<BuyerContract> {
                   minimumSize:
                       const Size(double.infinity, 50), // Full width button
                 ),
-                child: const Text('Next Step'),
+                child: const Text('Submit'),
               ),
             ],
           ),
@@ -281,5 +306,16 @@ class _BuyerContractState extends State<BuyerContract> {
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    buyerFullNameController.dispose();
+    buyerBirthDateController.dispose();
+    buyerNationalIDController.dispose();
+    buyerRegistryNumberController.dispose();
+    buyerRegistryPlaceController.dispose();
+    buyerExpiryDateController.dispose();
+    super.dispose();
   }
 }

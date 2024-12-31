@@ -1,12 +1,14 @@
 import 'dart:developer';
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:qanoni/core/utils/app_router.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/features/home/data/contract_repo.dart';
-
-import 'car_info.dart';
+import 'package:qanoni/features/home/data/model/seller_data.dart';
 
 class SellerContract extends StatefulWidget {
   const SellerContract({super.key});
@@ -16,6 +18,7 @@ class SellerContract extends StatefulWidget {
 }
 
 class _SellerContractState extends State<SellerContract> {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final ImagePicker _picker = ImagePicker();
   XFile? _frontImageFile;
   XFile? _backImageFile;
@@ -52,6 +55,7 @@ class _SellerContractState extends State<SellerContract> {
       }
     } catch (e) {
       log('Error processing image: $e');
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Failed to process image')));
     } finally {
@@ -130,29 +134,80 @@ class _SellerContractState extends State<SellerContract> {
     }
   }
 
-  // Validate form and navigate to next screen
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      submitSellerContract();
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const CarInfo()),
+  // Submit the seller's data to Firestore
+  Future<void> submitSellerData() async {
+    try {
+      final currentUser = _firebaseAuth.currentUser;
+      if (currentUser == null) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('User not logged in.')),
+        );
+        return;
+      }
+
+      final contractRepo = ContractRepo();
+
+      final seller = Seller(
+        fullName: sellerFullNameController.text,
+        birthDate: sellerBirthDateController.text,
+        nationalID: sellerNationalIDController.text,
+        registryNumber: sellerRegistryNumberController.text,
+        registryPlace: sellerRegistryPlaceController.text,
+        expiryDate: sellerExpiryDateController.text,
+      );
+
+      await contractRepo.saveContract(
+        seller: seller,
+        creatorId: currentUser.uid,
+      );
+
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Seller data saved successfully!')),
+      );
+    } catch (e) {
+      log('Error saving seller data: $e');
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error saving seller data: $e')),
       );
     }
   }
 
-  void submitSellerContract() {
-    final contractRepo = ContractRepo();
-    final sellerData = contractRepo.createSeller(
-      fullName: sellerFullNameController.text,
-      birthDate: sellerBirthDateController.text,
-      nationalID: sellerNationalIDController.text,
-      registryNumber: sellerRegistryNumberController.text,
-      registryPlace: sellerRegistryPlaceController.text,
-      expiryDate: sellerExpiryDateController.text,
-    );
-    contractRepo.saveContract(
-      seller: sellerData,
+  // Validate and submit the form
+  void validateAndSubmit() {
+    if (sellerFullNameController.text.isEmpty ||
+        sellerBirthDateController.text.isEmpty ||
+        sellerNationalIDController.text.isEmpty ||
+        sellerRegistryNumberController.text.isEmpty ||
+        sellerRegistryPlaceController.text.isEmpty ||
+        sellerExpiryDateController.text.isEmpty) {
+      _showValidationDialog();
+    } else {
+      submitSellerData();
+    }
+  }
+
+  // Show validation error dialog
+  void _showValidationDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Validation Error'),
+        content: const Text('Please fill in all required fields.'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text(
+              'OK',
+              style: TextStyle(color: QColors.secondary),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -208,16 +263,16 @@ class _SellerContractState extends State<SellerContract> {
                     'Seller Expiry Date', sellerExpiryDateController),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: _submitForm,
+                  onPressed: () {
+                    validateAndSubmit();
+                    GoRouter.of(context).push(AppRouter.kCarInformation);
+                  }, // Use the validation method
                   style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(double.infinity, 50),
                     backgroundColor: QColors.secondary,
-                    textStyle: const TextStyle(fontSize: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                    minimumSize:
+                        const Size(double.infinity, 50), // Full width button
                   ),
-                  child: const Text('Next Step'),
+                  child: const Text('Submit'),
                 ),
               ],
             ),
@@ -227,7 +282,22 @@ class _SellerContractState extends State<SellerContract> {
     );
   }
 
-  // Reusable Image Section widget
+  Widget _buildTextField(String label, TextEditingController controller) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: TextField(
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: label,
+          border: const OutlineInputBorder(),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: QColors.secondary, width: 2.0),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildImageSection({
     XFile? imageFile,
     required String label,
@@ -247,29 +317,6 @@ class _SellerContractState extends State<SellerContract> {
               const Icon(Icons.camera_alt, color: QColors.secondary, size: 40),
         ),
       ],
-    );
-  }
-
-  // Reusable TextField widget
-  Widget _buildTextField(String label, TextEditingController controller) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: TextFormField(
-        controller: controller,
-        decoration: InputDecoration(
-          labelText: label,
-          border: const OutlineInputBorder(),
-          focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: QColors.secondary, width: 2.0),
-          ),
-        ),
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Please enter $label';
-          }
-          return null;
-        },
-      ),
     );
   }
 

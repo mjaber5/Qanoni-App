@@ -1,20 +1,24 @@
 import 'dart:io';
+import 'dart:developer';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:qanoni/core/utils/app_router.dart';
+import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/features/home/data/contract_repo.dart';
-
-import '../../../../../core/utils/constants/colors.dart';
-import 'contract_info.dart';
+import 'package:qanoni/features/home/data/model/car_information_data.dart';
 
 class CarInfo extends StatefulWidget {
   const CarInfo({super.key});
 
   @override
-  State<CarInfo> createState() => _CarContractState();
+  State<CarInfo> createState() => _CarInfoState();
 }
 
-class _CarContractState extends State<CarInfo> {
+class _CarInfoState extends State<CarInfo> {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final ImagePicker _picker = ImagePicker();
   XFile? _frontImageFile;
   XFile? _backImageFile;
@@ -47,7 +51,8 @@ class _CarContractState extends State<CarInfo> {
         extractBackData(recognizedText.text);
       }
     } catch (e) {
-      print('Error processing image: $e');
+      log('Error processing image: $e');
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Failed to process image')),
       );
@@ -146,19 +151,85 @@ class _CarContractState extends State<CarInfo> {
     }
   }
 
-  void submitCarInfoContract() {
-    final contractRepo = ContractRepo();
-    final carInfo = contractRepo.createCarInfoForm(
-      carPlateNumber: carPlateNumberController.text,
-      vinNumber: vinNumberController.text,
-      engineNumber: engineNumberController.text,
-      carModel: carModelController.text,
-      carColor: carColorController.text,
-      carRegistrationNumber: carRegistrationNumberController.text,
-      insuranceExpiryDate: insuranceExpiryDateController.text,
-      carCondition: carConditionController.text,
+  // Submit the car's data to Firestore
+  Future<void> submitCarData() async {
+    try {
+      final currentUser = _firebaseAuth.currentUser;
+      if (currentUser == null) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('User not logged in.')),
+        );
+        return;
+      }
+
+      final contractRepo = ContractRepo();
+
+      final carInfo = CarInfoForm(
+        carPlateNumber: carPlateNumberController.text,
+        vinNumber: vinNumberController.text,
+        engineNumber: engineNumberController.text,
+        carModel: carModelController.text,
+        carColor: carColorController.text,
+        carRegistrationNumber: carRegistrationNumberController.text,
+        insuranceExpiryDate: insuranceExpiryDateController.text,
+        carCondition: carConditionController.text,
+      );
+
+      await contractRepo.saveContract(
+        carInfo: carInfo,
+        creatorId: currentUser.uid,
+      );
+
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Car data saved successfully!')),
+      );
+    } catch (e) {
+      log('Error saving car data: $e');
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error saving car data: $e')),
+      );
+    }
+  }
+
+  // Validate and submit the form
+  void validateAndSubmit() {
+    if (carPlateNumberController.text.isEmpty ||
+        vinNumberController.text.isEmpty ||
+        engineNumberController.text.isEmpty ||
+        carModelController.text.isEmpty ||
+        carColorController.text.isEmpty ||
+        carRegistrationNumberController.text.isEmpty ||
+        insuranceExpiryDateController.text.isEmpty ||
+        carConditionController.text.isEmpty) {
+      _showValidationDialog();
+    } else {
+      submitCarData();
+    }
+  }
+
+  // Show validation error dialog
+  void _showValidationDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Validation Error'),
+        content: const Text('Please fill in all required fields.'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text(
+              'OK',
+              style: TextStyle(color: QColors.secondary),
+            ),
+          ),
+        ],
+      ),
     );
-    contractRepo.saveContract(carInfo: carInfo);
   }
 
   @override
@@ -166,6 +237,7 @@ class _CarContractState extends State<CarInfo> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Car Information Scanner'),
+        backgroundColor: QColors.secondary,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -207,22 +279,17 @@ class _CarContractState extends State<CarInfo> {
                   'Insurance Expiry Date', insuranceExpiryDateController),
               _buildTextField('Car Condition', carConditionController),
               const SizedBox(height: 20),
-
               ElevatedButton(
                 onPressed: () {
-                  submitCarInfoContract(); // Submit data to the ContractCubit
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ContractInfoForm()),
-                  );
-                },
+                  validateAndSubmit();
+                  GoRouter.of(context).push(AppRouter.kContractInformationForm);
+                }, // Use the validation method
                 style: ElevatedButton.styleFrom(
                   backgroundColor: QColors.secondary,
                   minimumSize:
                       const Size(double.infinity, 50), // Full width button
                 ),
-                child: const Text('Next Step'),
+                child: const Text('Submit'),
               ),
             ],
           ),
@@ -239,6 +306,9 @@ class _CarContractState extends State<CarInfo> {
         decoration: InputDecoration(
           labelText: label,
           border: const OutlineInputBorder(),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: QColors.secondary, width: 2.0),
+          ),
         ),
       ),
     );
@@ -268,7 +338,6 @@ class _CarContractState extends State<CarInfo> {
 
   @override
   void dispose() {
-    // Dispose the text controllers to avoid memory leaks
     carPlateNumberController.dispose();
     vinNumberController.dispose();
     engineNumberController.dispose();
