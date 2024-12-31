@@ -21,10 +21,10 @@ class SignupViewBody extends StatelessWidget {
               SignupLogoText(),
               SignupTextAboutApp(),
               SizedBox(
-                height: 25,
+                height: 22,
               ),
               SignupTextFeilds(),
-              SizedBox(height: 40),
+              SizedBox(height: 32),
               SignupTextCondition(),
             ],
           ),

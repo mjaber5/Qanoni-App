@@ -15,14 +15,18 @@ class LoginLogoText extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            localizations.qanoni,
-            style: const TextStyle(
-              fontSize: 40,
-              fontWeight: FontWeight.w800,
-            ),
+          const Row(
+            children: [
+              Text('Q',
+                  style: TextStyle(
+                      color: QColors.secondary,
+                      fontSize: 48,
+                      fontWeight: FontWeight.bold)),
+              Text('anoni',
+                  style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold)),
+            ],
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 8),
           Text(
             localizations.welcomeBack,
             style: const TextStyle(
