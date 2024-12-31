@@ -114,8 +114,10 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                 hintText: localizations.userName,
                 hintStyle: const TextStyle(color: QColors.darkGrey),
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a valid name';
+                  if (value == null ||
+                      value.isEmpty ||
+                      !AppRegex.isUserNameValid(nameController.text)) {
+                    return 'Please enter your full name';
                   }
                   return null;
                 },
@@ -205,7 +207,22 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter a valid password';
+                    return 'Password is required.';
+                  }
+                  if (value.length < 8 || value.length > 12) {
+                    return 'must be between 8 and 12 characters long.';
+                  }
+                  if (!RegExp(r'[a-z]').hasMatch(value)) {
+                    return 'at least one lowercase letter.';
+                  }
+                  if (!RegExp(r'[A-Z]').hasMatch(value)) {
+                    return 'at least one uppercase letter.';
+                  }
+                  if (!RegExp(r'[0-9]').hasMatch(value)) {
+                    return 'at least one number.';
+                  }
+                  if (!RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value)) {
+                    return 'at least one special character';
                   }
                   return null;
                 },

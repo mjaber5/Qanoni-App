@@ -2,62 +2,145 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:qanoni/core/utils/helpers/app_regex.dart';
 
 void main() {
-  group('AppRegex Tests', () {
-    // Test for Password Validation
-    test('Valid password', () {
-      expect(AppRegex.isPasswordValid('Password123!'), true);
+  group('AppRegex', () {
+    test('isUserNameValid should return true for valid usernames', () {
+      expect(AppRegex.isUserNameValid("Mohammed Amjed Jaber"), true);
+      expect(AppRegex.isUserNameValid("Ali Hasan Khalid"), true);
     });
 
-    test('Invalid password (too short)', () {
-      expect(AppRegex.isPasswordValid('Pwd1!'), false); // Too short
+    test('isUserNameValid should return false for invalid usernames', () {
+      expect(AppRegex.isUserNameValid("Mohammed"), false); // Less than 3 words
+      expect(
+          AppRegex.isUserNameValid("Mohammed 123"), false); // Contains numbers
+      expect(AppRegex.isUserNameValid("Mohammed@Jaber"),
+          false); // Contains special characters
+      expect(
+          AppRegex.isUserNameValid(" Mohammed"), false); // Starts with a space
     });
 
-    test('Invalid password (too long)', () {
-      expect(AppRegex.isPasswordValid('Password12345678!'),
-          false); // > 12 characters
+    test('isPhoneNumberValid should return true for valid phone numbers', () {
+      expect(AppRegex.isPhoneNumberValid("0771234567"), true);
+      expect(AppRegex.isPhoneNumberValid("0789876543"), true);
     });
 
-    test('Invalid password (missing number)', () {
-      expect(AppRegex.isPasswordValid('Password!'), false); // No number
+    test('isPhoneNumberValid should return false for invalid phone numbers',
+        () {
+      expect(AppRegex.isPhoneNumberValid("0671234567"),
+          false); // Starts with invalid prefix
+      expect(AppRegex.isPhoneNumberValid("07712345"), false); // Too short
+      expect(AppRegex.isPhoneNumberValid("07712345678"), false); // Too long
+      expect(
+          AppRegex.isPhoneNumberValid("0771234abc"), false); // Contains letters
     });
 
-    test('Invalid password (missing special character)', () {
-      expect(AppRegex.isPasswordValid('Password123'),
-          false); // No special character
+    test('isEmailValid should return true for valid email addresses', () {
+      expect(AppRegex.isEmailValid("test@example.com"), true);
+      expect(AppRegex.isEmailValid("user.name@domain.co"), true);
     });
 
-    test('Invalid password (missing uppercase)', () {
-      expect(AppRegex.isPasswordValid('password123!'),
-          false); // No uppercase letter
+    test('isEmailValid should return false for invalid email addresses', () {
+      expect(
+          AppRegex.isEmailValid("test@com"), false); // Missing domain extension
+      expect(AppRegex.isEmailValid("test@.com"), false); // Missing domain name
+      expect(AppRegex.isEmailValid("test.com"), false); // Missing @ symbol
+      expect(AppRegex.isEmailValid("@example.com"), false); // Missing username
     });
 
-    test('Invalid password (missing lowercase)', () {
-      expect(AppRegex.isPasswordValid('PASSWORD123!'),
-          false); // No lowercase letter
+    group('Password Validation', () {
+      test('isPasswordValid should return true for valid passwords', () {
+        expect(AppRegex.isPasswordValid("Abc123!@"), true); // Valid
+        expect(AppRegex.isPasswordValid("QwErTy12#"), true); // Valid
+        expect(AppRegex.isPasswordValid("Aa1!@%&12"), true); // Valid
+      });
+
+      test('isPasswordValid should return false for invalid passwords', () {
+        expect(
+            AppRegex.isPasswordValid("abc123!@"), false); // No uppercase letter
+        expect(
+            AppRegex.isPasswordValid("ABC123!@"), false); // No lowercase letter
+        expect(AppRegex.isPasswordValid("Abcdefg!"), false); // No digit
+        expect(AppRegex.isPasswordValid("Abc123456"),
+            false); // No special character
+        expect(AppRegex.isPasswordValid("Aa1!@"), false); // Too short
+        expect(AppRegex.isPasswordValid("Aa1!@%&123456"), false); // Too long
+      });
     });
 
-    // Test for Phone Number Validation
-    test('Valid phone number', () {
-      expect(AppRegex.isPhoneNumberValid('0778123456'),
-          true); // Valid Kenyan phone number
+    test('hasLowerCase should return true for passwords with lowercase letters',
+        () {
+      expect(AppRegex.hasLowerCase("abc"), true);
+      expect(AppRegex.hasLowerCase("AbC"), true);
     });
 
-    test('Invalid phone number (wrong prefix)', () {
-      expect(AppRegex.isPhoneNumberValid('0758123456'),
-          false); // Wrong prefix (should be 07)
+    test(
+        'hasLowerCase should return false for passwords without lowercase letters',
+        () {
+      expect(AppRegex.hasLowerCase("ABC"), false);
+      expect(AppRegex.hasLowerCase("123"), false);
     });
 
-    test('Invalid phone number (too short)', () {
-      expect(AppRegex.isPhoneNumberValid('07781234'), false); // Too short
+    test('hasUpperCase should return true for passwords with uppercase letters',
+        () {
+      expect(AppRegex.hasUpperCase("ABC"), true);
+      expect(AppRegex.hasUpperCase("AbC"), true);
     });
 
-    test('Invalid phone number (too long)', () {
-      expect(AppRegex.isPhoneNumberValid('0778123456789'), false); // Too long
+    test(
+        'hasUpperCase should return false for passwords without uppercase letters',
+        () {
+      expect(AppRegex.hasUpperCase("abc"), false);
+      expect(AppRegex.hasUpperCase("123"), false);
     });
 
-    test('Invalid phone number (invalid second digit)', () {
-      expect(AppRegex.isPhoneNumberValid('0768123456'),
-          false); // Invalid second digit (should be between 7-9)
+    test('hasNumber should return true for passwords with numbers', () {
+      expect(AppRegex.hasNumber("123"), true);
+      expect(AppRegex.hasNumber("a1b2c3"), true);
+    });
+
+    test('hasNumber should return false for passwords without numbers', () {
+      expect(AppRegex.hasNumber("abc"), false);
+      expect(AppRegex.hasNumber("!@#"), false);
+    });
+
+    test(
+        'hasSpecialCharacter should return true for passwords with special characters',
+        () {
+      expect(AppRegex.hasSpecialCharacter("abc!"), true);
+      expect(AppRegex.hasSpecialCharacter("123#"), true);
+    });
+
+    test(
+        'hasSpecialCharacter should return false for passwords without special characters',
+        () {
+      expect(AppRegex.hasSpecialCharacter("abc"), false);
+      expect(AppRegex.hasSpecialCharacter("123"), false);
+    });
+
+    test('hasMinLength should return true for passwords with sufficient length',
+        () {
+      expect(AppRegex.hasMinLength("12345678"), true);
+      expect(AppRegex.hasMinLength("abcdefgh"), true);
+    });
+
+    test(
+        'hasMinLength should return false for passwords with insufficient length',
+        () {
+      expect(AppRegex.hasMinLength("123"), false);
+      expect(AppRegex.hasMinLength("abc"), false);
+    });
+
+    test('isNationalIdValid should return true for valid national IDs', () {
+      expect(AppRegex.isNationalIdValid("9123456789"), true);
+      expect(AppRegex.isNationalIdValid("9234567890"), true);
+    });
+
+    test('isNationalIdValid should return false for invalid national IDs', () {
+      expect(AppRegex.isNationalIdValid("8123456789"),
+          false); // Does not start with 9
+      expect(AppRegex.isNationalIdValid("912345678"), false); // Too short
+      expect(AppRegex.isNationalIdValid("91234567890"), false); // Too long
+      expect(
+          AppRegex.isNationalIdValid("91234567a9"), false); // Contains letters
     });
   });
 }
