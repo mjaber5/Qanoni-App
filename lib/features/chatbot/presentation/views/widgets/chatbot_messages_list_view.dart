@@ -8,7 +8,7 @@ class ChatbotMessagesListView extends StatelessWidget {
   const ChatbotMessagesListView({
     super.key,
     required List<Map<String, dynamic>> messages,
-    required this.typingUsers, // إضافة الـ typingUsers
+    required this.typingUsers,
   }) : _messages = messages;
 
   @override
@@ -16,7 +16,7 @@ class ChatbotMessagesListView extends StatelessWidget {
     return Expanded(
       child: DashChat(
         currentUser: ChatUser(id: '1', firstName: 'Useredit'),
-        typingUsers: typingUsers, // هنا تم تمرير قائمة الـ typingUsers
+        typingUsers: typingUsers,
         messageOptions: MessageOptions(
           currentUserContainerColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
           currentUserTextColor: Colors.white,
@@ -24,15 +24,16 @@ class ChatbotMessagesListView extends StatelessWidget {
         messages: _messages.map((message) {
           return ChatMessage(
             text: message['text'],
-            user: message['isUserMessage'] 
-              ? ChatUser(id: '1', firstName: 'User') 
-              : ChatUser(id: 'bot', firstName: 'Lawyer AI'),
+            user: message['isUserMessage']
+                ? ChatUser(id: '1', firstName: 'User')
+                : ChatUser(id: 'bot', firstName: 'Lawyer AI'),
             createdAt: DateTime.now(),
           );
         }).toList(),
         onSend: (ChatMessage m) {
           // Handle message send action here
         },
+        readOnly: true,
       ),
     );
   }
