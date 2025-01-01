@@ -1,10 +1,12 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 import 'package:qanoni/features/home/data/contract_repo.dart';
 import 'package:qanoni/features/home/presentation/view_model/contract_status/contract_status_cubit.dart';
@@ -13,6 +15,7 @@ import 'package:user_repository/user_reposetory.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'features/chatbot/presentation/views/widgets/chat_provider.dart';
+import 'features/notification/presentation/view_model/notification_cubit/notifications_cubit.dart';
 import 'features/theme/presentation/view_model/cubit/change_theme_cubit.dart';
 import 'qanoni.dart';
 import 'simple_bloc_observer.dart';
@@ -38,6 +41,7 @@ void main() async {
 
   final prefs = await SharedPreferences.getInstance();
   ContractRepo contractRepo = ContractRepo();
+  FirebaseUserRepo userRepository = FirebaseUserRepo();
 
   runApp(MultiBlocProvider(
     providers: [
@@ -47,16 +51,25 @@ void main() async {
       BlocProvider(
         create: (_) => ContractCubit(contractRepo),
       ),
+      BlocProvider(
+        create: (_) => NotificationsCubit(
+          FirebaseMessaging.instance,
+          FirebaseFirestore.instance,
+          FlutterLocalNotificationsPlugin(),
+          userRepository,
+        ),
+      ),
     ],
     child: MultiProvider(
       providers: [
         ChangeNotifierProvider(
-            create: (_) => ChatProvider()), // إضافة ChatProvider هنا
+          create: (_) => ChatProvider(),
+        ),
       ],
-      child: RepositoryProvider(
-        create: (_) => FirebaseUserRepo(),
+      child: RepositoryProvider<UserRepository>(
+        create: (_) => userRepository,
         child: Qanoni(
-          FirebaseUserRepo(),
+          userRepository,
           prefs: prefs,
         ),
       ),

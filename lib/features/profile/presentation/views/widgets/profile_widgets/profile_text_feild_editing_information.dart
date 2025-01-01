@@ -39,9 +39,11 @@ class _ProfileUserInformationEditingFieldState
 
         if (userDoc.exists) {
           setState(() {
-            _email = userDoc.data()?['email'] ?? 'Unknown';
+            _email =
+                (userDoc.data() as Map<String, dynamic>)['email'] ?? 'Unknown';
             emailController.text = _email!;
-            _phone = userDoc.data()?['phone'] ?? 'Unknown';
+            _phone =
+                (userDoc.data() as Map<String, dynamic>)['phone'] ?? 'Unknown';
             phoneController.text = _phone!;
           });
         } else {

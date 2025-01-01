@@ -1,273 +1,193 @@
+import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:go_router/go_router.dart';
-import 'package:qanoni/core/utils/app_router.dart';
+import 'package:http/http.dart' as http;
+import 'package:qanoni/core/utils/constants/colors.dart';
+import 'package:shimmer/shimmer.dart';
 
-class Request extends StatefulWidget {
-  final String enteredUserId;
+class RequestScreen extends StatefulWidget {
   final String contractId;
-  final String buyerId;
-  final String sellerId;
+  final String messageTitle;
+  final String messageBody;
 
-  const Request({
+  const RequestScreen({
     super.key,
-    required this.enteredUserId,
     required this.contractId,
-    required this.buyerId,
-    required this.sellerId,
+    required this.messageTitle,
+    required this.messageBody,
   });
 
   @override
-  State<Request> createState() => _RequestState();
+  State<RequestScreen> createState() => _RequestScreenState();
 }
 
-class _RequestState extends State<Request> {
-  final List<Map<String, String>> _notifications = [];
-  late FirebaseMessaging _firebaseMessaging;
-  bool _isMounted = true;
-
-  // Example seller and buyer IDs
+class _RequestScreenState extends State<RequestScreen> {
+  bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    _firebaseMessaging = FirebaseMessaging.instance;
-    _initializeFirebaseMessaging();
 
-    // Simulate sending a notification to the entered user
-    _simulateSendNotificationToUser(widget.enteredUserId, widget.contractId);
-  }
-
-  void _initializeFirebaseMessaging() async {
-    await _firebaseMessaging.requestPermission(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
-
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      log('Foreground message received: ${message.notification?.title}');
-      _showInAppNotification(message.notification);
-      _handleIncomingMessage(message.notification);
-    });
-
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      log('Notification clicked: ${message.notification?.title}');
-      _handleIncomingMessage(message.notification);
-    });
-
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
-    String? token = await _firebaseMessaging.getToken();
-    log('FCM Token: $token');
-  }
-
-  static Future<void> _firebaseMessagingBackgroundHandler(
-      RemoteMessage message) async {
-    log('Handling a background message: ${message.notification?.title}');
-  }
-
-  void _handleIncomingMessage(RemoteNotification? notification) {
-    if (notification == null) return;
-    if (!_isMounted) return;
-
-    setState(() {
-      _notifications.add({
-        'title': notification.title ?? 'No Title',
-        'body': notification.body ?? 'No Content',
-      });
-    });
-  }
-
-  void _showInAppNotification(RemoteNotification? notification) {
-    if (notification == null) return;
-    if (!_isMounted) return;
-
-    final snackBar = SnackBar(
-      content: Text(
-        notification.title ?? 'You have a new message!',
-        style: const TextStyle(fontSize: 16),
-      ),
-      action: SnackBarAction(
-        label: 'View',
-        onPressed: () {
-          _handleIncomingMessage(notification);
-        },
-      ),
-    );
-
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  }
-
-  void _simulateSendNotificationToUser(String userId, String contractId) {
-    Future.delayed(const Duration(seconds: 2), () {
-      if (!_isMounted) return;
-
+    // Simulate a loading delay of 2-3 seconds
+    Timer(const Duration(seconds: 2), () {
       setState(() {
-        _notifications.add({
-          'title': 'New Contract Created',
-          'body':
-              'A new contract (ID: $contractId) has been created for user $userId.',
-        });
+        isLoading = false;
       });
-
-      log('Notification sent to user $userId about contract $contractId.');
     });
   }
 
-  Widget buildNotificationList(BuildContext context) {
-    if (_notifications.isEmpty) {
-      return Center(
-        child: Text(
-          "No Requests",
-          style: TextStyle(
-            fontSize: 18,
-            color: Theme.of(context).brightness == Brightness.dark
-                ? Colors.white
-                : Colors.black,
-          ),
-        ),
-      );
+  Future<void> approveContract() async {
+    if (widget.contractId.isEmpty) {
+      log('Error: contractId is empty.');
+      return;
     }
 
-    return ListView.builder(
-      itemCount: _notifications.length,
-      itemBuilder: (context, index) {
-        final notification = _notifications[index];
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 16),
-          child: Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: [
-                BoxShadow(
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.black.withOpacity(0.2)
-                      : Colors.grey.withOpacity(0.2),
-                  blurRadius: 8,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    const CircleAvatar(
-                      radius: 30,
-                      backgroundColor: Colors.orange,
-                      child: Icon(Icons.request_page, color: Colors.white),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            notification['title'] ?? "Request Notification",
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 5),
-                          Text(
-                            notification['body'] ?? "No additional details",
-                            style: const TextStyle(
-                              fontSize: 14,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        log('Reject notification at index $index');
-                        setState(() {
-                          _notifications.removeAt(index);
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 18, vertical: 10),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      child: const Text(
-                        'Reject',
-                        style: TextStyle(fontSize: 14),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    ElevatedButton(
-                      onPressed: () {
-                        log('Approve contract for User ID: ${widget.enteredUserId}');
-                        log('Comparing: Seller ID: ${widget.sellerId}, Buyer ID: ${widget.buyerId}');
+    final response = await http.post(
+      Uri.parse(
+          'https://your-ngrok-url.ngrok-free.app/approve-contract/${widget.contractId}'),
+    );
 
-                        if (widget.enteredUserId == widget.sellerId) {
-                          log('Navigating to Buyer Contract Screen');
-                          GoRouter.of(context).push(AppRouter.kBuyerContract);
-                        } else if (widget.enteredUserId == widget.buyerId) {
-                          log('Navigating to Seller Contract Screen');
-                          GoRouter.of(context).push(AppRouter.kSellerContract);
-                        } else {
-                          log('Unable to determine contract type.');
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'Unable to determine contract type for User ID: ${widget.enteredUserId}',
-                              ),
-                            ),
-                          );
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 18, vertical: 10),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      child: const Text(
-                        'Approve',
-                        style: TextStyle(fontSize: 14),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+    if (response.statusCode == 200) {
+      log('Contract approved successfully');
+    } else {
+      log('Failed to approve contract: ${response.body}');
+    }
+  }
+
+  Future<void> rejectContract() async {
+    if (widget.contractId.isEmpty) {
+      log('Error: contractId is empty.');
+      return;
+    }
+
+    final response = await http.delete(
+      Uri.parse(
+          'https://your-ngrok-url.ngrok-free.app/reject-contract/${widget.contractId}'),
+    );
+
+    if (response.statusCode == 200) {
+      log('Contract rejected successfully');
+    } else {
+      log('Failed to reject contract: ${response.body}');
+    }
+  }
+
+  Widget buildShimmer() {
+    return Shimmer.fromColors(
+      baseColor: QColors.black.withOpacity(0.5),
+      highlightColor: QColors.darkerGrey.withOpacity(0.5),
+      child: Column(
+        children: List.generate(
+          1,
+          (index) => Container(
+            margin: const EdgeInsets.symmetric(vertical: 8.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.black.withOpacity(0.5),
             ),
+            height: 150,
+            width: double.infinity,
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 
-  @override
-  void dispose() {
-    _isMounted = false;
-    super.dispose();
+  Widget buildCard() {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25),
+        gradient: LinearGradient(
+          colors: [
+            QColors.black.withOpacity(0.1),
+            QColors.black.withOpacity(0.1)
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  widget.messageTitle,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+          const Divider(
+            color: Colors.blueGrey,
+            thickness: 1.5,
+            height: 20,
+          ),
+          Text(
+            widget.messageBody,
+            style: const TextStyle(
+              fontSize: 16,
+            ),
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ElevatedButton.icon(
+                onPressed: approveContract,
+                style: ElevatedButton.styleFrom(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                  backgroundColor: QColors.secondary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                icon: const Icon(Icons.check, size: 20),
+                label: const Text(
+                  'Approve',
+                  style: TextStyle(fontSize: 14),
+                ),
+              ),
+              ElevatedButton.icon(
+                onPressed: rejectContract,
+                style: ElevatedButton.styleFrom(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                  backgroundColor: Colors.deepOrange,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                icon: const Icon(Icons.cancel, size: 20),
+                label: const Text(
+                  'Reject',
+                  style: TextStyle(fontSize: 14),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: buildNotificationList(context),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Column(
+        children: [
+          const SizedBox(height: 20),
+          isLoading ? buildShimmer() : buildCard(),
+        ],
+      ),
     );
   }
 }

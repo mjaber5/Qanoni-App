@@ -58,8 +58,9 @@ class _ProfileUserInformationCardState
 
         if (userDoc.exists) {
           final userData = userDoc.data()!;
-          await _cacheUserData(userData, prefs, cacheKey);
-          _updateStateWithUserData(userData);
+          await _cacheUserData(
+              userDoc.data() as Map<String, dynamic>, prefs, cacheKey);
+          _updateStateWithUserData(userData as Map<String, dynamic>);
         } else {
           _setErrorState();
         }

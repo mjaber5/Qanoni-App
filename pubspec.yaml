@@ -40,7 +40,6 @@ dependencies:
   flutter_localization: ^0.2.1
   salomon_bottom_bar: ^3.3.2
   iconsax: ^0.0.8
-
   go_router: ^14.2.3
   flutter_local_notifications: ^18.0.1
   gap: ^3.0.1
@@ -63,10 +62,6 @@ dependencies:
   flutter_svg: ^2.0.16
   flutter_cache_manager: ^3.4.1
   sqflite: ^2.4.1
-
-
-  user_repository:
-    path: packages/user_repository
   firebase_messaging: ^15.1.6
   google_ml_kit: ^0.19.0
   image_picker: ^1.1.2
@@ -76,6 +71,11 @@ dependencies:
   speech_to_text: ^7.0.0
   dash_chat_2: ^0.0.21
   signature: ^5.5.0
+
+
+  user_repository:
+    path: packages/user_repository
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:qanoni/features/home/data/contract_repo.dart';
@@ -13,6 +16,7 @@ class ContractCubit extends Cubit<ContractStatusState> {
   ContractCubit(this._contractRepo) : super(ContractStatusInitial());
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final ContractRepo _contractRepo;
 
   String _enteredUserId = '';
@@ -65,19 +69,33 @@ class ContractCubit extends Cubit<ContractStatusState> {
 
   // Set the contract ID
   void setContractId(String contractId) {
+    if (contractId.isEmpty) {
+      emit(const ContractError('Contract ID cannot be empty.'));
+      return;
+    }
     _contractId = contractId;
     emit(ContractUpdated('Contract ID updated: $contractId'));
   }
 
   // Fetch buyer and seller IDs for a given contract
   Future<Map<String, String>> getBuyerAndSellerIds(String contractId) async {
+    if (contractId.isEmpty) {
+      log('Error: contractId is empty.');
+      throw Exception('Invalid contractId.');
+    }
     try {
-      final buyerAndSellerIds =
-          await _contractRepo.getBuyerAndSellerIds(contractId);
-      return buyerAndSellerIds;
+      final doc =
+          await _firestore.collection('contracts').doc(contractId).get();
+      if (!doc.exists) {
+        throw Exception('Contract not found');
+      }
+      final data = doc.data() as Map<String, dynamic>;
+      final buyerId = data['buyer']?['id'] as String? ?? '';
+      final sellerId = data['seller']?['id'] as String? ?? '';
+      return {'buyerId': buyerId, 'sellerId': sellerId};
     } catch (e) {
-      emit(ContractError('Failed to fetch buyer and seller IDs: $e'));
-      return {};
+      log('Error fetching buyer and seller IDs: $e');
+      throw Exception('Failed to fetch buyer and seller IDs: $e');
     }
   }
 }

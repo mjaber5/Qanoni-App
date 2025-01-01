@@ -1,99 +1,42 @@
 import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/features/home/presentation/view_model/contract_status/contract_status_cubit.dart';
+import 'package:qanoni/features/notification/presentation/view_model/notification_cubit/notifications_cubit.dart';
+import 'package:qanoni/features/notification/presentation/views/widgets/request.dart';
 
 import 'all.dart';
 import 'done.dart';
-import 'request.dart';
 
 class NotificationContent extends StatefulWidget {
   const NotificationContent({super.key});
 
   @override
-  State<NotificationContent> createState() => NotificationContentState();
+  State<NotificationContent> createState() => _NotificationContentState();
 }
 
-class NotificationContentState extends State<NotificationContent> {
+class _NotificationContentState extends State<NotificationContent> {
   String selectedItem = "All";
   final PageController _pageController = PageController();
-
-  // Firebase Messaging instance
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
-
-  // Local Notifications plugin
-  final FlutterLocalNotificationsPlugin _localNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  User? currentUser;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   void initState() {
     super.initState();
-    _initializeNotifications();
-  }
+    currentUser = _firebaseAuth.currentUser;
 
-  Future<void> _initializeNotifications() async {
-    // Request permission for notifications
-    await _firebaseMessaging.requestPermission(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
-
-    // Initialize local notifications
-    const initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
-    const initializationSettingsDarwin = DarwinInitializationSettings();
-    const initializationSettings = InitializationSettings(
-      android: initializationSettingsAndroid,
-      iOS: initializationSettingsDarwin,
-    );
-    await _localNotificationsPlugin.initialize(initializationSettings);
-
-    // Listen to foreground messages
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      log('Foreground message received: ${message.notification?.title}');
-      _showNotification(message.notification);
-    });
-
-    // Handle notification when app is opened via notification
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      _handleNotificationClick(message.data);
-    });
-
-    // Get the FCM token for this device
-    String? token = await _firebaseMessaging.getToken();
-    debugPrint("FCM Token: $token");
-  }
-
-  void _showNotification(RemoteNotification? notification) {
-    if (notification == null) return;
-
-    const androidDetails = AndroidNotificationDetails(
-      'high_importance_channel', // Channel ID
-      'High Importance Notifications',
-      channelDescription: 'This channel is used for important notifications.',
-      importance: Importance.high,
-      priority: Priority.high,
-      sound: RawResourceAndroidNotificationSound('notification_sound'),
-    );
-    const notificationDetails = NotificationDetails(android: androidDetails);
-
-    _localNotificationsPlugin.show(
-      notification.hashCode,
-      notification.title,
-      notification.body,
-      notificationDetails,
-    );
-  }
-
-  void _handleNotificationClick(Map<String, dynamic> data) {
-    if (data['type'] == 'request') {
-      _pageController.jumpToPage(1);
-    } else if (data['type'] == 'done') {
-      _pageController.jumpToPage(2);
+    if (currentUser != null) {
+      log('User logged in with ID: ${currentUser!.uid}');
+      context.read<NotificationsCubit>().initializeNotifications(
+            currentUser!.uid,
+          );
+    } else {
+      log('Error: User is not logged in.');
     }
   }
 
@@ -141,70 +84,76 @@ class NotificationContentState extends State<NotificationContent> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            const SizedBox(width: 4),
-            buildTab("All", 0),
-            const SizedBox(width: 4),
-            buildTab("Request", 1),
-            const SizedBox(width: 4),
-            buildTab("Progress status", 2),
-          ],
-        ),
-        const SizedBox(height: 20),
-        Expanded(
-          child: PageView(
-            controller: _pageController,
-            onPageChanged: (index) {
-              setState(() {
-                if (index == 0) {
-                  selectedItem = "All";
-                } else if (index == 1) {
-                  selectedItem = "Request";
-                } else if (index == 2) {
-                  selectedItem = "Progress status";
-                }
-              });
-            },
+    return BlocListener<NotificationsCubit, NotificationsState>(
+      listener: (context, state) {
+        if (state is NotificationError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.error)),
+          );
+        } else if (state is NotificationClicked) {
+          log('Notification clicked: ${state.contractId}');
+          _pageController.jumpToPage(1); // Navigate to the "Request" tab
+        }
+      },
+      child: Column(
+        children: [
+          Row(
             children: [
-              const All(),
-              BlocBuilder<ContractCubit, ContractStatusState>(
-                builder: (context, state) {
-                  final contractCubit = context.read<ContractCubit>();
-                  final contractId = contractCubit.getContractId();
-                  return FutureBuilder<Map<String, String>>(
-                    future: contractCubit.getBuyerAndSellerIds(contractId),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      } else if (snapshot.hasError) {
-                        return Text('Error: ${snapshot.error}');
-                      } else if (snapshot.hasData) {
-                        final buyerId = snapshot.data!['buyerId']!;
-                        final sellerId = snapshot.data!['sellerId']!;
-
-                        return Request(
-                          enteredUserId: contractCubit.getEnteredUserId(),
-                          contractId: contractId,
-                          buyerId: buyerId,
-                          sellerId: sellerId,
-                        );
-                      } else {
-                        return const Text('No data available');
-                      }
-                    },
-                  );
-                },
-              ),
-              const Done(),
+              const SizedBox(width: 4),
+              buildTab("All", 0),
+              const SizedBox(width: 4),
+              buildTab("Request", 1),
+              const SizedBox(width: 4),
+              buildTab("Progress status", 2),
             ],
           ),
-        ),
-      ],
+          const SizedBox(height: 20),
+          Expanded(
+            child: PageView(
+              controller: _pageController,
+              onPageChanged: (index) {
+                setState(() {
+                  selectedItem = ["All", "Request", "Progress status"][index];
+                });
+              },
+              children: [
+                const All(),
+                BlocBuilder<ContractCubit, ContractStatusState>(
+                  builder: (context, state) {
+                    return FutureBuilder<DocumentReference>(
+                      future: _firestore.collection('contracts').add({
+                        'status': 'pending',
+                      }),
+                      builder: (context, snapshot) {
+                        final contractRef = snapshot.data;
+                        final String contractId = contractRef?.id ?? '';
+
+                        if (contractId.isEmpty) {
+                          log('Error: Contract ID is missing.');
+                          return const Center(
+                            child: Text(
+                              'Error: Contract ID is missing.',
+                              style: TextStyle(color: Colors.red),
+                            ),
+                          );
+                        }
+
+                        return RequestScreen(
+                          contractId: contractId,
+                          messageTitle: '📜 Contract Request  ',
+                          messageBody:
+                              'New Contract for Review\nPlease approve or reject the',
+                        );
+                      },
+                    );
+                  },
+                ),
+                const Done(),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
