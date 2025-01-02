@@ -1,20 +1,25 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+
 import 'package:qanoni/core/utils/constants/colors.dart';
+import 'package:qanoni/features/home/presentation/views/widget_form_input/buyer_contract.dart';
+import 'package:qanoni/features/home/presentation/views/widget_form_input/seller_cuntract.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shimmer/shimmer.dart';
 
 class RequestScreen extends StatefulWidget {
   final String contractId;
   final String messageTitle;
   final String messageBody;
+  final String userType; // 'buyer' or 'seller'
 
   const RequestScreen({
     super.key,
     required this.contractId,
     required this.messageTitle,
     required this.messageBody,
+    required this.userType,
   });
 
   @override
@@ -23,6 +28,7 @@ class RequestScreen extends StatefulWidget {
 
 class _RequestScreenState extends State<RequestScreen> {
   bool isLoading = true;
+  bool isVisible = true; // Track if the widget should be visible
 
   @override
   void initState() {
@@ -36,22 +42,14 @@ class _RequestScreenState extends State<RequestScreen> {
     });
   }
 
-  Future<void> approveContract() async {
-    if (widget.contractId.isEmpty) {
-      log('Error: contractId is empty.');
-      return;
-    }
-
-    final response = await http.post(
-      Uri.parse(
-          'https://your-ngrok-url.ngrok-free.app/approve-contract/${widget.contractId}'),
+  void countinueContract() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => widget.userType == 'buyer'
+            ? const SellerContract()
+            : const BuyerContract(),
+      ),
     );
-
-    if (response.statusCode == 200) {
-      log('Contract approved successfully');
-    } else {
-      log('Failed to approve contract: ${response.body}');
-    }
   }
 
   Future<void> rejectContract() async {
@@ -60,15 +58,20 @@ class _RequestScreenState extends State<RequestScreen> {
       return;
     }
 
-    final response = await http.delete(
-      Uri.parse(
-          'https://your-ngrok-url.ngrok-free.app/reject-contract/${widget.contractId}'),
-    );
+    try {
+      // Delete the document from Firestore
+      await FirebaseFirestore.instance
+          .collection('contracts')
+          .doc(widget.contractId)
+          .delete();
 
-    if (response.statusCode == 200) {
-      log('Contract rejected successfully');
-    } else {
-      log('Failed to reject contract: ${response.body}');
+      setState(() {
+        isVisible = false; // Hide the widget
+      });
+
+      log('Contract rejected and document deleted successfully.');
+    } catch (e) {
+      log('Error rejecting contract: $e');
     }
   }
 
@@ -100,7 +103,7 @@ class _RequestScreenState extends State<RequestScreen> {
         gradient: LinearGradient(
           colors: [
             QColors.black.withOpacity(0.1),
-            QColors.black.withOpacity(0.1)
+            QColors.black.withOpacity(0.1),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -140,7 +143,7 @@ class _RequestScreenState extends State<RequestScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ElevatedButton.icon(
-                onPressed: approveContract,
+                onPressed: countinueContract,
                 style: ElevatedButton.styleFrom(
                   padding:
                       const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
@@ -180,14 +183,16 @@ class _RequestScreenState extends State<RequestScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Column(
-        children: [
-          const SizedBox(height: 20),
-          isLoading ? buildShimmer() : buildCard(),
-        ],
-      ),
-    );
+    return isVisible
+        ? Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Column(
+              children: [
+                const SizedBox(height: 20),
+                isLoading ? buildShimmer() : buildCard(),
+              ],
+            ),
+          )
+        : const SizedBox.shrink(); // Return an empty widget if not visible
   }
 }

@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:qanoni/core/services/base.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/features/home/data/contract_repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:qanoni/features/home/data/model/buyer_data.dart';
 
 class BuyerContract extends StatefulWidget {
   const BuyerContract({super.key});
@@ -35,6 +35,9 @@ class _BuyerContractState extends State<BuyerContract> {
 
   // Firebase Auth instance
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  // Backend repository instance
+  final ContractRepo contractRepo = ContractRepo(baseUrl: ConfigApi.baseUri);
 
   // Process the image with ML Kit Text Recognition
   Future<void> processImage(File imageFile, {bool isFront = true}) async {
@@ -132,7 +135,7 @@ class _BuyerContractState extends State<BuyerContract> {
     }
   }
 
-  // Submit the buyer's data to Firestore
+  // Submit the buyer's data to the backend
   Future<void> submitBuyerData() async {
     try {
       final currentUser = _firebaseAuth.currentUser;
@@ -144,25 +147,24 @@ class _BuyerContractState extends State<BuyerContract> {
         return;
       }
 
-      final contractRepo = ContractRepo();
-
-      final buyer = Buyer(
-        fullName: buyerFullNameController.text,
-        birthDate: buyerBirthDateController.text,
-        nationalID: buyerNationalIDController.text,
-        registryNumber: buyerRegistryNumberController.text,
-        registryPlace: buyerRegistryPlaceController.text,
-        expiryDate: buyerExpiryDateController.text,
-      );
-
-      await contractRepo.saveContract(
-        buyer: buyer,
-        creatorId: currentUser.uid,
+      await contractRepo.createContract(
+        buyerIduse: currentUser.uid,
+        sellerIduse: 'seller123', // Replace with actual seller ID
+        contractDetails: {
+          'buyerData': {
+            'fullName': buyerFullNameController.text,
+            'birthDate': buyerBirthDateController.text,
+            'nationalID': buyerNationalIDController.text,
+            'registryNumber': buyerRegistryNumberController.text,
+            'registryPlace': buyerRegistryPlaceController.text,
+            'expiryDate': buyerExpiryDateController.text,
+          },
+        },
       );
 
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Buyer data saved successfully!')),
+        const SnackBar(content: Text('Buyer data submitted successfully!')),
       );
     } catch (e) {
       log('Error saving buyer data: $e');
@@ -214,14 +216,13 @@ class _BuyerContractState extends State<BuyerContract> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Buyer Information Scanner'),
-        backgroundColor: QColors.secondary, // Better color contrast
+        backgroundColor: QColors.secondary,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Front and Back Image Picker Section
               Card(
                 elevation: 5,
                 child: Padding(
@@ -244,7 +245,6 @@ class _BuyerContractState extends State<BuyerContract> {
                 ),
               ),
               const SizedBox(height: 16),
-              // Text fields for extracted data
               _buildTextField('Buyer Full Name', buyerFullNameController),
               _buildTextField('Buyer Birth Date', buyerBirthDateController),
               _buildTextField('Buyer National ID', buyerNationalIDController),
@@ -255,11 +255,10 @@ class _BuyerContractState extends State<BuyerContract> {
               _buildTextField('Buyer Expiry Date', buyerExpiryDateController),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: validateAndSubmit, // Use the validation method
+                onPressed: validateAndSubmit,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: QColors.secondary,
-                  minimumSize:
-                      const Size(double.infinity, 50), // Full width button
+                  minimumSize: const Size(double.infinity, 50),
                 ),
                 child: const Text('Submit'),
               ),

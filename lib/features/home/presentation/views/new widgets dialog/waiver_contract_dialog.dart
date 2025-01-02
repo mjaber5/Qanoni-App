@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:qanoni/core/utils/app_router.dart';
+
 import 'package:qanoni/features/notification/presentation/view_model/notification_cubit/notifications_cubit.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 
@@ -26,7 +29,9 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
       });
     });
     // Request notification permissions at startup
-    context.read<NotificationsCubit>().requestNotificationPermission();
+    context
+        .read<NotificationsCubit>()
+        .initializeNotifications(_idController.text);
   }
 
   @override
@@ -116,6 +121,12 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
     );
   }
 
+  void countinueContract() {
+    GoRouter.of(context).push(_selectedUserType == 'buyer'
+        ? AppRouter.kBuyerContract
+        : AppRouter.kSellerContract);
+  }
+
   Widget _buildActionButtons(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -141,7 +152,10 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
             elevation: 3,
             shadowColor: Colors.black45,
           ),
-          onPressed: () => _confirmIdInput(context),
+          onPressed: () {
+            countinueContract();
+            _confirmIdInput(context);
+          },
           child: const Text("Confirm", style: TextStyle(fontSize: 16)),
         ),
       ],

@@ -6,6 +6,7 @@ import 'package:equatable/equatable.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
+import 'package:qanoni/core/services/base.dart';
 import 'package:user_repository/user_reposetory.dart';
 
 part 'notifications_state.dart';
@@ -23,12 +24,11 @@ class NotificationsCubit extends Cubit<NotificationsState> {
     this._userRepository,
   ) : super(NotificationsInitial());
 
-  // Fetch user messages
+  /// Fetch user messages from the server
   Future<void> fetchUserMessages(String userIduse) async {
     emit(NotificationLoading());
     try {
-      final url =
-          'https://acec-2a01-9700-44f2-ed00-59f8-61af-59e9-9a3a.ngrok-free.app/get-messages/$userIduse';
+      final url = '${ConfigApi.baseUri}/get-messages/$userIduse';
       final response = await http.get(Uri.parse(url));
 
       if (response.statusCode == 200) {
@@ -36,19 +36,17 @@ class NotificationsCubit extends Cubit<NotificationsState> {
         emit(NotificationsFetched(messages.cast<Map<String, String>>()));
       } else {
         log('Failed to retrieve messages: ${response.body}');
-        emit(
-            NotificationError('Failed to retrieve messages: ${response.body}'));
+        emit(const NotificationError('Failed to retrieve messages.'));
       }
     } catch (e) {
       log('Error retrieving messages: $e');
-      emit(NotificationError('Error retrieving messages: $e'));
+      emit(const NotificationError('Error retrieving messages.'));
     }
   }
 
-  // Initialize notifications
+  /// Initialize notifications for the user
   Future<void> initializeNotifications(String? userId) async {
     if (userId == null || userId.isEmpty) {
-      log('Error: User ID is null or empty. Cannot initialize notifications.');
       emit(const NotificationError('User ID is missing.'));
       return;
     }
@@ -64,7 +62,6 @@ class NotificationsCubit extends Cubit<NotificationsState> {
       );
 
       if (settings.authorizationStatus == AuthorizationStatus.denied) {
-        log('Notification permissions denied');
         emit(const NotificationError('Notification permissions denied.'));
         return;
       }
@@ -72,47 +69,91 @@ class NotificationsCubit extends Cubit<NotificationsState> {
       log('Notification permission status: ${settings.authorizationStatus}');
 
       // Initialize local notifications
-      const initializationSettingsAndroid =
-          AndroidInitializationSettings('@mipmap/ic_launcher');
-      const initializationSettings = InitializationSettings(
-        android: initializationSettingsAndroid,
-      );
+      await _initializeLocalNotifications();
 
-      await _localNotificationsPlugin.initialize(
-        initializationSettings,
-        onDidReceiveNotificationResponse: (NotificationResponse response) {
-          log('Notification clicked with payload: ${response.payload}');
-          if (response.payload != null) {
-            handleNotificationClick(response.payload!);
-          }
-        },
-      );
+      // Handle foreground notifications
+      FirebaseMessaging.onMessage.listen(_handleForegroundNotification);
 
-      // Save FCM token
+      // Save and update FCM token
       final token = await _firebaseMessaging.getToken();
       if (token == null) {
-        log('FCM token is null. Cannot proceed.');
         emit(const NotificationError('Failed to retrieve FCM token.'));
         return;
       }
-      log('FCM Token: $token');
-
-      // Update FCM token using UserRepository
       await _userRepository.updateFcmToken(userId, token);
 
       emit(NotificationInitialized());
     } catch (e) {
       log('Error initializing notifications: $e');
-      emit(NotificationError('Error initializing notifications: $e'));
+      emit(const NotificationError('Error initializing notifications.'));
     }
   }
 
-  // Handle notification click
+  /// Handle foreground notifications
+  void _handleForegroundNotification(RemoteMessage message) {
+    log('Foreground message received: ${message.notification?.title}');
+    if (message.notification != null) {
+      _showLocalNotification(
+        title: message.notification!.title ?? 'No Title',
+        body: message.notification!.body ?? 'No Body',
+        payload: message.data['contractId'], // Optional payload
+      );
+    }
+  }
+
+  /// Initialize local notification settings
+  Future<void> _initializeLocalNotifications() async {
+    const initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+    const initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+    );
+
+    await _localNotificationsPlugin.initialize(
+      initializationSettings,
+      onDidReceiveNotificationResponse: (response) {
+        if (response.payload != null) {
+          handleNotificationClick(response.payload!);
+        }
+      },
+    );
+  }
+
+  /// Show a local notification
+  Future<void> _showLocalNotification({
+    required String title,
+    required String body,
+    String? payload,
+  }) async {
+    const androidDetails = AndroidNotificationDetails(
+      'high_importance_channel',
+      'High Importance Notifications',
+      importance: Importance.high,
+      priority: Priority.high,
+      showWhen: true,
+    );
+
+    const notificationDetails = NotificationDetails(android: androidDetails);
+
+    try {
+      await _localNotificationsPlugin.show(
+        0, // Notification ID
+        title,
+        body,
+        notificationDetails,
+        payload: payload,
+      );
+    } catch (e) {
+      log('Error showing local notification: $e');
+    }
+  }
+
+  /// Handle notification click
   void handleNotificationClick(String contractId) {
     emit(NotificationClicked(contractId));
   }
 
-  // Create contract and notify
+  /// Create a contract and notify the other user
   Future<void> createContractAndNotify(
       String otherUserIduse, String userType) async {
     emit(NotificationLoading());
@@ -125,39 +166,36 @@ class NotificationsCubit extends Cubit<NotificationsState> {
 
       log('User found: ${user.userId}');
 
+      // Create a new contract
       final contractRef = await _firestore.collection('contracts').add({
         'creatorId': user.userId,
         'userType': userType,
         'status': 'pending',
         'timestamp': FieldValue.serverTimestamp(),
       });
-      final String contractId = contractRef.id;
+
+      final contractId = contractRef.id;
       log('Contract created with ID: $contractId');
 
-      final fcmToken = user.fcmToken;
-      if (fcmToken != null) {
-        await _sendNotification(fcmToken, contractId);
-        emit(const ContractCreated());
-      } else {
-        emit(NotificationError('FCM token not found for user: ${user.userId}'));
-      }
+      // Send notification to the user using `userIduse`
+      await _sendNotification(otherUserIduse, contractId);
+      emit(const ContractCreated());
     } catch (e) {
       log('Error creating contract or sending notification: $e');
-      emit(NotificationError(
-          'Error creating contract or sending notification: $e'));
+      emit(const NotificationError(
+          'Error creating contract or sending notification.'));
     }
   }
 
-  // Send notification
-  Future<void> _sendNotification(String fcmToken, String contractId) async {
+  /// Send notification to the user by `userIduse`
+  Future<void> _sendNotification(String userIduse, String contractId) async {
     try {
-      const url =
-          'https://acec-2a01-9700-44f2-ed00-59f8-61af-59e9-9a3a.ngrok-free.app/send-notification';
+      const url = '${ConfigApi.baseUri}/send-notification';
       final response = await http.post(
         Uri.parse(url),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
-          'fcmToken': fcmToken,
+          'userIduse': userIduse,
           'title': 'New Contract Assigned',
           'body': 'You have a new contract with ID: $contractId',
           'data': {
@@ -174,72 +212,6 @@ class NotificationsCubit extends Cubit<NotificationsState> {
       }
     } catch (e) {
       log('Error sending notification: $e');
-    }
-  }
-
-  // Fetch contract notifications
-  Future<void> fetchContractNotifications(String contractId) async {
-    emit(NotificationLoading());
-    try {
-      log('Fetching notifications for contract ID: $contractId');
-
-      final querySnapshot = await _firestore
-          .collection('contracts')
-          .doc(contractId)
-          .collection('messages')
-          .orderBy('timestamp', descending: true)
-          .get();
-
-      final notifications = querySnapshot.docs.map((doc) {
-        final data = doc.data();
-        return {
-          'title': (data['title'] ?? 'No Title').toString(),
-          'body': (data['body'] ?? 'No Content').toString(),
-          'timestamp': (data['timestamp'] as Timestamp?)?.toDate().toString() ??
-              'No Timestamp',
-        };
-      }).toList();
-
-      emit(NotificationsFetched(notifications));
-      log('Fetched ${notifications.length} notifications for contract ID: $contractId');
-    } catch (e) {
-      log('Error fetching notifications for contract ID $contractId: $e');
-      emit(NotificationError('Error fetching notifications: $e'));
-    }
-  }
-
-  // Request notification permissions
-  Future<void> requestNotificationPermission() async {
-    try {
-      final settings = await _firebaseMessaging.requestPermission(
-        alert: true,
-        announcement: false,
-        badge: true,
-        carPlay: false,
-        criticalAlert: false,
-        provisional: false,
-        sound: true,
-      );
-
-      if (settings.authorizationStatus == AuthorizationStatus.denied) {
-        log('Notification permissions denied');
-        emit(const NotificationError('Notification permissions denied.'));
-      } else if (settings.authorizationStatus ==
-          AuthorizationStatus.authorized) {
-        log('Notification permissions granted');
-        emit(NotificationInitialized());
-      } else if (settings.authorizationStatus ==
-          AuthorizationStatus.provisional) {
-        log('Provisional notification permissions granted');
-        emit(NotificationInitialized());
-      } else {
-        log('Unknown notification permission status: ${settings.authorizationStatus}');
-        emit(
-            const NotificationError('Unknown notification permission status.'));
-      }
-    } catch (e) {
-      log('Error requesting notification permissions: $e');
-      emit(NotificationError('Error requesting notification permissions: $e'));
     }
   }
 }

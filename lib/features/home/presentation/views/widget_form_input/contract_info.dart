@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:qanoni/core/services/base.dart';
 import 'package:qanoni/features/home/data/contract_repo.dart';
 import 'package:qanoni/features/home/data/model/contract_information_data.dart';
 import 'package:signature/signature.dart';
@@ -34,6 +35,9 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
   String? selectedPaymentMethod;
 
   String? _signatureUrl;
+
+  // Backend repository instance
+  final ContractRepo contractRepo = ContractRepo(baseUrl: ConfigApi.baseUri);
 
   @override
   void initState() {
@@ -77,7 +81,9 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
                   });
                 }
               }
-              Navigator.of(context).pop();
+              if (mounted) {
+                Navigator.of(context).pop();
+              }
             },
             child: const Text('Save'),
           ),
@@ -98,8 +104,6 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
         return;
       }
 
-      final contractRepo = ContractRepo();
-
       final contractInfo = ContractInfo(
         contractDate: contractDateController.text,
         contractPlace: _signatureUrl ?? 'No Signature',
@@ -109,12 +113,12 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
         additionalTerms: additionalTermsController.text,
       );
 
-      await contractRepo.saveContract(
-        contractInfo: contractInfo,
-        buyer: null, // Provide buyer data if available
-        seller: null, // Provide seller data if available
-        carInfo: null, // Provide car info if available
-        creatorId: currentUser.uid,
+      await contractRepo.createContract(
+        buyerIduse: currentUser.uid,
+        sellerIduse: 'seller123', // Replace with actual seller ID
+        contractDetails: {
+          'contractInfo': contractInfo.toMap(),
+        },
       );
 
       if (!mounted) return;

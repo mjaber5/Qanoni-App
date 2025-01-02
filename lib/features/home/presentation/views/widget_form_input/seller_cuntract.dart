@@ -2,10 +2,9 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:qanoni/core/utils/app_router.dart';
+import 'package:qanoni/core/services/base.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/features/home/data/contract_repo.dart';
 import 'package:qanoni/features/home/data/model/seller_data.dart';
@@ -37,7 +36,8 @@ class _SellerContractState extends State<SellerContract> {
   final TextEditingController sellerExpiryDateController =
       TextEditingController();
 
-  final _formKey = GlobalKey<FormState>(); // Form validation key
+  // Backend repository instance
+  final ContractRepo contractRepo = ContractRepo(baseUrl: ConfigApi.baseUri);
 
   // Process the image with ML Kit Text Recognition
   Future<void> processImage(File imageFile, {required bool isFront}) async {
@@ -57,7 +57,8 @@ class _SellerContractState extends State<SellerContract> {
       log('Error processing image: $e');
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Failed to process image')));
+        const SnackBar(content: Text('Failed to process image')),
+      );
     } finally {
       textRecognizer.close();
     }
@@ -118,23 +119,7 @@ class _SellerContractState extends State<SellerContract> {
     }
   }
 
-  // Pick image from camera
-  Future<void> pickImage({required bool isFront}) async {
-    final pickedFile = await _picker.pickImage(source: ImageSource.camera);
-    if (pickedFile != null) {
-      setState(() {
-        if (isFront) {
-          _frontImageFile = pickedFile;
-        } else {
-          _backImageFile = pickedFile;
-        }
-      });
-
-      processImage(File(pickedFile.path), isFront: isFront);
-    }
-  }
-
-  // Submit the seller's data to Firestore
+  // Submit the seller's data to the backend
   Future<void> submitSellerData() async {
     try {
       final currentUser = _firebaseAuth.currentUser;
@@ -146,8 +131,6 @@ class _SellerContractState extends State<SellerContract> {
         return;
       }
 
-      final contractRepo = ContractRepo();
-
       final seller = Seller(
         fullName: sellerFullNameController.text,
         birthDate: sellerBirthDateController.text,
@@ -157,14 +140,17 @@ class _SellerContractState extends State<SellerContract> {
         expiryDate: sellerExpiryDateController.text,
       );
 
-      await contractRepo.saveContract(
-        seller: seller,
-        creatorId: currentUser.uid,
+      await contractRepo.createContract(
+        buyerIduse: 'buyer123', // Replace with actual buyer ID
+        sellerIduse: currentUser.uid,
+        contractDetails: {
+          'sellerData': seller.toMap(),
+        },
       );
 
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Seller data saved successfully!')),
+        const SnackBar(content: Text('Seller data submitted successfully!')),
       );
     } catch (e) {
       log('Error saving seller data: $e');
@@ -211,6 +197,28 @@ class _SellerContractState extends State<SellerContract> {
     );
   }
 
+  // Method to pick an image
+  Future<void> pickImage({required bool isFront}) async {
+    try {
+      final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+      if (pickedFile != null) {
+        setState(() {
+          if (isFront) {
+            _frontImageFile = pickedFile;
+          } else {
+            _backImageFile = pickedFile;
+          }
+        });
+        processImage(File(pickedFile.path), isFront: isFront);
+      }
+    } catch (e) {
+      log('Error picking image: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Failed to pick image')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -222,60 +230,50 @@ class _SellerContractState extends State<SellerContract> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Front and Back Image Picker Section
-                Card(
-                  elevation: 5,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        _buildImageSection(
-                          imageFile: _frontImageFile,
-                          label: 'Front Side',
-                          isFront: true,
-                        ),
-                        _buildImageSection(
-                          imageFile: _backImageFile,
-                          label: 'Back Side',
-                          isFront: false,
-                        ),
-                      ],
-                    ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Front and Back Image Picker Section
+              Card(
+                elevation: 5,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      _buildImageSection(
+                        imageFile: _frontImageFile,
+                        label: 'Front Side',
+                        isFront: true,
+                      ),
+                      _buildImageSection(
+                        imageFile: _backImageFile,
+                        label: 'Back Side',
+                        isFront: false,
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 16),
-                // Text fields for extracted data
-                _buildTextField('Seller Full Name', sellerFullNameController),
-                _buildTextField('Seller Birth Date', sellerBirthDateController),
-                _buildTextField(
-                    'Seller National ID', sellerNationalIDController),
-                _buildTextField(
-                    'Seller Registry Number', sellerRegistryNumberController),
-                _buildTextField(
-                    'Seller Registry Place', sellerRegistryPlaceController),
-                _buildTextField(
-                    'Seller Expiry Date', sellerExpiryDateController),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    validateAndSubmit();
-                    GoRouter.of(context).push(AppRouter.kCarInformation);
-                  }, // Use the validation method
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: QColors.secondary,
-                    minimumSize:
-                        const Size(double.infinity, 50), // Full width button
-                  ),
-                  child: const Text('Submit'),
+              ),
+              const SizedBox(height: 16),
+              _buildTextField('Seller Full Name', sellerFullNameController),
+              _buildTextField('Seller Birth Date', sellerBirthDateController),
+              _buildTextField('Seller National ID', sellerNationalIDController),
+              _buildTextField(
+                  'Seller Registry Number', sellerRegistryNumberController),
+              _buildTextField(
+                  'Seller Registry Place', sellerRegistryPlaceController),
+              _buildTextField('Seller Expiry Date', sellerExpiryDateController),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: validateAndSubmit,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: QColors.secondary,
+                  minimumSize: const Size(double.infinity, 50),
                 ),
-              ],
-            ),
+                child: const Text('Submit'),
+              ),
+            ],
           ),
         ),
       ),

@@ -2,13 +2,11 @@ import 'dart:io';
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:qanoni/core/utils/app_router.dart';
+import 'package:qanoni/core/services/base.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/features/home/data/contract_repo.dart';
-import 'package:qanoni/features/home/data/model/car_information_data.dart';
 
 class CarInfo extends StatefulWidget {
   const CarInfo({super.key});
@@ -35,6 +33,9 @@ class _CarInfoState extends State<CarInfo> {
   final TextEditingController insuranceExpiryDateController =
       TextEditingController();
   final TextEditingController carConditionController = TextEditingController();
+
+  // Backend repository instance
+  final ContractRepo contractRepo = ContractRepo(baseUrl: ConfigApi.baseUri);
 
   // Process the image with ML Kit Text Recognition
   Future<void> processImage(File imageFile, {bool isFront = true}) async {
@@ -134,24 +135,7 @@ class _CarInfoState extends State<CarInfo> {
     }
   }
 
-  // Pick image from camera
-  Future<void> pickImage({required bool isFront}) async {
-    final pickedFile = await _picker.pickImage(source: ImageSource.camera);
-    if (pickedFile != null) {
-      setState(() {
-        if (isFront) {
-          _frontImageFile = pickedFile;
-        } else {
-          _backImageFile = pickedFile;
-        }
-      });
-
-      // Process the selected image
-      processImage(File(pickedFile.path), isFront: isFront);
-    }
-  }
-
-  // Submit the car's data to Firestore
+  // Submit the car's data to the backend
   Future<void> submitCarData() async {
     try {
       final currentUser = _firebaseAuth.currentUser;
@@ -163,27 +147,26 @@ class _CarInfoState extends State<CarInfo> {
         return;
       }
 
-      final contractRepo = ContractRepo();
-
-      final carInfo = CarInfoForm(
-        carPlateNumber: carPlateNumberController.text,
-        vinNumber: vinNumberController.text,
-        engineNumber: engineNumberController.text,
-        carModel: carModelController.text,
-        carColor: carColorController.text,
-        carRegistrationNumber: carRegistrationNumberController.text,
-        insuranceExpiryDate: insuranceExpiryDateController.text,
-        carCondition: carConditionController.text,
-      );
-
-      await contractRepo.saveContract(
-        carInfo: carInfo,
-        creatorId: currentUser.uid,
+      await contractRepo.createContract(
+        buyerIduse: currentUser.uid,
+        sellerIduse: 'seller123', // Replace with actual seller ID
+        contractDetails: {
+          'carInfo': {
+            'carPlateNumber': carPlateNumberController.text,
+            'vinNumber': vinNumberController.text,
+            'engineNumber': engineNumberController.text,
+            'carModel': carModelController.text,
+            'carColor': carColorController.text,
+            'carRegistrationNumber': carRegistrationNumberController.text,
+            'insuranceExpiryDate': insuranceExpiryDateController.text,
+            'carCondition': carConditionController.text,
+          },
+        },
       );
 
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Car data saved successfully!')),
+        const SnackBar(content: Text('Car data submitted successfully!')),
       );
     } catch (e) {
       log('Error saving car data: $e');
@@ -244,7 +227,6 @@ class _CarInfoState extends State<CarInfo> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Front and Back Image Picker Section
               Card(
                 elevation: 5,
                 child: Padding(
@@ -267,7 +249,6 @@ class _CarInfoState extends State<CarInfo> {
                 ),
               ),
               const SizedBox(height: 16),
-              // Text fields for extracted data
               _buildTextField('Car Plate Number', carPlateNumberController),
               _buildTextField('VIN Number', vinNumberController),
               _buildTextField('Engine Number', engineNumberController),
@@ -280,14 +261,10 @@ class _CarInfoState extends State<CarInfo> {
               _buildTextField('Car Condition', carConditionController),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  validateAndSubmit();
-                  GoRouter.of(context).push(AppRouter.kContractInformationForm);
-                }, // Use the validation method
+                onPressed: validateAndSubmit,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: QColors.secondary,
-                  minimumSize:
-                      const Size(double.infinity, 50), // Full width button
+                  minimumSize: const Size(double.infinity, 50),
                 ),
                 child: const Text('Submit'),
               ),
@@ -334,6 +311,21 @@ class _CarInfoState extends State<CarInfo> {
         ),
       ],
     );
+  }
+
+  // Method to pick an image
+  Future<void> pickImage({required bool isFront}) async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.camera);
+    if (pickedFile != null) {
+      setState(() {
+        if (isFront) {
+          _frontImageFile = pickedFile;
+        } else {
+          _backImageFile = pickedFile;
+        }
+      });
+      processImage(File(pickedFile.path), isFront: isFront);
+    }
   }
 
   @override

@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
+import 'package:qanoni/core/services/base.dart';
 import 'package:qanoni/features/home/data/contract_repo.dart';
 import 'package:qanoni/features/home/presentation/view_model/contract_status/contract_status_cubit.dart';
 import 'core/errors/failures.dart';
@@ -40,7 +41,7 @@ void main() async {
   Bloc.observer = SimpleBlocObserver();
 
   final prefs = await SharedPreferences.getInstance();
-  ContractRepo contractRepo = ContractRepo();
+  ContractRepo contractRepo = ContractRepo(baseUrl: ConfigApi.baseUri);
   FirebaseUserRepo userRepository = FirebaseUserRepo();
 
   runApp(MultiBlocProvider(

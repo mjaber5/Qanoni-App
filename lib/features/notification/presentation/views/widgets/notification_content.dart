@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/presentation/view_model/contract_status/contract_status_cubit.dart';
 import 'package:qanoni/features/notification/presentation/view_model/notification_cubit/notifications_cubit.dart';
 import 'package:qanoni/features/notification/presentation/views/widgets/request.dart';
 
@@ -118,33 +117,37 @@ class _NotificationContentState extends State<NotificationContent> {
               },
               children: [
                 const All(),
-                BlocBuilder<ContractCubit, ContractStatusState>(
-                  builder: (context, state) {
-                    return FutureBuilder<DocumentReference>(
-                      future: _firestore.collection('contracts').add({
-                        'status': 'pending',
-                      }),
-                      builder: (context, snapshot) {
-                        final contractRef = snapshot.data;
-                        final String contractId = contractRef?.id ?? '';
+                FutureBuilder<QuerySnapshot>(
+                  future: _firestore
+                      .collection('contracts')
+                      .where('status', isEqualTo: 'pending')
+                      .get(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
 
-                        if (contractId.isEmpty) {
-                          log('Error: Contract ID is missing.');
-                          return const Center(
-                            child: Text(
-                              'Error: Contract ID is missing.',
-                              style: TextStyle(color: Colors.red),
-                            ),
-                          );
-                        }
+                    if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                      return const Center(
+                        child: Text(
+                          'No pending contracts found.',
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      );
+                    }
 
-                        return RequestScreen(
-                          contractId: contractId,
-                          messageTitle: '📜 Contract Request  ',
-                          messageBody:
-                              'New Contract for Review\nPlease approve or reject the',
-                        );
-                      },
+                    final contractDoc = snapshot.data!.docs.first;
+                    final contractId = contractDoc.id;
+                    final userType = contractDoc['userType'] ?? 'unknown';
+
+                    return RequestScreen(
+                      contractId: contractId,
+                      messageTitle: '📜 Contract Request',
+                      messageBody:
+                          'Please review and approve or reject the contract.',
+                      userType: userType,
                     );
                   },
                 ),
