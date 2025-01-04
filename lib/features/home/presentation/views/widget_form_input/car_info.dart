@@ -1,12 +1,12 @@
 import 'dart:io';
 import 'dart:developer';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:qanoni/core/services/base.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/data/contract_repo.dart';
 
 class CarInfo extends StatefulWidget {
   const CarInfo({super.key});
@@ -16,7 +16,6 @@ class CarInfo extends StatefulWidget {
 }
 
 class _CarInfoState extends State<CarInfo> {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final ImagePicker _picker = ImagePicker();
   XFile? _frontImageFile;
   XFile? _backImageFile;
@@ -34,8 +33,12 @@ class _CarInfoState extends State<CarInfo> {
       TextEditingController();
   final TextEditingController carConditionController = TextEditingController();
 
-  // Backend repository instance
-  final ContractRepo contractRepo = ContractRepo(baseUrl: ConfigApi.baseUri);
+  // Backend Base URL
+  final String baseUrl =
+      'http://localhost:8080'; // Replace with your backend URL
+
+  // Contract ID (to be updated during the stage process)
+  String? contractId;
 
   // Process the image with ML Kit Text Recognition
   Future<void> processImage(File imageFile, {bool isFront = true}) async {
@@ -137,40 +140,41 @@ class _CarInfoState extends State<CarInfo> {
 
   // Submit the car's data to the backend
   Future<void> submitCarData() async {
+    final carData = {
+      'carPlateNumber': carPlateNumberController.text,
+      'vinNumber': vinNumberController.text,
+      'engineNumber': engineNumberController.text,
+      'carModel': carModelController.text,
+      'carColor': carColorController.text,
+      'carRegistrationNumber': carRegistrationNumberController.text,
+      'insuranceExpiryDate': insuranceExpiryDateController.text,
+      'carCondition': carConditionController.text,
+    };
+
+    final data = {
+      'stage': 'car',
+      'carData': carData,
+      'contractId': contractId,
+    };
+
     try {
-      final currentUser = _firebaseAuth.currentUser;
-      if (currentUser == null) {
-        if (!mounted) return;
+      final response = await http.post(
+        Uri.parse('$baseUrl/save-data'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(data),
+      );
+
+      if (response.statusCode == 200) {
+        final responseData = jsonDecode(response.body);
+        contractId = responseData['contractId']; // Update contract ID
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('User not logged in.')),
+          const SnackBar(content: Text('Car data submitted successfully!')),
         );
-        return;
+      } else {
+        throw Exception('Failed to save car data: ${response.body}');
       }
-
-      await contractRepo.createContract(
-        buyerIduse: currentUser.uid,
-        sellerIduse: 'seller123', // Replace with actual seller ID
-        contractDetails: {
-          'carInfo': {
-            'carPlateNumber': carPlateNumberController.text,
-            'vinNumber': vinNumberController.text,
-            'engineNumber': engineNumberController.text,
-            'carModel': carModelController.text,
-            'carColor': carColorController.text,
-            'carRegistrationNumber': carRegistrationNumberController.text,
-            'insuranceExpiryDate': insuranceExpiryDateController.text,
-            'carCondition': carConditionController.text,
-          },
-        },
-      );
-
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Car data submitted successfully!')),
-      );
     } catch (e) {
       log('Error saving car data: $e');
-      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error saving car data: $e')),
       );
@@ -207,7 +211,7 @@ class _CarInfoState extends State<CarInfo> {
             },
             child: const Text(
               'OK',
-              style: TextStyle(color: QColors.secondary),
+              style: TextStyle(color: QColors.error),
             ),
           ),
         ],
@@ -283,9 +287,6 @@ class _CarInfoState extends State<CarInfo> {
         decoration: InputDecoration(
           labelText: label,
           border: const OutlineInputBorder(),
-          focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: QColors.secondary, width: 2.0),
-          ),
         ),
       ),
     );

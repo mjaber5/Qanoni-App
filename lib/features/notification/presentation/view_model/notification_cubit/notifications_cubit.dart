@@ -89,25 +89,12 @@ class NotificationsCubit extends Cubit<NotificationsState> {
     }
   }
 
-  /// Handle foreground notifications
-  void _handleForegroundNotification(RemoteMessage message) {
-    log('Foreground message received: ${message.notification?.title}');
-    if (message.notification != null) {
-      _showLocalNotification(
-        title: message.notification!.title ?? 'No Title',
-        body: message.notification!.body ?? 'No Body',
-        payload: message.data['contractId'], // Optional payload
-      );
-    }
-  }
-
   /// Initialize local notification settings
   Future<void> _initializeLocalNotifications() async {
-    const initializationSettingsAndroid =
+    const androidSettings =
         AndroidInitializationSettings('@mipmap/ic_launcher');
-    const initializationSettings = InitializationSettings(
-      android: initializationSettingsAndroid,
-    );
+    const initializationSettings =
+        InitializationSettings(android: androidSettings);
 
     await _localNotificationsPlugin.initialize(
       initializationSettings,
@@ -117,6 +104,38 @@ class NotificationsCubit extends Cubit<NotificationsState> {
         }
       },
     );
+
+    // Create notification channel for Android 8.0+
+    const androidNotificationChannel = AndroidNotificationChannel(
+      'high_importance_channel', // Channel ID
+      'High Importance Notifications', // Channel Name
+      description: 'This channel is for important notifications.',
+      importance: Importance.high,
+    );
+
+    final androidPlugin =
+        _localNotificationsPlugin.resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>();
+
+    if (androidPlugin != null) {
+      await androidPlugin.createNotificationChannel(androidNotificationChannel);
+    }
+
+    log('Local notifications initialized successfully.');
+  }
+
+  /// Handle foreground notifications
+  void _handleForegroundNotification(RemoteMessage message) {
+    log('Foreground message received: ${message.notification?.title}');
+    if (message.notification != null) {
+      _showLocalNotification(
+        title: message.notification!.title ?? 'No Title',
+        body: message.notification!.body ?? 'No Body',
+        payload: message.data['contractId'], // Optional payload
+      );
+    } else {
+      log('Message does not contain notification details.');
+    }
   }
 
   /// Show a local notification
@@ -126,8 +145,9 @@ class NotificationsCubit extends Cubit<NotificationsState> {
     String? payload,
   }) async {
     const androidDetails = AndroidNotificationDetails(
-      'high_importance_channel',
+      'high_importance_channel', // Ensure this matches the channel ID
       'High Importance Notifications',
+      channelDescription: 'This channel is for important notifications.',
       importance: Importance.high,
       priority: Priority.high,
       showWhen: true,
@@ -137,12 +157,13 @@ class NotificationsCubit extends Cubit<NotificationsState> {
 
     try {
       await _localNotificationsPlugin.show(
-        0, // Notification ID
+        DateTime.now().millisecond, // Unique Notification ID
         title,
         body,
         notificationDetails,
         payload: payload,
       );
+      log('Local notification displayed: $title');
     } catch (e) {
       log('Error showing local notification: $e');
     }
@@ -150,6 +171,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
 
   /// Handle notification click
   void handleNotificationClick(String contractId) {
+    log('Notification clicked with payload: $contractId');
     emit(NotificationClicked(contractId));
   }
 

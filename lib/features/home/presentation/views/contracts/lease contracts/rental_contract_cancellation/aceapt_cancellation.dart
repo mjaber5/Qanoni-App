@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import the localization file
 import '../../../../../../../core/utils/constants/colors.dart';
-import 'contract_Input_form_cancellation.dart';
+import 'contract_input_form_cancellation.dart';
 
 class AceaptCancellation extends StatefulWidget {
   const AceaptCancellation({super.key});
@@ -56,14 +56,19 @@ class _AceaptCancellationState extends State<AceaptCancellation> {
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: isDarkMode
-                          ? [QColors.darkerGrey.withOpacity(0.8), QColors.darkerGrey.withOpacity(0.6)]
+                          ? [
+                              QColors.darkerGrey.withOpacity(0.8),
+                              QColors.darkerGrey.withOpacity(0.6)
+                            ]
                           : [Colors.white, Colors.grey[200]!],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: isDarkMode ? Colors.white54 : Colors.grey.withOpacity(0.5),
+                      color: isDarkMode
+                          ? Colors.white54
+                          : Colors.grey.withOpacity(0.5),
                       width: 1.5,
                     ),
                     boxShadow: [
@@ -79,7 +84,8 @@ class _AceaptCancellationState extends State<AceaptCancellation> {
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Text(
-                      localizations.cancellationTerms, // Localized cancellation terms
+                      localizations
+                          .cancellationTerms, // Localized cancellation terms
                       style: const TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.w500,
@@ -129,14 +135,16 @@ class _AceaptCancellationState extends State<AceaptCancellation> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const ContractInputFormCancellation(), // Replace with your actual next screen
+                                builder: (context) =>
+                                    const ContractInputFormCancellation(), // Replace with your actual next screen
                               ),
                             );
                           }
                         : null,
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 15),
-                      backgroundColor: _agreed ? QColors.secondary : Colors.grey[400],
+                      backgroundColor:
+                          _agreed ? QColors.secondary : Colors.grey[400],
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),

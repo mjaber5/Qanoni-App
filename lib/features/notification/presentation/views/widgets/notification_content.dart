@@ -138,16 +138,16 @@ class _NotificationContentState extends State<NotificationContent> {
                       );
                     }
 
-                    final contractDoc = snapshot.data!.docs.first;
-                    final contractId = contractDoc.id;
-                    final userType = contractDoc['userType'] ?? 'unknown';
+                    // Parse the first document as a Waiver
+                    final waiver =
+                        Waiver.fromDocumentSnapshot(snapshot.data!.docs.first);
 
                     return RequestScreen(
-                      contractId: contractId,
+                      contractId: waiver.contractId,
                       messageTitle: '📜 Contract Request',
                       messageBody:
                           'Please review and approve or reject the contract.',
-                      userType: userType,
+                      userType: waiver.userType,
                     );
                   },
                 ),
@@ -157,6 +157,22 @@ class _NotificationContentState extends State<NotificationContent> {
           ),
         ],
       ),
+    );
+  }
+}
+
+/// Waiver class to parse Firestore documents
+class Waiver {
+  final String contractId;
+  final String userType;
+
+  Waiver({required this.contractId, required this.userType});
+
+  factory Waiver.fromDocumentSnapshot(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
+    return Waiver(
+      contractId: doc.id,
+      userType: data['userType'] ?? 'unknown',
     );
   }
 }

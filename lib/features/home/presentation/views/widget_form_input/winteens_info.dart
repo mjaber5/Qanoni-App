@@ -4,13 +4,14 @@ class WitnessInfoForm extends StatefulWidget {
   const WitnessInfoForm({super.key});
 
   @override
-  _WitnessInfoFormState createState() => _WitnessInfoFormState();
+  State<WitnessInfoForm> createState() => _WitnessInfoFormState();
 }
 
 class _WitnessInfoFormState extends State<WitnessInfoForm> {
   final TextEditingController witnessNameController = TextEditingController();
   final TextEditingController witnessIDController = TextEditingController();
-  final TextEditingController witnessAddressController = TextEditingController();
+  final TextEditingController witnessAddressController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,7 @@ class _WitnessInfoFormState extends State<WitnessInfoForm> {
         controller: controller,
         decoration: InputDecoration(
           labelText: label,
-          border: OutlineInputBorder(),
+          border: const OutlineInputBorder(),
         ),
       ),
     );

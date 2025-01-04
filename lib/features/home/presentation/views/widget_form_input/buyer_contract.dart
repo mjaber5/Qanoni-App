@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:qanoni/core/services/base.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/data/contract_repo.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class BuyerContract extends StatefulWidget {
   const BuyerContract({super.key});
@@ -33,11 +33,11 @@ class _BuyerContractState extends State<BuyerContract> {
   final TextEditingController buyerExpiryDateController =
       TextEditingController();
 
-  // Firebase Auth instance
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  // Backend Base URL
+  final String baseUrl = 'http://localhost:8080';
 
-  // Backend repository instance
-  final ContractRepo contractRepo = ContractRepo(baseUrl: ConfigApi.baseUri);
+  // Contract ID (to be fetched/updated during stage processing)
+  String? contractId;
 
   // Process the image with ML Kit Text Recognition
   Future<void> processImage(File imageFile, {bool isFront = true}) async {
@@ -137,38 +137,39 @@ class _BuyerContractState extends State<BuyerContract> {
 
   // Submit the buyer's data to the backend
   Future<void> submitBuyerData() async {
+    final buyerData = {
+      'fullName': buyerFullNameController.text,
+      'birthDate': buyerBirthDateController.text,
+      'nationalID': buyerNationalIDController.text,
+      'registryNumber': buyerRegistryNumberController.text,
+      'registryPlace': buyerRegistryPlaceController.text,
+      'expiryDate': buyerExpiryDateController.text,
+    };
+
+    final data = {
+      'stage': 'buyer',
+      'buyerData': buyerData,
+      'contractId': contractId, // Existing contract ID
+    };
+
     try {
-      final currentUser = _firebaseAuth.currentUser;
-      if (currentUser == null) {
-        if (!mounted) return;
+      final response = await http.post(
+        Uri.parse('$baseUrl/save-data'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(data),
+      );
+
+      if (response.statusCode == 200) {
+        final responseData = jsonDecode(response.body);
+        contractId = responseData['contractId']; // Update contract ID
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('User not logged in.')),
+          const SnackBar(content: Text('Buyer data submitted successfully!')),
         );
-        return;
+      } else {
+        throw Exception('Failed to save data: ${response.body}');
       }
-
-      await contractRepo.createContract(
-        buyerIduse: currentUser.uid,
-        sellerIduse: 'seller123', // Replace with actual seller ID
-        contractDetails: {
-          'buyerData': {
-            'fullName': buyerFullNameController.text,
-            'birthDate': buyerBirthDateController.text,
-            'nationalID': buyerNationalIDController.text,
-            'registryNumber': buyerRegistryNumberController.text,
-            'registryPlace': buyerRegistryPlaceController.text,
-            'expiryDate': buyerExpiryDateController.text,
-          },
-        },
-      );
-
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Buyer data submitted successfully!')),
-      );
     } catch (e) {
       log('Error saving buyer data: $e');
-      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error saving buyer data: $e')),
       );
@@ -203,7 +204,7 @@ class _BuyerContractState extends State<BuyerContract> {
             },
             child: const Text(
               'OK',
-              style: TextStyle(color: QColors.secondary),
+              style: TextStyle(color: Colors.red),
             ),
           ),
         ],
@@ -277,9 +278,6 @@ class _BuyerContractState extends State<BuyerContract> {
         decoration: InputDecoration(
           labelText: label,
           border: const OutlineInputBorder(),
-          focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: QColors.secondary, width: 2.0),
-          ),
         ),
       ),
     );

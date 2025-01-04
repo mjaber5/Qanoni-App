@@ -1,12 +1,9 @@
 import 'dart:developer';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:qanoni/core/services/base.dart';
-import 'package:qanoni/features/home/data/contract_repo.dart';
-import 'package:qanoni/features/home/data/model/contract_information_data.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:signature/signature.dart';
-import '../../../../../core/utils/constants/colors.dart';
 
 class ContractInfoForm extends StatefulWidget {
   const ContractInfoForm({super.key});
@@ -16,7 +13,6 @@ class ContractInfoForm extends StatefulWidget {
 }
 
 class _ContractInfoFormState extends State<ContractInfoForm> {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final TextEditingController contractDateController = TextEditingController();
   final TextEditingController saleAmountController = TextEditingController();
   final TextEditingController additionalTermsController =
@@ -34,10 +30,15 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
   // Payment methods dropdown list
   String? selectedPaymentMethod;
 
+  // Signature placeholder URL
   String? _signatureUrl;
 
-  // Backend repository instance
-  final ContractRepo contractRepo = ContractRepo(baseUrl: ConfigApi.baseUri);
+  // Backend Base URL
+  final String baseUrl =
+      'http://localhost:8080'; // Replace with your backend URL
+
+  // Contract ID (if available)
+  String? contractId;
 
   @override
   void initState() {
@@ -74,10 +75,9 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
               if (_signatureController.isNotEmpty) {
                 final signature = await _signatureController.toPngBytes();
                 if (signature != null) {
-                  // Save signature locally or upload to Firebase
+                  // Replace with actual upload logic if needed
                   setState(() {
-                    _signatureUrl =
-                        'User Signature Captured'; // Placeholder for signature URL
+                    _signatureUrl = 'User Signature Captured'; // Placeholder
                   });
                 }
               }
@@ -92,42 +92,42 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
     );
   }
 
-  // Method to submit contract info
+  // Submit contract info to the backend
   Future<void> submitContractInfo() async {
+    final contractData = {
+      'contractDate': contractDateController.text,
+      'contractPlace': _signatureUrl ?? 'No Signature',
+      'saleAmount': saleAmountController.text,
+      'paymentMethod': selectedPaymentMethod ?? 'online',
+      'ownershipTransfer': ownershipTransferChecked,
+      'additionalTerms': additionalTermsController.text,
+    };
+
+    final data = {
+      'stage': 'contract',
+      'contractData': contractData,
+      'contractId': contractId, // Include contract ID if exists
+    };
+
     try {
-      final currentUser = _firebaseAuth.currentUser;
-      if (currentUser == null) {
-        if (!mounted) return;
+      final response = await http.post(
+        Uri.parse('$baseUrl/save-data'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(data),
+      );
+
+      if (response.statusCode == 200) {
+        final responseData = jsonDecode(response.body);
+        contractId = responseData['contractId']; // Update contract ID
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('User not logged in.')),
+          const SnackBar(
+              content: Text('Contract data submitted successfully!')),
         );
-        return;
+      } else {
+        throw Exception('Failed to save contract data: ${response.body}');
       }
-
-      final contractInfo = ContractInfo(
-        contractDate: contractDateController.text,
-        contractPlace: _signatureUrl ?? 'No Signature',
-        saleAmount: saleAmountController.text,
-        paymentMethod: selectedPaymentMethod ?? 'online',
-        ownershipTransfer: ownershipTransferChecked,
-        additionalTerms: additionalTermsController.text,
-      );
-
-      await contractRepo.createContract(
-        buyerIduse: currentUser.uid,
-        sellerIduse: 'seller123', // Replace with actual seller ID
-        contractDetails: {
-          'contractInfo': contractInfo.toMap(),
-        },
-      );
-
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Contract data saved successfully!')),
-      );
     } catch (e) {
       log('Error saving contract data: $e');
-      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error saving contract data: $e')),
       );
@@ -140,12 +140,9 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
         _signatureUrl == null ||
         saleAmountController.text.isEmpty ||
         selectedPaymentMethod == null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Please fill in all required fields.')),
-        );
-      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please fill in all required fields.')),
+      );
       return false;
     }
     return true;
@@ -157,7 +154,7 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
       appBar: AppBar(
         title: const Text('Contract Information'),
         centerTitle: true,
-        backgroundColor: QColors.secondary,
+        backgroundColor: Colors.blue,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -230,12 +227,10 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
               const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
-            borderSide: const BorderSide(color: QColors.secondary),
           ),
           contentPadding:
               const EdgeInsets.symmetric(vertical: 15.0, horizontal: 12.0),
         ),
-        style: const TextStyle(fontSize: 16),
       ),
     );
   }
@@ -248,9 +243,7 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
         decoration: const InputDecoration(
           labelText: 'Payment Method',
           labelStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(color: QColors.secondary),
-          ),
+          border: OutlineInputBorder(),
         ),
         items: [
           'Cash',
@@ -293,7 +286,6 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
 
   @override
   void dispose() {
-    // Dispose the text controllers and signature controller to avoid memory leaks
     contractDateController.dispose();
     saleAmountController.dispose();
     additionalTermsController.dispose();

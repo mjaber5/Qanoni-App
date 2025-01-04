@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:qanoni/core/utils/app_router.dart';
 
 import 'package:qanoni/core/utils/constants/colors.dart';
-import 'package:qanoni/features/home/presentation/views/widget_form_input/buyer_contract.dart';
-import 'package:qanoni/features/home/presentation/views/widget_form_input/seller_cuntract.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -43,13 +43,9 @@ class _RequestScreenState extends State<RequestScreen> {
   }
 
   void countinueContract() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => widget.userType == 'buyer'
-            ? const SellerContract()
-            : const BuyerContract(),
-      ),
-    );
+    GoRouter.of(context).push(widget.userType == 'buyer'
+        ? AppRouter.kSellerContract
+        : AppRouter.kBuyerContract);
   }
 
   Future<void> rejectContract() async {
@@ -181,18 +177,33 @@ class _RequestScreenState extends State<RequestScreen> {
     );
   }
 
+  Widget buildNoRequestMessage() {
+    return Center(
+      child: Text(
+        'No requests available.',
+        style: TextStyle(
+          fontSize: 18,
+          color: Colors.grey.shade600,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return isVisible
-        ? Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Column(
-              children: [
-                const SizedBox(height: 20),
-                isLoading ? buildShimmer() : buildCard(),
-              ],
-            ),
-          )
-        : const SizedBox.shrink(); // Return an empty widget if not visible
+    if (!isVisible || widget.contractId.isEmpty || widget.messageBody.isEmpty) {
+      return buildNoRequestMessage();
+    }
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Column(
+        children: [
+          const SizedBox(height: 20),
+          isLoading ? buildShimmer() : buildCard(),
+        ],
+      ),
+    );
   }
 }
