@@ -5,6 +5,8 @@ import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // أضف هذا السطر
+
 
 import 'package:qanoni/core/utils/constants/colors.dart';
 
@@ -199,19 +201,21 @@ class _CarInfoState extends State<CarInfo> {
 
   // Show validation error dialog
   void _showValidationDialog() {
+         final localizations = AppLocalizations.of(context)!;
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Validation Error'),
-        content: const Text('Please fill in all required fields.'),
+        title:  Text(localizations.validation_error),
+        content:  Text(localizations.fill_all_fields),
         actions: <Widget>[
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: const Text(
-              'OK',
-              style: TextStyle(color: QColors.error),
+            child: Text(
+              localizations.ok,
+              style: const TextStyle(color: QColors.error),
             ),
           ),
         ],
@@ -221,9 +225,10 @@ class _CarInfoState extends State<CarInfo> {
 
   @override
   Widget build(BuildContext context) {
+     final localizations = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Car Information Scanner'),
+        title:  Text(localizations.car_info_title),
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -240,12 +245,12 @@ class _CarInfoState extends State<CarInfo> {
                     children: [
                       _buildImageSection(
                         imageFile: _frontImageFile,
-                        label: 'Front Side',
+                        label: localizations.frontSide,
                         isFront: true,
                       ),
                       _buildImageSection(
                         imageFile: _backImageFile,
-                        label: 'Back Side',
+                        label: localizations.backSide,
                         isFront: false,
                       ),
                     ],
@@ -253,16 +258,16 @@ class _CarInfoState extends State<CarInfo> {
                 ),
               ),
               const SizedBox(height: 16),
-              _buildTextField('Car Plate Number', carPlateNumberController),
-              _buildTextField('VIN Number', vinNumberController),
-              _buildTextField('Engine Number', engineNumberController),
-              _buildTextField('Car Model', carModelController),
-              _buildTextField('Car Color', carColorController),
+              _buildTextField(localizations.car_plate_number, carPlateNumberController),
+              _buildTextField(localizations.vin_number, vinNumberController),
+              _buildTextField(localizations.engine_number, engineNumberController),
+              _buildTextField(localizations.car_model, carModelController),
+              _buildTextField(localizations.car_color, carColorController),
               _buildTextField(
-                  'Car Registration Number', carRegistrationNumberController),
+                  localizations.car_registration_number, carRegistrationNumberController),
               _buildTextField(
-                  'Insurance Expiry Date', insuranceExpiryDateController),
-              _buildTextField('Car Condition', carConditionController),
+                  localizations.insurance_expiry_date, insuranceExpiryDateController),
+              _buildTextField(localizations.car_condition, carConditionController),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: validateAndSubmit,
@@ -270,7 +275,7 @@ class _CarInfoState extends State<CarInfo> {
                   backgroundColor: QColors.secondary,
                   minimumSize: const Size(double.infinity, 50),
                 ),
-                child: const Text('Submit'),
+                child: Text(localizations.submit),
               ),
             ],
           ),
