@@ -1,10 +1,15 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:qanoni/core/services/base.dart';
+import 'package:qanoni/core/utils/app_router.dart';
+import 'package:qanoni/core/utils/constants/colors.dart';
 
 class SellerContract extends StatefulWidget {
   const SellerContract({super.key});
@@ -33,8 +38,7 @@ class _SellerContractState extends State<SellerContract> {
       TextEditingController();
 
   // Backend Base URL
-  final String baseUrl =
-      'http://localhost:8080'; // Replace with your backend URL
+  final String baseUrl = ConfigApi.baseUri; // Replace with your backend URL
 
   // Contract ID
   String? contractId;
@@ -198,7 +202,7 @@ class _SellerContractState extends State<SellerContract> {
   // Method to pick an image
   Future<void> pickImage({required bool isFront}) async {
     try {
-      final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+      final pickedFile = await _picker.pickImage(source: ImageSource.camera);
       if (pickedFile != null) {
         setState(() {
           if (isFront) {
@@ -222,7 +226,7 @@ class _SellerContractState extends State<SellerContract> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Seller Information Scanner'),
-        backgroundColor: Colors.blue,
+        backgroundColor: QColors.secondary,
         elevation: 0,
       ),
       body: Padding(
@@ -264,9 +268,12 @@ class _SellerContractState extends State<SellerContract> {
               _buildTextField('Seller Expiry Date', sellerExpiryDateController),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: validateAndSubmit,
+                onPressed: () {
+                  validateAndSubmit();
+                  GoRouter.of(context).push(AppRouter.kCarInformation);
+                },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: QColors.secondary,
                   minimumSize: const Size(double.infinity, 50),
                 ),
                 child: const Text('Submit'),
@@ -306,7 +313,8 @@ class _SellerContractState extends State<SellerContract> {
                     const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         IconButton(
           onPressed: () => pickImage(isFront: isFront),
-          icon: const Icon(Icons.camera_alt, color: Colors.blue, size: 40),
+          icon:
+              const Icon(Icons.camera_alt, color: QColors.secondary, size: 40),
         ),
       ],
     );

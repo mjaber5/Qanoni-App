@@ -68,6 +68,10 @@ class NotificationsCubit extends Cubit<NotificationsState> {
 
       log('Notification permission status: ${settings.authorizationStatus}');
 
+      // Register background message handler
+      FirebaseMessaging.onBackgroundMessage(
+          _firebaseMessagingBackgroundHandler);
+
       // Initialize local notifications
       await _initializeLocalNotifications();
 
@@ -163,7 +167,6 @@ class NotificationsCubit extends Cubit<NotificationsState> {
         notificationDetails,
         payload: payload,
       );
-      log('Local notification displayed: $title');
     } catch (e) {
       log('Error showing local notification: $e');
     }
@@ -235,5 +238,12 @@ class NotificationsCubit extends Cubit<NotificationsState> {
     } catch (e) {
       log('Error sending notification: $e');
     }
+  }
+
+  /// Background message handler (static for background execution)
+  static Future<void> _firebaseMessagingBackgroundHandler(
+      RemoteMessage message) async {
+    log('Handling a background message: ${message.messageId}');
+    // Additional background handling if needed
   }
 }

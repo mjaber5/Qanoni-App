@@ -77,7 +77,7 @@ class _SignupTextFeildsState extends State<SignupTextFeilds> {
             setState(() {
               signUpRequired = false;
             });
-            GoRouter.of(context).pushReplacement(AppRouter.kLayout);
+            GoRouter.of(context).go(AppRouter.kLayout);
             ToastService.showSuccessToast(
               context,
               length: ToastLength.medium,

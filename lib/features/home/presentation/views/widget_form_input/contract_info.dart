@@ -1,7 +1,12 @@
 import 'dart:developer';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
+import 'package:qanoni/core/services/base.dart';
+import 'package:qanoni/core/utils/app_router.dart';
+import 'package:qanoni/core/utils/constants/colors.dart';
 import 'dart:convert';
 import 'package:signature/signature.dart';
 
@@ -17,6 +22,7 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
   final TextEditingController saleAmountController = TextEditingController();
   final TextEditingController additionalTermsController =
       TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   final SignatureController _signatureController = SignatureController(
     penStrokeWidth: 5,
@@ -34,8 +40,7 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
   String? _signatureUrl;
 
   // Backend Base URL
-  final String baseUrl =
-      'http://localhost:8080'; // Replace with your backend URL
+  final String baseUrl = ConfigApi.baseUri; // Replace with your backend URL
 
   // Contract ID (if available)
   String? contractId;
@@ -47,8 +52,59 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
     final now = DateTime.now();
     final formattedDate = DateFormat('dd/MM/yyyy hh:mm a').format(now);
     contractDateController.text = formattedDate;
+
+    // Fetch and initialize contractId
+    _initializeContractId();
   }
 
+  // Method to fetch or create contractId
+  Future<void> _initializeContractId() async {
+    try {
+      final user = _auth.currentUser;
+      if (user != null) {
+        String sellerIduse = user.uid; // Assume sellerIduse is same as user.uid
+        await _fetchOrCreateContractId(
+            sellerIduse); // Fetch contractId using sellerIduse
+      } else {
+        log("User is not logged in.");
+      }
+    } catch (e) {
+      log("Error fetching contractId: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error fetching contract ID: $e')),
+      );
+    }
+  }
+
+  // Fetch or create contract ID from the backend
+  Future<void> _fetchOrCreateContractId(String sellerIduse) async {
+    if (contractId == null || contractId!.isEmpty) {
+      try {
+        log('Fetching or creating contract ID for sellerIduse: $sellerIduse...');
+        final response = await http.post(
+          Uri.parse('$baseUrl/get-contract-id'),
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode({'sellerIduse': sellerIduse}),
+        );
+
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          final responseData = jsonDecode(response.body);
+          contractId = responseData['contractId'];
+          log('Fetched or created contract ID: $contractId');
+        } else {
+          throw Exception(
+              'Failed to fetch or create contract: ${response.body}');
+        }
+      } catch (e) {
+        log('Error fetching or creating contract ID: $e');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error fetching or creating contract ID: $e')),
+        );
+      }
+    }
+  }
+
+  // Capture the signature
   Future<void> _captureSignature(BuildContext context) async {
     await showDialog(
       context: context,
@@ -94,6 +150,14 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
 
   // Submit contract info to the backend
   Future<void> submitContractInfo() async {
+    if (contractId == null || contractId!.isEmpty) {
+      log('Error: contractId is missing. Cannot submit contract data.');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Error: Contract ID is required.')),
+      );
+      return;
+    }
+
     final contractData = {
       'contractDate': contractDateController.text,
       'contractPlace': _signatureUrl ?? 'No Signature',
@@ -106,10 +170,11 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
     final data = {
       'stage': 'contract',
       'contractData': contractData,
-      'contractId': contractId, // Include contract ID if exists
+      'contractId': contractId, // Ensure contractId is included
     };
 
     try {
+      log('Submitting contract data: ${jsonEncode(data)}');
       final response = await http.post(
         Uri.parse('$baseUrl/save-data'),
         headers: {'Content-Type': 'application/json'},
@@ -118,7 +183,10 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
 
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
-        contractId = responseData['contractId']; // Update contract ID
+        if (responseData['contractId'] != null) {
+          contractId = responseData['contractId'];
+          log('Updated contractId: $contractId');
+        }
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
               content: Text('Contract data submitted successfully!')),
@@ -153,8 +221,7 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Contract Information'),
-        centerTitle: true,
-        backgroundColor: Colors.blue,
+        backgroundColor: QColors.secondary,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -168,9 +235,12 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12.0),
                 child: Center(
-                  child: ElevatedButton(
-                    onPressed: () => _captureSignature(context),
-                    child: const Text('Capture Signature'),
+                  child: SizedBox(
+                    width: 200,
+                    child: ElevatedButton(
+                      onPressed: () => _captureSignature(context),
+                      child: const Text('Capture Signature'),
+                    ),
                   ),
                 ),
               ),
@@ -198,6 +268,8 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
                   onPressed: () {
                     if (_validateInputs()) {
                       submitContractInfo();
+                      GoRouter.of(context)
+                          .push(AppRouter.kContractInformationForm);
                     }
                   },
                   child: const Text(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:qanoni/core/services/base.dart';
 import 'dart:convert';
 
 import 'package:qanoni/core/utils/constants/colors.dart';
@@ -34,7 +35,7 @@ class _BuyerContractState extends State<BuyerContract> {
       TextEditingController();
 
   // Backend Base URL
-  final String baseUrl = 'http://localhost:8080';
+  final String baseUrl = ConfigApi.baseUri;
 
   // Contract ID (to be fetched/updated during stage processing)
   String? contractId;
@@ -135,8 +136,43 @@ class _BuyerContractState extends State<BuyerContract> {
     }
   }
 
+  Future<void> initializeContractId(String sellerIduse) async {
+    if (contractId == null || contractId!.isEmpty) {
+      try {
+        log('Fetching contract ID for sellerIduse: $sellerIduse...');
+        final response = await http.post(
+          Uri.parse('$baseUrl/get-contract-id'),
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode({'sellerIduse': sellerIduse}),
+        );
+
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          final responseData = jsonDecode(response.body);
+          contractId = responseData['contractId'];
+          log('Fetched contract ID: $contractId');
+        } else {
+          throw Exception('Failed to fetch contract ID: ${response.body}');
+        }
+      } catch (e) {
+        log('Error fetching contract ID: $e');
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error fetching contract ID: $e')),
+        );
+      }
+    }
+  }
+
   // Submit the buyer's data to the backend
-  Future<void> submitBuyerData() async {
+  Future<void> submitBuyerData(String buyerIduse) async {
+    if (contractId == null || contractId!.isEmpty) {
+      log('Error: contractId is missing. Cannot submit buyer data.');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Error: Contract ID is required.')),
+      );
+      return;
+    }
+
     final buyerData = {
       'fullName': buyerFullNameController.text,
       'birthDate': buyerBirthDateController.text,
@@ -149,7 +185,8 @@ class _BuyerContractState extends State<BuyerContract> {
     final data = {
       'stage': 'buyer',
       'buyerData': buyerData,
-      'contractId': contractId, // Existing contract ID
+      'buyerIduse': buyerIduse,
+      'contractId': contractId,
     };
 
     try {
@@ -161,7 +198,8 @@ class _BuyerContractState extends State<BuyerContract> {
 
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
-        contractId = responseData['contractId']; // Update contract ID
+        log('Response data: $responseData');
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Buyer data submitted successfully!')),
         );
@@ -170,6 +208,7 @@ class _BuyerContractState extends State<BuyerContract> {
       }
     } catch (e) {
       log('Error saving buyer data: $e');
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error saving buyer data: $e')),
       );
@@ -177,7 +216,7 @@ class _BuyerContractState extends State<BuyerContract> {
   }
 
   // Validate and submit the form
-  void validateAndSubmit() {
+  void validateAndSubmit() async {
     if (buyerFullNameController.text.isEmpty ||
         buyerBirthDateController.text.isEmpty ||
         buyerNationalIDController.text.isEmpty ||
@@ -185,8 +224,21 @@ class _BuyerContractState extends State<BuyerContract> {
         buyerRegistryPlaceController.text.isEmpty ||
         buyerExpiryDateController.text.isEmpty) {
       _showValidationDialog();
+      return;
+    }
+
+    if (contractId == null || contractId!.isEmpty) {
+      await initializeContractId('sellerIduse');
+      if (!mounted) return;
+    }
+
+    if (contractId != null && contractId!.isNotEmpty) {
+      submitBuyerData('buyerIduse');
     } else {
-      submitBuyerData();
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Failed to initialize contract ID.')),
+      );
     }
   }
 

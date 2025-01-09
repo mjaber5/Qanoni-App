@@ -1,9 +1,13 @@
 import 'dart:io';
 import 'dart:developer';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:qanoni/core/services/base.dart';
+import 'package:qanoni/core/utils/app_router.dart';
 import 'dart:convert';
 
 import 'package:qanoni/core/utils/constants/colors.dart';
@@ -17,6 +21,7 @@ class CarInfo extends StatefulWidget {
 
 class _CarInfoState extends State<CarInfo> {
   final ImagePicker _picker = ImagePicker();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   XFile? _frontImageFile;
   XFile? _backImageFile;
 
@@ -34,8 +39,7 @@ class _CarInfoState extends State<CarInfo> {
   final TextEditingController carConditionController = TextEditingController();
 
   // Backend Base URL
-  final String baseUrl =
-      'http://localhost:8080'; // Replace with your backend URL
+  final String baseUrl = ConfigApi.baseUri; // Replace with your backend URL
 
   // Contract ID (to be updated during the stage process)
   String? contractId;
@@ -139,7 +143,42 @@ class _CarInfoState extends State<CarInfo> {
   }
 
   // Submit the car's data to the backend
+  Future<void> initializeContractId(String sellerIduse) async {
+    if (contractId == null || contractId!.isEmpty) {
+      try {
+        log('Fetching or creating contract ID for sellerIduse: $sellerIduse...');
+        final response = await http.post(
+          Uri.parse('$baseUrl/get-contract-id'),
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode({'sellerIduse': sellerIduse}),
+        );
+
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          final responseData = jsonDecode(response.body);
+          contractId = responseData['contractId'];
+          log('Fetched or created contract ID: $contractId');
+        } else {
+          throw Exception(
+              'Failed to fetch or create contract: ${response.body}');
+        }
+      } catch (e) {
+        log('Error fetching or creating contract ID: $e');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error fetching or creating contract ID: $e')),
+        );
+      }
+    }
+  }
+
   Future<void> submitCarData() async {
+    if (contractId == null) {
+      log('Error: contractId is missing. Cannot submit car data.');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Error: Contract ID is missing.')),
+      );
+      return;
+    }
+
     final carData = {
       'carPlateNumber': carPlateNumberController.text,
       'vinNumber': vinNumberController.text,
@@ -154,10 +193,11 @@ class _CarInfoState extends State<CarInfo> {
     final data = {
       'stage': 'car',
       'carData': carData,
-      'contractId': contractId,
+      'contractId': contractId, // Ensure contractId is included
     };
 
     try {
+      log('Submitting car data: ${jsonEncode(data)}');
       final response = await http.post(
         Uri.parse('$baseUrl/save-data'),
         headers: {'Content-Type': 'application/json'},
@@ -166,7 +206,12 @@ class _CarInfoState extends State<CarInfo> {
 
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
-        contractId = responseData['contractId']; // Update contract ID
+
+        if (responseData['contractId'] != null) {
+          contractId = responseData['contractId'];
+          log('Updated contractId: $contractId');
+        }
+
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Car data submitted successfully!')),
         );
@@ -181,8 +226,7 @@ class _CarInfoState extends State<CarInfo> {
     }
   }
 
-  // Validate and submit the form
-  void validateAndSubmit() {
+  void validateAndSubmit() async {
     if (carPlateNumberController.text.isEmpty ||
         vinNumberController.text.isEmpty ||
         engineNumberController.text.isEmpty ||
@@ -192,8 +236,20 @@ class _CarInfoState extends State<CarInfo> {
         insuranceExpiryDateController.text.isEmpty ||
         carConditionController.text.isEmpty) {
       _showValidationDialog();
+      return;
+    }
+
+    await initializeContractId(_auth.currentUser!.uid);
+
+    if (contractId != null) {
+      await submitCarData();
     } else {
-      submitCarData();
+      log('Error: contractId is still null after initialization.');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content:
+                Text('Error: Failed to initialize or retrieve contract ID.')),
+      );
     }
   }
 
@@ -265,7 +321,10 @@ class _CarInfoState extends State<CarInfo> {
               _buildTextField('Car Condition', carConditionController),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: validateAndSubmit,
+                onPressed: () {
+                  validateAndSubmit();
+                  GoRouter.of(context).push(AppRouter.kContractInformationForm);
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: QColors.secondary,
                   minimumSize: const Size(double.infinity, 50),
