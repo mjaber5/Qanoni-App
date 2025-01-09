@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Done extends StatelessWidget {
   const Done({super.key});
@@ -35,16 +36,16 @@ class Done extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "$type Notification ${index + 1}",
+                        "${AppLocalizations.of(context)!.done_notification} ${index + 1}",
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       const SizedBox(height: 5),
-                      const Text(
-                        "This is a detailed description of the notification that can span two lines.",
-                        style: TextStyle(
+                      Text(
+                        AppLocalizations.of(context)!.notification_description,
+                        style: const TextStyle(
                           fontSize: 14,
                         ),
                         overflow: TextOverflow.ellipsis,

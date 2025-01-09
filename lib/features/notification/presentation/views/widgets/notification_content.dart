@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'package:qanoni/features/notification/presentation/view_model/notification_cubit/notifications_cubit.dart';
 import 'package:qanoni/features/notification/presentation/views/widgets/request.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // أضف هذا السطر
+
 
 import 'all.dart';
 import 'done.dart';
@@ -99,11 +101,11 @@ class _NotificationContentState extends State<NotificationContent> {
           Row(
             children: [
               const SizedBox(width: 4),
-              buildTab("All", 0),
+              buildTab(AppLocalizations.of(context)!.all, 0),
               const SizedBox(width: 4),
-              buildTab("Request", 1),
+              buildTab(AppLocalizations.of(context)!.request, 1),
               const SizedBox(width: 4),
-              buildTab("Progress status", 2),
+              buildTab(AppLocalizations.of(context)!.progress_status, 2),
             ],
           ),
           const SizedBox(height: 20),
@@ -130,10 +132,10 @@ class _NotificationContentState extends State<NotificationContent> {
                     }
 
                     if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                      return const Center(
+                      return Center(
                         child: Text(
-                          'No pending contracts found.',
-                          style: TextStyle(color: Colors.grey),
+                          AppLocalizations.of(context)!.no_pending_contracts,
+                          style: const TextStyle(color: Colors.grey),
                         ),
                       );
                     }
@@ -144,9 +146,9 @@ class _NotificationContentState extends State<NotificationContent> {
 
                     return RequestScreen(
                       contractId: waiver.contractId,
-                      messageTitle: '📜 Contract Request',
+                      messageTitle: AppLocalizations.of(context)!.contract_request_title,
                       messageBody:
-                          'Please review and approve or reject the contract.',
+                          AppLocalizations.of(context)!.contract_request_body,
                       userType: waiver.userType,
                     );
                   },

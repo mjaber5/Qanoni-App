@@ -6,6 +6,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:qanoni/core/services/base.dart';
 import 'dart:convert';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // أضف هذا السطر
+
 
 import 'package:qanoni/core/utils/constants/colors.dart';
 
@@ -266,9 +268,11 @@ class _BuyerContractState extends State<BuyerContract> {
 
   @override
   Widget build(BuildContext context) {
+        final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Buyer Information Scanner'),
+        title: Text(localizations.buyerInformationScanner),
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -285,12 +289,12 @@ class _BuyerContractState extends State<BuyerContract> {
                     children: [
                       _buildImageSection(
                         imageFile: _frontImageFile,
-                        label: 'Front Side',
+                        label: localizations.frontSide,
                         isFront: true,
                       ),
                       _buildImageSection(
                         imageFile: _backImageFile,
-                        label: 'Back Side',
+                        label:  localizations.backSide,
                         isFront: false,
                       ),
                     ],
@@ -298,14 +302,12 @@ class _BuyerContractState extends State<BuyerContract> {
                 ),
               ),
               const SizedBox(height: 16),
-              _buildTextField('Buyer Full Name', buyerFullNameController),
-              _buildTextField('Buyer Birth Date', buyerBirthDateController),
-              _buildTextField('Buyer National ID', buyerNationalIDController),
-              _buildTextField(
-                  'Buyer Registry Number', buyerRegistryNumberController),
-              _buildTextField(
-                  'Buyer Registry Place', buyerRegistryPlaceController),
-              _buildTextField('Buyer Expiry Date', buyerExpiryDateController),
+              _buildTextField(localizations.buyerFullName, buyerFullNameController),
+              _buildTextField(localizations.buyerBirthDate, buyerBirthDateController),
+              _buildTextField(localizations.buyerNationalId, buyerNationalIDController),
+              _buildTextField(localizations.buyerRegistryNumber, buyerRegistryNumberController),
+              _buildTextField(localizations.buyerRegistryPlace, buyerRegistryPlaceController),
+              _buildTextField(localizations.buyerExpiryDate, buyerExpiryDateController),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: validateAndSubmit,
@@ -313,7 +315,7 @@ class _BuyerContractState extends State<BuyerContract> {
                   backgroundColor: QColors.secondary,
                   minimumSize: const Size(double.infinity, 50),
                 ),
-                child: const Text('Submit'),
+                child: Text(localizations.submit),
               ),
             ],
           ),

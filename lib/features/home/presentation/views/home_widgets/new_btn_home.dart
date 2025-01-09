@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Assuming you are using flutter_gen for localization
 import '../new widgets dialog/waiver_contract_dialog.dart'; // Assuming the correct import path
 
 class NewBtnHome extends StatelessWidget {
@@ -18,7 +19,7 @@ class NewBtnHome extends StatelessWidget {
             },
           );
         },
-        child: const Text("Start a New Contract"),
+        child: Text(AppLocalizations.of(context)!.startNewContract),
       ),
     );
   }

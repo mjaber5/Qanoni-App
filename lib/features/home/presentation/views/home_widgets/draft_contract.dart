@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Assuming you are using flutter_gen for localization
 import 'package:qanoni/core/utils/constants/colors.dart';
-
 import '../../../../../core/utils/app_router.dart';
 
 class DraftContract extends StatelessWidget {
@@ -21,7 +21,7 @@ class DraftContract extends StatelessWidget {
           GoRouter.of(context).push(AppRouter.kHistoryView);
         },
         child: Text(
-          "Draft contracts",
+          AppLocalizations.of(context)!.draftContracts,
           style: TextStyle(
             color: Theme.of(context).brightness == Brightness.dark
                 ? Colors.white

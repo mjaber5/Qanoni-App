@@ -9,6 +9,7 @@ import 'package:qanoni/core/utils/app_router.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'dart:convert';
 import 'package:signature/signature.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // أضف هذا السطر
 
 class ContractInfoForm extends StatefulWidget {
   const ContractInfoForm({super.key});
@@ -218,10 +219,13 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Contract Information'),
-        backgroundColor: QColors.secondary,
+        centerTitle: true,
+        backgroundColor: Colors.blue,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -230,21 +234,19 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Text fields for contract data
-              _buildTextField('Contract Date', contractDateController,
+              _buildTextField(
+                  localizations.contractDate, contractDateController,
                   enabled: false),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12.0),
                 child: Center(
-                  child: SizedBox(
-                    width: 200,
-                    child: ElevatedButton(
-                      onPressed: () => _captureSignature(context),
-                      child: const Text('Capture Signature'),
-                    ),
+                  child: ElevatedButton(
+                    onPressed: () => _captureSignature(context),
+                    child: const Text('Capture Signature'),
                   ),
                 ),
               ),
-              _buildTextField('Sale Amount', saleAmountController),
+              _buildTextField(localizations.saleAmount, saleAmountController),
 
               // Dropdown for payment method
               _buildPaymentMethodDropdown(),
@@ -252,7 +254,8 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
               // Checkbox for ownership transfer
               _buildOwnershipTransferCheckbox(),
 
-              _buildTextField('Additional Terms', additionalTermsController),
+              _buildTextField(
+                  localizations.additionalTerms, additionalTermsController),
               const SizedBox(height: 20),
 
               // Save Button
@@ -272,9 +275,10 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
                           .push(AppRouter.kContractInformationForm);
                     }
                   },
-                  child: const Text(
-                    'Save Data',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  child: Text(
+                    localizations.saveData,
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -308,20 +312,23 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
   }
 
   Widget _buildPaymentMethodDropdown() {
+    final localizations = AppLocalizations.of(context)!;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0),
       child: DropdownButtonFormField<String>(
         value: selectedPaymentMethod,
-        decoration: const InputDecoration(
-          labelText: 'Payment Method',
-          labelStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-          border: OutlineInputBorder(),
+        decoration: InputDecoration(
+          labelText: localizations.paymentMethod,
+          labelStyle:
+              const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          border: const OutlineInputBorder(),
         ),
         items: [
-          'Cash',
-          'Bank Transfer',
-          'Credit Card',
-          'Online Payment',
+          localizations.cash,
+          localizations.bankTransfer,
+          localizations.creditCard,
+          localizations.onlinePayment,
         ].map((method) {
           return DropdownMenuItem<String>(
             value: method,
@@ -338,6 +345,8 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
   }
 
   Widget _buildOwnershipTransferCheckbox() {
+    final localizations = AppLocalizations.of(context)!;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0),
       child: Row(
@@ -350,7 +359,7 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
               });
             },
           ),
-          const Expanded(child: Text('Legal ownership transfer commitment')),
+          Expanded(child: Text(localizations.legalOwnershipTransferCommitment)),
         ],
       ),
     );

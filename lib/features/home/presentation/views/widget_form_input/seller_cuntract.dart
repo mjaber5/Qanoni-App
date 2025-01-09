@@ -7,10 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:qanoni/core/services/base.dart';
-import 'package:qanoni/core/utils/app_router.dart';
-import 'package:qanoni/core/utils/constants/colors.dart';
-
 class SellerContract extends StatefulWidget {
   const SellerContract({super.key});
 
@@ -182,16 +178,16 @@ class _SellerContractState extends State<SellerContract> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Validation Error'),
-        content: const Text('Please fill in all required fields.'),
+        title: Text(AppLocalizations.of(context)!.validationError),
+        content: Text(AppLocalizations.of(context)!.pleaseFillInAllFields),
         actions: <Widget>[
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: const Text(
-              'OK',
-              style: TextStyle(color: Colors.red),
+            child: Text(
+              AppLocalizations.of(context)!.ok,
+              style: const TextStyle(color: Colors.red),
             ),
           ),
         ],
@@ -216,7 +212,8 @@ class _SellerContractState extends State<SellerContract> {
     } catch (e) {
       log('Error picking image: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Failed to pick image')),
+        SnackBar(
+            content: Text(AppLocalizations.of(context)!.failedToPickImage)),
       );
     }
   }
@@ -226,7 +223,7 @@ class _SellerContractState extends State<SellerContract> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Seller Information Scanner'),
-        backgroundColor: QColors.secondary,
+        backgroundColor: Colors.blue,
         elevation: 0,
       ),
       body: Padding(
@@ -245,12 +242,12 @@ class _SellerContractState extends State<SellerContract> {
                     children: [
                       _buildImageSection(
                         imageFile: _frontImageFile,
-                        label: 'Front Side',
+                        label: AppLocalizations.of(context)!.frontSide,
                         isFront: true,
                       ),
                       _buildImageSection(
                         imageFile: _backImageFile,
-                        label: 'Back Side',
+                        label: AppLocalizations.of(context)!.backSide,
                         isFront: false,
                       ),
                     ],
@@ -258,14 +255,19 @@ class _SellerContractState extends State<SellerContract> {
                 ),
               ),
               const SizedBox(height: 16),
-              _buildTextField('Seller Full Name', sellerFullNameController),
-              _buildTextField('Seller Birth Date', sellerBirthDateController),
-              _buildTextField('Seller National ID', sellerNationalIDController),
+              _buildTextField(AppLocalizations.of(context)!.sellerFullName,
+                  sellerFullNameController),
+              _buildTextField(AppLocalizations.of(context)!.sellerBirthDate,
+                  sellerBirthDateController),
+              _buildTextField(AppLocalizations.of(context)!.sellerNationalID,
+                  sellerNationalIDController),
               _buildTextField(
-                  'Seller Registry Number', sellerRegistryNumberController),
-              _buildTextField(
-                  'Seller Registry Place', sellerRegistryPlaceController),
-              _buildTextField('Seller Expiry Date', sellerExpiryDateController),
+                  AppLocalizations.of(context)!.sellerRegistryNumber,
+                  sellerRegistryNumberController),
+              _buildTextField(AppLocalizations.of(context)!.sellerRegistryPlace,
+                  sellerRegistryPlaceController),
+              _buildTextField(AppLocalizations.of(context)!.sellerExpiryDate,
+                  sellerExpiryDateController),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
@@ -276,7 +278,7 @@ class _SellerContractState extends State<SellerContract> {
                   backgroundColor: QColors.secondary,
                   minimumSize: const Size(double.infinity, 50),
                 ),
-                child: const Text('Submit'),
+                child: Text(AppLocalizations.of(context)!.submit),
               ),
             ],
           ),

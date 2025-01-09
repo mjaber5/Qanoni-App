@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Assuming you are using flutter_gen for localization
 import 'package:qanoni/core/utils/app_router.dart';
-
 import 'package:qanoni/features/notification/presentation/view_model/notification_cubit/notifications_cubit.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 
@@ -45,13 +45,12 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
     final userIduseInput = _idController.text.trim();
 
     if (userIduseInput.isEmpty) {
-      _showSnackBar(context, "Please enter a valid ID.", Colors.red);
+      _showSnackBar(context, AppLocalizations.of(context)!.enterValidId, Colors.red);
       return;
     }
 
     if (_selectedUserType == null) {
-      _showSnackBar(
-          context, "Please select a user type (Buyer/Seller).", Colors.red);
+      _showSnackBar(context, AppLocalizations.of(context)!.selectUserType, Colors.red);
       return;
     }
 
@@ -75,10 +74,10 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        _buildUserTypeButton("Buyer"),
-        const Text("or",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
-        _buildUserTypeButton("Seller"),
+        _buildUserTypeButton(AppLocalizations.of(context)!.buyer),
+        Text(AppLocalizations.of(context)!.or,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+        _buildUserTypeButton(AppLocalizations.of(context)!.seller),
       ],
     );
   }
@@ -108,8 +107,10 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
       focusNode: _idFocusNode,
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
-        hintText:
-            "Enter ${_selectedUserType == "Buyer" ? "Seller" : "Buyer"} ID",
+        hintText: AppLocalizations.of(context)!.enterId(
+            _selectedUserType == AppLocalizations.of(context)!.buyer
+                ? AppLocalizations.of(context)!.seller
+                : AppLocalizations.of(context)!.buyer),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -138,8 +139,8 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
               _idController.clear();
             });
           },
-          child: const Text(
-            "Cancel",
+          child: Text(
+            AppLocalizations.of(context)!.cancel,
             style: TextStyle(color: Colors.red, fontSize: 16),
           ),
         ),
@@ -156,7 +157,8 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
             countinueContract();
             _confirmIdInput(context);
           },
-          child: const Text("Confirm", style: TextStyle(fontSize: 16)),
+          child: Text(AppLocalizations.of(context)!.confirm,
+              style: TextStyle(fontSize: 16)),
         ),
       ],
     );
@@ -170,7 +172,7 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
           _showSnackBar(context, state.error, Colors.red);
         } else if (state is ContractCreated) {
           _showSnackBar(
-              context, 'Contract created successfully!', Colors.green);
+              context, AppLocalizations.of(context)!.contractCreatedSuccessfully, Colors.green);
         }
       },
       child: Padding(
@@ -187,25 +189,27 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
             mainAxisSize: MainAxisSize.min,
             children: [
               if (_selectedUserType == null)
-                const Text(
-                  "Who are you?",
+                Text(
+                  AppLocalizations.of(context)!.whoAreYou,
                   style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               _buildUserTypeSelection(),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               if (_selectedUserType != null) ...[
-                const Divider(thickness: 1, color: Colors.grey),
-                const SizedBox(height: 20),
+                Divider(thickness: 1, color: Colors.grey),
+                SizedBox(height: 20),
                 Text(
-                  "Enter ${_selectedUserType == "Buyer" ? "Seller" : "Buyer"} ID",
-                  style: const TextStyle(
-                      fontSize: 22, fontWeight: FontWeight.bold),
+                  AppLocalizations.of(context)!.enterId(
+                      _selectedUserType == AppLocalizations.of(context)!.buyer
+                          ? AppLocalizations.of(context)!.seller
+                          : AppLocalizations.of(context)!.buyer),
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: 10),
                 _buildIdTextField(),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 _buildActionButtons(context),
               ],
             ],
