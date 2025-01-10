@@ -1,13 +1,14 @@
 import 'dart:developer';
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:qanoni/core/services/base.dart';
 import 'dart:convert';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // أضف هذا السطر
-
 
 import 'package:qanoni/core/utils/constants/colors.dart';
 
@@ -22,6 +23,7 @@ class _BuyerContractState extends State<BuyerContract> {
   final ImagePicker _picker = ImagePicker();
   XFile? _frontImageFile;
   XFile? _backImageFile;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   // Text Controllers for extracted data
   final TextEditingController buyerFullNameController = TextEditingController();
@@ -121,6 +123,12 @@ class _BuyerContractState extends State<BuyerContract> {
     }
   }
 
+  @override
+  void initState() {
+    super.initState();
+    _initializeContractId();
+  }
+
   // Pick image from camera
   Future<void> pickImage({required bool isFront}) async {
     final pickedFile = await _picker.pickImage(source: ImageSource.camera);
@@ -138,10 +146,30 @@ class _BuyerContractState extends State<BuyerContract> {
     }
   }
 
-  Future<void> initializeContractId(String sellerIduse) async {
+  // Method to fetch or create contractId
+  Future<void> _initializeContractId() async {
+    try {
+      final user = _auth.currentUser;
+      if (user != null) {
+        String sellerIduse = user.uid; // Assume sellerIduse is same as user.uid
+        await _fetchOrCreateContractId(
+            sellerIduse); // Fetch contractId using sellerIduse
+      } else {
+        log("User is not logged in.");
+      }
+    } catch (e) {
+      log("Error fetching contractId: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error fetching contract ID: $e')),
+      );
+    }
+  }
+
+  // Fetch or create contract ID from the backend
+  Future<void> _fetchOrCreateContractId(String sellerIduse) async {
     if (contractId == null || contractId!.isEmpty) {
       try {
-        log('Fetching contract ID for sellerIduse: $sellerIduse...');
+        log('Fetching or creating contract ID for sellerIduse: $sellerIduse...');
         final response = await http.post(
           Uri.parse('$baseUrl/get-contract-id'),
           headers: {'Content-Type': 'application/json'},
@@ -151,47 +179,55 @@ class _BuyerContractState extends State<BuyerContract> {
         if (response.statusCode == 200 || response.statusCode == 201) {
           final responseData = jsonDecode(response.body);
           contractId = responseData['contractId'];
-          log('Fetched contract ID: $contractId');
+          log('Fetched or created contract ID: $contractId');
         } else {
-          throw Exception('Failed to fetch contract ID: ${response.body}');
+          throw Exception(
+              'Failed to fetch or create contract: ${response.body}');
         }
       } catch (e) {
-        log('Error fetching contract ID: $e');
-        if (!mounted) return;
+        log('Error fetching or creating contract ID: $e');
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error fetching contract ID: $e')),
+          SnackBar(content: Text('Error fetching or creating contract ID: $e')),
         );
       }
     }
   }
 
-  // Submit the buyer's data to the backend
   Future<void> submitBuyerData(String buyerIduse) async {
     if (contractId == null || contractId!.isEmpty) {
       log('Error: contractId is missing. Cannot submit buyer data.');
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Error: Contract ID is required.')),
+        const SnackBar(content: Text('Error: Contract ID is missing.')),
+      );
+      return;
+    }
+
+    if (buyerIduse.isEmpty) {
+      log('Error: buyerIduse is missing. Cannot submit buyer data.');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Error: Buyer ID is required.')),
       );
       return;
     }
 
     final buyerData = {
-      'fullName': buyerFullNameController.text,
-      'birthDate': buyerBirthDateController.text,
-      'nationalID': buyerNationalIDController.text,
-      'registryNumber': buyerRegistryNumberController.text,
-      'registryPlace': buyerRegistryPlaceController.text,
-      'expiryDate': buyerExpiryDateController.text,
+      'fullName': buyerFullNameController.text.trim(),
+      'birthDate': buyerBirthDateController.text.trim(),
+      'nationalID': buyerNationalIDController.text.trim(),
+      'registryNumber': buyerRegistryNumberController.text.trim(),
+      'registryPlace': buyerRegistryPlaceController.text.trim(),
+      'expiryDate': buyerExpiryDateController.text.trim(),
     };
 
     final data = {
       'stage': 'buyer',
       'buyerData': buyerData,
       'buyerIduse': buyerIduse,
-      'contractId': contractId,
+      'contractId': contractId, // Ensure the same contractId is passed
     };
 
     try {
+      log('Submitting buyer data: ${jsonEncode(data)}');
       final response = await http.post(
         Uri.parse('$baseUrl/save-data'),
         headers: {'Content-Type': 'application/json'},
@@ -199,26 +235,28 @@ class _BuyerContractState extends State<BuyerContract> {
       );
 
       if (response.statusCode == 200) {
-        final responseData = jsonDecode(response.body);
-        log('Response data: $responseData');
-        if (!mounted) return;
+        log('Buyer data submitted successfully.');
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Buyer data submitted successfully!')),
         );
+
+        // Navigate to confirmation page or success screen
+        GoRouter.of(context).pop();
       } else {
-        throw Exception('Failed to save data: ${response.body}');
+        final errorResponse = jsonDecode(response.body);
+        throw Exception('Failed to save buyer data: ${errorResponse['error']}');
       }
     } catch (e) {
       log('Error saving buyer data: $e');
-      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error saving buyer data: $e')),
       );
     }
   }
 
-  // Validate and submit the form
+// Validate and submit the form
   void validateAndSubmit() async {
+    // Validate form fields
     if (buyerFullNameController.text.isEmpty ||
         buyerBirthDateController.text.isEmpty ||
         buyerNationalIDController.text.isEmpty ||
@@ -229,17 +267,23 @@ class _BuyerContractState extends State<BuyerContract> {
       return;
     }
 
-    if (contractId == null || contractId!.isEmpty) {
-      await initializeContractId('sellerIduse');
-      if (!mounted) return;
-    }
+    try {
+      // Initialize contract ID if not already set
+      if (contractId == null || contractId!.isEmpty) {
+        await _initializeContractId();
+      }
 
-    if (contractId != null && contractId!.isNotEmpty) {
-      submitBuyerData('buyerIduse');
-    } else {
+      if (contractId != null && contractId!.isNotEmpty) {
+        // Submit buyer data
+        await submitBuyerData('buyerIduse');
+      } else {
+        throw Exception('Contract ID initialization failed.');
+      }
+    } catch (e) {
+      log('Error during validation or submission: $e');
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Failed to initialize contract ID.')),
+        SnackBar(content: Text('Error: $e')),
       );
     }
   }
@@ -268,7 +312,7 @@ class _BuyerContractState extends State<BuyerContract> {
 
   @override
   Widget build(BuildContext context) {
-        final localizations = AppLocalizations.of(context)!;
+    final localizations = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
@@ -294,7 +338,7 @@ class _BuyerContractState extends State<BuyerContract> {
                       ),
                       _buildImageSection(
                         imageFile: _backImageFile,
-                        label:  localizations.backSide,
+                        label: localizations.backSide,
                         isFront: false,
                       ),
                     ],
@@ -302,12 +346,18 @@ class _BuyerContractState extends State<BuyerContract> {
                 ),
               ),
               const SizedBox(height: 16),
-              _buildTextField(localizations.buyerFullName, buyerFullNameController),
-              _buildTextField(localizations.buyerBirthDate, buyerBirthDateController),
-              _buildTextField(localizations.buyerNationalId, buyerNationalIDController),
-              _buildTextField(localizations.buyerRegistryNumber, buyerRegistryNumberController),
-              _buildTextField(localizations.buyerRegistryPlace, buyerRegistryPlaceController),
-              _buildTextField(localizations.buyerExpiryDate, buyerExpiryDateController),
+              _buildTextField(
+                  localizations.buyerFullName, buyerFullNameController),
+              _buildTextField(
+                  localizations.buyerBirthDate, buyerBirthDateController),
+              _buildTextField(
+                  localizations.buyerNationalId, buyerNationalIDController),
+              _buildTextField(localizations.buyerRegistryNumber,
+                  buyerRegistryNumberController),
+              _buildTextField(localizations.buyerRegistryPlace,
+                  buyerRegistryPlaceController),
+              _buildTextField(
+                  localizations.buyerExpiryDate, buyerExpiryDateController),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: validateAndSubmit,

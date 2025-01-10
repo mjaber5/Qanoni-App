@@ -113,7 +113,8 @@ class ProfileViewBody extends StatelessWidget {
     );
   }
 
-  Widget _propertyCard(BuildContext context, {
+  Widget _propertyCard(
+    BuildContext context, {
     required String title,
     required String address,
     required String status,
@@ -184,7 +185,8 @@ class ProfileViewBody extends StatelessWidget {
     );
   }
 
-  Widget _contractCard(BuildContext context, {
+  Widget _contractCard(
+    BuildContext context, {
     required String contractName,
     required String date,
     required String status,

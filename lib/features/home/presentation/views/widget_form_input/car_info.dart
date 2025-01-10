@@ -11,7 +11,6 @@ import 'package:qanoni/core/utils/app_router.dart';
 import 'dart:convert';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // أضف هذا السطر
 
-
 import 'package:qanoni/core/utils/constants/colors.dart';
 
 class CarInfo extends StatefulWidget {
@@ -182,20 +181,20 @@ class _CarInfoState extends State<CarInfo> {
     }
 
     final carData = {
-      'carPlateNumber': carPlateNumberController.text,
-      'vinNumber': vinNumberController.text,
-      'engineNumber': engineNumberController.text,
-      'carModel': carModelController.text,
-      'carColor': carColorController.text,
-      'carRegistrationNumber': carRegistrationNumberController.text,
-      'insuranceExpiryDate': insuranceExpiryDateController.text,
-      'carCondition': carConditionController.text,
+      'carPlateNumber': carPlateNumberController.text.trim(),
+      'vinNumber': vinNumberController.text.trim(),
+      'engineNumber': engineNumberController.text.trim(),
+      'carModel': carModelController.text.trim(),
+      'carColor': carColorController.text.trim(),
+      'carRegistrationNumber': carRegistrationNumberController.text.trim(),
+      'insuranceExpiryDate': insuranceExpiryDateController.text.trim(),
+      'carCondition': carConditionController.text.trim(),
     };
 
     final data = {
       'stage': 'car',
       'carData': carData,
-      'contractId': contractId, // Ensure contractId is included
+      'contractId': contractId, // Use contractId from the previous stage
     };
 
     try {
@@ -207,18 +206,16 @@ class _CarInfoState extends State<CarInfo> {
       );
 
       if (response.statusCode == 200) {
-        final responseData = jsonDecode(response.body);
-
-        if (responseData['contractId'] != null) {
-          contractId = responseData['contractId'];
-          log('Updated contractId: $contractId');
-        }
-
+        log('Car data submitted successfully.');
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Car data submitted successfully!')),
         );
+        // Navigate to the Contract Data form
+        GoRouter.of(context)
+            .push(AppRouter.kContractInformationForm, extra: contractId);
       } else {
-        throw Exception('Failed to save car data: ${response.body}');
+        final errorResponse = jsonDecode(response.body);
+        throw Exception('Failed to save car data: ${errorResponse['error']}');
       }
     } catch (e) {
       log('Error saving car data: $e');
@@ -257,13 +254,13 @@ class _CarInfoState extends State<CarInfo> {
 
   // Show validation error dialog
   void _showValidationDialog() {
-         final localizations = AppLocalizations.of(context)!;
+    final localizations = AppLocalizations.of(context)!;
 
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title:  Text(localizations.validation_error),
-        content:  Text(localizations.fill_all_fields),
+        title: Text(localizations.validation_error),
+        content: Text(localizations.fill_all_fields),
         actions: <Widget>[
           TextButton(
             onPressed: () {
@@ -281,10 +278,10 @@ class _CarInfoState extends State<CarInfo> {
 
   @override
   Widget build(BuildContext context) {
-     final localizations = AppLocalizations.of(context)!;
+    final localizations = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title:  Text(localizations.car_info_title),
+        title: Text(localizations.car_info_title),
         backgroundColor: QColors.secondary,
       ),
       body: Padding(
@@ -314,21 +311,24 @@ class _CarInfoState extends State<CarInfo> {
                 ),
               ),
               const SizedBox(height: 16),
-              _buildTextField(localizations.car_plate_number, carPlateNumberController),
+              _buildTextField(
+                  localizations.car_plate_number, carPlateNumberController),
               _buildTextField(localizations.vin_number, vinNumberController),
-              _buildTextField(localizations.engine_number, engineNumberController),
+              _buildTextField(
+                  localizations.engine_number, engineNumberController),
               _buildTextField(localizations.car_model, carModelController),
               _buildTextField(localizations.car_color, carColorController),
+              _buildTextField(localizations.car_registration_number,
+                  carRegistrationNumberController),
+              _buildTextField(localizations.insurance_expiry_date,
+                  insuranceExpiryDateController),
               _buildTextField(
-                  localizations.car_registration_number, carRegistrationNumberController),
-              _buildTextField(
-                  localizations.insurance_expiry_date, insuranceExpiryDateController),
-              _buildTextField(localizations.car_condition, carConditionController),
+                  localizations.car_condition, carConditionController),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   validateAndSubmit();
-                  GoRouter.of(context).push(AppRouter.kContractInformationForm);
+                  // GoRouter.of(context).push(AppRouter.kContractInformationForm);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: QColors.secondary,

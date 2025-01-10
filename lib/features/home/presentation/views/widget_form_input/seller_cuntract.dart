@@ -1,11 +1,16 @@
 import 'dart:developer';
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:qanoni/core/services/base.dart';
+import 'package:qanoni/core/utils/app_router.dart';
+import 'package:qanoni/core/utils/constants/colors.dart';
 
 class SellerContract extends StatefulWidget {
   const SellerContract({super.key});
@@ -119,76 +124,107 @@ class _SellerContractState extends State<SellerContract> {
     }
   }
 
-  // Submit the seller's data to the backend
+// Submit the seller's data to the backend
   Future<void> submitSellerData() async {
-    final sellerData = {
-      'fullName': sellerFullNameController.text,
-      'birthDate': sellerBirthDateController.text,
-      'nationalID': sellerNationalIDController.text,
-      'registryNumber': sellerRegistryNumberController.text,
-      'registryPlace': sellerRegistryPlaceController.text,
-      'expiryDate': sellerExpiryDateController.text,
-    };
+    final sellerIduse = FirebaseAuth.instance.currentUser?.uid;
+    if (sellerIduse == null) {
+      log('Error: User is not authenticated.');
+      return;
+    }
 
-    final data = {
-      'stage': 'seller',
-      'sellerData': sellerData,
+    final sellerData = {
+      'sellerIduse': sellerIduse,
+      'fullName': sellerFullNameController.text.trim(),
+      'birthDate': sellerBirthDateController.text.trim(),
+      'nationalID': sellerNationalIDController.text.trim(),
+      'registryNumber': sellerRegistryNumberController.text.trim(),
+      'registryPlace': sellerRegistryPlaceController.text.trim(),
+      'expiryDate': sellerExpiryDateController.text.trim(),
     };
 
     try {
-      final response = await http.post(
-        Uri.parse('$baseUrl/save-data'),
+      // Fetch or create contract ID
+      final contractIdResponse = await http.post(
+        Uri.parse('$baseUrl/get-contract-id'),
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode(data),
+        body: jsonEncode({'sellerIduse': sellerIduse}),
       );
 
-      if (response.statusCode == 200) {
-        final responseData = jsonDecode(response.body);
-        contractId = responseData['contractId']; // Update contract ID
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Seller data submitted successfully!')),
+      if (contractIdResponse.statusCode == 200 ||
+          contractIdResponse.statusCode == 201) {
+        final responseData = jsonDecode(contractIdResponse.body);
+        contractId = responseData['contractId'];
+
+        // Submit seller data
+        final data = {
+          'stage': 'seller',
+          'sellerData': sellerData,
+          'contractId': contractId,
+        };
+
+        final response = await http.post(
+          Uri.parse('$baseUrl/save-data'),
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode(data),
         );
+
+        if (response.statusCode == 200) {
+          log('Seller data submitted successfully: Contract ID = $contractId');
+          GoRouter.of(context)
+              .push(AppRouter.kCarInformation, extra: contractId);
+        } else {
+          throw Exception('Failed to save seller data.');
+        }
       } else {
-        throw Exception('Failed to save seller data: ${response.body}');
+        throw Exception('Failed to fetch or create contract ID.');
       }
     } catch (e) {
-      log('Error saving seller data: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error saving seller data: $e')),
-      );
+      log('Error: $e');
     }
   }
 
-  // Validate and submit the form
+// Validate and submit the form
   void validateAndSubmit() {
-    if (sellerFullNameController.text.isEmpty ||
-        sellerBirthDateController.text.isEmpty ||
-        sellerNationalIDController.text.isEmpty ||
-        sellerRegistryNumberController.text.isEmpty ||
-        sellerRegistryPlaceController.text.isEmpty ||
-        sellerExpiryDateController.text.isEmpty) {
-      _showValidationDialog();
-    } else {
-      submitSellerData();
+    if (sellerFullNameController.text.isEmpty) {
+      _showValidationDialog('Seller full name is required.');
+      return;
     }
+    if (sellerBirthDateController.text.isEmpty) {
+      _showValidationDialog('Seller birth date is required.');
+      return;
+    }
+    if (sellerNationalIDController.text.isEmpty) {
+      _showValidationDialog('Seller national ID is required.');
+      return;
+    }
+    if (sellerRegistryNumberController.text.isEmpty) {
+      _showValidationDialog('Seller registry number is required.');
+      return;
+    }
+    if (sellerRegistryPlaceController.text.isEmpty) {
+      _showValidationDialog('Seller registry place is required.');
+      return;
+    }
+    if (sellerExpiryDateController.text.isEmpty) {
+      _showValidationDialog('Seller expiry date is required.');
+      return;
+    }
+
+    // All fields are valid, proceed to submit data
+    submitSellerData();
   }
 
-  // Show validation error dialog
-  void _showValidationDialog() {
+// Show validation error dialog
+  void _showValidationDialog(String message) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.validationError),
-        content: Text(AppLocalizations.of(context)!.pleaseFillInAllFields),
-        actions: <Widget>[
+        title: const Text('Validation Error'),
+        content: Text(message),
+        actions: [
           TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text(
-              AppLocalizations.of(context)!.ok,
-              style: const TextStyle(color: Colors.red),
-            ),
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('OK'),
           ),
         ],
       ),
@@ -223,7 +259,7 @@ class _SellerContractState extends State<SellerContract> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Seller Information Scanner'),
-        backgroundColor: Colors.blue,
+        backgroundColor: QColors.secondary,
         elevation: 0,
       ),
       body: Padding(
@@ -272,7 +308,6 @@ class _SellerContractState extends State<SellerContract> {
               ElevatedButton(
                 onPressed: () {
                   validateAndSubmit();
-                  GoRouter.of(context).push(AppRouter.kCarInformation);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: QColors.secondary,

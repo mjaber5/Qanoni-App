@@ -1,3 +1,3 @@
 class ConfigApi {
-  static const baseUri = 'https://04c2-213-139-45-74.ngrok-free.app';
+  static const baseUri = 'https://c10a-212-34-23-72.ngrok-free.app';
 }

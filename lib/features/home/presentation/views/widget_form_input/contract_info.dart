@@ -1,11 +1,9 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:qanoni/core/services/base.dart';
-import 'package:qanoni/core/utils/app_router.dart';
 import 'package:qanoni/core/utils/constants/colors.dart';
 import 'dart:convert';
 import 'package:signature/signature.dart';
@@ -150,8 +148,8 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
   }
 
   // Submit contract info to the backend
-  Future<void> submitContractInfo() async {
-    if (contractId == null || contractId!.isEmpty) {
+  Future<void> submitContractData() async {
+    if (contractId == null) {
       log('Error: contractId is missing. Cannot submit contract data.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Error: Contract ID is required.')),
@@ -160,18 +158,18 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
     }
 
     final contractData = {
-      'contractDate': contractDateController.text,
+      'contractDate': contractDateController.text.trim(),
       'contractPlace': _signatureUrl ?? 'No Signature',
-      'saleAmount': saleAmountController.text,
+      'saleAmount': saleAmountController.text.trim(),
       'paymentMethod': selectedPaymentMethod ?? 'online',
       'ownershipTransfer': ownershipTransferChecked,
-      'additionalTerms': additionalTermsController.text,
+      'additionalTerms': additionalTermsController.text.trim(),
     };
 
     final data = {
       'stage': 'contract',
       'contractData': contractData,
-      'contractId': contractId, // Ensure contractId is included
+      'contractId': contractId,
     };
 
     try {
@@ -183,17 +181,15 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
       );
 
       if (response.statusCode == 200) {
-        final responseData = jsonDecode(response.body);
-        if (responseData['contractId'] != null) {
-          contractId = responseData['contractId'];
-          log('Updated contractId: $contractId');
-        }
+        log('Contract data submitted successfully.');
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
               content: Text('Contract data submitted successfully!')),
         );
       } else {
-        throw Exception('Failed to save contract data: ${response.body}');
+        final errorResponse = jsonDecode(response.body);
+        throw Exception(
+            'Failed to save contract data: ${errorResponse['error']}');
       }
     } catch (e) {
       log('Error saving contract data: $e');
@@ -225,7 +221,7 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
       appBar: AppBar(
         title: const Text('Contract Information'),
         centerTitle: true,
-        backgroundColor: Colors.blue,
+        backgroundColor: QColors.secondary,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -240,9 +236,12 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12.0),
                 child: Center(
-                  child: ElevatedButton(
-                    onPressed: () => _captureSignature(context),
-                    child: const Text('Capture Signature'),
+                  child: SizedBox(
+                    width: 200,
+                    child: ElevatedButton(
+                      onPressed: () => _captureSignature(context),
+                      child: const Text('Capture Signature'),
+                    ),
                   ),
                 ),
               ),
@@ -270,9 +269,7 @@ class _ContractInfoFormState extends State<ContractInfoForm> {
                   ),
                   onPressed: () {
                     if (_validateInputs()) {
-                      submitContractInfo();
-                      GoRouter.of(context)
-                          .push(AppRouter.kContractInformationForm);
+                      submitContractData();
                     }
                   },
                   child: Text(
