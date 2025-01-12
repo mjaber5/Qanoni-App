@@ -39,7 +39,7 @@ class ProfileViewBody extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 300,
+                height: 385,
                 child: TabBarView(
                   children: [
                     // محتوى "My Property"
