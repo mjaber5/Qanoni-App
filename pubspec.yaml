@@ -71,11 +71,12 @@ dependencies:
   speech_to_text: ^7.0.0
   dash_chat_2: ^0.0.21
   signature: ^5.5.0
-
-
+  shimmer: ^3.0.0
+  flutter_credit_card: 
+    path: android\flutter_credit_card-master\flutter_credit_card-master\
   user_repository:
     path: packages/user_repository
-  shimmer: ^3.0.0
+  flutter_email_sender: ^6.0.3
 
 dev_dependencies:
   flutter_test:
