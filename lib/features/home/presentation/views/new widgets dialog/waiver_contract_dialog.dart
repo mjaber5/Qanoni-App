@@ -141,7 +141,7 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
           },
           child: Text(
             AppLocalizations.of(context)!.cancel,
-            style: TextStyle(color: Colors.red, fontSize: 16),
+            style: const TextStyle(color: Colors.red, fontSize: 16),
           ),
         ),
         ElevatedButton(
@@ -158,7 +158,7 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
             _confirmIdInput(context);
           },
           child: Text(AppLocalizations.of(context)!.confirm,
-              style: TextStyle(fontSize: 16)),
+              style: const TextStyle(fontSize: 16)),
         ),
       ],
     );
@@ -191,25 +191,25 @@ class _WaiverContractBottomSheetState extends State<WaiverContractBottomSheet> {
               if (_selectedUserType == null)
                 Text(
                   AppLocalizations.of(context)!.whoAreYou,
-                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               _buildUserTypeSelection(),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               if (_selectedUserType != null) ...[
-                Divider(thickness: 1, color: Colors.grey),
-                SizedBox(height: 20),
+                const Divider(thickness: 1, color: Colors.grey),
+                const SizedBox(height: 20),
                 Text(
                   AppLocalizations.of(context)!.enterId(
                       _selectedUserType == AppLocalizations.of(context)!.buyer
                           ? AppLocalizations.of(context)!.seller
                           : AppLocalizations.of(context)!.buyer),
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 _buildIdTextField(),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 _buildActionButtons(context),
               ],
             ],

@@ -47,9 +47,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver
-        android:name="com.dexterous.flutterlocalnotifications.FlutterLocalNotificationsPlugin"
-        android:exported="true" />
+     <receiver android:name="com.dexterous.flutterlocalnotifications.receivers.ActionBroadcastReceiver" />
+
 
         <!-- Firebase Messaging Service -->
         <service
