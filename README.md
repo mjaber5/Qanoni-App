@@ -38,23 +38,6 @@ Qanoni-App is a mobile application designed to digitize and simplify contract ma
    flutter run
    ```
 
-## Project Structure
-
-```
-Qanoni-App/
-│── lib/
-│   ├── models/       # Data models for contracts and users
-│   ├── repository/   # Data handling and business logic
-│   ├── views/        # UI components and screens
-│   ├── cubit/        # State management (Cubit/Bloc)
-│   ├── services/     # API and Firebase services
-│   ├── main.dart     # Entry point of the application
-│
-│── assets/           # Images, icons, and fonts
-│── pubspec.yaml      # Dependencies and configurations
-│── README.md         # Project documentation
-```
-
 ## Contribution
 
 Contributions are welcome! To contribute:
